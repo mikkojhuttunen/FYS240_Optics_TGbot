@@ -1,6 +1,14 @@
 /**
- * LaTeX Renderer for Telegram Bot
+ * LaTeX Renderer for FYS.240 Optics Telegram Bot
  * Converts $$ ... $$ blocks in text to rendered equation images via CodeCogs
+ * 
+ * Used by bot_fys240.js to render optical equations, lens formulas, and other math
+ * in a visually readable format for Telegram chat.
+ * 
+ * Examples:
+ *   $$\frac{1}{f} = \frac{1}{d_o} + \frac{1}{d_i}$$  (thin lens equation)
+ *   $$m = -\frac{d_i}{d_o}$$                         (magnification)
+ *   $$n_1 \sin\theta_1 = n_2 \sin\theta_2$$         (Snell's law)
  */
 
 const axios = require("axios");
@@ -12,6 +20,8 @@ const DEFAULT_BG = "white";
 /**
  * Build CodeCogs URL for LaTeX rendering
  * @param {string} latexCode - The LaTeX equation (without $$)
+ * @param {number} dpi - DPI for rendered image (default 150)
+ * @param {string} bg - Background color (default 'white')
  * @returns {string} - Full URL to rendered image
  */
 function buildCodecogsUrl(latexCode, dpi = DEFAULT_DPI, bg = DEFAULT_BG) {
@@ -36,6 +46,7 @@ async function verifyLatexUrl(url) {
 
 /**
  * Parse text for $$ ... $$ blocks and return structured parts
+ * Handles multiple equations and mixed text/latex content
  * @param {string} text - Text containing potential LaTeX blocks
  * @returns {Array<{type: 'text'|'latex', content: string}>}
  */
@@ -61,6 +72,7 @@ function parseLatexBlocks(text) {
 
 /**
  * Send a single LaTeX equation as an image via Telegram
+ * Falls back to text representation if rendering fails
  * @param {Function} tg - Telegram API function (takes method, payload)
  * @param {number} chatId - Telegram chat ID
  * @param {string} latexCode - LaTeX equation
@@ -113,6 +125,7 @@ async function sendLatexImage(tg, chatId, latexCode, replyToMessageId = null) {
 
 /**
  * Main function: Parse response for $$ blocks and send text + images
+ * Sends regular text messages for text portions and photo messages for LaTeX equations
  * @param {Function} tg - Telegram API function
  * @param {number} chatId - Telegram chat ID
  * @param {string} responseText - Full response (may contain $$ blocks)
