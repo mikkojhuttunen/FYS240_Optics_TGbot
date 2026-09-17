@@ -261,8 +261,16 @@ const HELP_TEXT =
   "/reset — clear our conversation history";
 
 // Video topics command
-// Returns an array of message chunks, each safely under Telegram's 4096-char
-// limit (with embedded video links the full list no longer fits in one message).
+// Returns an array of HTML-formatted message chunks (Telegram parse_mode:
+// "HTML"), each safely under Telegram's 4096-char limit. Each line's chapter
+// and topic text IS the hyperlink, rather than a separate URL underneath.
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function generateTopicsMessages() {
   if (!VIDEO_DB || VIDEO_DB.all().length === 0) {
     return ["Video database not loaded."];
@@ -271,12 +279,13 @@ function generateTopicsMessages() {
   const chapters = VIDEO_DB.getChapters();
   const MAX_CHUNK = 3800; // headroom under Telegram's 4096 hard limit
   const messages = [];
-  let msg = "📺 **FYS.240 Optics - Video Lectures**\n\n";
+  let msg = "📺 <b>FYS.240 Optics - Video Lectures</b>\n\n";
 
   chapters.forEach(chapter => {
     const videos = VIDEO_DB.getChapter(chapter);
     videos.forEach(v => {
-      const line = `${v.chapter}: ${v.topic}\n${v.url}\n\n`;
+      const label = escapeHtml(`${v.chapter}: ${v.topic}`);
+      const line = `<a href="${escapeHtml(v.url)}">${label}</a>\n`;
       if (msg.length + line.length > MAX_CHUNK) {
         messages.push(msg.trim());
         msg = "";
@@ -328,7 +337,14 @@ async function handleUpdate(update) {
   }
   if (/^\/topics?/i.test(text)) {
     for (const chunk of generateTopicsMessages()) {
-      await sendMessage(chatId, chunk);
+      await tg("sendMessage", {
+        chat_id: chatId,
+        text: chunk,
+        parse_mode: "HTML",
+        disable_web_page_preview: true,
+      }).catch((e) =>
+        console.error("Telegram sendMessage (/topics) failed:", e.response?.status, JSON.stringify(e.response?.data))
+      );
     }
     return;
   }
