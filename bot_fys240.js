@@ -415,7 +415,8 @@ const HELP_TEXT =
   "- How do thin lenses work?\n" +
   "- What's the difference between real and virtual images?\n" +
   "- I'm stuck on problem 5.2, where should I start?\n" +
-  "- Explain how a microscope works\n\n" +
+  "- Explain how a microscope works\n" +
+  "- Quiz me on chapter 2 (or a specific section, e.g. \"quiz me on section 2.3\") for a multiple-choice quiz\n\n" +
   "I'll explain concepts, point you to relevant videos or sections, and give hints on homework (but not solutions).\n\n" +
   "Commands:\n" +
   "/topics — see all video lecture topics\n" +
