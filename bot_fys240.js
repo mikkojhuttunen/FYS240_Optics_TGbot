@@ -261,22 +261,32 @@ const HELP_TEXT =
   "/reset — clear our conversation history";
 
 // Video topics command
-function generateTopicsMessage() {
+// Returns an array of message chunks, each safely under Telegram's 4096-char
+// limit (with embedded video links the full list no longer fits in one message).
+function generateTopicsMessages() {
   if (!VIDEO_DB || VIDEO_DB.all().length === 0) {
-    return "Video database not loaded.";
+    return ["Video database not loaded."];
   }
-  
+
   const chapters = VIDEO_DB.getChapters();
+  const MAX_CHUNK = 3800; // headroom under Telegram's 4096 hard limit
+  const messages = [];
   let msg = "📺 **FYS.240 Optics - Video Lectures**\n\n";
-  
+
   chapters.forEach(chapter => {
     const videos = VIDEO_DB.getChapter(chapter);
     videos.forEach(v => {
-      msg += `${v.chapter}: ${v.topic}\n`;
+      const line = `${v.chapter}: ${v.topic}\n${v.url}\n\n`;
+      if (msg.length + line.length > MAX_CHUNK) {
+        messages.push(msg.trim());
+        msg = "";
+      }
+      msg += line;
     });
   });
-  
-  return msg;
+
+  if (msg.trim()) messages.push(msg.trim());
+  return messages;
 }
 
 // ------------------------------------------------------------- webhook ------
@@ -317,7 +327,10 @@ async function handleUpdate(update) {
     return sendMessage(chatId, "Conversation history cleared. Ask me anything.");
   }
   if (/^\/topics?/i.test(text)) {
-    return sendMessage(chatId, generateTopicsMessage());
+    for (const chunk of generateTopicsMessages()) {
+      await sendMessage(chatId, chunk);
+    }
+    return;
   }
 
   const question = stripMention(text);
