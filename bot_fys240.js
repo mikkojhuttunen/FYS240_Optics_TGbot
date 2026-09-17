@@ -125,6 +125,8 @@ ${LATEX_ENABLED
 - Write video links as [Video X.Y (Topic)](URL) Markdown links, never as bare URLs
 - 2-3 short paragraphs maximum
 - Answer in the language the student writes in (English or Finnish)
+- VECTOR QUANTITIES: wrap every vector symbol in **...** (e.g. **E**, **B**, **D**, **H**, **j**, **k**, **r**, **p**, **S**, **F**, **v**), EVERY time it appears — not just on first use, and inside equations as well as prose (e.g. \u2207\u00d7**B** = \u03bc\u2080**j** + \u03bc\u2080\u03b5\u2080\u2202**E**/\u2202t). Do this consistently across microscopic and macroscopic Maxwell's equations alike.
+- Do NOT bold scalars: \u03b5\u2080, \u03bc\u2080, \u03c1, \u03c9, n, \u03bb, and the \u2207 operator itself stay unbolded even next to a bolded vector (\u2207\u00d7**E**, not **\u2207**\u00d7**E**)
 
 LIMITS
 - Some maths symbols in extracted chapter text are garbled; read them from context
@@ -318,23 +320,51 @@ function convertLinksAndEscape(text) {
   return escaped;
 }
 
-// Converts "**bold**" markdown spans (Claude's natural way of marking vector
-// quantities, e.g. **E**, **B**) into real Unicode bold characters. Messages
-// are sent with parse_mode "HTML" now (for video links), so this still runs
-// first to keep "**" from ever needing HTML tags of its own.
-// Leaves Greek letters, subscripts, LaTeX $$ blocks, and everything else as-is.
-function markdownBoldToUnicode(text) {
-  return text.replace(/\*\*(.+?)\*\*/g, (_, inner) => {
-    let out = "";
-    for (const ch of inner) {
-      const code = ch.codePointAt(0);
-      if (code >= 0x41 && code <= 0x5a) out += String.fromCodePoint(0x1d400 + (code - 0x41));       // A-Z
-      else if (code >= 0x61 && code <= 0x7a) out += String.fromCodePoint(0x1d41a + (code - 0x61));  // a-z
-      else if (code >= 0x30 && code <= 0x39) out += String.fromCodePoint(0x1d7ce + (code - 0x30));  // 0-9
-      else out += ch; // Greek letters, underscores, spaces, punctuation: leave alone
+// Converts one run of Unicode Mathematical Alphanumeric characters for a
+// given style. Digits have no dedicated "italic" codepoints in Unicode, so
+// italic digits are left as plain ASCII; lowercase italic "h" has no
+// codepoint of its own either (Unicode reserves that slot), so it maps to
+// the pre-existing PLANCK CONSTANT compatibility character (ℎ, U+210E)
+// instead, which is the standard workaround.
+function toMathUnicode(inner, style) {
+  let out = "";
+  for (const ch of inner) {
+    const code = ch.codePointAt(0);
+    if (style === "bold") {
+      if (code >= 0x41 && code <= 0x5a) out += String.fromCodePoint(0x1d400 + (code - 0x41));      // A-Z
+      else if (code >= 0x61 && code <= 0x7a) out += String.fromCodePoint(0x1d41a + (code - 0x61)); // a-z
+      else if (code >= 0x30 && code <= 0x39) out += String.fromCodePoint(0x1d7ce + (code - 0x30)); // 0-9
+      else out += ch;
+    } else if (style === "italic") {
+      if (ch === "h") out += "\u210e";                                                             // italic h exception
+      else if (code >= 0x41 && code <= 0x5a) out += String.fromCodePoint(0x1d434 + (code - 0x41));  // A-Z
+      else if (code >= 0x61 && code <= 0x7a) out += String.fromCodePoint(0x1d44e + (code - 0x61));  // a-z
+      else out += ch;                                                                               // no italic digits exist
+    } else { // "bolditalic"
+      if (code >= 0x41 && code <= 0x5a) out += String.fromCodePoint(0x1d468 + (code - 0x41));      // A-Z
+      else if (code >= 0x61 && code <= 0x7a) out += String.fromCodePoint(0x1d482 + (code - 0x61)); // a-z
+      else if (code >= 0x30 && code <= 0x39) out += String.fromCodePoint(0x1d7ce + (code - 0x30)); // 0-9 (reuses bold digits)
+      else out += ch;
     }
-    return out;
-  });
+  }
+  return out;
+}
+
+// Converts Claude's Markdown emphasis into real Unicode styled characters
+// (Claude's natural way of marking vector quantities, e.g. **E**, **B**, and
+// occasionally single-asterisk emphasis like *i*). Messages are sent with
+// parse_mode "HTML" now (for video links), so this still runs first to keep
+// any asterisks from ever needing HTML tags of their own. Both "*single*"
+// and "**double**" are handled (plus "***triple***" for completeness);
+// longest marker matches first so the single-* pass never gets confused by
+// leftover ** runs, since those are already replaced with plain Unicode
+// characters by the time it runs. Leaves Greek letters, subscripts, LaTeX $$
+// blocks, and everything else as-is.
+function markdownEmphasisToUnicode(text) {
+  text = text.replace(/\*\*\*(.+?)\*\*\*/g, (_, inner) => toMathUnicode(inner, "bolditalic"));
+  text = text.replace(/\*\*(.+?)\*\*/g, (_, inner) => toMathUnicode(inner, "bold"));
+  text = text.replace(/\*(.+?)\*/g, (_, inner) => toMathUnicode(inner, "italic"));
+  return text;
 }
 
 // Splits text into <4096-char chunks and sends each as a message. Pass
@@ -377,7 +407,7 @@ async function sendPlainChunks(chatId, text, replyTo, parseMode) {
 // separate equation images; the surrounding text segments go through the
 // same link-conversion + HTML send as the non-LaTeX path.
 async function sendMessage(chatId, text, replyTo) {
-  text = markdownBoldToUnicode(text);
+  text = markdownEmphasisToUnicode(text);
 
   if (LATEX_ENABLED) {
     let segments;
