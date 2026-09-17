@@ -22,6 +22,8 @@ const path = require("path");
 const express = require("express");
 const axios = require("axios");
 const { extractAndSendLatex } = require("./latex-renderer");
+const quizGenerator = require("./quizGenerator_fys240");
+const corpusLoader = require("./corpusLoader");
 
 const app = express();
 app.use(express.json());
@@ -237,6 +239,61 @@ function remember(chatId, role, content) {
 // ------------------------------------------------------------- telegram -----
 async function tg(method, payload) {
   return axios.post(`${TELEGRAM_API}/${method}`, payload, { timeout: 15000 });
+}
+
+// ---------------------------------------------------- quiz bot adapter -----
+// quizGenerator_fys240.js expects a small node-telegram-bot-api-shaped `bot`
+// object (sendMessage/editMessageText/answerCallbackQuery). This bot talks
+// to Telegram directly via axios (tg()), so this adapter bridges the two
+// without adding a new dependency — same pattern as the FYS.501 bot.js.
+const quizBot = {
+  async sendMessage(chatId, text, opts = {}) {
+    return tg("sendMessage", {
+      chat_id: chatId,
+      text,
+      parse_mode: opts.parse_mode,
+      reply_markup: opts.reply_markup,
+    }).catch((e) =>
+      console.error("Telegram sendMessage (quiz) failed:", e.response?.status, JSON.stringify(e.response?.data))
+    );
+  },
+  async editMessageText(text, opts = {}) {
+    return tg("editMessageText", {
+      chat_id: opts.chat_id,
+      message_id: opts.message_id,
+      text,
+      parse_mode: opts.parse_mode,
+      reply_markup: opts.reply_markup,
+    }).catch((e) =>
+      console.error("Telegram editMessageText (quiz) failed:", e.response?.status, JSON.stringify(e.response?.data))
+    );
+  },
+  async answerCallbackQuery(callbackQueryId, opts = {}) {
+    return tg("answerCallbackQuery", {
+      callback_query_id: callbackQueryId,
+      text: opts.text,
+    }).catch((e) =>
+      console.error("Telegram answerCallbackQuery failed:", e.response?.status, JSON.stringify(e.response?.data))
+    );
+  },
+};
+
+// Called by quizGenerator.startQuiz() when the student didn't name a
+// chapter/section (e.g. just typed "quiz me"). Presents an inline-keyboard
+// chapter picker covering FYS.240's chapters 2-10, built from
+// corpusLoader.listChapters()/getChapterTitle(). Tapping a chapter sends a
+// "quizchapter:N" callback, handled in handleCallbackQuery() below, which
+// starts the actual quiz. Returning null tells startQuiz() to stop — there's
+// nothing more for it to do until the student taps a button.
+async function askWhichChapter(bot, chatId) {
+  await bot.sendMessage(chatId, "Which chapter would you like to be quizzed on?", {
+    reply_markup: {
+      inline_keyboard: corpusLoader.listChapters().map((ch) => ([
+        { text: `Chapter ${ch} — ${corpusLoader.getChapterTitle(ch)}`, callback_data: `quizchapter:${ch}` },
+      ])),
+    },
+  });
+  return null;
 }
 
 async function sendMessage(chatId, text, replyTo) {
@@ -531,9 +588,11 @@ app.get("/", (_req, res) => res.send("FYS.240 Optics bot is running"));
 app.get("/healthz", (_req, res) => res.json({ 
   ok: true, 
   corpusChars: COURSE_CORPUS.length,
+  corpusLooksHealthy: corpusLoader.corpusLooksHealthy(),
   videoLectures: VIDEO_DB ? VIDEO_DB.all().length : 0,
   latexEnabled: LATEX_ENABLED,
   homeworkProblemsLoaded: Object.values(HOMEWORK_PROBLEMS).reduce((n, hw) => n + Object.keys(hw).length, 0),
+  quizBankLooksHealthy: quizGenerator.quizBankLooksHealthy(),
 }));
 
 app.post("/webhook", (req, res) => {
@@ -546,12 +605,20 @@ app.post("/webhook", (req, res) => {
 });
 
 async function handleUpdate(update) {
-  const message = update?.message;
-  if (!message || !message.text) return;
+  if (!update || update.update_id === undefined) return;
 
   if (seenUpdates.has(update.update_id)) return;
   seenUpdates.add(update.update_id);
   if (seenUpdates.size > 1000) seenUpdates.clear();
+
+  // Quiz answer taps and chapter-picker taps arrive as callback_query
+  // updates, not message updates — handle those separately.
+  if (update.callback_query) {
+    return handleCallbackQuery(update.callback_query);
+  }
+
+  const message = update.message;
+  if (!message || !message.text) return;
 
   const chatId = message.chat.id;
   const userId = message.from?.id;
@@ -645,6 +712,13 @@ async function handleUpdate(update) {
 
   console.log(`[${message.chat.type}:${chatId}] ${question.slice(0, 120)}`);
 
+  // ---- "quiz me" / "quiz me on chapter 2" / "quiz me on section 2.3" ----
+  if (quizGenerator.isQuizRequest(question)) {
+    return quizGenerator
+      .startQuiz(quizBot, chatId, question, askWhichChapter)
+      .catch((e) => console.error("quizGenerator.startQuiz crashed:", e.message));
+  }
+
   await tg("sendChatAction", { chat_id: chatId, action: "typing" }).catch(() => {});
 
   try {
@@ -659,6 +733,33 @@ async function handleUpdate(update) {
       message.message_id
     );
   }
+}
+
+// callback_query updates: answer-option taps ("quiz:...") from
+// quizGenerator's inline keyboards, and chapter-picker taps
+// ("quizchapter:N") from askWhichChapter() above.
+async function handleCallbackQuery(cq) {
+  const data = cq.data || "";
+
+  if (data.startsWith("quiz:")) {
+    return quizGenerator
+      .handleQuizAnswer(quizBot, cq)
+      .catch((e) => console.error("quizGenerator.handleQuizAnswer crashed:", e.message));
+  }
+
+  if (data.startsWith("quizchapter:")) {
+    const chapter = data.split(":")[1];
+    const chatId = cq.message?.chat?.id;
+    await quizBot.answerCallbackQuery(cq.id);
+    if (!chatId) return;
+    return quizGenerator
+      .startQuiz(quizBot, chatId, `quiz me on chapter ${chapter}`, askWhichChapter)
+      .catch((e) => console.error("quizGenerator.startQuiz (chapter pick) crashed:", e.message));
+  }
+
+  // Unknown callback data — acknowledge anyway so Telegram stops showing a
+  // loading spinner on the button.
+  await quizBot.answerCallbackQuery(cq.id).catch(() => {});
 }
 
 // ---------------------------------------------------------------- start -----
