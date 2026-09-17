@@ -21,7 +21,7 @@ const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const axios = require("axios");
-const { extractAndSendLatex } = require("./latex-renderer");
+const { parseLatexBlocks, sendLatexImage } = require("./latex-renderer");
 const quizGenerator = require("./quizGenerator_fys240");
 const corpusLoader = require("./corpusLoader");
 
@@ -103,15 +103,15 @@ WHAT YOU KNOW
 WHEN TO SUGGEST VIDEOS
 If a student asks about a topic that's covered in video lectures, suggest the relevant video:
 - Check if the topic matches any video lecture title
-- Example: "That's covered in Video 5.2 (Refraction). Watch it here: [link]"
-- Always provide the YouTube link when suggesting a video
-- Format: Chapter X.Y: [topic] - https://youtube.com/watch?v=[ID]
+- Write it as a Markdown link with the chapter and topic as the clickable label, e.g.:
+  "That's covered in [Video 5.2 (Refraction)](https://youtube.com/watch?v=pzzjQhhXdkE)."
+- ALWAYS use this exact [Video X.Y (Topic)](URL) format — never write the raw URL on its own, after a colon, or after a dash
 
 HOW TO HELP
 **LENGTH**: ONE OR TWO SHORT SENTENCES/PARAGRAPH ONLY. Never use section headers, bullets, tables, or sub-points. No "Step 1, Step 2". No "Key insight:". Just talk to them like a person.
 **HOMEWORK**: Give hints, not answers. Name the relevant equation or concept, point to the section, suggest a video if available, ask ONE guiding question. (Students can also use /HW1 ... /HW6 and /HW3.2-style commands to ask about a specific homework set or problem directly.)
-**CONCEPTUAL**: Answer directly and briefly. If they ask about something that has a video, mention it: "That's in Video X.Y: [link]. In short, ..."
-**VIDEO REFERENCES**: When appropriate, include direct YouTube links with chapter numbers so students can find them easily.
+**CONCEPTUAL**: Answer directly and briefly. If they ask about something that has a video, mention it: "That's in [Video X.Y (Topic)](URL). In short, ..."
+**VIDEO REFERENCES**: When appropriate, include video links as [Video X.Y (Topic)](URL) so students can find them easily.
 **STUDENT ATTEMPTS**: If they show work, check it quickly, point at one specific error. Don't rewrite the whole thing.
 **REDIRECT**: If it's outside course scope, say "That's beyond FYS.240, ask your instructor during office hours".
 
@@ -122,7 +122,7 @@ ${LATEX_ENABLED
 - These will be automatically rendered as readable images`
   : `- Use UNICODE SYMBOLS ONLY: α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ σ τ υ φ χ ψ ω`
 }
-- Include YouTube links when suggesting videos
+- Write video links as [Video X.Y (Topic)](URL) Markdown links, never as bare URLs
 - 2-3 short paragraphs maximum
 - Answer in the language the student writes in (English or Finnish)
 
@@ -296,10 +296,32 @@ async function askWhichChapter(bot, chatId) {
   return null;
 }
 
+// Converts Claude's "[label](url)" Markdown links (video suggestions) into
+// Telegram HTML <a> tags, and HTML-escapes everything else in the chunk so
+// it's safe to send with parse_mode: "HTML". Links are pulled out into
+// placeholders BEFORE escaping so neither the label nor the URL get their
+// &/</> characters mangled, then the <a> tags are spliced back in after.
+function convertLinksAndEscape(text) {
+  const links = [];
+  const withPlaceholders = text.replace(
+    /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+    (_, label, url) => {
+      links.push({ label, url });
+      return `\u0000${links.length - 1}\u0000`;
+    }
+  );
+  let escaped = escapeHtml(withPlaceholders);
+  links.forEach((link, i) => {
+    const anchor = `<a href="${escapeHtml(link.url)}">${escapeHtml(link.label)}</a>`;
+    escaped = escaped.replace(`\u0000${i}\u0000`, anchor);
+  });
+  return escaped;
+}
+
 // Converts "**bold**" markdown spans (Claude's natural way of marking vector
 // quantities, e.g. **E**, **B**) into real Unicode bold characters. Messages
-// are sent as plain text with no parse_mode, so Telegram never interprets
-// "**" as formatting — without this, students just see literal asterisks.
+// are sent with parse_mode "HTML" now (for video links), so this still runs
+// first to keep "**" from ever needing HTML tags of its own.
 // Leaves Greek letters, subscripts, LaTeX $$ blocks, and everything else as-is.
 function markdownBoldToUnicode(text) {
   return text.replace(/\*\*(.+?)\*\*/g, (_, inner) => {
@@ -315,11 +337,13 @@ function markdownBoldToUnicode(text) {
   });
 }
 
-// Splits text into <4096-char chunks and sends each as a plain message.
-// Used for the non-LaTeX path, and as a fallback if extractAndSendLatex fails
-// so a rendering hiccup degrades to plain text instead of the student getting
+// Splits text into <4096-char chunks and sends each as a message. Pass
+// parseMode "HTML" (the normal case now, so video links render as clickable
+// text) or leave it undefined for a literal-text fallback. Used for the
+// non-LaTeX path, and as a fallback if LaTeX parsing/sending fails, so a
+// rendering hiccup degrades to plain text instead of the student getting
 // nothing at all.
-async function sendPlainChunks(chatId, text, replyTo) {
+async function sendPlainChunks(chatId, text, replyTo, parseMode) {
   const chunks = [];
   let rest = text.trim();
   while (rest.length > 4000) {
@@ -335,6 +359,7 @@ async function sendPlainChunks(chatId, text, replyTo) {
     await tg("sendMessage", {
       chat_id: chatId,
       text: chunk,
+      parse_mode: parseMode,
       reply_to_message_id: replyTo,
       allow_sending_without_reply: true,
       disable_web_page_preview: true,
@@ -344,17 +369,36 @@ async function sendPlainChunks(chatId, text, replyTo) {
   }
 }
 
+// Sends Claude's reply to Telegram. Video links come back from Claude as
+// Markdown "[label](url)" (per TA_INSTRUCTIONS) and are converted to real
+// <a> tags via convertLinksAndEscape() + parse_mode "HTML", so students see
+// "Video 3.3 (Harmonic waves)" as clickable text instead of a raw URL.
+// $$ LaTeX blocks are pulled out first (via parseLatexBlocks) and sent as
+// separate equation images; the surrounding text segments go through the
+// same link-conversion + HTML send as the non-LaTeX path.
 async function sendMessage(chatId, text, replyTo) {
   text = markdownBoldToUnicode(text);
+
   if (LATEX_ENABLED) {
-    await extractAndSendLatex(tg, chatId, text, replyTo).catch(async (e) => {
-      console.error("extractAndSendLatex failed, falling back to plain text:", e.message);
-      // Strip the $$ delimiters so the student at least sees the raw content
-      // (as text, no rendered equation) instead of silence.
-      await sendPlainChunks(chatId, text.replace(/\$\$/g, ""), replyTo);
-    });
+    let segments;
+    try {
+      segments = parseLatexBlocks(text);
+    } catch (e) {
+      console.error("parseLatexBlocks failed, falling back to plain text:", e.message);
+      await sendPlainChunks(chatId, convertLinksAndEscape(text.replace(/\$\$/g, "")), replyTo, "HTML");
+      return;
+    }
+    for (const seg of segments) {
+      if (seg.type === "latex") {
+        await sendLatexImage(tg, chatId, seg.content, replyTo).catch((e) =>
+          console.error("sendLatexImage failed:", e.message)
+        );
+      } else if (seg.content && seg.content.trim()) {
+        await sendPlainChunks(chatId, convertLinksAndEscape(seg.content), replyTo, "HTML");
+      }
+    }
   } else {
-    await sendPlainChunks(chatId, text, replyTo);
+    await sendPlainChunks(chatId, convertLinksAndEscape(text), replyTo, "HTML");
   }
 }
 
