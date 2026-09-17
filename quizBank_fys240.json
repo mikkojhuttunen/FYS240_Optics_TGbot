@@ -1,0 +1,580 @@
+{
+  "2": {
+    "2.1": [
+      {
+        "id": "q2.1_001",
+        "stem": "In 1865, who compiled the previously separate laws of electricity and magnetism into a unified electromagnetic theory?",
+        "options": [
+          "James Clerk Maxwell",
+          "Isaac Newton",
+          "Michael Faraday",
+          "Heinrich Hertz"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes state Maxwell compiled the laws of magnetism and electricity together in 1865, giving rise to Maxwell's equations.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.1_002",
+        "stem": "Which of Maxwell's equations is ∇ × E⃗ = -∂B⃗/∂t?",
+        "options": [
+          "The Maxwell–Faraday equation",
+          "Gauss's law",
+          "Gauss's law for magnetism",
+          "Ampère's circuital law"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes name (III) ∇ × E⃗ = -∂B⃗/∂t the Maxwell–Faraday equation.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.1_003",
+        "stem": "For the time-harmonic plane wave ψ(z,t) = A sin(k(z − vt)), what does the symbol k represent?",
+        "options": [
+          "The wavevector",
+          "The field amplitude",
+          "The velocity of the wave",
+          "The phase"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes define A as field amplitude, k as wavevector, v as wave velocity, and the sine term as describing the phase.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.1_004",
+        "stem": "According to the notes, visible light corresponds to roughly what wavelength range?",
+        "options": [
+          "390–780 nm",
+          "10–200 nm",
+          "780 nm–1 mm",
+          "1–10 μm"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes give λ ∈ 390–780 nm (violet–red) as the technical wavelength range of light, while noting UV and near-IR are also often included in the treatment.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ],
+    "2.2": [
+      {
+        "id": "q2.2_001",
+        "stem": "In geometrical optics, what aspect of light's behavior is being neglected?",
+        "options": [
+          "Its wave nature (and hence diffraction)",
+          "Its particle nature",
+          "Its speed in vacuum",
+          "Its polarization entirely"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes state that geometrical optics applies when the wave nature of light can be forgotten (λ → 0), so diffraction is neglected.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.2_002",
+        "stem": "At an interface between two media with refractive indices n₁ and n₂, what relation connects the angles of incidence and refraction?",
+        "options": [
+          "Snell's law: nᵢ sin θᵢ = nₜ sin θₜ",
+          "θᵢ = 2θₜ",
+          "nᵢ cos θᵢ = nₜ cos θₜ",
+          "θᵢ + θₜ = 90°"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes give Snell's law, nᵢ sin θᵢ = nₜ sin θₜ, as the connection between incidence angle θᵢ and refraction angle θₜ.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.2_003",
+        "stem": "How do the angle of incidence θᵢ and the angle of reflection θᵣ compare at an interface?",
+        "options": [
+          "They are equal",
+          "θᵣ is always twice θᵢ",
+          "They sum to 90°",
+          "There is no fixed relation between them"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes state θᵢ = θᵣ for the reflected ray at an interface.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ],
+    "2.3": [
+      {
+        "id": "q2.3_001",
+        "stem": "In the particle picture of light, how is a photon's energy related to its frequency ν?",
+        "options": [
+          "E = hν = ħω, proportional to frequency",
+          "E is independent of frequency",
+          "E is inversely proportional to frequency",
+          "E = ħ/ν"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes give E = hν = ħω, i.e. photon energy is proportional to the light's frequency.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.3_002",
+        "stem": "When is treating light as quantized particles (photons) particularly important, according to the notes?",
+        "options": [
+          "When quantum-mechanical effects matter, e.g. with weak sources like individual atoms/molecules",
+          "Whenever light travels through vacuum",
+          "Only for radio-frequency waves",
+          "Only when light is monochromatic"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes note the particle picture matters when quantum mechanical phenomena are important in light–matter interaction, often for weak light sources such as individual atoms or molecules.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.3_003",
+        "stem": "Does this course (FYS.240) treat the quantum (particle) nature of light in detail?",
+        "options": [
+          "No — the notes explicitly state it is neglected during this course",
+          "Yes, extensively, using full QED",
+          "Only for X-rays",
+          "Only in the chapter on lasers"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes explicitly state: \"During this course, we neglect the quantum nature of light.\"",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ]
+  },
+  "4": {
+    "4.1": [
+      {
+        "id": "q4.1_001",
+        "stem": "What is the Lorentz force equation, also included in Maxwell's original treatise?",
+        "options": [
+          "F⃗ = qE⃗ + qv⃗ × B⃗",
+          "F⃗ = qE⃗ only",
+          "F⃗ = qv⃗ × B⃗ only",
+          "F⃗ = q²E⃗"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes give the Lorentz force as F⃗ = qE⃗ + qv⃗ × B⃗, noting it was part of Maxwell's original work.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.1_002",
+        "stem": "Starting from the microscopic Maxwell's equations in vacuum (ρ=0, J⃗=0⃗), what speed do the derived E⃗- and B⃗-field wave equations show radiation propagates at?",
+        "options": [
+          "c₀ = 1/√(μ₀ε₀)",
+          "c₀ = μ₀ε₀",
+          "c₀ = √(μ₀/ε₀)",
+          "c₀ depends on the field amplitude"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes derive that both fields propagate at c₀ ≡ 1/√(μ₀ε₀) ≈ 3×10⁸ m/s, the speed of light.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.1_003",
+        "stem": "Which later section treats Maxwell's equations for fields inside a medium, rather than in vacuum?",
+        "options": [
+          "Section 4.6",
+          "Section 4.2",
+          "Section 5.3",
+          "Section 6.3"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes point to Chapter 4.6 for the original (macroscopic) Maxwell's equations governing fields in a medium, after first introducing the simpler vacuum (microscopic) form here.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ],
+    "4.2": [
+      {
+        "id": "q4.2_001",
+        "stem": "For a plane wave E⃗(r⃗,t) = E⃗₀ e^(ik⃗·r⃗) e^(-iωt) propagating in vacuum, what does ∇·E⃗ = 0 imply about k⃗ and E⃗₀?",
+        "options": [
+          "k⃗ · E⃗₀ = 0, i.e. the E-field is transverse",
+          "k⃗ and E⃗₀ are parallel",
+          "E⃗₀ must be zero",
+          "k⃗ has no fixed relation to E⃗₀"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes derive k⃗ · E⃗₀ = 0 from ∇·E⃗ = 0, showing the electric field oscillates perpendicular to the propagation direction (a transverse field).",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.2_002",
+        "stem": "For a plane wave in vacuum, how are the magnitudes of the E- and B-fields related?",
+        "options": [
+          "|B⃗| = |E⃗| / c",
+          "|B⃗| = |E⃗| · c",
+          "|B⃗| = |E⃗|²",
+          "They are unrelated"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes derive k × E⃗ = cB⃗, which for a plane wave gives |B⃗| = |E⃗|/c.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.2_003",
+        "stem": "Taking the divergence of the Ampère–Maxwell law and combining it with Gauss's law leads directly to which physical law?",
+        "options": [
+          "Conservation of electric charge (∇·J⃗ + ∂ρ/∂t = 0)",
+          "Conservation of energy",
+          "Snell's law",
+          "The Lorentz force law"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes show ∇·(∇×B⃗) = 0 combined with Gauss's law yields ∇·J⃗ + ∂ρ/∂t = 0, the charge-conservation (continuity) equation.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ],
+    "4.3": [
+      {
+        "id": "q4.3_001",
+        "stem": "What is the total energy density u of an electromagnetic field in vacuum, expressed via the E-field alone?",
+        "options": [
+          "u = ε₀E²",
+          "u = ε₀E²/2",
+          "u = E²/μ₀",
+          "u = μ₀E²"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes show energy is equally split between E- and B-fields, giving a total u = u_E + u_B = ε₀E² = B²/μ₀.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.3_002",
+        "stem": "What vector quantity describes the direction and magnitude of electromagnetic energy flow?",
+        "options": [
+          "The Poynting vector, S⃗ = c²ε₀E⃗×B⃗",
+          "The wavevector k⃗",
+          "The polarization vector E⃗₀",
+          "The current density J⃗"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes define the (vectorial) irradiance via the Poynting vector S⃗ = c²ε₀E⃗×B⃗.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.3_003",
+        "stem": "Since the time average of cos(ωt) is zero but that of cos²(ωt) is 1/2, what is the resulting time-averaged irradiance for a plane wave of amplitude E₀?",
+        "options": [
+          "I = ½cε₀E₀²",
+          "I = cε₀E₀²",
+          "I = ¼cε₀E₀²",
+          "I = cε₀E₀"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes derive ⟨I⟩_T = ½cε₀E₀² using ⟨cos²ωt⟩_T = 1/2, avoiding the need to compute time averages directly in most later calculations.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ],
+    "4.4": [
+      {
+        "id": "q4.4_001",
+        "stem": "What did Maxwell predict about an electromagnetic field impinging on an object?",
+        "options": [
+          "It exerts a radiation pressure equal to the field's energy density, P = u = S/c",
+          "It exerts no force at all",
+          "It exerts a pressure proportional to E³",
+          "It only exerts a pressure at X-ray frequencies"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes state Maxwell predicted radiation pressure P = u = S/c, equal to the EM field's energy density.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.4_002",
+        "stem": "For a plane wave fully absorbed by an object, how is the field's momentum density p_V related to the irradiance I?",
+        "options": [
+          "p_V = I / c²",
+          "p_V = I · c",
+          "p_V = I / c",
+          "p_V = I²/c"
+        ],
+        "correctIndex": 0,
+        "explanation": "Combining P = p_V·c with the time-averaged radiation pressure ⟨P⟩_T = I/c, the notes derive p_V = I/c².",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ],
+    "4.5": [
+      {
+        "id": "q4.5_001",
+        "stem": "According to basic electrodynamics, what gives rise to electromagnetic radiation?",
+        "options": [
+          "Electric charges undergoing accelerating motion (e.g. oscillating charges)",
+          "Charges moving at constant velocity",
+          "Charges at rest in a strong field",
+          "Any charge, regardless of its motion"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes state that accelerating charges — i.e. a time-dependent current density with ∂J⃗/∂t ≠ 0 — act as a source term in the wave equation.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.5_002",
+        "stem": "At visible wavelengths, what is identified as the most important type of radiation source?",
+        "options": [
+          "An electric dipole source (e.g. a fluorescent molecule, atomic/molecular emitter, or quantum dot)",
+          "A synchrotron",
+          "A radio antenna",
+          "Cosmic background radiation"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes name the electric dipole source — such as a fluorescent molecule, atomic/molecular emitter, or quantum dot — as the most important visible-wavelength radiation source.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.5_003",
+        "stem": "How does the far-field irradiance of dipole radiation scale with the angular frequency ω?",
+        "options": [
+          "It is proportional to ω⁴",
+          "It is proportional to ω",
+          "It is independent of ω",
+          "It is proportional to 1/ω²"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes give I(r,θ) ∝ ω⁴, meaning shorter wavelengths (higher ω) scatter/radiate much more strongly — the same scaling behind Rayleigh scattering.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ],
+    "4.6": [
+      {
+        "id": "q4.6_001",
+        "stem": "Why can't Maxwell's equations be applied directly to matter without approximation?",
+        "options": [
+          "A macroscopic medium consists of ~10²³ atoms — an intractable many-body problem",
+          "Matter has no electric charges",
+          "Maxwell's equations only apply in a vacuum by definition",
+          "Matter has no magnetic properties"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes note that even 1 cm³ of solid matter has ~10²³ atoms, making an exact microscopic treatment impossible — hence the macroscopic (continuum) Maxwell's equations.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.6_002",
+        "stem": "In the macroscopic Maxwell's equations, which auxiliary field's divergence equals the free charge density ρ_f?",
+        "options": [
+          "The electric displacement D⃗",
+          "The magnetizing field H⃗",
+          "The polarization P⃗",
+          "The magnetization M⃗"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes give ∇·D⃗ = ρ_f as one of the macroscopic Maxwell's equations, where D⃗ = ε₀E⃗ + P⃗.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.6_003",
+        "stem": "What causes material dispersion, i.e. why does the refractive index depend on wavelength?",
+        "options": [
+          "The refractive index n itself depends on the light's frequency/wavelength, n = n(ω) = n(λ)",
+          "The speed of light in vacuum varies with wavelength",
+          "Only absorption causes dispersion",
+          "Dispersion only occurs in gases, not solids"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes state that a material's refractive index n depends on the incident light's frequency/wavelength, i.e. n = n(ω) = n(λ), which is called dispersion.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ]
+  },
+  "5": {
+    "5.1": [
+      {
+        "id": "q5.1_001",
+        "stem": "What determines the resonance frequency ω_ig between two electronic states i and g of an atom/molecule?",
+        "options": [
+          "Their energy difference: ΔE = Eᵢ − E_g = ħω_ig",
+          "The temperature of the medium alone",
+          "The speed of light in the medium",
+          "The polarization of incident light"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes give ΔE = Eᵢ − E_g = hν_ig = ħω_ig, directly linking the energy gap between states to their resonance frequency.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.1_002",
+        "stem": "Why must the behavior of electrons in a medium generally be treated statistically?",
+        "options": [
+          "There are many electrons, and thermal effects and relaxation dynamics make the system inherently statistical",
+          "Electrons have no well-defined energy states",
+          "Only a single electron exists per atom",
+          "Statistics is only needed at absolute zero"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes note that with many electrons, non-zero temperature effects, and excited states relaxing with characteristic lifetimes τ, the treatment necessarily becomes a statistical one.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ],
+    "5.2": [
+      {
+        "id": "q5.2_001",
+        "stem": "What happens when the frequency of light interacting with matter is close to one of the matter's resonance frequencies?",
+        "options": [
+          "Matter can absorb a photon, raising an electron to an excited state",
+          "The photon always scatters elastically",
+          "No interaction occurs at all",
+          "The electron is ejected from the atom"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes describe absorption: light near a resonance frequency ω_ig raises an electron from the ground state to excited state i.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.2_002",
+        "stem": "How does a stimulated-emission photon's phase compare to the photon that triggered it, versus a spontaneously emitted photon?",
+        "options": [
+          "Stimulated emission is phase-correlated with the incident photon; spontaneous emission has a random initial phase",
+          "Both have identical, fixed phases",
+          "Both have entirely random phases",
+          "Stimulated emission has no phase at all"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes state stimulated emission preserves phase correlation with the incoming photon (same k⃗, phase, polarization), while spontaneous emission has a random initial phase.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.2_003",
+        "stem": "What happens to light when its frequency is far from any resonance frequency of the matter it interacts with?",
+        "options": [
+          "It is not absorbed but scattered",
+          "It is always fully absorbed",
+          "It is completely reflected",
+          "It undergoes stimulated emission"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes state that far from resonance, the photon isn't absorbed into the medium but scatters from it (ω ≠ ω₀).",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ],
+    "5.3": [
+      {
+        "id": "q5.3_001",
+        "stem": "In the (simple, undamped) Lorentz model of an atom, the electron is modeled as attached to the atomic core via what kind of force?",
+        "options": [
+          "A harmonic spring force (Hooke's law, F = −kx)",
+          "A constant, velocity-independent force",
+          "No restoring force at all",
+          "A force depending only on the electron's charge, not position"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes model the electron as bound to the core via a harmonic spring of constant k, giving the restoring force F_R(t) = −kx(t).",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.3_002",
+        "stem": "What unphysical behavior does the simple (undamped) Lorentz model predict exactly at resonance (ω = ω₀)?",
+        "options": [
+          "The refractive index n diverges (n → ∞)",
+          "The refractive index becomes exactly 1",
+          "The electron stops oscillating entirely",
+          "Light is no longer absorbed"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes show the undamped model gives n → ∞ at ω = ω₀, which is unphysical and doesn't match experimental observations.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.3_003",
+        "stem": "What modification fixes the Lorentz model's unphysical divergence at resonance?",
+        "options": [
+          "Adding a damping term (mγẋ) to the electron's equation of motion",
+          "Removing the spring force entirely",
+          "Assuming the electron has infinite mass",
+          "Setting the driving field amplitude to zero"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes add a damping term, giving m·ẍ + mγẋ + kx = qE₀e^(−iωt), which yields a finite, complex-valued refractive index even at resonance.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.3_004",
+        "stem": "In the damped Lorentz model, what does the imaginary part of the complex refractive index n(ω) correspond to physically?",
+        "options": [
+          "Absorption in the medium",
+          "The speed of light in the medium",
+          "The material's magnetic permeability",
+          "The electron's rest mass"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes state the imaginary part of the complex refractive index leads directly to absorption in the medium, while the real part relates to the propagation speed.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ],
+    "5.4": [
+      {
+        "id": "q5.4_001",
+        "stem": "In thermal equilibrium, how do the population densities N₁ (ground state) and N₂ (excited state) relate?",
+        "options": [
+          "They follow the Boltzmann distribution: N₂/N₁ = e^(−hν₀/k_BT)",
+          "N₂ always equals N₁",
+          "N₂ is always greater than N₁",
+          "They are unrelated to temperature"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes give the Boltzmann-distribution relation N₂/N₁ = e^(−hν₀/k_BT) for thermal equilibrium between the two states.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.4_002",
+        "stem": "What condition on the population densities must be achieved for light amplification (gain) to occur?",
+        "options": [
+          "Population inversion: N₂ > N₁",
+          "N₂ = N₁ exactly",
+          "N₁ > N₂, the normal thermal-equilibrium case",
+          "The temperature must be exactly 0 K"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes state that population inversion, N₂ > N₁, must be achieved (via pumping) before stimulated emission can dominate and amplify light.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.4_003",
+        "stem": "Beyond having a gain medium with population inversion, what additional element is required to turn an optical amplifier into a laser?",
+        "options": [
+          "A feedback mechanism — an optical resonator/cavity formed by mirrors",
+          "A higher pump temperature only",
+          "A stronger applied magnetic field",
+          "A second, identical gain medium"
+        ],
+        "correctIndex": 0,
+        "explanation": "The notes state an optical amplifier is not yet a laser — a feedback mechanism (the gain medium placed inside an optical cavity/resonator) is needed, which improves the coherence of the amplified light.",
+        "addedAt": "2026-09-17",
+        "source": "claude-authored"
+      }
+    ]
+  }
+}
