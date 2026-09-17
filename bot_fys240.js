@@ -7,6 +7,14 @@
  *   2. Video lecture links from fys240_videos.js
  *   3. LaTeX equation rendering (optional)
  *   4. Conversation history & rate limiting
+ *
+ * HOMEWORK-HELPER COMMANDS (ported from the FYS.501 bot):
+ *   /HW3          — overview: lists the problems in Homework 3
+ *   /HW3.2        — hint on Homework 3, problem 2 (equation/section pointer + guiding question)
+ *   /HW_hint3.2   — minimal nudge: one guiding question, nothing else
+ *   Course has 6 homework sets, so hwNum is expected to be 1-6 (HW1 ... HW6) —
+ *   same flat numbering as FYS.501, NOT the chapter numbers (2-10) used elsewhere in this bot.
+ *   None of these reveal solutions — same no-solutions rule as the rest of the bot.
  */
 
 const fs = require("fs");
@@ -14,6 +22,8 @@ const path = require("path");
 const express = require("express");
 const axios = require("axios");
 const { extractAndSendLatex } = require("./latex-renderer");
+const quizGenerator = require("./quizGenerator_fys240");
+const corpusLoader = require("./corpusLoader");
 
 const app = express();
 app.use(express.json());
@@ -41,6 +51,19 @@ try {
   );
 } catch (e) {
   console.error(`WARNING: could not read ${CORPUS_PATH} — ${e.message}`);
+}
+
+// Exact per-problem text, keyed "<hw>" -> "<problem>" -> text, e.g. HOMEWORK_PROBLEMS["1"]["2"].
+// hwNum runs 1-6 (six homework sets for FYS.240 — see HOMEWORK-HELPER note above).
+// Optional: if missing/empty, /HW commands fall back to letting Claude search the full corpus.
+const HW_PROBLEMS_PATH = path.join(__dirname, "homework_problems.json");
+let HOMEWORK_PROBLEMS = {};
+try {
+  HOMEWORK_PROBLEMS = JSON.parse(fs.readFileSync(HW_PROBLEMS_PATH, "utf8"));
+  const total = Object.values(HOMEWORK_PROBLEMS).reduce((n, hw) => n + Object.keys(hw).length, 0);
+  console.log(`Loaded homework_problems.json: ${total} problems across ${Object.keys(HOMEWORK_PROBLEMS).length} homeworks`);
+} catch (e) {
+  console.log(`No homework_problems.json found (${e.code || e.message}) — /HW commands will fall back to full-corpus search.`);
 }
 
 // ------------------------------------------------- video database ----
@@ -86,7 +109,7 @@ If a student asks about a topic that's covered in video lectures, suggest the re
 
 HOW TO HELP
 **LENGTH**: ONE OR TWO SHORT SENTENCES/PARAGRAPH ONLY. Never use section headers, bullets, tables, or sub-points. No "Step 1, Step 2". No "Key insight:". Just talk to them like a person.
-**HOMEWORK**: Give hints, not answers. Name the relevant equation or concept, point to the section, suggest a video if available, ask ONE guiding question.
+**HOMEWORK**: Give hints, not answers. Name the relevant equation or concept, point to the section, suggest a video if available, ask ONE guiding question. (Students can also use /HW1 ... /HW6 and /HW3.2-style commands to ask about a specific homework set or problem directly.)
 **CONCEPTUAL**: Answer directly and briefly. If they ask about something that has a video, mention it: "That's in Video X.Y: [link]. In short, ..."
 **VIDEO REFERENCES**: When appropriate, include direct YouTube links with chapter numbers so students can find them easily.
 **STUDENT ATTEMPTS**: If they show work, check it quickly, point at one specific error. Don't rewrite the whole thing.
@@ -218,6 +241,61 @@ async function tg(method, payload) {
   return axios.post(`${TELEGRAM_API}/${method}`, payload, { timeout: 15000 });
 }
 
+// ---------------------------------------------------- quiz bot adapter -----
+// quizGenerator_fys240.js expects a small node-telegram-bot-api-shaped `bot`
+// object (sendMessage/editMessageText/answerCallbackQuery). This bot talks
+// to Telegram directly via axios (tg()), so this adapter bridges the two
+// without adding a new dependency — same pattern as the FYS.501 bot.js.
+const quizBot = {
+  async sendMessage(chatId, text, opts = {}) {
+    return tg("sendMessage", {
+      chat_id: chatId,
+      text,
+      parse_mode: opts.parse_mode,
+      reply_markup: opts.reply_markup,
+    }).catch((e) =>
+      console.error("Telegram sendMessage (quiz) failed:", e.response?.status, JSON.stringify(e.response?.data))
+    );
+  },
+  async editMessageText(text, opts = {}) {
+    return tg("editMessageText", {
+      chat_id: opts.chat_id,
+      message_id: opts.message_id,
+      text,
+      parse_mode: opts.parse_mode,
+      reply_markup: opts.reply_markup,
+    }).catch((e) =>
+      console.error("Telegram editMessageText (quiz) failed:", e.response?.status, JSON.stringify(e.response?.data))
+    );
+  },
+  async answerCallbackQuery(callbackQueryId, opts = {}) {
+    return tg("answerCallbackQuery", {
+      callback_query_id: callbackQueryId,
+      text: opts.text,
+    }).catch((e) =>
+      console.error("Telegram answerCallbackQuery failed:", e.response?.status, JSON.stringify(e.response?.data))
+    );
+  },
+};
+
+// Called by quizGenerator.startQuiz() when the student didn't name a
+// chapter/section (e.g. just typed "quiz me"). Presents an inline-keyboard
+// chapter picker covering FYS.240's chapters 2-10, built from
+// corpusLoader.listChapters()/getChapterTitle(). Tapping a chapter sends a
+// "quizchapter:N" callback, handled in handleCallbackQuery() below, which
+// starts the actual quiz. Returning null tells startQuiz() to stop — there's
+// nothing more for it to do until the student taps a button.
+async function askWhichChapter(bot, chatId) {
+  await bot.sendMessage(chatId, "Which chapter would you like to be quizzed on?", {
+    reply_markup: {
+      inline_keyboard: corpusLoader.listChapters().map((ch) => ([
+        { text: `Chapter ${ch} — ${corpusLoader.getChapterTitle(ch)}`, callback_data: `quizchapter:${ch}` },
+      ])),
+    },
+  });
+  return null;
+}
+
 // Converts "**bold**" markdown spans (Claude's natural way of marking vector
 // quantities, e.g. **E**, **B**) into real Unicode bold characters. Messages
 // are sent as plain text with no parse_mode, so Telegram never interprets
@@ -237,35 +315,46 @@ function markdownBoldToUnicode(text) {
   });
 }
 
+// Splits text into <4096-char chunks and sends each as a plain message.
+// Used for the non-LaTeX path, and as a fallback if extractAndSendLatex fails
+// so a rendering hiccup degrades to plain text instead of the student getting
+// nothing at all.
+async function sendPlainChunks(chatId, text, replyTo) {
+  const chunks = [];
+  let rest = text.trim();
+  while (rest.length > 4000) {
+    let cut = rest.lastIndexOf("\n\n", 4000);
+    if (cut < 2000) cut = rest.lastIndexOf(" ", 4000);
+    if (cut < 2000) cut = 4000;
+    chunks.push(rest.slice(0, cut));
+    rest = rest.slice(cut).trim();
+  }
+  chunks.push(rest);
+
+  for (const chunk of chunks) {
+    await tg("sendMessage", {
+      chat_id: chatId,
+      text: chunk,
+      reply_to_message_id: replyTo,
+      allow_sending_without_reply: true,
+      disable_web_page_preview: true,
+    }).catch((e) =>
+      console.error("Telegram sendMessage failed:", e.response?.status, JSON.stringify(e.response?.data))
+    );
+  }
+}
+
 async function sendMessage(chatId, text, replyTo) {
   text = markdownBoldToUnicode(text);
   if (LATEX_ENABLED) {
-    await extractAndSendLatex(tg, chatId, text, replyTo).catch((e) => {
-      console.error("extractAndSendLatex failed:", e.message);
+    await extractAndSendLatex(tg, chatId, text, replyTo).catch(async (e) => {
+      console.error("extractAndSendLatex failed, falling back to plain text:", e.message);
+      // Strip the $$ delimiters so the student at least sees the raw content
+      // (as text, no rendered equation) instead of silence.
+      await sendPlainChunks(chatId, text.replace(/\$\$/g, ""), replyTo);
     });
   } else {
-    const chunks = [];
-    let rest = text.trim();
-    while (rest.length > 4000) {
-      let cut = rest.lastIndexOf("\n\n", 4000);
-      if (cut < 2000) cut = rest.lastIndexOf(" ", 4000);
-      if (cut < 2000) cut = 4000;
-      chunks.push(rest.slice(0, cut));
-      rest = rest.slice(cut).trim();
-    }
-    chunks.push(rest);
-
-    for (const chunk of chunks) {
-      await tg("sendMessage", {
-        chat_id: chatId,
-        text: chunk,
-        reply_to_message_id: replyTo,
-        allow_sending_without_reply: true,
-        disable_web_page_preview: true,
-      }).catch((e) =>
-        console.error("Telegram sendMessage failed:", e.response?.status, JSON.stringify(e.response?.data))
-      );
-    }
+    await sendPlainChunks(chatId, text, replyTo);
   }
 }
 
@@ -326,17 +415,103 @@ function stripMention(text) {
     .trim();
 }
 
+// --------------------------------------------------------- HW commands ------
+// Matches:  /HW3          (overview of Homework 3)
+//           /HW3.2        (hint on Homework 3, problem 2)
+//           /HW_hint3.2   (minimal one-line nudge on Homework 3, problem 2)
+// hwNum is expected to be 1-6 (six homework sets); the regex itself doesn't
+// enforce that range, it just matches whatever digits follow /HW.
+const HW_COMMAND_RE = /^\/HW(_hint)?(\d+)(?:\.(\d+))?(@\S+)?\b/i;
+
+function buildHwOverviewDirective(hwNum) {
+  return (
+    `[HOMEWORK OVERVIEW REQUEST]\n` +
+    `The student wants an overview of Homework ${hwNum}. Find "HOMEWORK ${hwNum}" in the course ` +
+    `material and list each top-level numbered problem with a one-line topic description only ` +
+    `(no sub-parts, no hints, no solutions, no point values needed). Keep the whole reply short — ` +
+    `one line per problem. End with: "Ask /HW${hwNum}.<problem number> for a hint on a specific one."`
+  );
+}
+
+// Free, deterministic version — used when homework_problems.json has this homework,
+// so it costs no API call and can't hallucinate a problem list.
+//
+// NOTE: the naive "split on \n, take line 0" approach (used in the original
+// FYS.501 bot.js this was ported from) only works if the stored text's own
+// first line already IS a one-line summary. It isn't: the text starts with
+// the "<hw>.<n>." header on its own line, so line 0 is just the header, and
+// after stripping the header from a line that WAS only the header, nothing
+// is left — every entry renders as "1.3 — " with an empty summary. Instead,
+// strip the header from the WHOLE text, collapse all whitespace/newlines
+// (so a multi-line paragraph or an itemized problem statement doesn't get
+// cut off at its first internal line break), then take a short excerpt.
+function buildHwOverviewFromStructuredData(hwNum) {
+  const problems = HOMEWORK_PROBLEMS[hwNum];
+  const nums = Object.keys(problems).sort((a, b) => Number(a) - Number(b));
+  const EXCERPT_LEN = 110;
+  const lines = nums.map((n) => {
+    const body = problems[n]
+      .replace(new RegExp(`^${hwNum}\\.${n}\\.?\\s*`), "") // strip the leading "hw.n." header line
+      .replace(/\s+/g, " ") // collapse newlines/multiple spaces into one flowing line
+      .replace(/\s*\(\d+\s*points?\)\s*/i, " ") // drop a "(N points)" mention anywhere in the excerpt window
+      .trim();
+    const excerpt =
+      body.length > EXCERPT_LEN
+        ? body.slice(0, EXCERPT_LEN).replace(/\s+\S*$/, "") + "…" // cut at the last full word
+        : body;
+    return `${hwNum}.${n} — ${excerpt}`;
+  });
+  return (
+    `Homework ${hwNum}:\n` +
+    lines.join("\n") +
+    `\n\nAsk /HW${hwNum}.<problem number> for a hint on a specific one.`
+  );
+}
+
+function buildHwHintDirective(hwNum, problemNum) {
+  const exactText = HOMEWORK_PROBLEMS[hwNum]?.[problemNum];
+  const problemBlock = exactText
+    ? `Here is the exact text of problem ${hwNum}.${problemNum}, verbatim from the assignment sheet:\n"""\n${exactText}\n"""\n`
+    : `Find problem ${hwNum}.${problemNum} in Homework ${hwNum} in the course material below. ` +
+      `If you can't find it, say so plainly instead of guessing.\n`;
+  return (
+    `[HOMEWORK HINT REQUEST]\n` +
+    `The student is asking for help with Homework ${hwNum}, problem ${problemNum}. ${problemBlock}` +
+    `Give ONE hint per your standing homework rules: name the relevant equation or concept, point ` +
+    `to where it's covered, suggest a video if one is available, and ask one guiding question. Do not ` +
+    `solve the problem or give the final answer.`
+  );
+}
+
+function buildHwMinimalHintDirective(hwNum, problemNum) {
+  const exactText = HOMEWORK_PROBLEMS[hwNum]?.[problemNum];
+  const problemBlock = exactText
+    ? `Here is the exact text of problem ${hwNum}.${problemNum}, verbatim from the assignment sheet:\n"""\n${exactText}\n"""\n`
+    : `Find problem ${hwNum}.${problemNum} in Homework ${hwNum} in the course material below. ` +
+      `If you can't find it, say so plainly instead of guessing.\n`;
+  return (
+    `[HOMEWORK MINIMAL HINT REQUEST]\n` +
+    `The student wants just a nudge for Homework ${hwNum}, problem ${problemNum} — no explanation. ${problemBlock}` +
+    `Reply with ONE short guiding question only (a single sentence), optionally naming one equation ` +
+    `or concept. No further explanation, no solution.`
+  );
+}
+
 const HELP_TEXT =
   `Hi! I'm the FYS.240 Optics assistant. I know the lecture notes, textbook, and have ${VIDEO_DB ? VIDEO_DB.all().length : 0} video lectures on all course topics.\n\n` +
   "Ask me things like:\n" +
   "- How do thin lenses work?\n" +
   "- What's the difference between real and virtual images?\n" +
   "- I'm stuck on problem 5.2, where should I start?\n" +
-  "- Explain how a microscope works\n\n" +
+  "- Explain how a microscope works\n" +
+  "- Quiz me on chapter 2 (or a specific section, e.g. \"quiz me on section 2.3\") for a multiple-choice quiz\n\n" +
   "I'll explain concepts, point you to relevant videos or sections, and give hints on homework (but not solutions).\n\n" +
   "Commands:\n" +
   "/topics — see all video lecture topics\n" +
   "/week1 ... /week7 — see videos for a specific course week (week 7 = recap)\n" +
+  "/HW1 ... /HW6 — list the problems in a specific homework set\n" +
+  "/HW3.2 — get a hint on Homework 3, problem 2\n" +
+  "/HW_hint3.2 — just a one-line nudge, no explanation\n" +
   "/reset — clear our conversation history";
 
 
@@ -444,8 +619,11 @@ app.get("/", (_req, res) => res.send("FYS.240 Optics bot is running"));
 app.get("/healthz", (_req, res) => res.json({ 
   ok: true, 
   corpusChars: COURSE_CORPUS.length,
+  corpusLooksHealthy: corpusLoader.corpusLooksHealthy(),
   videoLectures: VIDEO_DB ? VIDEO_DB.all().length : 0,
-  latexEnabled: LATEX_ENABLED 
+  latexEnabled: LATEX_ENABLED,
+  homeworkProblemsLoaded: Object.values(HOMEWORK_PROBLEMS).reduce((n, hw) => n + Object.keys(hw).length, 0),
+  quizBankLooksHealthy: quizGenerator.quizBankLooksHealthy(),
 }));
 
 app.post("/webhook", (req, res) => {
@@ -458,12 +636,20 @@ app.post("/webhook", (req, res) => {
 });
 
 async function handleUpdate(update) {
-  const message = update?.message;
-  if (!message || !message.text) return;
+  if (!update || update.update_id === undefined) return;
 
   if (seenUpdates.has(update.update_id)) return;
   seenUpdates.add(update.update_id);
   if (seenUpdates.size > 1000) seenUpdates.clear();
+
+  // Quiz answer taps and chapter-picker taps arrive as callback_query
+  // updates, not message updates — handle those separately.
+  if (update.callback_query) {
+    return handleCallbackQuery(update.callback_query);
+  }
+
+  const message = update.message;
+  if (!message || !message.text) return;
 
   const chatId = message.chat.id;
   const userId = message.from?.id;
@@ -505,6 +691,49 @@ async function handleUpdate(update) {
     return;
   }
 
+  // ---- /HW1 ... /HW6, /HW3.2, /HW_hint3.2
+  const hwMatch = text.match(HW_COMMAND_RE);
+  if (hwMatch) {
+    const isMinimalHint = !!hwMatch[1];
+    const hwNum = hwMatch[2];
+    const problemNum = hwMatch[3];
+
+    const now1 = Date.now();
+    if (now1 - (lastCall.get(userId) || 0) < MIN_INTERVAL_MS) return;
+    lastCall.set(userId, now1);
+
+    console.log(`[${message.chat.type}:${chatId}] HW command: ${text.slice(0, 60)}`);
+
+    // Overview with no problem number: answer for free/instantly if we have
+    // structured data for this homework, no need to call Claude at all.
+    if (!problemNum && HOMEWORK_PROBLEMS[hwNum] && Object.keys(HOMEWORK_PROBLEMS[hwNum]).length) {
+      await sendMessage(chatId, buildHwOverviewFromStructuredData(hwNum), message.message_id);
+      return;
+    }
+
+    const directive = !problemNum
+      ? buildHwOverviewDirective(hwNum)
+      : isMinimalHint
+      ? buildHwMinimalHintDirective(hwNum, problemNum)
+      : buildHwHintDirective(hwNum, problemNum);
+
+    await tg("sendChatAction", { chat_id: chatId, action: "typing" }).catch(() => {});
+
+    try {
+      const reply = await askClaude(chatId, directive);
+      remember(chatId, "user", text);
+      remember(chatId, "assistant", reply);
+      await sendMessage(chatId, reply, message.message_id);
+    } catch (e) {
+      await sendMessage(
+        chatId,
+        "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
+        message.message_id
+      );
+    }
+    return;
+  }
+
   const question = stripMention(text);
   if (question.length < 3) return;
 
@@ -513,6 +742,13 @@ async function handleUpdate(update) {
   lastCall.set(userId, now);
 
   console.log(`[${message.chat.type}:${chatId}] ${question.slice(0, 120)}`);
+
+  // ---- "quiz me" / "quiz me on chapter 2" / "quiz me on section 2.3" ----
+  if (quizGenerator.isQuizRequest(question)) {
+    return quizGenerator
+      .startQuiz(quizBot, chatId, question, askWhichChapter)
+      .catch((e) => console.error("quizGenerator.startQuiz crashed:", e.message));
+  }
 
   await tg("sendChatAction", { chat_id: chatId, action: "typing" }).catch(() => {});
 
@@ -528,6 +764,33 @@ async function handleUpdate(update) {
       message.message_id
     );
   }
+}
+
+// callback_query updates: answer-option taps ("quiz:...") from
+// quizGenerator's inline keyboards, and chapter-picker taps
+// ("quizchapter:N") from askWhichChapter() above.
+async function handleCallbackQuery(cq) {
+  const data = cq.data || "";
+
+  if (data.startsWith("quiz:")) {
+    return quizGenerator
+      .handleQuizAnswer(quizBot, cq)
+      .catch((e) => console.error("quizGenerator.handleQuizAnswer crashed:", e.message));
+  }
+
+  if (data.startsWith("quizchapter:")) {
+    const chapter = data.split(":")[1];
+    const chatId = cq.message?.chat?.id;
+    await quizBot.answerCallbackQuery(cq.id);
+    if (!chatId) return;
+    return quizGenerator
+      .startQuiz(quizBot, chatId, `quiz me on chapter ${chapter}`, askWhichChapter)
+      .catch((e) => console.error("quizGenerator.startQuiz (chapter pick) crashed:", e.message));
+  }
+
+  // Unknown callback data — acknowledge anyway so Telegram stops showing a
+  // loading spinner on the button.
+  await quizBot.answerCallbackQuery(cq.id).catch(() => {});
 }
 
 // ---------------------------------------------------------------- start -----
