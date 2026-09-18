@@ -7,8 +7,9 @@ FILES — all 5 replace their same-named files in your repo root:
   quizGenerator_fys240.js  was quizGenerator_fys240_bilingual_links.js, unchanged
   fys240_videos.js      adds segments/findSegment/getSegments/findRelevantSegments,
                          loads video_segments.json
-  video_segments.json   NEW — Finnish timestamps for chapters 2.1-3.12 (16 videos, from
-                         FYS_240_video_contents_FI.docx) + the ch. 4.3 example
+  video_segments.json   NEW — Finnish timestamps for ALL 59 lectures with content in the
+                         source (chapters 2.1-10.13; only 9.4 has no timestamps listed
+                         at all in the source doc), from FYS_240_video_contents_FI_all.docx
   add_video_segments.js NEW — CLI to add more, one video at a time:
                          node add_video_segments.js <videoId> file.txt
   import_docx_segments.js NEW — bulk importer for a whole "FYS. 240 Optiikka X.Y ..."
@@ -43,3 +44,12 @@ instead of one combined link: the timestamp itself is clickable (e.g. "[16:48](u
 and the video title is a separate plain link to the start of the video ("[Video 4.3 (Topic)](url)"),
 e.g. "Tarkemmin asiasta kerrotaan kohdassa [16:48](...) videolla [Video 4.3 (...)](...).
 Only bot_fys240.js changed for this.
+
+UPDATE: rebuilt video_segments.json from FYS_240_video_contents_FI_all.docx (the
+complete-course version of the earlier partial file), covering all chapters instead of
+just 2.1-3.12. This also fixed a real parsing bug: several chapters (4.2-4.6, 5.4, ...)
+have ALL their timestamps crammed onto a single line with no line breaks between entries
+in the source doc, which the old line-by-line parser mistook for one giant entry (e.g.
+chapter 4.2 went from 1 'segment' to the correct 18). import_docx_segments.js now splits
+on timestamp tokens found anywhere in the text rather than assuming one per line, so it
+handles both formats. Chapter 9.4 has no timestamps at all in the source and is skipped.

@@ -1,90 +1,4 @@
 {
-  "KCRFMlnFNbQ": [
-    {
-      "t": 0,
-      "label": "Johdanto (mm. Poyntingin teoreema)"
-    },
-    {
-      "t": 210,
-      "label": "Sähkömagneettinen kenttä siirtää energiaa paikasta A paikkaan B"
-    },
-    {
-      "t": 290,
-      "label": "Sähkö- ja magneettikenttien energiatiheydet u_E ja u_B"
-    },
-    {
-      "t": 400,
-      "label": "E- ja B-kenttien energiatiheydet ovat yhtäsuuret: u_E = u_B"
-    },
-    {
-      "t": 470,
-      "label": "Energia on siis jakautunut tasaisesti kenttäkomponenttien (E ja B) välille"
-    },
-    {
-      "t": 496,
-      "label": "Koko kentän energitiheys u = u_E + u_B"
-    },
-    {
-      "t": 527,
-      "label": "Energia(tiheyde)n etenemissuuntaa kuvaa Poyntingin vektori S"
-    },
-    {
-      "t": 762,
-      "label": "Energiatiheyden suuruutta kuvaa suure irradianssi S (tai I)"
-    },
-    {
-      "t": 896,
-      "label": "Intensiteetti ei ole sama asia kuin irradianssi!"
-    },
-    {
-      "t": 956,
-      "label": "Energiatiheyden suureen yleistys vektorisuureisiin, Poyntingin vektoriksi S"
-    },
-    {
-      "t": 1008,
-      "label": "Poyntingin vektori S = c^2 eps0 ExB"
-    },
-    {
-      "t": 1066,
-      "label": "Poyntingin vektorin amplitudi vastaa irradianssia, |S| = S = I"
-    },
-    {
-      "t": 1174,
-      "label": "Poyntingin vektorin eksplisiittinen laskeminen aikaharmoniselle tasoaallolle"
-    },
-    {
-      "t": 1270,
-      "label": "Poyntingin vektori värähtelee myös ajan suhteen"
-    },
-    {
-      "t": 1318,
-      "label": "Optista kenttää ei voi suoraan mitata elektronisilla laitteilla, elektroniikka ei ole tarpeeksi nopeaa"
-    },
-    {
-      "t": 1416,
-      "label": "Valoilmaisimet eli fotodetektorit mittaavat irradianssin aikakeskiarvoja"
-    },
-    {
-      "t": 1600,
-      "label": "Poyntingin vektorin aikakeskiarvo"
-    },
-    {
-      "t": 1715,
-      "label": "B-kentän vaikutus valon ja aineen vuorovaikutuksessa on usein pieni"
-    },
-    {
-      "t": 1829,
-      "label": "Optinen aktiivisuus on ilmiö, jonka selittäminen vaatii B-kentän huomioimista"
-    },
-    {
-      "t": 2028,
-      "label": "Irradianssin aikakeskiarvoja ei tarvitse usein laskea, riittää tietää E-kentän amplitudi"
-    },
-    {
-      "t": 2076,
-      "label": "Irradianssin aikakeskiarvon laskeminen kompleksiesitystä käyttäen"
-    }
-  ],
   "MfFv9Y37cXA": [
     {
       "t": 0,
@@ -741,6 +655,1978 @@
     {
       "t": 1415,
       "label": "E- ja B-kentät skalaari- ja vektoripotentiaalien avulla ilmaistuna"
+    },
+    {
+      "t": 1670,
+      "label": "Sähkömagneetti"
+    }
+  ],
+  "lu3CBQFeaFM": [
+    {
+      "t": 0,
+      "label": "Rönsyilevä johdanto lukuun 4: Sähkömagneettiset aallot"
+    },
+    {
+      "t": 810,
+      "label": "Mikroskooppiset Maxwellin yhtälöt"
+    },
+    {
+      "t": 937,
+      "label": "J. C. Maxwell yhdisti sähköopin ja magnetismin sähkömagnetismiksi"
+    },
+    {
+      "t": 1020,
+      "label": "Lorentzin voima, F = qE + qvB, oli mukana alkuperäisissä Maxwellin yhtälöissä"
+    },
+    {
+      "t": 1127,
+      "label": "Gaussin laki, div(E) = rho/epsilon_0"
+    },
+    {
+      "t": 1172,
+      "label": "Gaussin laki magnetismille, div(B) = 0"
+    },
+    {
+      "t": 1331,
+      "label": "Maxwellin–Faradayn laki, rot(E) = -dB/dt"
+    },
+    {
+      "t": 1358,
+      "label": "Amperen–Maxwellin laki, rot(B) = mu_0 J + epsilon_0 mu_0 dE/dt"
+    },
+    {
+      "t": 1630,
+      "label": "Aaltoyhtälön johtaminen sähkömagneettiselle säteilylle"
+    },
+    {
+      "t": 1900,
+      "label": "Lagrangen kaavan soveltaminen yleistettyyn aaltoyhtälöön"
+    },
+    {
+      "t": 2048,
+      "label": "Aaltoyhtälö B-kentälle"
+    },
+    {
+      "t": 2188,
+      "label": "Sähkömagneettinen aalto etenee tyhjiössä nopeudella c0 (= valonnopeus)"
+    },
+    {
+      "t": 2335,
+      "label": "Valonnopeus c0 ei aina ole etenevän valon nopeus v :)"
+    }
+  ],
+  "uWUN2LZwbXU": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 68,
+      "label": "Perusoletukset: käsitellään aikaharmonisia tasoaaltoja"
+    },
+    {
+      "t": 146,
+      "label": "Ultralyhyet laserpulssit"
+    },
+    {
+      "t": 235,
+      "label": "Tiukasti fokusoitu lasersäde"
+    },
+    {
+      "t": 420,
+      "label": "Fourier-synteesi ja -analyysi"
+    },
+    {
+      "t": 483,
+      "label": "Aikaharmonisen tasoaallon divergenssi häviää"
+    },
+    {
+      "t": 586,
+      "label": "Solenoidisen kentän divergenssi häviää, div(E) = 0"
+    },
+    {
+      "t": 687,
+      "label": "E-kenttä on poikittaista aaltoliikettä"
+    },
+    {
+      "t": 765,
+      "label": "Valon polarisaatio on suunta/tapa jolla E-kenttä värähtelee"
+    },
+    {
+      "t": 830,
+      "label": "B-kenttä on myös poikittaisaalto"
+    },
+    {
+      "t": 867,
+      "label": "E- ja B-kentät ovat myös keskenään kohtisuoria"
+    },
+    {
+      "t": 1073,
+      "label": "E- ja B-kentät värähtelevät myös samassa vaiheessa"
+    },
+    {
+      "t": 1175,
+      "label": "Valonnopeus c liittää E- ja B-kenttien amplitudit toisiinsa, E = cB"
+    },
+    {
+      "t": 1279,
+      "label": "Varauksen säilymislain johtaminen"
+    },
+    {
+      "t": 1368,
+      "label": "Roottorin divergenssi on identtisesti nolla"
+    },
+    {
+      "t": 1447,
+      "label": "Varauksen säilymislaki differentiaalimuodossa"
+    },
+    {
+      "t": 1470,
+      "label": "Varauksen säilymislain integraalimuoto"
+    },
+    {
+      "t": 1635,
+      "label": "Maxwellin yhtälöt ovat yhteensopivat myös suppean suhteellisuusteorian kanssa"
+    }
+  ],
+  "KCRFMlnFNbQ": [
+    {
+      "t": 0,
+      "label": "Johdanto (mm. Poyntingin teoreema)"
+    },
+    {
+      "t": 210,
+      "label": "Sähkömagneettinen kenttä siirtää energiaa paikasta A paikkaan B"
+    },
+    {
+      "t": 290,
+      "label": "Sähkö- ja magneettikenttien energiatiheydet u_E ja u_B"
+    },
+    {
+      "t": 400,
+      "label": "E- ja B-kenttien energiatiheydet ovat yhtäsuuret: u_E = u_B"
+    },
+    {
+      "t": 470,
+      "label": "Energia on siis jakautunut tasaisesti kenttäkomponenttien (E ja B) välille"
+    },
+    {
+      "t": 496,
+      "label": "Koko kentän energitiheys u = u_E + u_B"
+    },
+    {
+      "t": 527,
+      "label": "Energia(tiheyde)n etenemissuuntaa kuvaa Poyntingin vektori S"
+    },
+    {
+      "t": 762,
+      "label": "Energiatiheyden suuruutta kuvaa suure irradianssi S (tai I)"
+    },
+    {
+      "t": 896,
+      "label": "Intensiteetti ei ole sama asia kuin irradianssi!"
+    },
+    {
+      "t": 956,
+      "label": "Energiatiheyden suureen yleistys vektorisuureisiin, Poyntingin vektoriksi S"
+    },
+    {
+      "t": 1008,
+      "label": "Poyntingin vektori S = c^2 eps0 ExB"
+    },
+    {
+      "t": 1066,
+      "label": "Poyntingin vektorin amplitudi vastaa irradianssia, |S| = S = I"
+    },
+    {
+      "t": 1174,
+      "label": "Poyntingin vektorin eksplisiittinen laskeminen aikaharmoniselle tasoaallolle"
+    },
+    {
+      "t": 1270,
+      "label": "Poyntingin vektori värähtelee myös ajan suhteen"
+    },
+    {
+      "t": 1318,
+      "label": "Optista kenttää ei voi suoraan mitata elektronisilla laitteilla, elektroniikka ei ole tarpeeksi nopeaa"
+    },
+    {
+      "t": 1416,
+      "label": "Valoilmaisimet eli fotodetektorit mittaavat irradianssin aikakeskiarvoja"
+    },
+    {
+      "t": 1600,
+      "label": "Poyntingin vektorin aikakeskiarvo"
+    },
+    {
+      "t": 1715,
+      "label": "B-kentän vaikutus valon ja aineen vuorovaikutuksessa on usein pieni"
+    },
+    {
+      "t": 1829,
+      "label": "Optinen aktiivisuus on ilmiö, jonka selittäminen vaatii B-kentän huomioimista"
+    },
+    {
+      "t": 2028,
+      "label": "Irradianssin aikakeskiarvoja ei tarvitse usein laskea, riittää tietää E-kentän amplitudi"
+    },
+    {
+      "t": 2076,
+      "label": "Irradianssin aikakeskiarvon laskeminen kompleksiesitystä käyttäen"
+    }
+  ],
+  "0Sa8yiBKW6k": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 36,
+      "label": "Optinen loukutus ja optiset pinsetit (Fysiikan Nobel 2018, Arthur Ashkin)"
+    },
+    {
+      "t": 250,
+      "label": "Säteilypaine on erittäin tärkeä suure myös aurinkopurjeiden ja satelliittien toiminnassa"
+    },
+    {
+      "t": 348,
+      "label": "Breakthrough Starshot, avaruusaluksien kiihdyttäminen relativistisiin nopeuksiin lasereilla"
+    },
+    {
+      "t": 1046,
+      "label": "Sähkömagneettisella kentällä on myös liikemäärää, kenttä synnyttää säteilypaineen"
+    },
+    {
+      "t": 1256,
+      "label": "Liikemäärän tiheyden määrittäminen"
+    },
+    {
+      "t": 1380,
+      "label": "Liikemäärän tiheys säteilypaineen avulla, p_V = I/c^2"
+    },
+    {
+      "t": 1600,
+      "label": "Luennon kertaus, säteilypaine on merkittävä suure sekä mikro- että makroskooppisessa mittakaavassa"
+    }
+  ],
+  "BP5tEo9OGJM": [
+    {
+      "t": 0,
+      "label": "Kiihtyvässä liikkeessä olevat varaukset synnyttävät sähkömagneettista säteilyä"
+    },
+    {
+      "t": 65,
+      "label": "Ajastariippuva virtatiheys J toimii aaltoyhtälön lähdeterminä"
+    },
+    {
+      "t": 119,
+      "label": "UV-, röntgen- ja gamma-säteilyä synnytetään kiihdyttimillä"
+    },
+    {
+      "t": 185,
+      "label": "Näkyvää valoa synnytetään mm. lasereilla, LEDeillä, hehkulampuilla, …"
+    },
+    {
+      "t": 246,
+      "label": "Infrapunasäteily, mm. lämpösäteily, radioaallot, kosminen taustasäteily, …"
+    },
+    {
+      "t": 355,
+      "label": "Ultraviolettisäteilyn alue"
+    },
+    {
+      "t": 371,
+      "label": "Näkyvän valon ja infrapunasäteilyn alueet"
+    },
+    {
+      "t": 397,
+      "label": "UV-säteilyn säteilylähteitä"
+    },
+    {
+      "t": 452,
+      "label": "IR-säteilyn säteilylähteitä"
+    },
+    {
+      "t": 510,
+      "label": "Valonlähteiden kehitys on laaja fotoniikan tutkimusalue"
+    },
+    {
+      "t": 572,
+      "label": "(Sähkö)dipoli on tärkein säteilyn lähde/tyyppi näkyvän valon alueella"
+    },
+    {
+      "t": 696,
+      "label": "Sähködipoli"
+    },
+    {
+      "t": 768,
+      "label": "Dipolimomentti p = qd"
+    },
+    {
+      "t": 822,
+      "label": "Värähtelevä sähködipoli synnyttää dipolikentän"
+    },
+    {
+      "t": 955,
+      "label": "Dipolikentän lähikenttä on ei-triviaali"
+    },
+    {
+      "t": 975,
+      "label": "Sähködipolin kaukokenttä"
+    },
+    {
+      "t": 1224,
+      "label": "Sähködipolin kaukokentän irradianssi"
+    },
+    {
+      "t": 1293,
+      "label": "Lyhyemmät aallonpituudet siroavat voimakkaasti (miksi taivas on sininen)"
+    },
+    {
+      "t": 1434,
+      "label": "Aineen epähomogeenisuudet sirottavat valoa voimakkaasti, miksi maito on valkoista?"
+    }
+  ],
+  "-kGaj4ONpq0": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 60,
+      "label": "Kiinteät aineet koostuvat järjettömästä määrästä elektroneita"
+    },
+    {
+      "t": 158,
+      "label": "Makroskooppiset Maxwellin yhtälöt mahdollistavat väliaineiden tarkastelun"
+    },
+    {
+      "t": 200,
+      "label": "Gaussin laki, div(D) = rho_f"
+    },
+    {
+      "t": 237,
+      "label": "Gaussin laki magnetismille, div(B) = 0"
+    },
+    {
+      "t": 246,
+      "label": "Maxwellin–Faradayn yhtälö, rot(E) = - dB/dt"
+    },
+    {
+      "t": 260,
+      "label": "Amperen–Maxwellin laki, rot(H) = J_f + dD/dt"
+    },
+    {
+      "t": 298,
+      "label": "Sähkövuon tiheyden D ja magneettikentän voimakkuuden H määritelmät"
+    },
+    {
+      "t": 375,
+      "label": "Materiaalin polarisaatio P, ja magnetisaatio M"
+    },
+    {
+      "t": 482,
+      "label": "Sidotut, vapaat ja kokonaisvaraukset ja -virrat"
+    },
+    {
+      "t": 582,
+      "label": "Optisilla aallonpituuksilla aineiden magneettiset ominaisuudet ovat usein heikkoja"
+    },
+    {
+      "t": 668,
+      "label": "Aineen polarisaatio määrittelee väliaineen optisen vasteen"
+    },
+    {
+      "t": 761,
+      "label": "Makroskooppinen polarisaatio voidaan liittää myös aineen mikroskooppisiin ominaisuuksiin, P = Np"
+    },
+    {
+      "t": 895,
+      "label": "Mikroskooppisen säteilijän/sirottajan dipolimomentti"
+    },
+    {
+      "t": 975,
+      "label": "Väliaineen permittiivisyys epsilon = eps0 eps_r"
+    },
+    {
+      "t": 1178,
+      "label": "Valo etenee väliaineessa nopeudella v = 1/sqrt(eps mu)"
+    },
+    {
+      "t": 1252,
+      "label": "Väliaineen taitekertoimen määritelmä, n = c/v"
+    },
+    {
+      "t": 1457,
+      "label": "Valon aallonpituus ja aaltovektori k muuttuvat väliaineessa, taajuus ei muutu!"
+    },
+    {
+      "t": 1720,
+      "label": "Optisen matkan (OPL) määritelmä"
+    },
+    {
+      "t": 1778,
+      "label": "Materiaalit ovat dispersiivisiä, eli taitekertoimet riippuvat tulevan valon aallonpituudesta"
+    },
+    {
+      "t": 1875,
+      "label": "Materiaalien dispersiivisyyden vaikutuksia käytännössä"
+    },
+    {
+      "t": 2142,
+      "label": "Loppuhöpinät ja luvun 4 kertaus"
+    }
+  ],
+  "RqimjuYdDGA": [
+    {
+      "t": 0,
+      "label": "Luvun 5 johdanto"
+    },
+    {
+      "t": 389,
+      "label": "Sähködipoli muodostuu valon ja aineen vuorovaikutuksen seurauksena"
+    },
+    {
+      "t": 430,
+      "label": "Kiinteillä aineilla on elektronivyörakenne"
+    },
+    {
+      "t": 589,
+      "label": "Aineen elektronien mahdolliset energiatilat"
+    },
+    {
+      "t": 673,
+      "label": "Tilojen välinen energiaero vastaa tulevan valon (resonanssi)taajuutta"
+    },
+    {
+      "t": 794,
+      "label": "Kiinteässä aineessa on järjetön määrä elektroneita, täytyy tarkastella statistisesti"
+    },
+    {
+      "t": 1188,
+      "label": "(Optisella) viritystilalla on tietty elinaika tau, atomaarisella systeemillä ~10 ns"
+    },
+    {
+      "t": 1290,
+      "label": "Loppuhöpinät"
+    }
+  ],
+  "ifhrp3ELmFs": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 162,
+      "label": "Valo voi absorboitua aineeseen"
+    },
+    {
+      "t": 407,
+      "label": "Virittyneen tilan relaksaatio"
+    },
+    {
+      "t": 692,
+      "label": "Tilan ei-radiatiivinen relaksoituminen (aine lämpenee)"
+    },
+    {
+      "t": 788,
+      "label": "Spontaani emissio"
+    },
+    {
+      "t": 932,
+      "label": "Spontaanisti emittoituneen fotonin vaihe ei korreloi systeemin virittäneen fotonin vaiheen kanssa"
+    },
+    {
+      "t": 986,
+      "label": "Stimuloitu emissio (valon vahvistuminen)"
+    },
+    {
+      "t": 1216,
+      "label": "Valon siroaminen on hallitseva prosessi, kun valon taajuus on kaukana aineen resonanssitaajuuksista"
+    },
+    {
+      "t": 1367,
+      "label": "Sironnan mikroskooppinen tarkastelu, dipolimomentin syntyminen"
+    },
+    {
+      "t": 1546,
+      "label": "Siroavan valon vaihe korreloi saapuvan valon vaiheen kanssa"
+    }
+  ],
+  "iWWeet0tZVo": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 120,
+      "label": "Lorentzin atomimalli toimii erityisen hyvin dielektrisille aineille"
+    },
+    {
+      "t": 201,
+      "label": "Toimii välttävästi puolijohteille"
+    },
+    {
+      "t": 242,
+      "label": "Metallien tapauksessa on järkevämpää käyttää Druden mallia"
+    },
+    {
+      "t": 326,
+      "label": "Lorentzin atomimallissa elektroni on harmonisesti kytketty atomin ytimeen"
+    },
+    {
+      "t": 446,
+      "label": "Oletetaan väliane isotrooppiseksi"
+    },
+    {
+      "t": 553,
+      "label": "Elektronia poikkeuttaa saapuva valo (Lorentzin voiman F=qE+qvB kautta)"
+    },
+    {
+      "t": 693,
+      "label": "Elektroni kokee Lorentzin voiman ja jousivoiman (Hooken laki F = -kx)"
+    },
+    {
+      "t": 790,
+      "label": "Elektronin liikeyhtälö (Newtonin mekaniikan mukaisesti)"
+    },
+    {
+      "t": 878,
+      "label": "Lorentzin atomimallin yleistys puolijohteille, mm. efektiiviset massat"
+    },
+    {
+      "t": 1037,
+      "label": "Ratkaistaan liikeyhtälö aikaharmonisella yritteellä"
+    },
+    {
+      "t": 1213,
+      "label": "Elektronin aikariippuva poikkeama x(t)"
+    },
+    {
+      "t": 1335,
+      "label": "Lasketaan väliaineen permittiivisyys epsilon"
+    },
+    {
+      "t": 1562,
+      "label": "Permittiivisyyden avulla saadaan arvio taajuudesta riippuvalle taitekertoimelle n"
+    },
+    {
+      "t": 1854,
+      "label": "Lisätään malliin fysikaalisesti järkevä vaimenemistermi"
+    },
+    {
+      "t": 1992,
+      "label": "Yleistetyn mallin ennustama taitekerroin n on kompleksisuure"
+    },
+    {
+      "t": 2080,
+      "label": "Taitekertoimen imaginääriosa Im(n) liittyy valon absorptioon"
+    },
+    {
+      "t": 2138,
+      "label": "R Re(n) liittyy valon etenemisnopeuteen väliaineessa v"
+    },
+    {
+      "t": 2219,
+      "label": "Mallin heikkoudet: klassinen malli, aineen jaksollista rakennetta ei ole huomioitu"
+    },
+    {
+      "t": 2366,
+      "label": "Mallin yleistys useampiin resonansseihin: Helmholtzin-Kettelerin kaava"
+    },
+    {
+      "t": 2734,
+      "label": "Normaalisti dispersiivinen taitekerroin"
+    },
+    {
+      "t": 2777,
+      "label": "Taitekertoimen anomaalinen dispersio"
+    },
+    {
+      "t": 2839,
+      "label": "Käytännön sovellutuksissa taitekertoimen ja sen dispersiivisyyden hallitseminen on tärkeää"
+    },
+    {
+      "t": 2902,
+      "label": "Optisesti tärkeät aineet ovat usein läpinäkyviä aallonpituusvälillä 380-780 nm, ts. ovat usein dielektrisiä aineita"
+    }
+  ],
+  "Cue9WoDlcC0": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 162,
+      "label": "Absorptio mahdollistaa energian varastoimisen laserkiteeseen"
+    },
+    {
+      "t": 191,
+      "label": "Stimuloitu emissio mahdollistaa valon vahvistamisen"
+    },
+    {
+      "t": 275,
+      "label": "Lämpötila vaikuttaa myös systeemin käyttäytymiseen, systeemissä on myös termistä energiaa ( E = kB T )"
+    },
+    {
+      "t": 415,
+      "label": "Systeemin tarkasteluun tulee soveltaa tilastollista/statistista fysiikkaa"
+    },
+    {
+      "t": 492,
+      "label": "Termisessä tasapainotilassa tilatiheydet noudattavat Boltzmannin jakaumaa"
+    },
+    {
+      "t": 735,
+      "label": "Huoneenlämpötilassa systeemin terminen energia on n. 26 meV"
+    },
+    {
+      "t": 873,
+      "label": "Terminen tasapaino täytyy rikkoa pumppaamalla systeemiä"
+    },
+    {
+      "t": 986,
+      "label": "Puolijohteita voidaan usein pumpata sähköisesti"
+    },
+    {
+      "t": 1009,
+      "label": "Optinen pumppaus"
+    },
+    {
+      "t": 1055,
+      "label": "Terminen pumppaus"
+    },
+    {
+      "t": 1104,
+      "label": "Populaatioinversio, N2 on suurempi kuin N1"
+    },
+    {
+      "t": 1250,
+      "label": "Stimuloitu emissio on mahdollista kun populaatioinversio on voimassa"
+    },
+    {
+      "t": 1325,
+      "label": "Fotonien vaihekoherenssi"
+    },
+    {
+      "t": 1366,
+      "label": "Laserointiin tarvitaan vielä takaisinkytkentämekanismi"
+    },
+    {
+      "t": 1488,
+      "label": "Takaisinkytkentämekanismi saadaan aikaiseksi optisten resonaattoreiden avulla"
+    },
+    {
+      "t": 1595,
+      "label": "Laserin toimintaa selventävä havainnekuva: Pumpppaus, vahvistinaine ja resonaattori"
+    },
+    {
+      "t": 1736,
+      "label": "Luvun 5 kertaus"
+    }
+  ],
+  "2yhzPfIstK0": [
+    {
+      "t": 0,
+      "label": "Aloitus"
+    },
+    {
+      "t": 47,
+      "label": "Alalukujen kuvaukset"
+    },
+    {
+      "t": 189,
+      "label": "Aaltorintamat ja säteet"
+    },
+    {
+      "t": 250,
+      "label": "Valonsäde = suunta johon valon energia etenee"
+    },
+    {
+      "t": 350,
+      "label": "Aaltorintamat"
+    }
+  ],
+  "kHYNBBSaG5Y": [
+    {
+      "t": 0,
+      "label": "Aloitus"
+    },
+    {
+      "t": 81,
+      "label": "Taitekerroin on makroskooppinen suure"
+    },
+    {
+      "t": 82,
+      "label": "Mikroskooppisella tasolla tapahtuva vuorovaikutus"
+    },
+    {
+      "t": 220,
+      "label": "Aineen polarisaatio on makroskooppinen suure"
+    },
+    {
+      "t": 280,
+      "label": "Taitekerroin on todellakin makroskooppinen suure"
+    },
+    {
+      "t": 393,
+      "label": "Heijastuminen rajapinnalla"
+    },
+    {
+      "t": 458,
+      "label": "Tulotaso"
+    },
+    {
+      "t": 595,
+      "label": "Tulokulman määritelmä"
+    },
+    {
+      "t": 840,
+      "label": "Heijastuslaki"
+    },
+    {
+      "t": 967,
+      "label": "Rajapinnan läpäisevä kenttä"
+    },
+    {
+      "t": 1077,
+      "label": "Taittumislaki"
+    },
+    {
+      "t": 1241,
+      "label": "Optisesti tiheämpi aine taittaa valoa kohti pinnan normaalia"
+    },
+    {
+      "t": 1303,
+      "label": "Taittuminen ilma-lasi rajapinnalla"
+    },
+    {
+      "t": 1526,
+      "label": "Optinen matka"
+    },
+    {
+      "t": 1610,
+      "label": "Optisen matkan käsitteen yleistäminen"
+    },
+    {
+      "t": 1675,
+      "label": "Optinen matka (polku)integraalimuodossa"
+    },
+    {
+      "t": 1715,
+      "label": "Fermat'n periaate: 'valo kulkee stationääristä reittiä'"
+    },
+    {
+      "t": 1840,
+      "label": "Yleensä stationäärinen reitti on lyhin reitti"
+    }
+  ],
+  "yvGUqkLMh3w": [
+    {
+      "t": 0,
+      "label": "Johdanto (kvantitatiivinen kuvaus)"
+    },
+    {
+      "t": 81,
+      "label": "Tulevan kentän yms. määritelmät/lähtöoletukset"
+    },
+    {
+      "t": 122,
+      "label": "Heijastuneen/läpäisseen kentän määritelmä"
+    },
+    {
+      "t": 295,
+      "label": "Reuna- ja/tai jatkuvuusehtojen johtaminen"
+    },
+    {
+      "t": 368,
+      "label": "Kelvin-Stokesin teoreeman soveltaminen"
+    },
+    {
+      "t": 398,
+      "label": "Maxwell-Faradayn laki integraalimuodossa"
+    },
+    {
+      "t": 586,
+      "label": "Tilanteen vieminen mikroskooppiseen tilavuuteen"
+    },
+    {
+      "t": 800,
+      "label": "Kentät ovat vakioarvoisia pienellä pinnalla S"
+    },
+    {
+      "t": 1090,
+      "label": "Rajapinnan suuntaan osoittava yksikkövektori t"
+    },
+    {
+      "t": 1140,
+      "label": "Ensimmäinen jatkuvuusehto: E-kentän tangentiaalikomponentit ovat jatkuvia"
+    },
+    {
+      "t": 1242,
+      "label": "Rajapinnan normaali n"
+    },
+    {
+      "t": 1332,
+      "label": "Aaltojen taajuus ei muutu heijastuksessa/taittumisessa"
+    },
+    {
+      "t": 1457,
+      "label": "Heijastumis/taittumislait jatkuvuusehtojen seurauksena"
+    },
+    {
+      "t": 1495,
+      "label": "k-vektorit ki ja kr, sekä pinnan normaali n määrittävät tulotason"
+    },
+    {
+      "t": 1571,
+      "label": "Heijastumislaki on seurausta E-kentän jatkuvuusehdoista"
+    },
+    {
+      "t": 1700,
+      "label": "Taittumislain eli Snellin lain johtaminen E-kentän jatkuvuusehdoista"
+    },
+    {
+      "t": 1855,
+      "label": "Jatkuvuusehdot riippuvat rajapinnan aineiden ominaisuuksista: dielektrinen-dielektrinen vs. dielektrinen-metalli!"
+    }
+  ],
+  "MdneBZEQLdI": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 50,
+      "label": "Tarkastelun jako kahteen tilanteeseen: E-kentän polarisaatio tulotasoon nähden"
+    },
+    {
+      "t": 216,
+      "label": "Pinnansuuntaisten eli tangentiaalikomponenttien jatkuvuusehdot"
+    },
+    {
+      "t": 605,
+      "label": "Fresnelin kertoimet r ja t tulotasoon nähden kohtisuorasti värähtelevälle komponentille"
+    },
+    {
+      "t": 750,
+      "label": "Tulotasossa värähtelevän E-kentän (ja vastaavan B-kentän) jatkuvuusehto"
+    },
+    {
+      "t": 862,
+      "label": "Fresnelin kertoimet r ja t tulotasossa värähtelevälle komponentille"
+    },
+    {
+      "t": 938,
+      "label": "Fresnelin kertoimet ilma-lasi rajapinnalle"
+    },
+    {
+      "t": 1215,
+      "label": "Brewsterin kulman johtaminen"
+    },
+    {
+      "t": 1410,
+      "label": "Brewsterin kulma eli polarisaatiokulma"
+    },
+    {
+      "t": 1500,
+      "label": "Brewsterin kulmaan perustuva polarisaattori"
+    }
+  ],
+  "_JWAPu0VUW8": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 26,
+      "label": "Heijastavuus ja läpäisevyys"
+    },
+    {
+      "t": 196,
+      "label": "Pinnan heijastavuus R (reflektanssi)"
+    },
+    {
+      "t": 329,
+      "label": "Pinnan läpäisevyys T (transmittanssi)"
+    },
+    {
+      "t": 484,
+      "label": "R + T = 1"
+    },
+    {
+      "t": 536,
+      "label": "R ja T ilma-lasi ja lasi-ilma rajapinnoille"
+    },
+    {
+      "t": 605,
+      "label": "Tarkastelun siirto kentistä irradiansseihin"
+    },
+    {
+      "t": 623,
+      "label": "Kokonaisheijastuminen lasi-ilma rajapinnalla"
+    }
+  ],
+  "dhQ1F7Rfh2A": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 53,
+      "label": "Kokonaisheijastumisen matemaattinen tarkastelu"
+    },
+    {
+      "t": 138,
+      "label": "Kokonaisheijastumisen kriittinen kulma"
+    },
+    {
+      "t": 420,
+      "label": "Kokonaisheijastumisen sovelluskohteita: optiset kuidut jne."
+    },
+    {
+      "t": 658,
+      "label": "Frustroitunut kokonaisheijastuminen"
+    },
+    {
+      "t": 718,
+      "label": "Lasi-ilma rajapinnan läpäisseen valon aaltovektori"
+    },
+    {
+      "t": 929,
+      "label": "Lasi-ilma rajapinnalla etenevä pinta-aalto"
+    },
+    {
+      "t": 988,
+      "label": "Frustroitunut kokonaisheijastuminen"
+    },
+    {
+      "t": 1140,
+      "label": "Komponenttien suorituskyvyn heikentyminen frustroituneen kokonaisheijastuksen seurauksena"
+    }
+  ],
+  "2hjW5XEqi1c": [
+    {
+      "t": 0,
+      "label": "Johdanto lukuun 7"
+    },
+    {
+      "t": 132,
+      "label": "Superpositioperiaate"
+    },
+    {
+      "t": 191,
+      "label": "Superpositioperiaate pohjana interferenssi- ja diffraktio-ilmiöille"
+    },
+    {
+      "t": 310,
+      "label": "Superpositioperiaate aalloille"
+    },
+    {
+      "t": 471,
+      "label": "Superpositio matemaattisessa mielessä"
+    }
+  ],
+  "pl7rt9eEM4E": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 27,
+      "label": "Harmoniset aallot"
+    },
+    {
+      "t": 53,
+      "label": "Superposition tulos riippuu aaltojen vaihe-erosta"
+    },
+    {
+      "t": 195,
+      "label": "Nopeasti ajan suhteen oskilloiva E-kenttä"
+    },
+    {
+      "t": 300,
+      "label": "Optisen matkan OPL yleistäminen"
+    },
+    {
+      "t": 566,
+      "label": "Kahden harmonisen aallon superpositio"
+    },
+    {
+      "t": 804,
+      "label": "Kahden aallon superpositio, matemaattinen tarkastelu"
+    },
+    {
+      "t": 940,
+      "label": "Kahden aallon superposition irradianssi"
+    },
+    {
+      "t": 1055,
+      "label": "Irradianssikuvion fysikaalinen tulkinta, interferenssitermi"
+    },
+    {
+      "t": 1135,
+      "label": "Interferoivien aaltojen välinen vaihe-ero"
+    },
+    {
+      "t": 1315,
+      "label": "Superposition yleistäminen N:n aallon tapaukseen"
+    },
+    {
+      "t": 1435,
+      "label": "N:n koherentin aallon superpositiokenttä näyttää yksittäiseltä tasoaallolta"
+    }
+  ],
+  "Zgcmyyb2zJU": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 24,
+      "label": "Seisovat aallot"
+    },
+    {
+      "t": 235,
+      "label": "Täydellisesti heijastavan metallipeilin rajapinnan reunaehto"
+    },
+    {
+      "t": 442,
+      "label": "Seisovan aallon muodostuminen z-suuntaan"
+    },
+    {
+      "t": 475,
+      "label": "Solmukohta"
+    },
+    {
+      "t": 496,
+      "label": "Kupukohta"
+    },
+    {
+      "t": 592,
+      "label": "Seisova aalto ei kuljeta energiaa"
+    },
+    {
+      "t": 779,
+      "label": "Superpositiokenttien tarkastelun yleistäminen"
+    },
+    {
+      "t": 815,
+      "label": "Valopulssi superpositiokenttänä (taajuus-aika)"
+    },
+    {
+      "t": 872,
+      "label": "Fokusoidun lasersäteen tarkastelu superpositiokenttänä (aaltovektori-paikka)"
+    }
+  ],
+  "s8itpLTTBcE": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 46,
+      "label": "Usean aallon superpositio"
+    },
+    {
+      "t": 76,
+      "label": "Fourier'n teoreema"
+    },
+    {
+      "t": 105,
+      "label": "Funktion f(t) Fourier-käänteismuunnos"
+    },
+    {
+      "t": 303,
+      "label": "Funktion f(t) Fourier-muunnos"
+    },
+    {
+      "t": 380,
+      "label": "Funktion f(t) spektri"
+    },
+    {
+      "t": 557,
+      "label": "Esimerkki Fourier-muunnoksen laskemisesta"
+    },
+    {
+      "t": 991,
+      "label": "Kardinaalisinifunktio"
+    },
+    {
+      "t": 1448,
+      "label": "Fourier-muunnos voi olla kompleksiarvoinen (tehospektri)"
+    },
+    {
+      "t": 1668,
+      "label": "Signaalin spektrisen piikin kaistanleveyden ja signaalin ajallisen keston välinen relaatio"
+    },
+    {
+      "t": 1868,
+      "label": "Epätarkkuusperiaate (aika vs. kaistanleveys)"
+    },
+    {
+      "t": 2118,
+      "label": "Epätarkkuusperiaate konjugaattimuuttujien välillä"
+    },
+    {
+      "t": 2280,
+      "label": "Koherenssin käsite aikaharmonisen aallon avulla"
+    },
+    {
+      "t": 2340,
+      "label": "Täysin ajallisesti koherentti kenttä = aikaharmoninen aalto"
+    },
+    {
+      "t": 2546,
+      "label": "Fysikaalisesti järkevämpi kuvaus aallolle: osittain koherentti aalto (aaltopaketti)"
+    },
+    {
+      "t": 2593,
+      "label": "Koherenssiaika"
+    },
+    {
+      "t": 2698,
+      "label": "Koherenssimatka"
+    },
+    {
+      "t": 2811,
+      "label": "Osittain koherentin valon tarkastelu on matemaattisesti ei-triviaalia"
+    },
+    {
+      "t": 2906,
+      "label": "Koherentti ja osittain koherentti valo, havainnekuva"
+    }
+  ],
+  "QQgsiYVPLas": [
+    {
+      "t": 0,
+      "label": "Johdanto lukuun 8"
+    },
+    {
+      "t": 190,
+      "label": "Vaatimukset interferenssille"
+    },
+    {
+      "t": 277,
+      "label": "Interferenssi vs. diffraktio"
+    },
+    {
+      "t": 376,
+      "label": "Ilmiön kuvaus monokromaattisilla tasoaalloilla"
+    },
+    {
+      "t": 491,
+      "label": "Kenttien superpositiokenttä ja irradianssi"
+    },
+    {
+      "t": 832,
+      "label": "Interferenssitermit, polarisaation vaikutus"
+    },
+    {
+      "t": 1240,
+      "label": "Irradianssin skalaarinen muoto"
+    },
+    {
+      "t": 1280,
+      "label": "Aaltojen välinen vaihe-ero"
+    },
+    {
+      "t": 1582,
+      "label": "De Moivren kaava"
+    },
+    {
+      "t": 1980,
+      "label": "Intererenssimaksimin ja -minimin muodostuminen"
+    },
+    {
+      "t": 2180,
+      "label": "Ajallinen koherenssi, koherenssiaika ja -pituus"
+    },
+    {
+      "t": 2510,
+      "label": "Spatiaalinen koherenssi ja koherenssileveys"
+    },
+    {
+      "t": 2812,
+      "label": "Yhteenveto"
+    }
+  ],
+  "8Gnd1mgW9_c": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 100,
+      "label": "Aaltorintaman jakavat interferometrit"
+    },
+    {
+      "t": 228,
+      "label": "Youngin kaksoirakokoe"
+    },
+    {
+      "t": 695,
+      "label": "Optinen matkaero kaksoirakokeessa"
+    },
+    {
+      "t": 860,
+      "label": "Vaihe-ero kaksoisrakokeessa"
+    },
+    {
+      "t": 972,
+      "label": "Interferenssin kertaluokka"
+    },
+    {
+      "t": 1180,
+      "label": "Koherenssin parantaminen kapean raon avulla"
+    }
+  ],
+  "3WdXDEPXnGY": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 132,
+      "label": "Amplitudin jakavan interferometrin perusperiaatteet"
+    },
+    {
+      "t": 308,
+      "label": "Ohutkalvorakenne interferometrinä"
+    },
+    {
+      "t": 517,
+      "label": "Ohutkalvorakenteen matemaattinen tarkastelu"
+    },
+    {
+      "t": 933,
+      "label": "Optinen matka-ero"
+    },
+    {
+      "t": 1193,
+      "label": "Heijastumisessa tapahtuva vaihesiirtymä"
+    },
+    {
+      "t": 1315,
+      "label": "Säteiden välinen vaihe-ero"
+    },
+    {
+      "t": 1569,
+      "label": "Interferenssin muodostumiseen vaikuttavat parametrit"
+    },
+    {
+      "t": 1840,
+      "label": "Kahvin pinnalla oleva rasva muodostaa ohutkalvorakenteen"
+    },
+    {
+      "t": 1924,
+      "label": "Heijastuksenestopinnoitteet ovat ohutkalvorakenteita"
+    },
+    {
+      "t": 2042,
+      "label": "Newtonin renkaiden muodostuminen"
+    }
+  ],
+  "Kqm2V5yTZVs": [
+    {
+      "t": 0,
+      "label": "Meitsi on Mr. kotisohva"
+    },
+    {
+      "t": 19,
+      "label": "Michelsonin interferometri"
+    },
+    {
+      "t": 60,
+      "label": "Michelsonin-Morley koe (valoeetterin olemassaolo?)"
+    },
+    {
+      "t": 135,
+      "label": "LIGO ja gravitaatioaaltojen havainnointi Michelsonin interferometrin avulla"
+    },
+    {
+      "t": 217,
+      "label": "Michelsonin interferometrin toiminta"
+    },
+    {
+      "t": 920,
+      "label": "Vaihe-ero ja maksimien/minimien muodostuminen"
+    },
+    {
+      "t": 1228,
+      "label": "FTIR-spektrometrin toiminta"
+    },
+    {
+      "t": 2100,
+      "label": "FTIR-spektrometrin interferogrammi"
+    },
+    {
+      "t": 2230,
+      "label": "Kameran käyttäminen Michelsonin interferometrissä valoilmaisimena"
+    },
+    {
+      "t": 2325,
+      "label": "Epäkoherentin valonlähteen käyttö Michelsonin interferometrissä"
+    }
+  ],
+  "dfLBiAwXB4A": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 110,
+      "label": "Usean säteen interferenssi (useita heijastuksia)"
+    },
+    {
+      "t": 322,
+      "label": "Heijastuneiden aaltojen superpositiokenttä"
+    },
+    {
+      "t": 392,
+      "label": "Aaltojen väliset matka- ja vaihe-erot"
+    },
+    {
+      "t": 926,
+      "label": "Heijastuneet osakentät muodostavat geometrisen sarjan"
+    },
+    {
+      "t": 1110,
+      "label": "Geometrisen sarjan johtaminen"
+    },
+    {
+      "t": 1377,
+      "label": "Ohutkalvon läpäisevän kentän tarkastelu"
+    },
+    {
+      "t": 1666,
+      "label": "Läpäisevän kentän irradianssi"
+    },
+    {
+      "t": 1823,
+      "label": "Irradianssikuvion parametririippuvuus"
+    },
+    {
+      "t": 2012,
+      "label": "Airyn funktio ja finessitekijä F"
+    }
+  ],
+  "A869OP8aFyY": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 55,
+      "label": "Fabryn-Perot'n instrumentit ja läpäisevyys T"
+    },
+    {
+      "t": 317,
+      "label": "Fabryn-Perot'n interferometrit"
+    },
+    {
+      "t": 383,
+      "label": "Etalonit"
+    },
+    {
+      "t": 720,
+      "label": "Puoliarvonleveys (FWHM)"
+    },
+    {
+      "t": 951,
+      "label": "Transmissiopiikin suhteellinen terävyys ja kaviteetin finessi"
+    }
+  ],
+  "3PMbr2jd8wo": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 65,
+      "label": "Fabryn-Perot'n spektroskopia"
+    },
+    {
+      "t": 452,
+      "label": "Vaihe-ero kaviteetin pituuden L funktiona"
+    },
+    {
+      "t": 893,
+      "label": "Spektrometrin vapaa spektrinen alue (FSR)"
+    },
+    {
+      "t": 1342,
+      "label": "Spektrinen resoluutio/erottelukyky"
+    }
+  ],
+  "QaEgPdf4St4": [
+    {
+      "t": 0,
+      "label": "Johdanto lukuun 9"
+    },
+    {
+      "t": 208,
+      "label": "Diffraktion matemaattinen tarkastelu"
+    },
+    {
+      "t": 336,
+      "label": "Huygensin-Fresnelin periaate"
+    },
+    {
+      "t": 600,
+      "label": "Diffraktoitunut kokonaiskenttä palloaaltojen summana (diffraktiointegraali)"
+    },
+    {
+      "t": 819,
+      "label": "Fresnelin diffraktio"
+    },
+    {
+      "t": 975,
+      "label": "Fraunhoferin diffraktio (kaukokenttäapproksimaatio)"
+    }
+  ],
+  "FDsxXicvdnE": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 87,
+      "label": "Fraunhoferin diffraktio"
+    },
+    {
+      "t": 311,
+      "label": "Tarkastelupisteen R etäisyys lähdepisteestä r'"
+    },
+    {
+      "t": 415,
+      "label": "Vaihetermin approksimointi"
+    },
+    {
+      "t": 795,
+      "label": "Fraunhoferin diffraktioehto"
+    },
+    {
+      "t": 944,
+      "label": "Fraunhoferin diffraktiointegraali"
+    },
+    {
+      "t": 1042,
+      "label": "Diffraktiointegraali vastaa 2D Fourier-muunnosta"
+    },
+    {
+      "t": 1222,
+      "label": "Diffraktiointegraalin fysikaalinen tulkinta"
+    }
+  ],
+  "MAf93waIV-g": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 47,
+      "label": "Kapean raon diffraktiokuvio"
+    },
+    {
+      "t": 131,
+      "label": "Ongelma on separoituva, f(x,y) = g(x)h(y)3:50 y-suunnan diffraktiointegraali"
+    },
+    {
+      "t": 507,
+      "label": "x-suunnan diffraktiointegraali"
+    },
+    {
+      "t": 682,
+      "label": "Kentän irradianssi (kardinaalisinifunktio)"
+    },
+    {
+      "t": 860,
+      "label": "Raon leveys a ja tarkastelupiste X muodostavat konjugaattimuuttujaparin"
+    },
+    {
+      "t": 960,
+      "label": "Suorakulmaisen aukon diffraktiokuvio"
+    },
+    {
+      "t": 1157,
+      "label": "Ympyränmuotoisen aukon diffraktiokuvion laskeminen sylinterikoordinaatistossa"
+    },
+    {
+      "t": 1545,
+      "label": "Diffraktiokuvion fysikaalista tulkintaa (lasersäteen divergenssi)"
+    }
+  ],
+  "iCY-G29TzMQ": [
+    {
+      "t": 0,
+      "label": "Johdanto diffraktiohiloihin"
+    },
+    {
+      "t": 74,
+      "label": "Diffraktiohilat ja läpäisyhila"
+    },
+    {
+      "t": 180,
+      "label": "Heijastushila, diffraktiokertaluokka"
+    },
+    {
+      "t": 250,
+      "label": "Hilan hienorakenne"
+    },
+    {
+      "t": 390,
+      "label": "Diffraktiohilan toiminnan matemaattinen tarkastelu"
+    },
+    {
+      "t": 744,
+      "label": "Vaihe-ero ja diffraktioehto"
+    }
+  ],
+  "dC3yEzq76nw": [
+    {
+      "t": 0,
+      "label": "Johdanto lukuun 10"
+    },
+    {
+      "t": 430,
+      "label": "Perusmääritelmät, ei-kuvantava vs. kuvantava optiikka"
+    },
+    {
+      "t": 677,
+      "label": "Kohde on kohdeavaruudessa, kuva kuva-avaruudessa"
+    },
+    {
+      "t": 810,
+      "label": "Stigmaattinen vs. diffraktiorajoitettu kuvantava systeemi"
+    },
+    {
+      "t": 866,
+      "label": "Geometrisessa optiikassa valon aaltoluonne unohdetaan"
+    },
+    {
+      "t": 930,
+      "label": "Valonsäteen käsite"
+    },
+    {
+      "t": 1102,
+      "label": "Kuvausvirheet eli aberraatiot sumentavat/vääristävät muodostuvaa kuvaa"
+    },
+    {
+      "t": 1180,
+      "label": "Todellinen vs. valekuva"
+    }
+  ],
+  "KKWAW34AfJw": [
+    {
+      "t": 0,
+      "label": "Johdanto ja motivaatio"
+    },
+    {
+      "t": 67,
+      "label": "Pallolinssi ei ole ideaalinen linssi kuvantamisen kannalta"
+    },
+    {
+      "t": 132,
+      "label": "Asfäärilinssin pinta ei ole pyöreä"
+    },
+    {
+      "t": 197,
+      "label": "ns. freeform-linssit"
+    },
+    {
+      "t": 254,
+      "label": "Taittuminen pallopinnalla, kohdepiste ja optinen akseli"
+    },
+    {
+      "t": 435,
+      "label": "Paraksiaaliapproksimaatio (transsendentaaliyhtälöt ovat ikäviä)"
+    },
+    {
+      "t": 998,
+      "label": "Kohde äärettömyydessä, kuva muodostuu takapolttotasoon"
+    },
+    {
+      "t": 1141,
+      "label": "Kohde etupolttotasossa, kuva äärettömyydessä"
+    },
+    {
+      "t": 1257,
+      "label": "Suureiden merkkisäännöt"
+    }
+  ],
+  "ysCrtlkMByY": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 61,
+      "label": "Ohuen linssin matemaattinen tarkastelu"
+    },
+    {
+      "t": 320,
+      "label": "Ohuen linssin approksimaatio"
+    },
+    {
+      "t": 368,
+      "label": "Linssintekijän yhtälö (linssi ilmassa), linssin polttopituudet"
+    },
+    {
+      "t": 618,
+      "label": "Ohuen linssin etupolttopituus = takapolttopituus"
+    },
+    {
+      "t": 651,
+      "label": "Linssiyhtälö ja linssin voimakkuus $\\mathrm{D}=1 / \\mathrm{f}$"
+    },
+    {
+      "t": 816,
+      "label": "Kupera linssi (f on positiivinen)"
+    },
+    {
+      "t": 922,
+      "label": "Kovera linssi (f on negatiivinen)"
+    },
+    {
+      "t": 1048,
+      "label": "Polttotasot"
+    }
+  ],
+  "FZwXt5Y2eGw": [
+    {
+      "t": 0,
+      "label": "Johdanto kuvanmuodostukseen"
+    },
+    {
+      "t": 100,
+      "label": "Kuvanmuodostumiseen vaikuttavia asioita"
+    },
+    {
+      "t": 262,
+      "label": "Kuvausvirheet ovat seurausta paraksiaaliapproksimaation pätemättömyydestä"
+    },
+    {
+      "t": 316,
+      "label": "Ideaalinen linssi (ei kuvausvirheitä) ja pääsäteet"
+    },
+    {
+      "t": 480,
+      "label": "Kuvantavan linssin geometria (paljon kolmioita!)"
+    },
+    {
+      "t": 824,
+      "label": "Linssiyhtälö ja Newtonin linssiyhtälö"
+    },
+    {
+      "t": 1008,
+      "label": "Poikittaissuurennus"
+    },
+    {
+      "t": 1224,
+      "label": "Pitkittäissuurennus"
+    },
+    {
+      "t": 1397,
+      "label": "Merkkisäännöt linsseille"
+    }
+  ],
+  "bKLgnpGzj1Y": [
+    {
+      "t": 0,
+      "label": "Johdanto ja motivaatio (aberraatiot, värivirheiden korjaus)"
+    },
+    {
+      "t": 176,
+      "label": "Linssisysteemin matemaattinen tarkastelu"
+    },
+    {
+      "t": 366,
+      "label": "Linssisysteemin poikittaissuurennus"
+    },
+    {
+      "t": 565,
+      "label": "Linssiyhtälö kahden ohuen linssin systeemille"
+    },
+    {
+      "t": 680,
+      "label": "Linssisysteemin polttoväli f ja voimakkuus D"
+    },
+    {
+      "t": 780,
+      "label": "Zoom-linssi"
+    },
+    {
+      "t": 841,
+      "label": "Kuvaus- ja värivirheiden korjaaminen linssisysteemeillä (dupletit, tripletit jne.)"
+    },
+    {
+      "t": 975,
+      "label": "Linssisuunnittelu säteenseurantaohjelmistoilla"
+    },
+    {
+      "t": 1273,
+      "label": "Polttotasot (bfl ja ffl) linssisysteemissä"
+    }
+  ],
+  "T9HaKFEX9l8": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 46,
+      "label": "Aukkojen ja rajoittimien vaikutus systeemin suorituskykyyn"
+    },
+    {
+      "t": 214,
+      "label": "Aukkorajoitin rajoittaa systeemin läpi menevän valon määrää"
+    },
+    {
+      "t": 360,
+      "label": "Kenttärajoitin rajoittaa kuvan kokoa"
+    },
+    {
+      "t": 500,
+      "label": "Tuloaukko on aukkorajoittimen kuva kohdeavaruudessa"
+    },
+    {
+      "t": 714,
+      "label": "Lähtöaukko on aukkorajoittimen kuva kuva-avaruudessa"
+    },
+    {
+      "t": 805,
+      "label": "Kuvan muodostuminen optisen instrumentin avulla ihmissilmään"
+    },
+    {
+      "t": 960,
+      "label": "Kuvan vinjetoituminen"
+    },
+    {
+      "t": 1116,
+      "label": "Suhteellisen aukon käänteisarvo on f-luku"
+    }
+  ],
+  "zkHP3lgIzjA": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 34,
+      "label": "Tasopeili"
+    },
+    {
+      "t": 140,
+      "label": "Kuvantaminen peilien avulla (peilikuvan muodostuminen)"
+    },
+    {
+      "t": 240,
+      "label": "Pallopeili ja linssiyhtälö, missä $f=-R / 2$"
+    },
+    {
+      "t": 376,
+      "label": "Peilin poikittaissuurennus"
+    },
+    {
+      "t": 408,
+      "label": "Peilien toiminta ei juurikaan riipu valon aallonpituudesta (värivirheet)"
+    },
+    {
+      "t": 537,
+      "label": "Suurten peilien valmistaminen on ~helppoa"
+    },
+    {
+      "t": 617,
+      "label": "Peilien hyödyntäminen sovelluksissa"
+    }
+  ],
+  "dPnmcCvQ8HE": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 98,
+      "label": "Prisman hyödyntäminen dispersiivisenä komponenttina"
+    },
+    {
+      "t": 184,
+      "label": "Kuvantaminen ja valon ohjaaminen prismojen avulla"
+    },
+    {
+      "t": 285,
+      "label": "Dispersiivinen komponentti hajottaa valon eri värikomponentit erilleen"
+    },
+    {
+      "t": 363,
+      "label": "Kokonaisheijastukseen perustuva (häviötön) valonsäteiden ohjaaminen"
+    }
+  ],
+  "H02bNFbiT-w": [
+    {
+      "t": 0,
+      "label": "Johdanto, taustoja ja motivaatio"
+    },
+    {
+      "t": 274,
+      "label": "Ihmissilmän tärkeimmät osat kuvanmuodostuksen kannalta"
+    },
+    {
+      "t": 550,
+      "label": "Kuvanmuodostuminen ja silmän mukautuminen eli akkommodaatio"
+    },
+    {
+      "t": 673,
+      "label": "Värikalvo eli iiris toimii silmän aukkorajoittimena"
+    },
+    {
+      "t": 709,
+      "label": "Näköhavainto sauva- ja tappisolujen avulla"
+    },
+    {
+      "t": 843,
+      "label": "Yksi juttu nokkelista mustekaloista"
+    },
+    {
+      "t": 939,
+      "label": "Silmän kaukopiste ja lähipiste"
+    },
+    {
+      "t": 1047,
+      "label": "Näköongelmat eli taittoviat"
+    },
+    {
+      "t": 1244,
+      "label": "Myopia eli likinäköisyys"
+    },
+    {
+      "t": 1372,
+      "label": "Hyperopia eli kaukotaittoisuus"
+    },
+    {
+      "t": 1515,
+      "label": "Hajataittoisuus ja harmaakaihi"
+    }
+  ],
+  "7axzJgkErp4": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 46,
+      "label": "Katsontakulma rajoittaa kuvan kokoa verkkokalvolla"
+    },
+    {
+      "t": 193,
+      "label": "Suurennuslasi kasvattaa katsontakulmaa"
+    },
+    {
+      "t": 371,
+      "label": "Suurennuslasin poikittaissuurennus"
+    }
+  ],
+  "Ix3ugaeI_MY": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 55,
+      "label": "Kahdesta linssistä (objektiivi ja okulaari) koostuva kuvantava instrumentti"
+    },
+    {
+      "t": 148,
+      "label": "Okulaari muodostaa kuvan äärettömyyteen (okulaarin merkitys)"
+    },
+    {
+      "t": 216,
+      "label": "Okulaarin merkitys historiallisessa mielessä"
+    }
+  ],
+  "CK2SR2PC4M4": [
+    {
+      "t": 0,
+      "label": "Johdanto ja motivaatio"
+    },
+    {
+      "t": 60,
+      "label": "Mikroskoopilla voidaan havaita/tutkia pieniä asioita (esim. pöpöjä)"
+    },
+    {
+      "t": 170,
+      "label": "Optinen vs. elektronimikroskooppi (resoluutio vs. elävien kohteiden kuvantaminen)"
+    },
+    {
+      "t": 297,
+      "label": "Mikroskoopin toiminta (objektiivi ja okulaari)"
+    },
+    {
+      "t": 517,
+      "label": "Mikroskooppien osat on standardoitu"
+    },
+    {
+      "t": 654,
+      "label": "Objektiivin, okulaarin ja koko mikroskoopin poikittaissuurennus"
+    },
+    {
+      "t": 755,
+      "label": "Kenttäluku (FN) ja näkökenttä (FOV)"
+    },
+    {
+      "t": 904,
+      "label": "Kolmen linssin (objektiivi, putkilinssi ja okulaari) mikroskooppi"
+    },
+    {
+      "t": 1124,
+      "label": "Äärettömyyskorjatut objektiivilinssit"
+    },
+    {
+      "t": 1159,
+      "label": "Käytännön asioita mikroskooppien suhteen"
+    },
+    {
+      "t": 1360,
+      "label": "Mikroskoopin resoluutio eli erottelukyky ja numeerinen aukko (NA)"
+    }
+  ],
+  "GSkARKoRQOs": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 65,
+      "label": "Kaukoputken toiminta"
+    },
+    {
+      "t": 177,
+      "label": "Afokaalinen linssisysteemi"
+    },
+    {
+      "t": 225,
+      "label": "Kuvanmuodostuminen ja poikittaissuurennus"
+    },
+    {
+      "t": 487,
+      "label": "Galilein kaukoputki"
+    },
+    {
+      "t": 662,
+      "label": "Keplerin kaukoputki"
+    },
+    {
+      "t": 835,
+      "label": "Newtonin kaukoputki oli ensimmäisiä peilikaukoputkia"
+    },
+    {
+      "t": 1043,
+      "label": "Vähänkään suuremmat kaukoputket ovat peilikaukoputkia"
+    },
+    {
+      "t": 1150,
+      "label": "Loppusanat ja kiitokset!"
     }
   ]
 }
