@@ -1,36 +1,17 @@
 {
   "name": "fys240-optics-bot",
-  "version": "1.0.0",
-  "description": "Telegram teaching assistant bot for FYS.240 Optics course with video lecture integration",
+  "version": "2.0.0",
   "private": true,
   "main": "bot_fys240.js",
   "scripts": {
-    "start": "node bot_fys240.js",
-    "dev": "DEBUG=* node bot_fys240.js"
+    "start": "node bot_fys240.js"
   },
-  "keywords": [
-    "telegram",
-    "bot",
-    "teaching-assistant",
-    "optics",
-    "education",
-    "FYS240"
-  ],
-  "author": "University of Jyväskylä",
-  "license": "MIT",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.125.0",
     "axios": "^1.20.0",
     "express": "^4.22.2"
   },
-  "devDependencies": {
-    "pdf-parse": "^1.1.1"
-  },
   "engines": {
     "node": ">=18"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/your-org/fys240-optics-bot"
   }
 }

@@ -1,0 +1,858 @@
+COURSE MATERIAL CORPUS — FYS.501 Laser Physics
+Text extracted from the official course PDFs. Homework solutions are excluded.
+Some mathematical symbols are garbled by PDF text extraction; read them from context.
+
+
+===== BEGIN HOMEWORK 1 — assignment sheet (questions only, no solutions)  [file: FYS_501_LaserPhysics_allHWs_2026.pdf] =====
+
+Homework 1
+Introductory Concepts
+The returnable homework assignments, submitted throughMoodle. Solutions for the exercises
+and the homework will be provided during the week after the return deadline.
+1.1.
+Let’s study the effect of quantum defect more carefully, and connect it with practical limi-
+tations related to power scaling of high-power lasers. We consider a few very common laser
+gain media: titanium-doped sapphire (Ti:Sapph), neodymium-doped yttrium aluminum gar-
+net (Nd:YAG), ytterbium-doped YAG (Yb:YAG), erbium-doped alumina (Er:Al
+2
+O
+3
+), and a
+gas mixture dominated by carbon dioxide (CO
+2
+).(5 points)
+a)Start by making a table of the most common pumping wavelengths (if the gain medium is
+optically pumped), lasing wavelengths (list peak gain wavelength, as well as the gain range),
+absorption/emission cross sections, and the pumping mechanisms of these gain materials.
+For example, for Er:Al
+2
+O
+3
+you would tabulate pumping mechanism as optical pumping, the
+pumping wavelengths of 980 nm and 1480 nm, and the lasing wavelength range of 1530–
+1610 nm, peaking at 1533 nm (although 1550 nm wavelength is most often considered).
+The absorption cross sections of the pump wavelengths areσ
+abs
+(980 nm)≈2×10
+−25
+m
+2
+andσ
+abs
+(1480 nm)≈1×10
+−25
+m
+2
+.
+b)Calculate the quantum defects (qvalues) of these laser gain media for their main pumping
+wavelengths.HINT: For CO
+2
+gain medium, the quantum defect is calculated using the
+energy difference between the lasing transition (10.6μm) and the energy of the excited
+vibrational state of N
+2
+molecules (2330 cm
+−1
+). For Er:Al
+2
+O
+3
+, remember to calculateq
+values for both pumping wavelengths. Which gain material and pumping scheme generates
+least amount of heat?
+c)Study next how these gain materials heat up during pumping. When making high-power
+lasers (e.g. for laser cutting and welding purposes), values around 100–1000 W of absorbed
+pump power are easily reached. Part of this absorbed power is turned into heat, that
+increases the temperature profile of the material approximately as
+T(r) =T
+0
++
+P
+heat
+4
+πκL
+(
+1−
+r
+2
+R
+2
+)
+,
+whereT
+0
+is the ambient crystal temperature,P
+heat
+is the heating power (of the crystal
+volume),κis the thermal conductivity of the material (in units of W/(m·K)),Lis the
+length of the pumped gain region,Ris the radius of the pumped gain region, andris the
+radial coordinate. Above equation can be used when the transverse profile of the pump
+beam does not markedly change inside the gain medium, for example when a bulk gain
+crystal is relatively thin with respect to the Rayleigh range of the pump beam, or when
+considering fiber lasers. The temperature increase∆Tat the center of the gain medium is
+then approximately
+∆T≈
+P
+heat
+4πκL
+.
+This temperature difference causes thermal stress, that may crack the material thus causing
+a catastrophic failure of the laser. Recalling elementaries of solid-state physics, the thermal
+stressσcan be estimated using
+σ≈Eα∆T ,
+whereEis the Young’s modulus andαis the thermal expansion coeﬀicient of the material.
+For conceptual clarity, we assume that cracking takes place in all materials when stress
+exceeds the value ofσ
+fracture
+= 100MPa, and thatL= 2mm.
+Using above information, and typical literature values for studied materials, calculate at
+which pump power levels the solid-state gain materials start thermally cracking. Which
+gain material allows to reach the highest pump power levels?
+
+d)Explain using a few sentences also how heating affects the performance of gas lasers, such
+as the CO
+2
+laser.
+e)Mention a few approaches to reduce detrimental effects of gain material heating, used in
+modern high-power laser technologies.
+1.2.
+Consider four different laser types: bulk solid-state lasers, gas lasers, fiber lasers, and integrated
+photonic lasers.(6 points)
+(a)What kind of output power levels one can approximately achieve using these different laser
+types?
+(b)Explain qualitatively how the threshold inversion∆N
+c
+depends on the cavity lossesγ,
+the gain medium lengthL, and the emission cross sectionσ. List at least three different
+strategies to reduce the threshold of a laser system, and briefly explain the physical idea
+behind each.
+(c)Explain using your own words why the inversion threshold doesn’t depend on the transverse
+area of the pumping beam. What quantities would depend on the transverse area of the
+beam?
+(d)Estimate typical values of∆N
+c
+for the considered laser types. For conceptual simplicity,
+use representative values ofL
+fiber
+= 10m,L
+gas
+= 1m,L
+bulk
+= 1cm,L
+int
+= 1mm
+for gain lengths. When making your round-trip loss estimates, use propagation losses of
+α
+fiber
+≈α
+gas
+= 0.1dB/m,α
+bulk
+= 1dB/m, andα
+int
+= 1dB/cm. Assume a simple linear
+two-mirror cavity, with mirror reflectivities of 99% and 95%, and negligible single-pass
+lossesL
+i
+besides above-state propagation losses.
+(e)Estimate which of these parameters (L,α,γ,σ) is typically easiest to engineer in practice
+in these different laser types?
+(f)Explain using a few sentences why fiber lasers can operate eﬀiciently despite having much
+smaller emission cross sections. Why long and low-σsystems are preferred over a short and
+high-σsystems, when making high-power laser systems?
+(g)The emission cross section
+σ
+is a material property related to the transition strength,
+depending e.g. on the transition linewidths upper level lifetimes, material constraints and
+doping concentration effects. Explain using a few sentences what kind of challenges exist
+when increasing the emission cross sections of gain materials.
+o
+oo
+oo
+o
+oo
+o
+o
+o
+oo
+R
+p
+1.3.
+Consider the energy level scheme shown in Figure. Atoms are raised
+from level 0 to level 2 at a pump rate
+R
+p
+. The lifetime of levels 1 and
+2 areτ
+1
+andτ
+2
+, respectively. Assuming that the ground state 0 is not
+depleted to any significant extent, neglecting stimulated emissions, and
+assume the levels 1 and 2 to have the same degeneracy:(5 points)
+a)Write the rate equations for the population densities,N
+1
+andN
+2
+of
+level 1 and 2, respectively.
+b)CalculateN
+1
+andN
+2
+as a function of time.
+c)Plot the population densities in the following two cases:
+I)τ
+1
+= 2μs,τ
+2
+= 1μs,
+II)τ
+1
+= 1μs,τ
+2
+= 2μs.
+How population dynamics in these two cases differs from each other?
+
+1.4.
+Let’s investigate the very important properties of laser beams, namely the spatial coherence
+and brightness.(4 points)
+a)At the surface of the Earth the intensity of the sun is approximately 1 kWm
+−2
+. Calculate
+the intensity at the retina resulting from directly looking at the sun via bare eyes. Assume
+that the pupil of a bright-adapted eye is 2 mm in diameter, the focal length of the eye is
+22.5 mm and that direct sunlight has a spatial coherence radius of approximately80λ.
+HINT: Assume that the human eye is an ideal optical system and thus conserves étendue
+G=AΩ, whereAis the cross-sectional area andΩis the solid angle of the incident beam
+of light.
+b)Compare the intensity to the case of looking into a 1 mW He-Ne laser (λ= 632.8nm) with
+a 2 mm diameter.
+c)Explain using a few sentences what areClass 2 lasers, and how they are still considered
+as eye-safe light sources. Why this classification is restricted to visible light wavelength
+range of 400–700 nm?
+
+FYS.501 Laser PhysicsExercises and
+
+===== END HOMEWORK 1 — assignment sheet (questions only, no solutions) =====
+
+
+===== BEGIN HOMEWORK 2 — assignment sheet (questions only, no solutions)  [file: FYS_501_LaserPhysics_allHWs_2026.pdf] =====
+
+Homework 2
+Semiclassical Theory of Light–Matter Interaction
+The returnable homework assignments, submitted throughMoodle. Solutions for the exercises
+and the homework will be provided during the week after the return deadline.
+2.1.
+Calculate the photon flux (photons m
+−2
+s
+−1
+) for a monochromatic plane wave of intensity
+I= 300W m
+−2
+for wavelengths of 500 nm and 100 nm. Discuss of the difference between the
+results.(3 points)
+2.2.
+Homogeneously broadened transition of a gain medium has an unsaturated gaing
+0
+= 5.0m
+−1
+and a saturation intensity valueI
+s
+= 10Wm
+−2
+. An electromagnetic field, with a frequency
+resonant with the gain transition and intensityI= 24Wm
+−2
+, propagates through this gain
+medium. The gain medium is 4 cm long.(5 points)
+a)Calculate the intensity of the amplified electromagnetic field at the medium output in the
+presence of constant (not saturated) gain.
+b)Calculate the intensity of the amplified field at the medium output in the presence of
+saturation, allowing the gain to depend on both propagation distancez, and the intensity
+I(g=g(z,I)).
+c)Comment on the difference between the above two results.
+2.3.
+Study more quantitatively the different broadening mechanisms affecting atomic transition
+linewidths of gain materials. For conceptual clarity, restrict to gaseous gain media and pro-
+cesses of collision and Doppler broadening, affecting the natural linewidths of laser transi-
+tions of e.g. CO
+2
+lasers. However, note that these considerations apply directly also to other
+gas lasers, and on a conceptual level also to other laser types, such as to solid-state lasers.
+(5 points)
+a)Start by estimating the natural linewidth of the CO
+2
+laser transition near 10.6μm. The
+laser transitions actually consist of a family of a closely-spaced rovibrational transitions,
+forming a frequency-comb like spectrum. Here, we are interested in the natural linewidth
+of a single rovibrational transition. (HINT: The natural linewidth is inversely propor-
+tional to the Einstein coeﬀicientA, where the dipole moment can be calculated using bond
+length value ofa= 0.1nm. Note that natural linewidths of molecular transitions at
+long-wavelelength infrared region (LWIR) are quite narrow, around 1000 Hz.)
+b)Consider next the collision broadening in ambient conditions (T= 298K,P= 1.01325bar).
+Under the hard-sphere model of a gas, collisional lifetime is given by
+τ
+c
+=
+(
+2
+3
+)
+1/2
+1
+8π
+(mk
+B
+T)
+1/2
+Pa
+2
+,
+wheremis the atomic mass of the CO
+2
+molecule. Calculate the linewidth due to collisional
+broadening. (HINT: value is around 300 MHz.)
+c)Finally, calculate the Doppler linewidth broadening, that can be estimated using
+∆ν
+Doppler
+= 2ν
+0
+[
+2k
+B
+Tln 2/mc
+2
+0
+]
+1/2
+.
+What are the total linewidths and lifetimes of the CO
+2
+molecules taking into account all
+these three above contributions? (HINT: The values are around 339 MHz and 47 ns.)
+
+2.4.
+In the course material, we study the 2-level atomic Hamiltonian, perturbed slightly via incident
+light, cast into a form of a time-dependent Schrödinger equation. The solutions were found to
+be of form
+|ψ(r,t)⟩=c
+g
+exp
+(
+−
+iE
+g
+t
+ℏ
+)
+|g⟩+c
+e
+exp
+(
+−
+iE
+e
+t
+ℏ
+)
+|e⟩,
+where the coeﬀicientsc
+g
+andc
+e
+were found to form a system of coupled ordinary differential
+equations:
+{
+i ̇c
+g
+(t) = Ω cos(ωt)e
+−iω
+0
+t
+c
+e
+(t),
+i ̇c
+e
+(t) = Ω cos(ωt)e
+iω
+0
+t
+c
+g
+(t).
+The above was solved perturbatively by forming the below power-series expansion of thec
+i
+coeﬀicients
+c
+g
+(t) =
+∞
+∑
+n=0
+c
+(n)
+g
+(t)Ω
+n
+=c
+(0)
+g
+(t) +c
+(1)
+g
+(t)Ω +c
+(2)
+g
+(t)Ω
+2
++...
+c
+e
+(t) =
+∞
+∑
+c
+(n)
+e
+(t)Ω
+n
+=c
+(0)
+e
+(t) +c
+(1)
+e
+(t)Ω +c
+(2)
+e
+(t)Ω
+2
++...
+up to the first order (i.e. up to termsc
+(1)
+i
+).
+Repeat the calculation, and solve the system up to the second order while not resorting to use
+the rotating-wave approximation (RWA). What happens for the resonance frequency of the
+system, when thec
+(2)
+i
+terms are included in the treatment?(7 points)
+
+FYS.501 Laser PhysicsExercises and
+
+===== END HOMEWORK 2 — assignment sheet (questions only, no solutions) =====
+
+
+===== BEGIN HOMEWORK 3 — assignment sheet (questions only, no solutions)  [file: FYS_501_LaserPhysics_allHWs_2026.pdf] =====
+
+Homework 3
+Passive Optical Resonators
+The returnable homework assignments, submitted throughMoodle. Solutions for the exercises
+and the homework will be provided during the week after the return deadline.
+3.1.
+Calculate the ABCD matrix for a thick and bi-convex spherical lens, surrounded by air. The
+lens thickness isd, and radius of curvature isR
+1
+(R
+2
+) for the front (back) surface. The
+refractive index of the lens material isn.(7 points)
+a)Calculate first the ABCD matrix for a ray entering the front surface. (HINT: The standard
+sign convention for a convex interface requiresR
+1
+>0.)
+b)Calculate next the effective transfer matrix of the thick lens. Show that the thin lens
+limit (d→0) results in a case where the distance of the ray from the optical axisyis
+not modified when propagating through the lens. (HINT: Form and multiply together the
+three relevant ABCD matrices, two for the spherical interfaces, and one for the propagation
+inside a medium of refractive indexn.)
+c)Verify that the final result complies with the lensmaker’s equation
+1
+f
+= (n−1)
+(
+1
+R
+1
+−
+1
+R
+2
++
+(n−1)d
+nR
+1
+R
+2
+)
+,
+implicitly assuming thatd≪R
+i
+. (HINT: The focal length is given byf=−1/C.)
+3.2.
+Consider a resonator made of two concave mirrors(R
+1
+>0,R
+2
+>0)spaced by distanceL.
+Find the values ofLfor which the resonator is stable.(3 points)
+3.3.
+The mirrors of a Fabry–Pérot interferometer have95%intensity reflectivities (identical mirrors)
+and the nominal length of the interferometer can be chosen to be 2 cm, 5 cm, 10 cm, 20 cm, and
+50 cm. The position of other the mirror can be moved around the nominal length, allowing to
+measure the frequency spectrum of broadband light passing through the interferometer. The
+light source emits a spectrum with a total bandwidth of 500 MHz.(5 points)
+a)What should the nominal length of the interferometer be in order to measure the spectrum
+as accurately as possible?
+b)For the above case, calculate the finesse of the cavity and the spectral resolution of the
+interferometer.
+3.4.
+A diode laser emits a highly elliptical beam of blue light (λ= 405nm) with beam waist values
+ofw
+x,0
+= 1mm andw
+y,0
+= 2μm along the two principal axesxandy.(5 points)
+a)Calculate the beam widthsw
+x
+(z)andw
+y
+(z)after propagation of 2 meters.
+b)Calculate the divergence angles along each axis.
+c)Calculate the beam aspect ratios at the source plane (the aspect ratio of the beam waists),
+and at the plane after propagation of 2 m.
+d)Find the distance at which the beam becomes a circular beam.
+e)Comment how this kind of strongly elliptical beam could be transformed into a circular
+beam.
+
+FYS.501 Laser PhysicsExercises and
+
+===== END HOMEWORK 3 — assignment sheet (questions only, no solutions) =====
+
+
+===== BEGIN HOMEWORK 4 — assignment sheet (questions only, no solutions)  [file: FYS_501_LaserPhysics_allHWs_2026.pdf] =====
+
+Homework 4
+Continuous Wave Behavior of a Laser
+The returnable homework assignments, submitted throughMoodle. Solutions for the exercises
+and the homework will be provided during the week after the return deadline.
+4.1.
+Assume we have a stable linear resonator with mirrorsR
+1
+=R
+2
+=R, with a distance ofL
+between the two mirrors.(4 points)
+a)Is a triangular ring resonator withR
+1
+=R
+2
+=R
+3
+=R, and where all distances areL, a
+stable resonator?
+b)What about a square ring resonator with (four) mirrors of curvatureRand mirror distances
+ofL?
+4.2.
+Ring-laser gyroscopes (RLGs) consists of laser cavities where two beams propagate in opposite
+directions around a closed path. Modern navigation-grade RLGs are commonly based on either
+square or triangular ring cavities. Rotation of the cavity (theSagnac effect) causes a phase
+shift
+∆φ≈
+8π
+λc
+ωA
+in the measured interference fringes between the clockwise (CW) and counter-clockwise (CCW)
+beams, whereAis the enclose area of the ring, andωis the gyroscope’s rotation rate (rotation
+axis assumed to be perpendicular to the plane of the ring).(6 points)
+a)Mention a few applications for RLGs and explain why it is advantageous for an RLG to
+operate in a single longitudinal mode.
+b)If a square RLG of side lengthℓ= 0.4m is formed, and the laser gain bandwidth is
+100 GHz, estimate how many longitudinal modes fit within the gain profile.
+c)An intracavity etalon can be used to achieve single-longitudinal mode operation (single-
+frequency lasing). If the etalon is 1 mm thick (refractive index of 1.5), what is the required
+finesse of the etalon?
+4.3.
+An erbium-doped fiber laser operating near 1550 nm is formed by constructing a Fabry–Pérot
+resonator using twofiber Bragg gratings (FBGs). The high-reflectivity grating has a
+reflectivity of99%, and the output coupling grating has a reflectivity of20%. Assume that
+the erbium-doped fiber is the only source of internal loss and has an internal loss factor of
+L
+i
+= 0.98per pass. The emission cross section of erbium at 1550 nm isσ= 2×10
+−25
+m
+2
+(assuming pump wavelength of 980 nm).(4 points)
+a)Calculate the logarithmic loss per passγof the resonator.
+b)Determine the minimum gain-fiber length required to reach the critical inversion density
+N
+c
+.
+4.4.
+In a three-level laser scheme the lower laser level is the ground state and pumping occurs
+through a pump band which populates, by fast relaxation, the upper laser level. Assume total
+populationN
+t
+of the active species, an upper level life-time ofτ, a cavity photon lifetimeτ
+c
+, a
+total logarithmic lossγ, a stimulated emission cross-sectionσ
+e
+of laser transition, and a length
+ℓof the active medium.(6 points)
+a)Write the space-independent rate equations for the three-level laser. (HINT: Note that
+the (volumetric) pumping rateR
+p
+now depends on the ground-state population.)
+b)Calculate theR
+p
+needed to reach the threshold. (HINT: The result is close to the result
+for a 4-level system, derived during lectures, additionally depending onN
+t
+.)
+
+FYS.501 Laser PhysicsExercises and
+
+===== END HOMEWORK 4 — assignment sheet (questions only, no solutions) =====
+
+
+===== BEGIN HOMEWORK 5 — assignment sheet (questions only, no solutions)  [file: FYS_501_LaserPhysics_allHWs_2026.pdf] =====
+
+Homework 5
+All Topics
+The returnable homework assignments, submitted throughMoodle. Solutions for the exercises
+and the homework will be provided during the week after the return deadline.
+5.1.
+Design a He-Ne laser resonator using one spherical mirror and one plane (output) mirror. The
+laser resonator should have the following characteristics:
+•operating wavelength: 633 nm
+•total divergence angle: 0.15 rad
+•longitudinal mode spacing: 100 MHz
+Assume a Gaussian beam profile. Calculate the radius of curvature of the spherical mirrorR
+1
+,
+and the distanceLbetween the mirrors. Is the cavity stable?(5 points)
+Figure 1: V-shaped cavity configuration.
+5.2.
+Consider a V-shaped cavity as shown in the Fig-
+ure1. The reflectivities of the mirrors are0.99,0.99
+and0.95forM
+1
+,M
+2
+andM
+3
+, respectively. The
+physical lengths of arms 1 (fromM
+1
+toM
+2
+) and 2
+(fromM
+2
+toM
+3
+) areL
+1
+= 30cm andL
+2
+= 20cm,
+respectively. A medium with thicknessd= 10cm
+and refractive index ofn= 1.5is placed in arm 2,
+and is associated with single-pass loss ofL
+i
+= 5%.
+Assume no other losses (in addition to the mirrors
+and the medium). Calculate the photon lifetime in
+the cavity.(5 points)
+5.3.
+Another very common cavity configuration is formed by cascading two V-shaped cavities, as
+shown in the Figure2a). Reduce this kind of general 4-mirror cavity into a 2-mirror cavity,
+schematically shown in Figure2b). Comment why this kind of cavity reduction scheme can
+be beneficial in analysis of the cavity.(5 points)
+d
+1
+L'
+x
+L
+L
+2
+t
+L
+1
+a)
+b)
+d
+2
+R
+1
+R
+2
+x
+n
+R
+2
+R'R
+1
+R'
+2
+Figure 2: a) Four-mirror cavity and b) an equivalent two-mirror cavity with imaged end mirrors.
+
+M
+1
+M
+2
+M
+3
+t
+n
+2휃
+Figure  3:  V-cavity  configuration  for  astigmatism
+compensation.
+5.4.
+An oblique folding mirror in a V-shaped 3-mirror
+cavity introduce astigmatism into the laser cavity,
+which can be fortunately compensated using Brew-
+ster plates. Assume incidence angle ofθfor the
+laser beam with respect to the folding mirror. For
+conceptual clarity assume the mirrors curvatures
+to beR=R
+1
+=R
+3
+= 100mm andR
+2
+=∞.
+Interestingly, the focal length of the folding mir-
+ror is different for sagittal (s) and tangential (t)
+incidence planes
+f
+s
+=f/cosθ   ,   f
+t
+=fcosθ .
+wheref=R
+2
+/2is the focal length of the folding mirror at normal incidence. The equivalent
+optical path lengths for the beam propagating inside the Brewster plate are for the different
+incidence planes:
+d
+s
+=t
+√
+n
+2
++ 1/n
+2
+,   d
+t
+=t
+√
+n
+2
++ 1/n
+4
+.
+After some lengthy algebra, it is possible to show that the astigmatism of the system can be
+minimized by equating these different sources of beam deviation
+(d
+s
+−d
+t
+) = (f
+s
+−f
+t
+).
+a)Derive the condition for astigmatism compensation.(3 points)
+b)Consider a Ti:Sapph gain material of thicknesst= 3mm and refractive indexn= 1.76,
+used as a Brewster plate. Calculate the angleθresulting in minimal astigmatism.(1 point)
+c)Plot the angleθwith respect to the so-called normalized cavity parameterX≡Nt/R,
+whereN≡(n
+2
+−1)
+√
+n
+2
++ 1/n
+4
+.(1 point)
+
+FYS.501 Laser PhysicsExercises and
+
+===== END HOMEWORK 5 — assignment sheet (questions only, no solutions) =====
+
+
+===== BEGIN HOMEWORK 6 — assignment sheet (questions only, no solutions)  [file: FYS_501_LaserPhysics_allHWs_2026.pdf] =====
+
+Homework 6
+All Topics
+The returnable homework assignments, submitted throughMoodle. Solutions for the exercises
+and the homework will be provided during the week after the return deadline.
+6.1.
+Write a short essay (maximum 500 words) explaining the ABCD matrix formalism (ray transfer
+matrix method) and its importance in laser physics. Your essay may briefly describe how
+optical elements and free-space propagation are represented using matrices, and explain how
+the formalism is used to analyze Gaussian beam propagation and laser resonators. Include a
+few practical examples of applications in laser science, such as laser cavity stability analysis,
+resonator design, beam shaping/focusing systems. Conclude with a brief discussion of the
+main advantages and limitations of the ABCD matrix approach.(5 points)
+6.2.
+Consider a four-level laser below threshold and assume that: (i) the branching ratio of the
+2→1transition, compared to the overall spontaneous transition rate (i.e., how much of the
+transition goes to level 1 from 2), isβ= 0.5; (ii) the overall upper-state lifetime is purely
+radiative and its value is equal toτ
+2
+= 234μs. Under these conditions, how short must the
+lifetimeτ
+1
+of the lower level be to ensure that
+N
+1
+N
+2
+<1%.(5 points)
+6.3.
+To estimate the internal losses in a high-power diode-pumped Nd:YLF laser, the threshold
+pump powerP
+th
+was measured using two different output couplers with reflectivitiesR
+1
+= 90%
+andR
+2
+= 95%, while the other mirror has a nominally100%reflectivity at the laser wavelength.
+Knowing that the measured threshold pump powers areP
+th,1
+= 1W andP
+th,2
+= 600mW,
+provide an estimate of the internal losses.(5 points)
+6.4.
+Calculate the population inversion necessary to achieve laser oscillation in a ruby laser at
+the wavelengthλ= 694.3 nm. Assume a Fabry-Perot resonator with mirror reflectivities
+R
+1
+= 100%andR
+2
+= 96%, a scattering loss of3%per round-trip pass, and a 6 cm long
+ruby rod. Assume also equal values for absorption and stimulated emission peak cross sections
+σ
+a
+=σ
+e
+= 2.7×10
+−20
+cm. Ruby laser can be assumed to be a three level system. HINT: value
+is around∆N= 2×10
+17
+cm
+−3
+.(5 points)
+
+===== END HOMEWORK 6 — assignment sheet (questions only, no solutions) =====

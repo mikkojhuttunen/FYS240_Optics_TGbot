@@ -1,17 +1,30 @@
 /**
  * FYS.240 Optics — Telegram teaching-assistant bot
- * With video lectures integration
+ * MERGED version — reconciles two branches that had diverged in the repo:
+ *   - bot_fys240.js            (this file's base): LaTeX $$ image rendering,
+ *     in-video timestamp segments (findRelevantSegments, &t=Xs links)
+ *   - bot_fys240_bilingual_links.js: a deterministic post-generation fix
+ *     (fixVideoLinkLanguage/isFinnishText) for Claude occasionally picking
+ *     the wrong-language video link — ported in below, applied first thing
+ *     in sendMessage() so it runs regardless of the LaTeX path taken.
+ * Both branches were otherwise identical (HW commands, quiz, /topics,
+ * /week, /reset, /healthz) — this file is now the single source of truth.
  *
  * Key features:
  *   1. Course material from course_corpus.txt (cached)
- *   2. Video lecture links from fys240_videos.js
- *   3. Math sent as plain Unicode (no LaTeX image rendering)
- *   4. Conversation history & rate limiting
+ *   2. Bilingual (EN/FI) video lecture links from fys240_videos.js, with
+ *      in-video timestamp segments from video_segments.json where added
+ *   3. Deterministic correction of wrong-language video links
+ *   4. LaTeX equation rendering (optional, LATEX_ENABLED env var)
+ *   5. Conversation history & rate limiting
  *
  * HOMEWORK-HELPER COMMANDS (ported from the FYS.501 bot):
  *   /HW3          — overview: lists the problems in Homework 3
  *   /HW3.2        — hint on Homework 3, problem 2 (equation/section pointer + guiding question)
  *   /HW_hint3.2   — minimal nudge: one guiding question, nothing else
+ *   /HWQ3.2       — exact verbatim question text, no hint, no API call (ported
+ *                   from bot_fys240_HWtext.js's /HWtext3.2, shortened; case-
+ *                   insensitive so /hwq3.2 also works)
  *   Course has 6 homework sets, so hwNum is expected to be 1-6 (HW1 ... HW6) —
  *   same flat numbering as FYS.501, NOT the chapter numbers (2-10) used elsewhere in this bot.
  *   None of these reveal solutions — same no-solutions rule as the rest of the bot.
@@ -21,6 +34,7 @@ const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const axios = require("axios");
+const { parseLatexBlocks, sendLatexImage } = require("./latex-renderer");
 const quizGenerator = require("./quizGenerator_fys240");
 const corpusLoader = require("./corpusLoader");
 
@@ -35,6 +49,7 @@ const MODEL = process.env.CLAUDE_MODEL || "claude-haiku-4-5-20251001";
 const CACHE_TTL = process.env.CACHE_TTL || "1h";
 const MAX_TOKENS = parseInt(process.env.MAX_TOKENS || "900", 10);
 const BOT_USERNAME = (process.env.BOT_USERNAME || "").replace(/^@/, "").toLowerCase();
+const LATEX_ENABLED = process.env.LATEX_ENABLED !== "false";
 
 const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
 
@@ -88,6 +103,29 @@ const CHAPTER_NAMES = {
   10: "Geometrical Optics",
 };
 
+const CHAPTER_NAMES_FI = {
+  2: "Valon kuvaustavat",
+  3: "Aaltoliike",
+  4: "Sähkömagneettiset aallot",
+  5: "Valon ja aineen vuorovaikutus",
+  6: "Eteneminen",
+  7: "Superpositio",
+  8: "Interferenssi",
+  9: "Diffraktio",
+  10: "Geometrinen optiikka",
+};
+
+// Picks a per-user language ("en" | "fi") for the deterministic, non-AI
+// commands (/help, /topics, /weekN, ...) which have no free-text question
+// to detect language from. Telegram sends the client's language_code
+// (e.g. "fi", "fi-FI") with every message.from; anything not Finnish falls
+// back to English. The AI-answered path instead detects language from the
+// student's own question text (see TA_INSTRUCTIONS), independent of this.
+function getLang(message) {
+  const code = message?.from?.language_code || "";
+  return code.toLowerCase().startsWith("fi") ? "fi" : "en";
+}
+
 // ------------------------------------------------------ build system ----
 const TA_INSTRUCTIONS = `You are the teaching assistant bot for FYS.240 Optics, answering students in a Telegram group.
 
@@ -101,22 +139,31 @@ WHAT YOU KNOW
 WHEN TO SUGGEST VIDEOS
 If a student asks about a topic that's covered in video lectures, suggest the relevant video:
 - Check if the topic matches any video lecture title
-- Write it as a Markdown link with the chapter and topic as the clickable label, e.g.:
-  "That's covered in [Video 5.2 (Refraction)](https://youtube.com/watch?v=pzzjQhhXdkE)."
-- ALWAYS use this exact [Video X.Y (Topic)](URL) format — never write the raw URL on its own, after a colon, or after a dash
+- ALWAYS use this exact [Video X.Y (Topic)](URL) format for the video link itself — never write the raw URL on its own, after a colon, or after a dash. (When a timestamp is also linked, see IN-VIDEO TIMESTAMPS below — that adds a second, separate link, it doesn't replace this one.)
+- LANGUAGE OF VIDEO LINKS: <video_lectures> below lists each lecture as an EN pair (topic + url) and, where one exists, an FI pair after "|". ALWAYS match the pair's language to the language you are answering in RIGHT NOW, with or without a timestamp — do not default to the English pair out of habit, even if an example below happens to be in English. If a lecture has no FI pair, use the EN pair even in a Finnish answer.
+  EN example (answering in English): "That's covered in [Video 5.2 (Refraction)](https://youtube.com/watch?v=pzzjQhhXdkE)."
+  FI example (answering in Finnish — same rule, Finnish pair): "Asiasta kerrotaan [Video 5.2 (Taittuminen)](https://youtube.com/watch?v=<fi-id>):ssa."
+- IN-VIDEO TIMESTAMPS: some lectures also list chapter markers indented beneath the EN and/or FI pair, tagged EN: or FI:, e.g. "  FI: 16:48 (1008s) Poyntingin vektori S = c^2 eps0 ExB". When the student's question matches one of these markers specifically (not just the video's general topic), give TWO separate links in the same sentence: (1) the timestamp itself as clickable text, e.g. "[16:48](URL&t=1008s)" — using the seconds shown in parentheses after the marker, never recomputed — and (2) the normal [Video X.Y (Topic)](URL) link with NO &t=, pointing at the start of the video as usual. Both links use the SAME-LANGUAGE pair's url; only use a marker tagged for the language (EN:/FI:) you're actually linking, and never mix a FI: marker's seconds onto the EN url or vice versa. If the student's message includes a <possible_video_moments> block, that's already been matched to this specific question in code — use it instead of searching <video_lectures> yourself whenever one of its candidates fits.
+  FI example (answering in Finnish, using a FI: marker): "Tarkemmin asiasta kerrotaan kohdassa [16:48](https://youtube.com/watch?v=KCRFMlnFNbQ&t=1008s) videolla [Video 4.3 (Sähkömagneettisen kentän energia)](https://youtube.com/watch?v=KCRFMlnFNbQ)."
+  EN example (answering in English, using an EN: marker for the same lecture): "That's explained in more detail around [16:48](https://youtube.com/watch?v=qPxBAoaT_Dc&t=1008s) in [Video 4.3 (Energy of the electromagnetic field)](https://youtube.com/watch?v=qPxBAoaT_Dc)." — only if an EN: marker is actually listed for that video.
+  Not every video has markers yet — when none is listed for the pair (language) you're linking, just give the single normal [Video X.Y (Topic)](URL) link as before, with no timestamp link.
 
 HOW TO HELP
 **LENGTH**: ONE OR TWO SHORT SENTENCES/PARAGRAPH ONLY. Never use section headers, bullets, tables, or sub-points. No "Step 1, Step 2". No "Key insight:". Just talk to them like a person.
 **HOMEWORK**: Give hints, not answers. Name the relevant equation or concept, point to the section, suggest a video if available, ask ONE guiding question. (Students can also use /HW1 ... /HW6 and /HW3.2-style commands to ask about a specific homework set or problem directly.)
 **CONCEPTUAL**: Answer directly and briefly. If they ask about something that has a video, mention it: "That's in [Video X.Y (Topic)](URL). In short, ..."
-**VIDEO REFERENCES**: When appropriate, include video links as [Video X.Y (Topic)](URL) so students can find them easily.
+**VIDEO REFERENCES**: When appropriate, include video links as [Video X.Y (Topic)](URL) so students can find them easily, choosing the EN or FI title/url pair to match the language you're answering in (see LANGUAGE OF VIDEO LINKS above).
 **STUDENT ATTEMPTS**: If they show work, check it quickly, point at one specific error. Don't rewrite the whole thing.
 **REDIRECT**: If it's outside course scope, say "That's beyond FYS.240, ask your instructor during office hours".
 
 FORMAT
 - Plain text for Telegram.
-- Never use $ or $$ delimiters, and never write raw LaTeX commands (\frac, \sqrt, \alpha, ^{}, _{}, etc.) — write all math directly in Unicode: Greek letters (α β γ δ θ λ μ π φ ω...), superscripts (x², n³), subscripts (n₁, sᵢ, sₒ), √ for roots, × · ÷ ± ∞ ∫ ∑ ∂ ∇ ≈ ≠ ≤ ≥ → for operators, and plain "/" for fractions (e.g. "1/f = 1/sₒ + 1/sᵢ")
-- Write video links as [Video X.Y (Topic)](URL) Markdown links, never as bare URLs
+${LATEX_ENABLED 
+  ? `- Write EQUATIONS in LaTeX between double dollar signs: $$E = mc^2$$
+- These will be automatically rendered as readable images`
+  : `- Use UNICODE SYMBOLS ONLY: α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ σ τ υ φ χ ψ ω`
+}
+- Write video links as [Video X.Y (Topic)](URL) Markdown links, never as bare URLs, using the Finnish topic/url when answering in Finnish and the English topic/url when answering in English (see LANGUAGE OF VIDEO LINKS above)
 - 2-3 short paragraphs maximum
 - Answer in the language the student writes in (English or Finnish)
 - VECTOR QUANTITIES: wrap every vector symbol in **...** (e.g. **E**, **B**, **D**, **H**, **j**, **k**, **r**, **p**, **S**, **F**, **v**), EVERY time it appears — not just on first use, and inside equations as well as prose (e.g. \u2207\u00d7**B** = \u03bc\u2080**j** + \u03bc\u2080\u03b5\u2080\u2202**E**/\u2202t). Do this consistently across microscopic and macroscopic Maxwell's equations alike.
@@ -146,10 +193,18 @@ function buildSystemBlocks() {
 
   blocks.push({ type: "text", text: formatCourseSchedule() });
 
-  // Add video database context
+  // Add video database context (cached: this grows as more per-video
+  // timestamps are added over the course, so keep it off the uncached path)
   if (VIDEO_DB && VIDEO_DB.all().length > 0) {
     const videoContext = formatVideoDatabase(VIDEO_DB);
-    blocks.push({ type: "text", text: videoContext });
+    blocks.push({
+      type: "text",
+      text: videoContext,
+      cache_control:
+        CACHE_TTL === "1h"
+          ? { type: "ephemeral", ttl: "1h" }
+          : { type: "ephemeral" },
+    });
   }
   
   if (COURSE_CORPUS) {
@@ -197,12 +252,27 @@ function formatCourseSchedule() {
 function formatVideoDatabase(db) {
   let context = "\n<video_lectures>\n";
   context += `## FYS.240 Optics - Video Lectures\n\n`;
-  
+  context += `Each line: chapter: English topic (EN url) | Finnish topic (FI url)\n`;
+  context += `Use the EN pair when answering in English, the FI pair when answering in Finnish. If a video has no FI pair listed, fall back to the EN pair even in a Finnish answer.\n`;
+  context += `Some lectures also list in-video timestamps indented below them, tagged EN: or FI: for which pair's url they belong to. The seconds value in parentheses is exactly what goes after &t= in that pair's url.\n\n`;
+
+  const segLine = (tag, seg) => {
+    const mm = String(Math.floor(seg.t / 60)).padStart(2, "0");
+    const ss = String(seg.t % 60).padStart(2, "0");
+    return `  ${tag}: ${mm}:${ss} (${seg.t}s) ${seg.label}\n`;
+  };
+
   const chapters = db.getChapters();
   chapters.forEach(chapter => {
     const videos = db.getChapter(chapter);
     videos.forEach(video => {
-      context += `${video.chapter}: ${video.topic} - https://youtube.com/watch?v=${video.id}\n`;
+      context += `${video.chapter}: ${video.topic} (https://youtube.com/watch?v=${video.id})`;
+      if (video.topic_fi && video.id_fi) {
+        context += ` | ${video.topic_fi} (https://youtube.com/watch?v=${video.id_fi})`;
+      }
+      context += "\n";
+      (video.segments || []).forEach(seg => { context += segLine("EN", seg); });
+      (video.segments_fi || []).forEach(seg => { context += segLine("FI", seg); });
     });
   });
   
@@ -277,16 +347,24 @@ const quizBot = {
 // Called by quizGenerator.startQuiz() when the student didn't name a
 // chapter/section (e.g. just typed "quiz me"). Presents an inline-keyboard
 // chapter picker covering FYS.240's chapters 2-10, built from
-// corpusLoader.listChapters()/getChapterTitle(). Tapping a chapter sends a
-// "quizchapter:N" callback, handled in handleCallbackQuery() below, which
-// starts the actual quiz. Returning null tells startQuiz() to stop — there's
-// nothing more for it to do until the student taps a button.
-async function askWhichChapter(bot, chatId) {
-  await bot.sendMessage(chatId, "Which chapter would you like to be quizzed on?", {
+// corpusLoader.listChapters()/getChapterTitle()/getChapterTitleFi() —
+// `lang` (passed through by startQuiz's resolveQuizLang()) picks which.
+// Tapping a chapter sends a "quizchapter:N:lang" callback, handled in
+// handleCallbackQuery() below, which starts the actual quiz in that same
+// language. Returning null tells startQuiz() to stop — there's nothing
+// more for it to do until the student taps a button.
+async function askWhichChapter(bot, chatId, lang = "en") {
+  const text = lang === "fi" ? "Mistä luvusta haluaisit visan?" : "Which chapter would you like to be quizzed on?";
+  await bot.sendMessage(chatId, text, {
     reply_markup: {
-      inline_keyboard: corpusLoader.listChapters().map((ch) => ([
-        { text: `Chapter ${ch} — ${corpusLoader.getChapterTitle(ch)}`, callback_data: `quizchapter:${ch}` },
-      ])),
+      inline_keyboard: corpusLoader.listChapters().map((ch) => {
+        const title = lang === "fi" ? corpusLoader.getChapterTitleFi(ch) : corpusLoader.getChapterTitle(ch);
+        const label = lang === "fi" ? `Luku ${ch} — ${title}` : `Chapter ${ch} — ${title}`;
+        // Language rides along in callback_data ("quizchapter:<N>:<lang>")
+        // since there's no quiz session yet at this point for
+        // handleQuizAnswer's session.lang trick to apply to.
+        return [{ text: label, callback_data: `quizchapter:${ch}:${lang}` }];
+      }),
     },
   });
   return null;
@@ -344,79 +422,6 @@ function toMathUnicode(inner, style) {
   return out;
 }
 
-// Converts common LaTeX that Claude might still slip in (despite
-// TA_INSTRUCTIONS telling it to use Unicode only) into Unicode, then
-// strips any leftover $ / $$ delimiters and backslash commands so
-// nothing raw ever reaches students. No LATEX_ENABLED flag — this
-// always runs; there is no image-rendering path anymore.
-const GREEK = {
-  alpha: "α", beta: "β", gamma: "γ", delta: "δ", epsilon: "ε", zeta: "ζ",
-  eta: "η", theta: "θ", iota: "ι", kappa: "κ", lambda: "λ", mu: "μ",
-  nu: "ν", xi: "ξ", omicron: "ο", pi: "π", rho: "ρ", sigma: "σ",
-  tau: "τ", upsilon: "υ", phi: "φ", chi: "χ", psi: "ψ", omega: "ω",
-  Gamma: "Γ", Delta: "Δ", Theta: "Θ", Lambda: "Λ", Xi: "Ξ", Pi: "Π",
-  Sigma: "Σ", Phi: "Φ", Psi: "Ψ", Omega: "Ω",
-};
-const SUP = { "0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹",
-  "+":"⁺","-":"⁻","=":"⁼","(":"⁽",")":"⁾","n":"ⁿ","i":"ⁱ",
-  a:"ᵃ",b:"ᵇ",c:"ᶜ",d:"ᵈ",e:"ᵉ",f:"ᶠ",g:"ᵍ",h:"ʰ",j:"ʲ",k:"ᵏ",l:"ˡ",m:"ᵐ",
-  o:"ᵒ",p:"ᵖ",r:"ʳ",s:"ˢ",t:"ᵗ",u:"ᵘ",v:"ᵛ",w:"ʷ",x:"ˣ",y:"ʸ",z:"ᶻ" };
-const SUB = { "0":"₀","1":"₁","2":"₂","3":"₃","4":"₄","5":"₅","6":"₆","7":"₇","8":"₈","9":"₉",
-  "+":"₊","-":"₋","=":"₌","(":"₍",")":"₎",
-  a:"ₐ",e:"ₑ",h:"ₕ",i:"ᵢ",j:"ⱼ",k:"ₖ",l:"ₗ",m:"ₘ",n:"ₙ",o:"ₒ",p:"ₚ",r:"ᵣ",s:"ₛ",t:"ₜ",u:"ᵤ",v:"ᵥ",x:"ₓ" };
-const toSup = (s) => [...s].map((c) => SUP[c] ?? c).join("");
-const toSub = (s) => [...s].map((c) => SUB[c] ?? c).join("");
-
-// Matches one level of {...} — good enough for the simple exponents/
-// fractions Claude actually generates; anything with nested braces
-// just falls through to the final cleanup pass below.
-const BRACED = "\\{([^{}]*)\\}";
-
-function latexToUnicode(text) {
-  // \frac{a}{b} -> a/b (parens added only if a or b contains a space/operator)
-  text = text.replace(new RegExp(`\\\\frac${BRACED}${BRACED}`, "g"), (_, a, b) => {
-    const wrap = (s) => (/[\s+\-]/.test(s) ? `(${s})` : s);
-    return `${wrap(a)}/${wrap(b)}`;
-  });
-  text = text.replace(/\\sqrt\{([^{}]*)\}/g, (_, x) => `√(${x})`);
-  text = text.replace(/\\sqrt(\w)/g, (_, x) => `√${x}`);
-
-  // superscripts / subscripts: braced or single-char
-  text = text.replace(new RegExp(`\\^${BRACED}`, "g"), (_, x) => toSup(x));
-  text = text.replace(/\^(\w)/g, (_, x) => toSup(x));
-  text = text.replace(new RegExp(`_${BRACED}`, "g"), (_, x) => toSub(x));
-  text = text.replace(/_(\w)/g, (_, x) => toSub(x));
-
-  // Greek letters
-  text = text.replace(/\\([A-Za-z]+)/g, (m, name) => GREEK[name] ?? m);
-
-  // common operators/symbols
-  const OPS = {
-    "\\pm": "±", "\\mp": "∓", "\\times": "×", "\\cdot": "·", "\\div": "÷",
-    "\\approx": "≈", "\\neq": "≠", "\\leq": "≤", "\\geq": "≥",
-    "\\rightarrow": "→", "\\to": "→", "\\infty": "∞", "\\partial": "∂",
-    "\\nabla": "∇", "\\int": "∫", "\\sum": "∑", "\\prod": "∏",
-    "\\left": "", "\\right": "", "\\,": " ", "\\;": " ", "\\!": "",
-    "\\text": "",
-  };
-  for (const [k, v] of Object.entries(OPS)) {
-    text = text.split(k).join(v);
-  }
-
-  // Fallback: strip any remaining backslash commands and stray braces
-  // (covers matrices, unrecognized macros — degrades to plain text
-  // instead of showing raw LaTeX)
-  text = text.replace(/\\[a-zA-Z]+/g, "");
-  text = text.replace(/[{}]/g, "");
-
-  // Finally, strip any leftover $ / $$ delimiters entirely
-  text = text.replace(/\$\$([\s\S]*?)\$\$/g, "$1");
-  text = text.replace(/\$([^$\n]+?)\$/g, "$1");
-  text = text.replace(/\$/g, "");
-
-  return text;
-}
-
 // Converts Claude's Markdown emphasis into real Unicode styled characters
 // (Claude's natural way of marking vector quantities, e.g. **E**, **B**, and
 // occasionally single-asterisk emphasis like *i*). Messages are sent with
@@ -425,14 +430,55 @@ function latexToUnicode(text) {
 // and "**double**" are handled (plus "***triple***" for completeness);
 // longest marker matches first so the single-* pass never gets confused by
 // leftover ** runs, since those are already replaced with plain Unicode
-// characters by the time it runs. Leaves Greek letters, subscripts, and
-// everything else as-is (latexToUnicode(), run afterward in sendMessage(),
-// handles any stray LaTeX).
+// characters by the time it runs. Leaves Greek letters, subscripts, LaTeX $$
+// blocks, and everything else as-is.
 function markdownEmphasisToUnicode(text) {
   text = text.replace(/\*\*\*(.+?)\*\*\*/g, (_, inner) => toMathUnicode(inner, "bolditalic"));
   text = text.replace(/\*\*(.+?)\*\*/g, (_, inner) => toMathUnicode(inner, "bold"));
   text = text.replace(/\*(.+?)\*/g, (_, inner) => toMathUnicode(inner, "italic"));
   return text;
+}
+
+// Heuristic Finnish/English detector for the ASSISTANT'S OWN reply text
+// (not the student's question). Finnish prose is dense with ä/ö; English
+// essentially never uses them, so a density threshold is a cheap, reliable
+// signal — far more reliable than asking the model to remember which
+// language it's replying in by the time it picks a video link.
+// (Ported from bot_fys240_bilingual_links.js — see fixVideoLinkLanguage.)
+function isFinnishText(text) {
+  const letters = text.match(/[a-zA-ZäöÄÖ]/g) || [];
+  if (letters.length < 20) return false; // too short to judge
+  const finnishMarkers = (text.match(/[äöÄÖ]/g) || []).length;
+  return finnishMarkers / letters.length > 0.02;
+}
+
+// Deterministic guard against wrong-language video links. TA_INSTRUCTIONS
+// tells Claude to pick the FI or EN (topic, url) pair depending on which
+// language it's answering in — but that's a soft instruction and Claude
+// sometimes answers in Finnish while still using the EN pair. Rather than
+// keep tuning the prompt, this rewrites every "[Video X.Y (Topic)](url)"
+// link AFTER generation to match the language the reply is actually
+// written in, using VIDEO_DB as the source of truth. A chapter with no FI
+// recording still falls back to the EN pair, same as TA_INSTRUCTIONS says.
+// Only touches the plain "[Video X.Y (Topic)](url)" pattern — the separate
+// "[16:48](url&t=1008s)" timestamp link (see IN-VIDEO TIMESTAMPS above) is
+// left untouched, since the model already ties its language to whichever
+// EN:/FI: marker it picked.
+function fixVideoLinkLanguage(text) {
+  if (!VIDEO_DB) return text;
+  const targetLang = isFinnishText(text) ? "fi" : "en";
+  return text.replace(
+    /\[Video (\d+\.\d+) \(([^)]+)\)\]\((https?:\/\/[^\s)]+)\)/g,
+    (full, chapter, _label, _url) => {
+      const video = (VIDEO_DB.getChapter(chapter) || [])[0];
+      if (!video) return full; // unknown chapter — leave untouched
+
+      if (targetLang === "fi" && video.topic_fi && video.id_fi) {
+        return `[Video ${chapter} (${video.topic_fi})](https://youtube.com/watch?v=${video.id_fi})`;
+      }
+      return `[Video ${chapter} (${video.topic})](https://youtube.com/watch?v=${video.id})`;
+    }
+  );
 }
 
 // Splits text into <4096-char chunks and sends each as a message. Pass
@@ -471,17 +517,57 @@ async function sendPlainChunks(chatId, text, replyTo, parseMode) {
 // Markdown "[label](url)" (per TA_INSTRUCTIONS) and are converted to real
 // <a> tags via convertLinksAndEscape() + parse_mode "HTML", so students see
 // "Video 3.3 (Harmonic waves)" as clickable text instead of a raw URL.
-// Math is sent as plain Unicode text — no image rendering: latexToUnicode()
-// converts any stray LaTeX Claude still emits, and strips $ / $$ delimiters.
+// $$ LaTeX blocks are pulled out first (via parseLatexBlocks) and sent as
+// separate equation images; the surrounding text segments go through the
+// same link-conversion + HTML send as the non-LaTeX path.
 async function sendMessage(chatId, text, replyTo) {
+  text = fixVideoLinkLanguage(text);
   text = markdownEmphasisToUnicode(text);
-  text = latexToUnicode(text);
-  await sendPlainChunks(chatId, convertLinksAndEscape(text), replyTo, "HTML");
+
+  if (LATEX_ENABLED) {
+    let segments;
+    try {
+      segments = parseLatexBlocks(text);
+    } catch (e) {
+      console.error("parseLatexBlocks failed, falling back to plain text:", e.message);
+      await sendPlainChunks(chatId, convertLinksAndEscape(text.replace(/\$\$/g, "")), replyTo, "HTML");
+      return;
+    }
+    for (const seg of segments) {
+      if (seg.type === "latex") {
+        await sendLatexImage(tg, chatId, seg.content, replyTo).catch((e) =>
+          console.error("sendLatexImage failed:", e.message)
+        );
+      } else if (seg.content && seg.content.trim()) {
+        await sendPlainChunks(chatId, convertLinksAndEscape(seg.content), replyTo, "HTML");
+      }
+    }
+  } else {
+    await sendPlainChunks(chatId, convertLinksAndEscape(text), replyTo, "HTML");
+  }
 }
 
 // --------------------------------------------------------------- claude -----
-async function askClaude(chatId, question) {
-  const messages = [...(history.get(chatId) || []), { role: "user", content: question }];
+/**
+ * @param {Array} [videoHints] - VIDEO_DB.findRelevantSegments(question)
+ *   results, pre-matched in code (see call site) so the model doesn't have
+ *   to fuzzy-search the whole <video_lectures> dump itself — much more
+ *   reliable for a small model, especially against Finnish case-inflected
+ *   questions ("yhtälöstä" not literally matching a label of "yhtälö").
+ */
+async function askClaude(chatId, question, videoHints) {
+  const content = [{ type: "text", text: question }];
+  if (videoHints && videoHints.length > 0) {
+    let hint = "<possible_video_moments>\n";
+    hint += "Pre-matched candidates for THIS question, ranked best first. If one actually answers it, prefer it over searching <video_lectures> yourself — use its exact url/seconds as-is, in the EN or FI form matching the language you're answering in (if only one language is listed for a candidate, only use it in that language's answer). If none of these fit, ignore this block.\n";
+    videoHints.forEach(h => {
+      hint += `${h.chapter} | ${h.lang.toUpperCase()} | ${h.topic} | ${h.t}s | ${h.label} | ${h.url}\n`;
+    });
+    hint += "</possible_video_moments>";
+    content.push({ type: "text", text: hint });
+  }
+
+  const messages = [...(history.get(chatId) || []), { role: "user", content }];
 
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
@@ -540,9 +626,18 @@ function stripMention(text) {
 // Matches:  /HW3          (overview of Homework 3)
 //           /HW3.2        (hint on Homework 3, problem 2)
 //           /HW_hint3.2   (minimal one-line nudge on Homework 3, problem 2)
+//           /HWQ3.2       (exact verbatim question text, no hint — see below)
 // hwNum is expected to be 1-6 (six homework sets); the regex itself doesn't
 // enforce that range, it just matches whatever digits follow /HW.
 const HW_COMMAND_RE = /^\/HW(_hint)?(\d+)(?:\.(\d+))?(@\S+)?\b/i;
+
+// Matches /HWQ3.2 (case-insensitive, so /hwq3.2 works too) — exact verbatim
+// problem text, no hint, no API call. Ported from bot_fys240_HWtext.js's
+// /HWtext command, shortened per request ("HWQ" = HW Question). Requires
+// the sub-problem number — a whole homework set's text is several problems
+// long and isn't meant to be dumped in one message; /HW3 already gives the
+// one-line overview to navigate from.
+const HW_TEXT_COMMAND_RE = /^\/HWQ(\d+)\.(\d+)(@\S+)?\b/i;
 
 function buildHwOverviewDirective(hwNum) {
   return (
@@ -589,6 +684,24 @@ function buildHwOverviewFromStructuredData(hwNum) {
   );
 }
 
+// Free, deterministic version of the full question text — no Claude call,
+// so it can't paraphrase, hint, or accidentally leak toward a solution.
+// Sends exactly what's stored in homework_problems.json, verbatim.
+// (Ported from bot_fys240_HWtext.js's buildHwFullText.) Not bilingual by
+// design — this returns the stored assignment text as-is, in whatever
+// language it was authored in, rather than translating it.
+function buildHwFullText(hwNum, problemNum, lang) {
+  const exactText = HOMEWORK_PROBLEMS[hwNum]?.[problemNum];
+  if (!exactText) {
+    return lang === "fi"
+      ? `Minulla ei ole tallennettuna Kotitehtävä ${hwNum}, tehtävä ${problemNum} tarkkaa tekstiä.\n` +
+        `Kokeile /HW${hwNum} yleiskatsausta varten, tai /HW${hwNum}.${problemNum} vihjettä varten.`
+      : `I don't have the exact text of Homework ${hwNum}, problem ${problemNum} stored.\n` +
+        `Try /HW${hwNum} for an overview, or /HW${hwNum}.${problemNum} for a hint instead.`;
+  }
+  return exactText;
+}
+
 function buildHwHintDirective(hwNum, problemNum) {
   const exactText = HOMEWORK_PROBLEMS[hwNum]?.[problemNum];
   const problemBlock = exactText
@@ -618,7 +731,7 @@ function buildHwMinimalHintDirective(hwNum, problemNum) {
   );
 }
 
-const HELP_TEXT =
+const HELP_TEXT_EN =
   `Hi! I'm the FYS.240 Optics assistant. I know the lecture notes, textbook, and have ${VIDEO_DB ? VIDEO_DB.all().length : 0} video lectures on all course topics.\n\n` +
   "Ask me things like:\n" +
   "- How do thin lenses work?\n" +
@@ -633,7 +746,30 @@ const HELP_TEXT =
   "/HW1 ... /HW6 — list the problems in a specific homework set\n" +
   "/HW3.2 — get a hint on Homework 3, problem 2\n" +
   "/HW_hint3.2 — just a one-line nudge, no explanation\n" +
+  "/HWQ3.2 — see the exact question text for a problem, verbatim\n" +
   "/reset — clear our conversation history";
+
+const HELP_TEXT_FI =
+  `Hei! Olen FYS.240 Optiikka -kurssin avustaja. Tunnen luentomuistiinpanot, oppikirjan ja ${VIDEO_DB ? VIDEO_DB.all().length : 0} luentovideota kaikista kurssin aiheista.\n\n` +
+  "Voit kysyä esimerkiksi:\n" +
+  "- Miten ohut linssi toimii?\n" +
+  "- Mikä ero on reaalikuvalla ja virtuaalikuvalla?\n" +
+  "- Jumitin tehtävässä 5.2, mistä kannattaisi aloittaa?\n" +
+  "- Selitä, miten mikroskooppi toimii\n" +
+  "- \"Kysele minulta luvusta 2\" (tai tietystä osiosta, esim. \"kysele minulta osiosta 2.3\") monivalintavisaa varten\n\n" +
+  "Selitän käsitteitä, ohjaan sinut oikeiden videoiden tai lukujen pariin ja annan vinkkejä kotitehtäviin (mutten valmiita ratkaisuja).\n\n" +
+  "Komennot:\n" +
+  "/topics — kaikki luentovideoiden aiheet\n" +
+  "/week1 ... /week7 — kyseisen kurssiviikon videot (viikko 7 = kertaus)\n" +
+  "/HW1 ... /HW6 — listaa tietyn kotitehtäväsetin tehtävät\n" +
+  "/HW3.2 — vinkki kotitehtävä 3:n tehtävään 2\n" +
+  "/HW_hint3.2 — vain lyhyt vihje, ei selitystä\n" +
+  "/HWQ3.2 — näytä tehtävän tarkka kysymysteksti\n" +
+  "/reset — tyhjennä keskusteluhistoriamme";
+
+function helpText(lang) {
+  return lang === "fi" ? HELP_TEXT_FI : HELP_TEXT_EN;
+}
 
 
 // Video topics command
@@ -649,11 +785,16 @@ function escapeHtml(s) {
     .replace(/>/g, "&gt;");
 }
 
-function buildVideoListChunks(chapterKeys, headerText) {
+// lang: "en" | "fi" — picks Finnish chapter names and, per video, the
+// Finnish topic/url pair (falling back to the English one for any video
+// that has no Finnish recording, same fallback rule as TA_INSTRUCTIONS).
+function buildVideoListChunks(chapterKeys, headerText, lang) {
   const MAX_CHUNK = 3800; // headroom under Telegram's 4096 hard limit
   const messages = [];
   let msg = headerText;
   let lastMajor = null;
+  const names = lang === "fi" ? CHAPTER_NAMES_FI : CHAPTER_NAMES;
+  const chapterWord = lang === "fi" ? "Luku" : "Chapter";
 
   chapterKeys.forEach(chapter => {
     const major = parseInt(chapter.split(".")[0], 10);
@@ -665,16 +806,18 @@ function buildVideoListChunks(chapterKeys, headerText) {
     let prefix = "";
     if (major !== lastMajor) {
       if (lastMajor !== null) prefix += "\n";
-      const title = CHAPTER_NAMES[major]
-        ? `Chapter ${major}: ${CHAPTER_NAMES[major]}`
-        : `Chapter ${major}`;
+      const title = names[major]
+        ? `${chapterWord} ${major}: ${names[major]}`
+        : `${chapterWord} ${major}`;
       prefix += `<b>${escapeHtml(title)}</b>\n`;
       lastMajor = major;
     }
 
     videos.forEach(v => {
-      const label = escapeHtml(`${v.chapter}: ${v.topic}`);
-      const line = `<a href="${escapeHtml(v.url)}">${label}</a>\n`;
+      const topic = lang === "fi" && v.topic_fi ? v.topic_fi : v.topic;
+      const url = lang === "fi" && v.url_fi ? v.url_fi : v.url;
+      const label = escapeHtml(`${v.chapter}: ${topic}`);
+      const line = `<a href="${escapeHtml(url)}">${label}</a>\n`;
       const block = prefix + line;
       if (msg.length + block.length > MAX_CHUNK) {
         messages.push(msg.trim());
@@ -689,14 +832,15 @@ function buildVideoListChunks(chapterKeys, headerText) {
   return messages;
 }
 
-function generateTopicsMessages() {
+function generateTopicsMessages(lang) {
   if (!VIDEO_DB || VIDEO_DB.all().length === 0) {
-    return ["Video database not loaded."];
+    return [lang === "fi" ? "Videotietokantaa ei ole ladattu." : "Video database not loaded."];
   }
-  return buildVideoListChunks(
-    VIDEO_DB.getChapters(),
-    "📺 <b>FYS.240 Optics - Video Lectures</b>\n\n"
-  );
+  const header =
+    lang === "fi"
+      ? "📺 <b>FYS.240 Optiikka - Luentovideot</b>\n\n"
+      : "📺 <b>FYS.240 Optics - Video Lectures</b>\n\n";
+  return buildVideoListChunks(VIDEO_DB.getChapters(), header, lang);
 }
 
 // /weekN command — real FYS.240 course schedule, mapping each course week
@@ -708,22 +852,27 @@ function getAvailableWeeks() {
   return [...Object.keys(WEEK_TO_CHAPTERS).map(Number), RECAP_WEEK].sort((a, b) => a - b);
 }
 
-function generateWeekMessages(weekNum) {
+function generateWeekMessages(weekNum, lang) {
   if (!VIDEO_DB || VIDEO_DB.all().length === 0) {
-    return ["Video database not loaded."];
+    return [lang === "fi" ? "Videotietokantaa ei ole ladattu." : "Video database not loaded."];
   }
 
   if (weekNum === RECAP_WEEK) {
     return [
-      "📚 Week 7 (5.10.-11.10.) is the recap week - no new chapters. " +
-      "Use /topics to browse all videos again, or ask me about anything from chapters 2-10.",
+      lang === "fi"
+        ? "📚 Viikko 7 (5.10.-11.10.) on kertausviikko - ei uusia lukuja. " +
+          "Selaa kaikkia videoita uudelleen komennolla /topics, tai kysy minulta mitä tahansa luvuista 2-10."
+        : "📚 Week 7 (5.10.-11.10.) is the recap week - no new chapters. " +
+          "Use /topics to browse all videos again, or ask me about anything from chapters 2-10.",
     ];
   }
 
   const chapterMajors = WEEK_TO_CHAPTERS[weekNum];
   if (!chapterMajors) {
     return [
-      `No videos found for week ${weekNum}. Available weeks: ${getAvailableWeeks().join(", ")} (7 is the recap week).`,
+      lang === "fi"
+        ? `Viikolle ${weekNum} ei löytynyt videoita. Saatavilla olevat viikot: ${getAvailableWeeks().join(", ")} (7 on kertausviikko).`
+        : `No videos found for week ${weekNum}. Available weeks: ${getAvailableWeeks().join(", ")} (7 is the recap week).`,
     ];
   }
 
@@ -731,8 +880,11 @@ function generateWeekMessages(weekNum) {
     chapterMajors.includes(parseInt(c.split(".")[0], 10))
   );
 
-  const header = `📺 <b>FYS.240 Optics - Week ${weekNum} Videos</b>\n\n`;
-  return buildVideoListChunks(chapters, header);
+  const header =
+    lang === "fi"
+      ? `📺 <b>FYS.240 Optiikka - Viikon ${weekNum} videot</b>\n\n`
+      : `📺 <b>FYS.240 Optics - Week ${weekNum} Videos</b>\n\n`;
+  return buildVideoListChunks(chapters, header, lang);
 }
 
 // ------------------------------------------------------------- webhook ------
@@ -742,6 +894,7 @@ app.get("/healthz", (_req, res) => res.json({
   corpusChars: COURSE_CORPUS.length,
   corpusLooksHealthy: corpusLoader.corpusLooksHealthy(),
   videoLectures: VIDEO_DB ? VIDEO_DB.all().length : 0,
+  latexEnabled: LATEX_ENABLED,
   homeworkProblemsLoaded: Object.values(HOMEWORK_PROBLEMS).reduce((n, hw) => n + Object.keys(hw).length, 0),
   quizBankLooksHealthy: quizGenerator.quizBankLooksHealthy(),
 }));
@@ -777,13 +930,18 @@ async function handleUpdate(update) {
 
   if (!shouldAnswer(message)) return;
 
-  if (/^\/(start|help)/i.test(text)) return sendMessage(chatId, HELP_TEXT);
+  const lang = getLang(message);
+
+  if (/^\/(start|help)/i.test(text)) return sendMessage(chatId, helpText(lang));
   if (/^\/reset/i.test(text)) {
     history.delete(chatId);
-    return sendMessage(chatId, "Conversation history cleared. Ask me anything.");
+    return sendMessage(
+      chatId,
+      lang === "fi" ? "Keskusteluhistoria tyhjennetty. Kysy mitä vain." : "Conversation history cleared. Ask me anything."
+    );
   }
   if (/^\/topics?/i.test(text)) {
-    for (const chunk of generateTopicsMessages()) {
+    for (const chunk of generateTopicsMessages(lang)) {
       await tg("sendMessage", {
         chat_id: chatId,
         text: chunk,
@@ -798,7 +956,7 @@ async function handleUpdate(update) {
   const weekMatch = text.match(/^\/week(\d+)/i);
   if (weekMatch) {
     const weekNum = parseInt(weekMatch[1], 10);
-    for (const chunk of generateWeekMessages(weekNum)) {
+    for (const chunk of generateWeekMessages(weekNum, lang)) {
       await tg("sendMessage", {
         chat_id: chatId,
         text: chunk,
@@ -808,6 +966,22 @@ async function handleUpdate(update) {
         console.error("Telegram sendMessage (/week) failed:", e.response?.status, JSON.stringify(e.response?.data))
       );
     }
+    return;
+  }
+
+  // ---- /HWQ3.2 (exact verbatim question text, no hint, no API call)
+  const hwTextMatch = text.match(HW_TEXT_COMMAND_RE);
+  if (hwTextMatch) {
+    const hwNum = hwTextMatch[1];
+    const problemNum = hwTextMatch[2];
+
+    const nowText = Date.now();
+    if (nowText - (lastCall.get(userId) || 0) < MIN_INTERVAL_MS) return;
+    lastCall.set(userId, nowText);
+
+    console.log(`[${message.chat.type}:${chatId}] HWQ command: ${text.slice(0, 60)}`);
+
+    await sendMessage(chatId, buildHwFullText(hwNum, problemNum, lang), message.message_id);
     return;
   }
 
@@ -847,7 +1021,9 @@ async function handleUpdate(update) {
     } catch (e) {
       await sendMessage(
         chatId,
-        "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
+        lang === "fi"
+          ? "Pahoittelut, en juuri nyt saanut yhteyttä aivoihini. Yritä hetken kuluttua uudelleen."
+          : "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
         message.message_id
       );
     }
@@ -866,21 +1042,24 @@ async function handleUpdate(update) {
   // ---- "quiz me" / "quiz me on chapter 2" / "quiz me on section 2.3" ----
   if (quizGenerator.isQuizRequest(question)) {
     return quizGenerator
-      .startQuiz(quizBot, chatId, question, askWhichChapter)
+      .startQuiz(quizBot, chatId, question, askWhichChapter, lang)
       .catch((e) => console.error("quizGenerator.startQuiz crashed:", e.message));
   }
 
   await tg("sendChatAction", { chat_id: chatId, action: "typing" }).catch(() => {});
 
   try {
-    const reply = await askClaude(chatId, question);
+    const videoHints = VIDEO_DB ? VIDEO_DB.findRelevantSegments(question) : [];
+    const reply = await askClaude(chatId, question, videoHints);
     remember(chatId, "user", question);
     remember(chatId, "assistant", reply);
     await sendMessage(chatId, reply, message.message_id);
   } catch (e) {
     await sendMessage(
       chatId,
-      "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
+      lang === "fi"
+        ? "Pahoittelut, en juuri nyt saanut yhteyttä aivoihini. Yritä hetken kuluttua uudelleen."
+        : "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
       message.message_id
     );
   }
@@ -888,7 +1067,7 @@ async function handleUpdate(update) {
 
 // callback_query updates: answer-option taps ("quiz:...") from
 // quizGenerator's inline keyboards, and chapter-picker taps
-// ("quizchapter:N") from askWhichChapter() above.
+// ("quizchapter:N:lang") from askWhichChapter() above.
 async function handleCallbackQuery(cq) {
   const data = cq.data || "";
 
@@ -899,12 +1078,14 @@ async function handleCallbackQuery(cq) {
   }
 
   if (data.startsWith("quizchapter:")) {
-    const chapter = data.split(":")[1];
+    const [, chapterStr, langStr] = data.split(":");
+    const chapter = chapterStr;
+    const lang = langStr === "fi" ? "fi" : "en";
     const chatId = cq.message?.chat?.id;
     await quizBot.answerCallbackQuery(cq.id);
     if (!chatId) return;
     return quizGenerator
-      .startQuiz(quizBot, chatId, `quiz me on chapter ${chapter}`, askWhichChapter)
+      .startQuiz(quizBot, chatId, `quiz me on chapter ${chapter}`, askWhichChapter, lang)
       .catch((e) => console.error("quizGenerator.startQuiz (chapter pick) crashed:", e.message));
   }
 
@@ -919,9 +1100,10 @@ if (!ANTHROPIC_API_KEY) console.error("WARNING: ANTHROPIC_API_KEY is not set");
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
+  const latexStatus = LATEX_ENABLED ? "ENABLED ✓" : "disabled";
   const videoStatus = VIDEO_DB && VIDEO_DB.all().length > 0 ? "✓" : "⚠";
   console.log(
     `FYS.240 Optics bot listening on port ${PORT} | model=${MODEL} | cache=${CACHE_TTL} | ` +
-    `Math=Unicode | Videos=${videoStatus}`
+    `LaTeX=${latexStatus} | Videos=${videoStatus}`
   );
 });

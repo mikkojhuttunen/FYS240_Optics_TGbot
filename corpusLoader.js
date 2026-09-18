@@ -1,51 +1,34 @@
 /**
- * corpusLoader.js — FYS.240 Optics
- * ---------------------------------
+ * corpusLoader.js
+ * -----------------
  * Chapter- and section-tagged access into course_corpus.txt.
  *
- * REWRITTEN for the FYS.240 corpus built by build_corpus.js directly from
- * the .tex lecture-slide sources (see that file). This replaces the
- * earlier version of corpusLoader.js, which indexed the FYS.501 Laser
- * Physics corpus (chapters 1-4, built from a mix of PDF-extracted textbook
- * chapters and lecture slides in two different heading-numbering
- * conventions). None of that applies here:
+ * The corpus is a single flat text file (built by build_corpus.js) that
+ * concatenates the lecture slides and the four textbook chapters, wrapped in
+ * `===== BEGIN ... =====` / `===== END ... =====` markers. Section headings
+ * inside it appear in TWO different numbering conventions, because the two
+ * source documents disagree with each other:
  *
- *   - FYS.240 covers chapters 2-10, sections 2.1 through 10.13 (61 sections
- *     total), not chapters 1-4.
- *   - The corpus is built straight from .tex sources, not PDF text
- *     extraction, so headings are always plain ASCII digits — there's no
- *     Unicode math-digit fallback to handle (contrast the old file's
- *     MATH_DIGIT/digitClass/normalizeHeadingNumber machinery, all removed).
- *   - There's no separate "textbook chapter" vs "lecture slides" split.
- *     Each section is ONE unified block, e.g.:
- *       ### 2.1 Electromagnetic waves (EN) ###
- *       ...content...
- *       ### 2.1 Sähkömagneettiset Aallot (FI) ###
- *       ...content...
- *     so there's also no getTextbookChapterBlock()/getSlidesBlock() split
- *     to maintain — one flat heading index covers everything.
- *   - The course (and its students) are bilingual, so getCorpusSection()
- *     takes an opts.lang ('en' | 'fi' | 'both', default 'en') that the old
- *     file had no equivalent for.
+ *   - Textbook chapters use plain ASCII digits, e.g. "3.4 Eigenmodes of an
+ *     Optical Resonator".
+ *   - Lecture slides use Unicode "Mathematical Sans-Serif/Double-Struck"
+ *     digit glyphs produced by the PDF text extraction, e.g. "𝟛.𝟜 Stability
+ *     Condition".
  *
- * SECTION_INDEX below is the canonical chapter/section list, generated
- * from the booklet's table of contents (English titles) and the Finnish
- * lecture-slide deck's mini-TOCs (Finnish titles) — see titles_en.json /
- * titles_fi.json alongside build_corpus.js. Section 7.4/7.5 is a known
- * quirk: the English lecture slides split "Superposition of several
- * frequencies and coherence" into two files (7.4, 7.5); the Finnish slides
- * (and the textbook) never split it. SECTION_INDEX lists 7.5 as its own
- * English section ("Coherence") with a Finnish title borrowed from 7.4,
- * matching how build_corpus.js and build_terminology.js already handle it
- * (see course_corpus.txt's own note on this at 7.5 (FI)).
+ * Rather than re-tagging the corpus at build time (option A in the setup
+ * guide), this loader takes the "fallback" approach: it recognises headings
+ * in *either* numbering convention directly via regex character classes, and
+ * exposes a `getCorpusSection(chapter, section)` that works against the
+ * existing course_corpus.txt unmodified. If build_corpus.js is ever updated
+ * to emit explicit `### 2.3 ... ###` delimiters, this loader can be
+ * simplified, but nothing else needs to change (same exported function
+ * signatures).
  *
- * The public API (getCorpusSection, listChapters, listSections,
- * getChapterTitle, getSectionTitle, isValidSection, corpusLooksHealthy,
- * glossaryLooksHealthy, findGlossaryTerms) is unchanged from the FYS.501
- * version, so existing call sites (quizGenerator.js, bot.js-style /define
- * and quiz-picker code) work as-is if ported over to bot_fys240.js. New,
- * additive-only exports: getChapterTitleFi, getSectionTitleFi, and the
- * opts.lang option on getCorpusSection.
+ * SECTION_INDEX below is the canonical list of chapters/sections used
+ * throughout the quiz feature (quizBank.json, buildQuizBank.js). It resolves
+ * the slide-vs-textbook numbering disagreement in section 3.4/3.5 by
+ * following the textbook's own internal order (3.4 Eigenmodes, 3.5
+ * Stability), since that's what quizBank.json was already built against.
  */
 
 const fs = require('fs');
@@ -53,217 +36,97 @@ const path = require('path');
 
 const CORPUS_PATH = path.join(__dirname, 'course_corpus.txt');
 
-// terminology.json is built offline by build_terminology.js (harvested from
-// the \CDAlert/\Alert/\CUAlert/\UAlert-marked English .tex sources) and
-// committed alongside the corpus. It backs the /define command in the bot.
+// terminology.json is built offline by terminology.js (harvested from the
+// \CDAlert/\Alert-marked lecture .tex sources) and committed alongside the
+// corpus. It backs the /define command in bot.js.
 const TERMINOLOGY_PATH = path.join(__dirname, 'terminology.json');
 
 // Default cap on how much text getCorpusSection() returns, to keep LLM
-// prompts (and eyeballing during quiz-bank-build runs) reasonably sized.
-// Bumped up from the FYS.501 defaults (9000 / 14000): FYS.240 chapters run
-// up to 13 sections each (vs. at most 6 for the laser course), so the old
-// per-chapter cap would truncate each section down to almost nothing.
+// prompts (and eyeballing during buildQuizBank.js runs) reasonably sized.
 const DEFAULT_MAX_CHARS = 9000;
-const DEFAULT_MAX_CHARS_CHAPTER = 22000;
+const DEFAULT_MAX_CHARS_CHAPTER = 14000; // when no section is given
 
 // ---------- canonical chapter/section index ----------
 
 const SECTION_INDEX = {
-  2: {
-    title: 'Descriptions of light',
-    titleFi: 'Valon Matemaattinen kuvaaminen',
+  1: {
+    title: 'Introductory Concepts',
     sections: {
-      '2.1': 'Electromagnetic waves',
-      '2.2': 'Rays',
-      '2.3': 'Particles',
+      '1.1': 'Spontaneous and Stimulated Emission, Absorption',
+      '1.2': 'The Laser Idea',
+      '1.3': 'Pumping Schemes',
+      '1.4': 'Properties of Laser Beams',
     },
-    sectionsFi: {
-      '2.1': 'Sähkömagneettiset Aallot',
-      '2.2': 'Säteet',
-      '2.3': 'Hiukkaset',
+  },
+  2: {
+    title: 'Semiclassical Theory of Light-Matter Interaction',
+    sections: {
+      '2.1': 'Time-dependent Perturbation Theory',
+      '2.2': 'The Einstein A and B Coefficients',
+      '2.3': "Fermi's Golden Rule",
+      '2.4': 'Cross-Section and Line Broadening',
+      '2.5': 'Line-broadening Mechanisms',
+      '2.6': 'Saturation and Gain',
     },
   },
   3: {
-    title: 'Wave motion',
-    titleFi: 'Aaltoliike',
+    title: 'Passive Optical Resonators',
     sections: {
-      '3.1': 'Moving perturbation',
-      '3.2': 'Wave equation',
-      '3.3': 'Harmonic waves',
-      '3.4': 'Phase and phase velocity',
-      '3.5': 'Superposition principle',
-      '3.6': 'Complex representation of waves',
-      '3.7': 'Plane waves',
-      '3.8': 'Wave equation in three dimensions',
-      '3.9': 'Spherical and cylindrical waves',
-      '3.10': 'Vector waves and Polarization of Light',
-      '3.11': 'Tutorial on vector calculus',
-      '3.12': 'Electrostatic approximation',
-    },
-    sectionsFi: {
-      '3.1': 'Liikkuva Häiriö',
-      '3.2': 'Aaltoyhtälö',
-      '3.3': 'Harmoniset Aallot',
-      '3.4': 'Vaihe ja Vaihenopeus',
-      '3.5': 'Superpositioperiaate',
-      '3.6': 'Aaltojen Kompleksinen Esitys',
-      '3.7': 'Tasoaallot',
-      '3.8': 'Aaltoyhtälö Kolmessa Ulottuvuudessa',
-      '3.9': 'Pallo- ja Sylinteriaallot',
-      '3.10': 'Vektorikentät',
-      '3.11': 'Vektorianalyysin Perusteet',
-      '3.12': 'Sähköstatiikka ja Sähköstaattiset Potentiaalit',
+      '3.1': 'Matrix Formulation of Paraxial Optics',
+      '3.2': 'Fabry-Perot Interferometer',
+      '3.3': 'Optical Resonators',
+      '3.4': 'Eigenmodes of an Optical Resonator',
+      '3.5': 'Stability Condition',
+      '3.6': 'Photon Lifetime and Cavity Q-factor',
     },
   },
   4: {
-    title: 'Electromagnetic waves',
-    titleFi: 'Sähkömagneettiset Aallot',
+    title: 'Continuous Wave (CW) Behaviour of a Laser',
     sections: {
-      '4.1': 'Microscopic Maxwell’s equations',
-      '4.2': 'Transverse waves and charge conservation',
-      '4.3': 'Energy of electromagnetic field',
-      '4.4': 'Radiation pressure and momentum',
-      '4.5': 'Dipole radiation',
-      '4.6': 'Light in matter (macroscopic Maxwell’s equations)',
-    },
-    sectionsFi: {
-      '4.1': 'Mikroskooppiset Maxwellin Yhtälöt',
-      '4.2': 'Poikittainen Aaltoliike ja Varauksen Säilyminen',
-      '4.3': 'Sähkömagneettisen Kentän Energia',
-      '4.4': 'Säteilypaine ja Liikemäärä',
-      '4.5': 'Dipolikenttä',
-      '4.6': 'Maxwellin Yhtälöt Väliaineessa',
-    },
-  },
-  5: {
-    title: 'Light–matter interaction',
-    titleFi: 'Valon ja Aineen Vuorovaikutus',
-    sections: {
-      '5.1': 'Radiation from atoms and molecules',
-      '5.2': 'Basic light–matter interactions',
-      '5.3': 'Lorentz model of an atom',
-      '5.4': 'Laser principle',
-    },
-    sectionsFi: {
-      '5.1': 'Atomien ja Molekyylien Säteily',
-      '5.2': 'Valon ja Aineen Vuorovaikutus',
-      '5.3': 'Lorentzin Atomimalli',
-      '5.4': 'Laserin Toimintaperiaate',
-    },
-  },
-  6: {
-    title: 'Propagation',
-    titleFi: 'Valon eteneminen',
-    sections: {
-      '6.1': 'Wave fronts and rays',
-      '6.2': 'Phenomenology of transmission and reflection',
-      '6.3': 'Electromagnetic theory of reflection and refraction',
-      '6.4': 'Fresnel coefficients',
-      '6.5': 'Reflectivity and transmissivity',
-      '6.6': 'Total internal reflection',
-    },
-    sectionsFi: {
-      '6.1': 'Aaltorintamat ja säteet',
-      '6.2': 'Läpäisy ja heijastus ilmiöinä',
-      '6.3': 'Läpäisyn ja heijastuksen SMG-teoria',
-      '6.4': 'Fresnelin kertoimet',
-      '6.5': 'Heijastavuus ja läpäisevyys',
-      '6.6': 'Kokonaisheijastus',
-    },
-  },
-  7: {
-    title: 'Superposition',
-    titleFi: 'Superpositio',
-    sections: {
-      '7.1': 'Superposition principle',
-      '7.2': 'Harmonic waves',
-      '7.3': 'Standing waves',
-      '7.4': 'Superposition of several frequencies and coherence',
-      '7.5': 'Coherence',
-    },
-    sectionsFi: {
-      '7.1': 'Superpositioperiaate',
-      '7.2': 'Harmoniset aallot',
-      '7.3': 'Seisovat aallot',
-      '7.4': 'Usean aallon superpositio ja koherenssi',
-      '7.5': 'Usean aallon superpositio ja koherenssi',
-    },
-  },
-  8: {
-    title: 'Interference',
-    titleFi: 'Interferenssi',
-    sections: {
-      '8.1': 'Conditions for interference',
-      '8.2': 'Wavefront splitting interferometers',
-      '8.3': 'Amplitude-splitting interferometers',
-      '8.4': 'Michelson interferometer',
-      '8.5': 'Multiple-beam interference',
-      '8.6': 'Fabry–Pérot instruments',
-      '8.7': 'Fabry–Pérot spectroscopy',
-    },
-    sectionsFi: {
-      '8.1': 'Vaatimukset interferenssille',
-      '8.2': 'Aaltorintaman jakavat interferometrit',
-      '8.3': 'Amplitudin jakavat interferometrit',
-      '8.4': 'Michelsonin interferometri',
-      '8.5': 'Usean säteen interferenssi',
-      '8.6': 'Fabryn-Perot’n instrumentit',
-      '8.7': 'Fabryn-Perot’n spektroskopia',
-    },
-  },
-  9: {
-    title: 'Diffraction',
-    titleFi: 'Diffraktio',
-    sections: {
-      '9.1': 'Basic theory',
-      '9.2': 'Fraunhofer diffraction',
-      '9.3': 'Diffraction from basic aperture shapes',
-      '9.4': 'Diffraction from multiple slits',
-      '9.5': 'Diffraction gratings',
-    },
-    sectionsFi: {
-      '9.1': 'Diffraktio-ilmiön matemaattinen malli',
-      '9.2': 'Fraunhoferin diffraktio',
-      '9.3': 'Yksinkertaisten aukkojen aiheuttama diffraktio',
-      '9.4': 'Usean aukon aiheuttama diffraktio',
-      '9.5': 'Diffraktiohilat',
-    },
-  },
-  10: {
-    title: 'Geometrical optics',
-    titleFi: 'Geometrinen optiikka',
-    sections: {
-      '10.1': 'Basic definitions',
-      '10.2': 'Refraction at a spherical surface',
-      '10.3': 'Thin lenses',
-      '10.4': 'Image formation',
-      '10.5': 'Combinations of lenses',
-      '10.6': 'Apertures and stops',
-      '10.7': 'Mirrors',
-      '10.8': 'Prisms',
-      '10.9': 'The human eye',
-      '10.10': 'Magnifying glass',
-      '10.11': 'Eyepiece (ocular)',
-      '10.12': 'Microscope',
-      '10.13': 'Telescope',
-    },
-    sectionsFi: {
-      '10.1': 'Perusmääritelmät',
-      '10.2': 'Taittuminen pallopinnalla',
-      '10.3': 'Ohut linssi',
-      '10.4': 'Kuvanmuodostus',
-      '10.5': 'Linssisysteemit',
-      '10.6': 'Aukot ja rajoittimet',
-      '10.7': 'Peili',
-      '10.8': 'Prisma',
-      '10.9': 'Ihmissilmä',
-      '10.10': 'Suurennuslasi',
-      '10.11': 'Okulaari',
-      '10.12': 'Mikroskooppi',
-      '10.13': 'Kaukoputki',
+      '4.1': 'Rate Equations Model and Laser Parameters',
+      '4.2': 'CW Behaviour',
+      '4.3': 'Reasons for Multimode Oscillation',
+      '4.4': 'Single-Mode Selection',
     },
   },
 };
+
+// ---------- digit-class helpers (ASCII <-> Unicode math digit) ----------
+
+const MATH_DIGIT = { 0: '𝟘', 1: '𝟙', 2: '𝟚', 3: '𝟛', 4: '𝟜', 5: '𝟝', 6: '𝟞', 7: '𝟟', 8: '𝟠', 9: '𝟡' };
+const MATH_DIGIT_TO_ASCII = Object.fromEntries(Object.entries(MATH_DIGIT).map(([a, b]) => [b, a]));
+
+// Regex character class matching either the ASCII digit `d` or its Unicode
+// math-digit twin, e.g. digitClass(3) -> "[3𝟛]"
+function digitClass(d) {
+  return `[${d}${MATH_DIGIT[d]}]`;
+}
+
+// Matches one or more digits in either convention, e.g. "34" or "𝟛𝟜" or "3𝟜"
+const ANY_DIGITS = '[0-9𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡]+';
+
+// Converts a heading's captured number (possibly mixed/Unicode) to a plain
+// ASCII "3.4" / "1.4.2" style string for comparison.
+//
+// NOTE: uses [...raw] (code-point iteration), not raw.split(''), because
+// the Unicode math digits are astral characters (surrogate pairs) and
+// split('') would break each one into two meaningless UTF-16 halves.
+function normalizeHeadingNumber(raw) {
+  return [...raw]
+    .map((ch) => MATH_DIGIT_TO_ASCII[ch] || ch)
+    .join('');
+}
+
+// Any heading line, in either numbering convention: "3.4 Eigenmodes ..." or
+// "𝟛.𝟜 Stability Condition" or a deeper "1.4.2.1 Spatial Coherence".
+//
+// NOTE: the `u` flag is required here. The Unicode math-digit glyphs (e.g.
+// 𝟛) live outside the Basic Multilingual Plane and are represented in JS
+// strings as surrogate pairs. Without `u`, a character class like [3𝟛]
+// matches raw UTF-16 code units (splitting the surrogate pair into two
+// unrelated, useless entries) instead of the intended code point. With `u`,
+// character classes correctly treat each astral glyph as a single unit.
+const HEADING_RE = new RegExp(`(?:^|\\n)(${ANY_DIGITS}(?:\\.${ANY_DIGITS})+)[ \\t]+([^\\n]+)`, 'gu');
 
 // ---------- corpus loading (cached) ----------
 
@@ -282,7 +145,6 @@ function loadCorpus({ forceReload = false } = {}) {
     _corpusMtimeMs = null;
     throw new Error(`corpusLoader: could not read ${CORPUS_PATH}: ${e.message}`);
   }
-  _headingIndexCache = null; // invalidate on (re)load
   return _corpusText;
 }
 
@@ -295,79 +157,75 @@ function corpusLooksHealthy() {
   }
 }
 
-// ---------- heading index ----------
-//
-// Every section in course_corpus.txt is introduced by a heading line of the
-// exact form build_corpus.js emits:
-//   ### 2.1 Electromagnetic waves (EN) ###
-//   ### 2.1 Sähkömagneettiset Aallot (FI) ###
-// on its own line. This scans the WHOLE corpus once and builds a flat list
-// of { chapter, section, lang, title, contentStart, contentEnd }, replacing
-// the old file's separate textbook-block/slides-block/HEADING_RE machinery
-// — there's only one kind of block now, so one index covers it.
-const HEADING_RE = /^### (\d+)\.(\d+) (.+?) \((EN|FI)\) ###$/gm;
+// ---------- block extraction ----------
 
-let _headingIndexCache = null;
+function chapterBlockMarkers(chapter) {
+  // e.g. chapter=3 -> BEGIN TEXTBOOK CHAPTER 3 ... END TEXTBOOK CHAPTER 3
+  const cd = digitClass(chapter);
+  return new RegExp(
+    `===== BEGIN TEXTBOOK CHAPTER ${cd}[^\\n]*=====\\n([\\s\\S]*?)===== END TEXTBOOK CHAPTER ${cd}[^\\n]*=====`,
+    'mu'
+  );
+}
 
-function buildHeadingIndex(corpusText) {
-  const matches = [...corpusText.matchAll(HEADING_RE)];
-  const headings = matches.map((m) => ({
-    chapter: Number(m[1]),
-    section: `${m[1]}.${m[2]}`,
-    title: m[3],
-    lang: m[4].toLowerCase(),
+function getTextbookChapterBlock(chapter, corpusText) {
+  const m = corpusText.match(chapterBlockMarkers(chapter));
+  return m ? m[1] : '';
+}
+
+let _slidesBlockCache = null;
+
+function getSlidesBlock(corpusText) {
+  if (_slidesBlockCache !== null) return _slidesBlockCache;
+  const m = corpusText.match(
+    /===== BEGIN LECTURE SLIDES[^\n]*=====\n([\s\S]*?)===== END LECTURE SLIDES[^\n]*=====/mu
+  );
+  _slidesBlockCache = m ? m[1] : '';
+  return _slidesBlockCache;
+}
+
+// NOTE: we deliberately do NOT try to bound a chapter's slide content by
+// searching for its bare top-level heading (e.g. "𝟚. Semiclassical Theory
+// ..."). The slide deck repeats a mini table-of-contents (all 4 chapter
+// titles, one per line) at the start of the deck and again at the start of
+// each chapter, so the very first occurrence of a chapter's bare heading is
+// immediately followed by the *next* chapter's bare heading on the next
+// line, producing an empty/near-empty slice. Instead, for slides we always
+// go straight to section-level headings ("2.3 Fermi's Golden Rule" /
+// "𝟚.𝟛 Fermi's Golden Rule"), which are unambiguous (a "2.3" heading can only
+// belong to chapter 2). Whole-chapter slide excerpts are built by
+// concatenating each of the chapter's known sections (see
+// getChapterCombinedBlock below).
+
+// ---------- section-level slicing within a chapter's combined text ----------
+
+function extractSection(scopeText, chapter, section) {
+  const wanted = `${chapter}.${section.split('.')[1]}`; // normalize to "3.4" form
+  const headings = [...scopeText.matchAll(HEADING_RE)].map((m) => ({
     index: m.index,
+    lineStart: m.index + m[0].indexOf(m[1]),
+    number: normalizeHeadingNumber(m[1]),
     contentStart: m.index + m[0].length,
   }));
+
+  if (!headings.length) return null;
+
+  const matchesWanted = (num) => num === wanted || num.startsWith(`${wanted}.`);
+
+  const chunks = [];
   for (let i = 0; i < headings.length; i++) {
-    headings[i].contentEnd = i + 1 < headings.length ? headings[i + 1].index : corpusText.length;
+    if (!matchesWanted(headings[i].number)) continue;
+    const start = headings[i].contentStart;
+    const end = i + 1 < headings.length ? headings[i + 1].index : scopeText.length;
+    const chunk = scopeText.slice(start, end).trim();
+    if (chunk) chunks.push(chunk);
   }
-  return headings;
-}
 
-function getHeadingIndex() {
-  if (_headingIndexCache) return _headingIndexCache;
-  const corpusText = loadCorpus();
-  _headingIndexCache = buildHeadingIndex(corpusText);
-  return _headingIndexCache;
-}
+  if (!chunks.length) return null;
 
-// Strips the outer "===== BEGIN/END CHAPTER ... =====" markers that can
-// otherwise get swept into a section's content — they sit between one
-// section's heading and the next, so whichever section happens to be last
-// in its chapter (or, like 7.5 FI, has no real content of its own) would
-// otherwise have the chapter boundary marker text appended to its excerpt.
-function stripChapterMarkers(text) {
-  return text.replace(/^===== (BEGIN|END) CHAPTER.*=====$/gm, '').trim();
-}
-
-// Returns the trimmed content for one (section, lang) heading, or null if
-// no such heading exists (e.g. a typo'd section number).
-function extractSectionLang(corpusText, headings, section, lang) {
-  const h = headings.find((x) => x.section === section && x.lang === lang);
-  if (!h) return null;
-  const chunk = stripChapterMarkers(corpusText.slice(h.contentStart, h.contentEnd));
-  return chunk || null;
-}
-
-function resolveLangs(optLang) {
-  const l = (optLang || 'en').toLowerCase();
-  if (l === 'both') return ['en', 'fi'];
-  if (l === 'fi') return ['fi'];
-  return ['en'];
-}
-
-// Builds the part(s) for one section across the requested language(s). For
-// 'both', each language's content is labelled so a multi-language excerpt
-// doesn't read as one undifferentiated blob.
-function sectionParts(corpusText, headings, section, langs) {
-  const parts = [];
-  for (const lang of langs) {
-    const text = extractSectionLang(corpusText, headings, section, lang);
-    if (!text) continue;
-    parts.push(langs.length > 1 ? `[${lang.toUpperCase()}]\n${text}` : text);
-  }
-  return parts;
+  // De-duplicate identical consecutive chunks (running-header artifacts).
+  const deduped = chunks.filter((c, i) => c !== chunks[i - 1]);
+  return deduped.join('\n\n');
 }
 
 // ---------- balanced multi-part truncation ----------
@@ -470,74 +328,76 @@ function findGlossaryTerms(query, limit = 3) {
 // ---------- public API ----------
 
 /**
- * Returns a text excerpt for a chapter (optionally narrowed to one
- * section), in the requested language(s). Throws only if the corpus file
- * itself can't be read or the chapter/section number is invalid — a
- * missing heading for an otherwise-valid section (e.g. 7.5 in Finnish,
- * which has no standalone recording — see the module doc comment) falls
- * back gracefully rather than throwing.
+ * Returns a text excerpt for a chapter (optionally narrowed to one section),
+ * combining the textbook chapter prose and the matching lecture-slide
+ * bullets. Throws only if the corpus file itself can't be read or the
+ * chapter number is invalid — a missing/unmatched section falls back
+ * gracefully to the whole chapter excerpt (with a console warning) rather
+ * than throwing, since the two source documents don't always number
+ * sub-sections identically.
  *
- * When the excerpt would exceed the char cap, parts are truncated via a
- * balanced budget split (truncateBalanced) rather than concatenating first
- * and slicing from the front — otherwise one long section/language could
- * consume the entire cap before the rest is ever appended.
+ * When the combined excerpt exceeds the char cap, each source (textbook /
+ * slides) is truncated independently via a balanced budget split
+ * (truncateBalanced) rather than concatenating first and slicing from the
+ * front — otherwise a long textbook section could consume the entire cap
+ * before the lecture-slide portion is ever appended.
  *
- * @param {number|string} chapter - 2-10
- * @param {string} [section] - e.g. "10.3"; omit for the whole chapter
+ * @param {number|string} chapter - 1-4
+ * @param {string} [section] - e.g. "2.3"; omit for the whole chapter
  * @param {object} [opts]
  * @param {number} [opts.maxChars] - truncate the returned excerpt
- * @param {'en'|'fi'|'both'} [opts.lang] - which language(s) to return; default 'en'
  * @returns {string}
  */
 function getCorpusSection(chapter, section, opts = {}) {
   const chapterNum = parseInt(chapter, 10);
   if (!SECTION_INDEX[chapterNum]) {
-    throw new Error(`corpusLoader: unknown chapter "${chapter}" (expected 2-10)`);
+    throw new Error(`corpusLoader: unknown chapter "${chapter}" (expected 1-4)`);
   }
   if (section && !SECTION_INDEX[chapterNum].sections[section]) {
     throw new Error(`corpusLoader: unknown section "${section}" for chapter ${chapterNum}`);
   }
 
   const corpusText = loadCorpus(); // throws if unreadable
-  const headings = getHeadingIndex();
-  const langs = resolveLangs(opts.lang);
 
-  if (!headings.length) {
+  const textbookBlock = getTextbookChapterBlock(chapterNum, corpusText);
+  const slidesFull = getSlidesBlock(corpusText);
+
+  if (!textbookBlock && !slidesFull) {
     throw new Error(
-      `corpusLoader: no section headings found in course_corpus.txt ` +
+      `corpusLoader: could not locate chapter ${chapterNum} content in course_corpus.txt ` +
       `(corpus may be stale or malformed — try re-running build_corpus.js)`
     );
   }
 
   if (!section) {
-    // Whole chapter: every known section's content, in section order, for
-    // each requested language. Each part gets a fair share of the char
-    // budget (truncateBalanced) rather than the first section eating the
-    // whole cap.
+    // Whole chapter: textbook prose (bounded by BEGIN/END markers) plus every
+    // known section's slide content, concatenated in section order. Each
+    // source gets a fair share of the char budget (see truncateBalanced)
+    // rather than the textbook block silently eating the whole cap.
+    const slideParts = listSections(chapterNum)
+      .map((sec) => extractSection(slidesFull, chapterNum, sec))
+      .filter(Boolean);
     const maxChars = opts.maxChars || DEFAULT_MAX_CHARS_CHAPTER;
-    const parts = listSections(chapterNum).flatMap((sec) => sectionParts(corpusText, headings, sec, langs));
-    if (!parts.length) {
-      throw new Error(
-        `corpusLoader: could not locate any content for chapter ${chapterNum} in course_corpus.txt ` +
-        `(corpus may be stale or malformed — try re-running build_corpus.js)`
-      );
-    }
-    return truncateBalanced(parts, maxChars);
+    return truncateBalanced([textbookBlock, ...slideParts], maxChars);
   }
 
+  const fromTextbook = textbookBlock ? extractSection(textbookBlock, chapterNum, section) : null;
+  const fromSlides = slidesFull ? extractSection(slidesFull, chapterNum, section) : null;
+  const parts = [fromTextbook, fromSlides].filter(Boolean);
   const maxChars = opts.maxChars || DEFAULT_MAX_CHARS;
-  const parts = sectionParts(corpusText, headings, section, langs);
 
   if (parts.length) {
     return truncateBalanced(parts, maxChars);
   }
 
   console.warn(
-    `corpusLoader: no heading match for section ${section} (lang: ${langs.join(',')}) ` +
+    `corpusLoader: no heading match for section ${chapterNum}.${section.split('.')[1]} ` +
     `— falling back to the whole chapter ${chapterNum} excerpt`
   );
-  const chapterParts = listSections(chapterNum).flatMap((sec) => sectionParts(corpusText, headings, sec, langs));
-  return truncateBalanced(chapterParts, maxChars);
+  const slideParts = listSections(chapterNum)
+    .map((sec) => extractSection(slidesFull, chapterNum, sec))
+    .filter(Boolean);
+  return truncateBalanced([textbookBlock, ...slideParts], maxChars);
 }
 
 function listChapters() {
@@ -547,27 +407,15 @@ function listChapters() {
 function listSections(chapter) {
   const entry = SECTION_INDEX[parseInt(chapter, 10)];
   if (!entry) return [];
-  return Object.keys(entry.sections).sort((a, b) => {
-    const [as] = a.split('.').slice(1).map(Number);
-    const [bs] = b.split('.').slice(1).map(Number);
-    return as - bs;
-  });
+  return Object.keys(entry.sections);
 }
 
 function getChapterTitle(chapter) {
   return SECTION_INDEX[parseInt(chapter, 10)]?.title || null;
 }
 
-function getChapterTitleFi(chapter) {
-  return SECTION_INDEX[parseInt(chapter, 10)]?.titleFi || null;
-}
-
 function getSectionTitle(chapter, section) {
   return SECTION_INDEX[parseInt(chapter, 10)]?.sections?.[section] || null;
-}
-
-function getSectionTitleFi(chapter, section) {
-  return SECTION_INDEX[parseInt(chapter, 10)]?.sectionsFi?.[section] || null;
 }
 
 function isValidSection(chapter, section) {
@@ -583,14 +431,10 @@ module.exports = {
   isValidSection,
   corpusLooksHealthy,
   SECTION_INDEX,
-  // additive vs. the FYS.501 version — Finnish titles + language selection
-  getChapterTitleFi,
-  getSectionTitleFi,
   // glossary / /define command
   glossaryLooksHealthy,
   findGlossaryTerms,
-  // exposed mainly for tests / quiz-bank-build diagnostics
+  // exposed mainly for tests / buildQuizBank.js diagnostics
   _loadCorpus: loadCorpus,
   _loadGlossary: loadGlossary,
-  _getHeadingIndex: getHeadingIndex,
 };
