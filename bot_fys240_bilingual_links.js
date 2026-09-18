@@ -505,6 +505,44 @@ async function sendPlainChunks(chatId, text, replyTo, parseMode) {
   }
 }
 
+// Heuristic Finnish/English detector for the ASSISTANT'S OWN reply text
+// (not the student's question). Finnish prose is dense with ä/ö; English
+// essentially never uses them, so a density threshold is a cheap, reliable
+// signal — far more reliable than asking the model to remember which
+// language it's replying in by the time it picks a video link.
+function isFinnishText(text) {
+  const letters = text.match(/[a-zA-ZäöÄÖ]/g) || [];
+  if (letters.length < 20) return false; // too short to judge
+  const finnishMarkers = (text.match(/[äöÄÖ]/g) || []).length;
+  return finnishMarkers / letters.length > 0.02;
+}
+
+// Deterministic guard against wrong-language video links. TA_INSTRUCTIONS
+// tells Claude to pick the FI or EN (topic, url) pair depending on which
+// language it's answering in — but that's a soft instruction and Claude
+// sometimes answers in Finnish while still using the EN pair (the bug this
+// fixes). Rather than keep tuning the prompt, this rewrites every
+// "[Video X.Y (Topic)](url)" link AFTER generation to match the language
+// the reply is actually written in, using VIDEO_DB as the source of truth.
+// A chapter with no FI recording still falls back to the EN pair, same as
+// TA_INSTRUCTIONS says.
+function fixVideoLinkLanguage(text) {
+  if (!VIDEO_DB) return text;
+  const targetLang = isFinnishText(text) ? "fi" : "en";
+  return text.replace(
+    /\[Video (\d+\.\d+) \(([^)]+)\)\]\((https?:\/\/[^\s)]+)\)/g,
+    (full, chapter, _label, _url) => {
+      const video = (VIDEO_DB.getChapter(chapter) || [])[0];
+      if (!video) return full; // unknown chapter — leave untouched
+
+      if (targetLang === "fi" && video.topic_fi && video.id_fi) {
+        return `[Video ${chapter} (${video.topic_fi})](https://youtube.com/watch?v=${video.id_fi})`;
+      }
+      return `[Video ${chapter} (${video.topic})](https://youtube.com/watch?v=${video.id})`;
+    }
+  );
+}
+
 // Sends Claude's reply to Telegram. Video links come back from Claude as
 // Markdown "[label](url)" (per TA_INSTRUCTIONS) and are converted to real
 // <a> tags via convertLinksAndEscape() + parse_mode "HTML", so students see
@@ -512,6 +550,7 @@ async function sendPlainChunks(chatId, text, replyTo, parseMode) {
 // Math is sent as plain Unicode text — no image rendering: latexToUnicode()
 // converts any stray LaTeX Claude still emits, and strips $ / $$ delimiters.
 async function sendMessage(chatId, text, replyTo) {
+  text = fixVideoLinkLanguage(text);
   text = markdownEmphasisToUnicode(text);
   text = latexToUnicode(text);
   await sendPlainChunks(chatId, convertLinksAndEscape(text), replyTo, "HTML");
