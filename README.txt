@@ -53,3 +53,34 @@ in the source doc, which the old line-by-line parser mistook for one giant entry
 chapter 4.2 went from 1 'segment' to the correct 18). import_docx_segments.js now splits
 on timestamp tokens found anywhere in the text rather than assuming one per line, so it
 handles both formats. Chapter 9.4 has no timestamps at all in the source and is skipped.
+
+UPDATE: found and fixed a real bug I introduced last time — the previous glued-
+timestamp fix wasn't precise enough and was silently corrupting ~300 legitimate
+timestamps (e.g. "16:31" became "1 6:31", losing the real 16:31 entry and creating a
+bogus 6:31 one). Replaced it with a narrower rule that only fires when a LETTER or ")"
+sits directly against a timestamp with no space (the one real case in the source:
+"g(x)h(y)3:50") and never when a digit precedes it, which is what caused the corruption.
+
+import_docx_segments.js now also warns (but doesn't guess/auto-fix) whenever a chapter's
+timestamps aren't in increasing order — that almost always means a typo in the SOURCE
+document, not a parsing issue. Two remain, both look like real typos worth checking
+against the actual videos:
+  - Chapter 3.12: "17:00 Gaussin laki potentiaalimuodossa" appears twice (the second,
+    labeled "osa 2", is also stamped 17:00 - almost certainly meant to be a later time).
+  - Chapter 6.5: entries run 0:00, 0:26, then jump to 10:05 ("Tarkastelun siirto
+    kentista irradiansseihin"), then back down to 3:16 - the 10:05 is likely a typo
+    (perhaps meant to be ~1:05) for where that entry belongs chronologically.
+Both are stored as-is (with segments still sorted by their stated time), so the bot will
+link to whatever time the source doc says until you correct it by hand.
+
+UPDATE: refreshed video_segments.json from your corrected source doc. Both
+previously-flagged typos are now fixed (chapter 3.12's duplicate 17:00 entry is
+gone; chapter 6.5's timestamps are now in correct chronological order), and the
+duplicate 3.5 block is also gone. 628 timestamps across 59 videos, all clean —
+the importer's out-of-order check now reports zero warnings.
+
+Minor, not flagged as an error since it's not a duplicate/ordering issue: chapter
+3.12's very last entry, "27:50 Sähkömagneetti", still trails off mid-word right
+before the next chapter header. Timestamp itself is fine, just the description text.
+
+Only video_segments.json changed in this update.

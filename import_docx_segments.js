@@ -26,7 +26,7 @@ const SKIP_LINE = /^\\(begin|end)\{itemize\}$|^Description\s*\?$/;
 // string and splitting on every timestamp token found anywhere in it, so
 // "0:00 A 1:08 B 2:26 C" on a single line yields three separate segments
 // just like three separate "M:SS text" lines would.
-function parseSegmentBlock(rawLines) {
+function parseSegmentBlock(rawLines, chapterLabel) {
   const cleaned = rawLines
     .map((l) => l.trim())
     .filter((l) => l && !SKIP_LINE.test(l))
@@ -35,6 +35,7 @@ function parseSegmentBlock(rawLines) {
 
   const matches = [...joined.matchAll(TIMESTAMP_TOKEN)];
   const segments = [];
+  let prevT = -1;
   for (let i = 0; i < matches.length; i++) {
     const m = matches[i];
     const [, hh, mm, ss] = m;
@@ -42,14 +43,36 @@ function parseSegmentBlock(rawLines) {
     const start = m.index + m[0].length;
     const end = i + 1 < matches.length ? matches[i + 1].index : joined.length;
     const label = joined.slice(start, end).trim();
-    if (label) segments.push({ t, label });
+    if (label) {
+      // A timestamp earlier than the one right before it, in document
+      // order, almost always means a typo in the SOURCE doc (not
+      // something this script can safely auto-correct) rather than a
+      // parsing failure — flag it so a human can check the actual video.
+      if (t < prevT) {
+        const mm2 = String(Math.floor(t / 60)).padStart(2, "0"), ss2 = String(t % 60).padStart(2, "0");
+        const pmm = String(Math.floor(prevT / 60)).padStart(2, "0"), pss = String(prevT % 60).padStart(2, "0");
+        console.log(`  ⚠ ${chapterLabel}: "${label.slice(0, 60)}" is timestamped ${mm2}:${ss2}, earlier than the previous entry (${pmm}:${pss}) — likely a typo in the source doc, please verify against the actual video.`);
+      }
+      prevT = t;
+      segments.push({ t, label });
+    }
   }
   segments.sort((a, b) => a.t - b.t);
   return segments;
 }
 
 function main() {
-  const text = fs.readFileSync(SRC, "utf8");
+  // Fix timestamps glued directly onto the preceding word with no space at
+  // all (found one real case: "...g(x)h(y)3:50 y-suunnan..." in ch. 9.3).
+  // Only triggers when a LETTER or ")" sits directly against the timestamp
+  // shape — deliberately NOT when a digit precedes it, since that's
+  // ambiguous with a legitimate 2-digit minute value (e.g. "0 4:06" is a
+  // real, separate timestamp, not something to touch; an earlier version
+  // of this fix didn't exclude digits and corrupted ~300 good timestamps
+  // like "16:31" into "1 6:31" — lookbehind-only insertion (no consumed
+  // characters) plus the digit exclusion avoids that.
+  const rawText = fs.readFileSync(SRC, "utf8");
+  const text = rawText.replace(/(?<=[\p{L})])(?=\d{1,2}:\d{2}(?::\d{2})?\s)/gu, " ");
   const lines = text.split(/\r?\n/);
 
   // Split into per-chapter blocks at each "FYS. 240 Optiikka X.Y title" header.
@@ -110,7 +133,7 @@ function main() {
     }
     const videoId = videos[0].id_fi;
 
-    const segments = parseSegmentBlock(block.lines);
+    const segments = parseSegmentBlock(block.lines, `${block.chapter} (${block.title})`);
     if (segments.length === 0) {
       skippedEmpty++;
       console.log(`⚠ ${block.chapter}: no parseable timestamps, skipped`);

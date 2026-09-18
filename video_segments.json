@@ -626,15 +626,11 @@
     },
     {
       "t": 785,
-      "label": "Helmholtzin hajotelma: $\\mathrm{E}=-\\operatorname{grad}(\\mathrm{phi})+\\operatorname{rot}(\\mathrm{A})$"
+      "label": "Helmholtzin hajotelma: E grad(phi)+\\ rot(A)"
     },
     {
       "t": 1020,
       "label": "Gaussin laki potentiaalimuodossa"
-    },
-    {
-      "t": 1020,
-      "label": "Gaussin laki potentiaalimuodossa, osa 2"
     },
     {
       "t": 1120,
@@ -2130,7 +2126,11 @@
     },
     {
       "t": 131,
-      "label": "Ongelma on separoituva, f(x,y) = g(x)h(y)3:50 y-suunnan diffraktiointegraali"
+      "label": "Ongelma on separoituva, f(x,y) = g(x)h(y)"
+    },
+    {
+      "t": 230,
+      "label": "y-suunnan diffraktiointegraali"
     },
     {
       "t": 507,
