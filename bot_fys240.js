@@ -126,14 +126,14 @@ WHAT YOU KNOW
 WHEN TO SUGGEST VIDEOS
 If a student asks about a topic that's covered in video lectures, suggest the relevant video:
 - Check if the topic matches any video lecture title
-- ALWAYS use this exact [Video X.Y (Topic)](URL) format — never write the raw URL on its own, after a colon, or after a dash
+- ALWAYS use this exact [Video X.Y (Topic)](URL) format for the video link itself — never write the raw URL on its own, after a colon, or after a dash. (When a timestamp is also linked, see IN-VIDEO TIMESTAMPS below — that adds a second, separate link, it doesn't replace this one.)
 - LANGUAGE OF VIDEO LINKS: <video_lectures> below lists each lecture as an EN pair (topic + url) and, where one exists, an FI pair after "|". ALWAYS match the pair's language to the language you are answering in RIGHT NOW, with or without a timestamp — do not default to the English pair out of habit, even if an example below happens to be in English. If a lecture has no FI pair, use the EN pair even in a Finnish answer.
   EN example (answering in English): "That's covered in [Video 5.2 (Refraction)](https://youtube.com/watch?v=pzzjQhhXdkE)."
   FI example (answering in Finnish — same rule, Finnish pair): "Asiasta kerrotaan [Video 5.2 (Taittuminen)](https://youtube.com/watch?v=<fi-id>):ssa."
-- IN-VIDEO TIMESTAMPS: some lectures also list chapter markers indented beneath the EN and/or FI pair, tagged EN: or FI:, e.g. "  FI: 16:48 (1008s) Poyntingin vektori S = c^2 eps0 ExB". When the student's question matches one of these markers specifically (not just the video's general topic), link straight to that moment instead of the start of the video: append &t=<seconds>s to the SAME-LANGUAGE pair's url, using the seconds shown in parentheses after the marker — never recompute it yourself. Only use a marker that's tagged for the language (EN:/FI:) you're actually linking; never mix a FI: marker's seconds onto the EN url or vice versa.
-  FI example (answering in Finnish, using a FI: marker): "Asiasta kerrotaan tarkemmin kohdassa 16:48 videolla [Video 4.3 (Poyntingin vektori)](https://youtube.com/watch?v=KCRFMlnFNbQ&t=1008s)."
-  EN example (answering in English, using an EN: marker for the same lecture): "That's explained around 16:48 in [Video 4.3 (Poynting vector formula)](https://youtube.com/watch?v=qPxBAoaT_Dc&t=1008s)." — only if an EN: marker is actually listed for that video.
-  Not every video has markers yet — only use &t= when one is actually listed for the pair (language) you're linking.
+- IN-VIDEO TIMESTAMPS: some lectures also list chapter markers indented beneath the EN and/or FI pair, tagged EN: or FI:, e.g. "  FI: 16:48 (1008s) Poyntingin vektori S = c^2 eps0 ExB". When the student's question matches one of these markers specifically (not just the video's general topic), give TWO separate links in the same sentence: (1) the timestamp itself as clickable text, e.g. "[16:48](URL&t=1008s)" — using the seconds shown in parentheses after the marker, never recomputed — and (2) the normal [Video X.Y (Topic)](URL) link with NO &t=, pointing at the start of the video as usual. Both links use the SAME-LANGUAGE pair's url; only use a marker tagged for the language (EN:/FI:) you're actually linking, and never mix a FI: marker's seconds onto the EN url or vice versa. If the student's message includes a <possible_video_moments> block, that's already been matched to this specific question in code — use it instead of searching <video_lectures> yourself whenever one of its candidates fits.
+  FI example (answering in Finnish, using a FI: marker): "Tarkemmin asiasta kerrotaan kohdassa [16:48](https://youtube.com/watch?v=KCRFMlnFNbQ&t=1008s) videolla [Video 4.3 (Sähkömagneettisen kentän energia)](https://youtube.com/watch?v=KCRFMlnFNbQ)."
+  EN example (answering in English, using an EN: marker for the same lecture): "That's explained in more detail around [16:48](https://youtube.com/watch?v=qPxBAoaT_Dc&t=1008s) in [Video 4.3 (Energy of the electromagnetic field)](https://youtube.com/watch?v=qPxBAoaT_Dc)." — only if an EN: marker is actually listed for that video.
+  Not every video has markers yet — when none is listed for the pair (language) you're linking, just give the single normal [Video X.Y (Topic)](URL) link as before, with no timestamp link.
 
 HOW TO HELP
 **LENGTH**: ONE OR TWO SHORT SENTENCES/PARAGRAPH ONLY. Never use section headers, bullets, tables, or sub-points. No "Step 1, Step 2". No "Key insight:". Just talk to them like a person.
@@ -492,8 +492,26 @@ async function sendMessage(chatId, text, replyTo) {
 }
 
 // --------------------------------------------------------------- claude -----
-async function askClaude(chatId, question) {
-  const messages = [...(history.get(chatId) || []), { role: "user", content: question }];
+/**
+ * @param {Array} [videoHints] - VIDEO_DB.findRelevantSegments(question)
+ *   results, pre-matched in code (see call site) so the model doesn't have
+ *   to fuzzy-search the whole <video_lectures> dump itself — much more
+ *   reliable for a small model, especially against Finnish case-inflected
+ *   questions ("yhtälöstä" not literally matching a label of "yhtälö").
+ */
+async function askClaude(chatId, question, videoHints) {
+  const content = [{ type: "text", text: question }];
+  if (videoHints && videoHints.length > 0) {
+    let hint = "<possible_video_moments>\n";
+    hint += "Pre-matched candidates for THIS question, ranked best first. If one actually answers it, prefer it over searching <video_lectures> yourself — use its exact url/seconds as-is, in the EN or FI form matching the language you're answering in (if only one language is listed for a candidate, only use it in that language's answer). If none of these fit, ignore this block.\n";
+    videoHints.forEach(h => {
+      hint += `${h.chapter} | ${h.lang.toUpperCase()} | ${h.topic} | ${h.t}s | ${h.label} | ${h.url}\n`;
+    });
+    hint += "</possible_video_moments>";
+    content.push({ type: "text", text: hint });
+  }
+
+  const messages = [...(history.get(chatId) || []), { role: "user", content }];
 
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
@@ -930,7 +948,8 @@ async function handleUpdate(update) {
   await tg("sendChatAction", { chat_id: chatId, action: "typing" }).catch(() => {});
 
   try {
-    const reply = await askClaude(chatId, question);
+    const videoHints = VIDEO_DB ? VIDEO_DB.findRelevantSegments(question) : [];
+    const reply = await askClaude(chatId, question, videoHints);
     remember(chatId, "user", question);
     remember(chatId, "assistant", reply);
     await sendMessage(chatId, reply, message.message_id);

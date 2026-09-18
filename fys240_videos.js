@@ -759,6 +759,47 @@ const BY_TOPIC = {
   "waves": ["YF0EGDxvILI", "pzzjQhhXdkE", "Ve6Y_WjFSOc", "_tcGbrTCQJk", "maSfD-56GyE", "sQxY5lPnGqU", "Vcyz3UGkx5g", "QjukxExTOA4"]
 };
 
+// --------------------------------------------------------------------------
+// Fuzzy matching for findRelevantSegments(): does the deterministic
+// question-to-timestamp matching in code instead of leaving a small model
+// to scan the whole raw <video_lectures> dump and hope it finds the right
+// line — much more reliable for short models like Haiku, and cheap.
+//
+// Finnish is agglutinative (case suffixes glue onto the stem: "yhtälöstä"
+// for "yhtälö"), so plain equality would miss almost everything. Instead
+// each query/label token pair scores via: exact match, or one token being
+// a prefix of the other (min 4 chars, to catch "poissonin"~"poissonin",
+// "yhtälöstä"~"yhtälö") without matching on short/common words.
+const STOPWORDS = new Set([
+  // Finnish question words / filler
+  "mikä", "mitä", "miksi", "miten", "milloin", "missä", "mistä", "minne",
+  "onko", "ovatko", "voitko", "voisitko", "kerro", "kertoa", "lisää",
+  "minulle", "selitä", "selittää", "tämä", "tuo", "se", "että", "myös",
+  "vielä", "ihan", "vain", "eli", "esim", "esimerkiksi", "kuin", "sekä",
+  // English question words / filler
+  "what", "how", "why", "when", "where", "does", "do", "is", "are", "the",
+  "a", "an", "of", "in", "on", "for", "to", "about", "tell", "me", "more",
+  "explain", "can", "you", "please", "i", "and", "or", "with",
+]);
+
+function tokenize(text) {
+  return (text.toLowerCase().match(/[a-zà-öø-ÿ0-9]+/gi) || [])
+    .filter((w) => w.length >= 4 && !STOPWORDS.has(w));
+}
+
+function tokenScore(qTokens, labelTokens) {
+  let score = 0;
+  for (const qt of qTokens) {
+    let best = 0;
+    for (const lt of labelTokens) {
+      if (qt === lt) { best = 2; break; }
+      if (lt.length >= 4 && (qt.startsWith(lt) || lt.startsWith(qt))) best = Math.max(best, 1);
+    }
+    score += best;
+  }
+  return score;
+}
+
 module.exports = {
   course: {"code":"FYS.240","name":"Optics","finnish":"Optiikka","channel":"https://www.youtube.com/@fysiikkaakotisohvalle1510"},
 
@@ -887,6 +928,50 @@ module.exports = {
     });
     hits.sort((a, b) => a.label.length - b.label.length);
     return hits;
+  },
+
+  /**
+   * Rank in-video timestamp segments against a free-text question, using
+   * fuzzy (Finnish-suffix-tolerant) token overlap instead of a plain
+   * substring check. Use this to hand a small, pre-matched set of
+   * candidates to the model instead of making it search the full
+   * <video_lectures> dump itself.
+   * @param {string} question - the student's raw question, any language
+   * @param {number} [maxResults=3]
+   * @returns {Array} [{chapter, topic, id, lang, t, label, url, score}],
+   *   best match first; empty if nothing scores above 0
+   */
+  findRelevantSegments(question, maxResults = 3) {
+    const qTokens = tokenize(question);
+    if (qTokens.length === 0) return [];
+
+    const hits = [];
+    VIDEOS.forEach(v => {
+      (v.segments || []).forEach(s => {
+        const score = tokenScore(qTokens, tokenize(s.label));
+        if (score > 0) {
+          hits.push({
+            chapter: v.chapter, topic: v.topic, id: v.id, lang: 'en',
+            t: s.t, label: s.label, score,
+            url: `https://www.youtube.com/watch?v=${v.id}&t=${s.t}s`,
+          });
+        }
+      });
+      (v.segments_fi || []).forEach(s => {
+        const score = tokenScore(qTokens, tokenize(s.label));
+        if (score > 0) {
+          hits.push({
+            chapter: v.chapter, topic: v.topic, id: v.id_fi, lang: 'fi',
+            t: s.t, label: s.label, score,
+            url: `https://www.youtube.com/watch?v=${v.id_fi}&t=${s.t}s`,
+          });
+        }
+      });
+    });
+
+    // Best score first; among ties, the more specific (shorter) label first.
+    hits.sort((a, b) => b.score - a.score || a.label.length - b.label.length);
+    return hits.slice(0, maxResults);
   },
 
   /**
