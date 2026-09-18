@@ -13,7 +13,24 @@
  *   db.search('lenses');        // Find videos about lenses
  *   db.getChapter('10.3');      // Get all videos for chapter 10.3
  *   db.getVideo('WKIGee5ISaw'); // Get specific video
+ *   db.findSegment('irradianssi'); // Find the specific in-video moment
+ *
+ * In-video timestamps (chapter markers pasted from YouTube descriptions,
+ * added with add_video_segments.js) live separately in video_segments.json
+ * so regenerating this file from a fresh CSV never wipes them out. They are
+ * merged onto each video below as a `segments` array: [{t: seconds, label}].
  */
+
+const fs = require("fs");
+const path = require("path");
+
+let SEGMENTS = {};
+try {
+  SEGMENTS = JSON.parse(fs.readFileSync(path.join(__dirname, "video_segments.json"), "utf8"));
+} catch (e) {
+  // No segments file yet, or it's unreadable — videos just won't have
+  // in-video timestamps until add_video_segments.js creates/fixes it.
+}
 
 const VIDEOS = [
   {
@@ -564,6 +581,14 @@ const VIDEOS = [
   }
 ];
 
+// Merge in-video timestamp segments (by id and, where present, id_fi) onto
+// each video entry. A video may have segments for one language, both, or
+// neither, depending on what's been pasted via add_video_segments.js so far.
+VIDEOS.forEach((v) => {
+  if (SEGMENTS[v.id]) v.segments = SEGMENTS[v.id];
+  if (v.id_fi && SEGMENTS[v.id_fi]) v.segments_fi = SEGMENTS[v.id_fi];
+});
+
 const BY_CHAPTER = {
   "2.1": ["YF0EGDxvILI"],
   "2.2": ["Hpst5RnWvWk"],
@@ -796,7 +821,7 @@ module.exports = {
   /**
    * Get quick topic summary for bot responses
    * @param {string} topic - Topic to find
-   * @returns {Object|null} {chapter, topic, url}
+   * @returns {Object|null} {chapter, topic, url, segment?}
    */
   findBestMatch(topic) {
     const lower = topic.toLowerCase();
@@ -805,18 +830,74 @@ module.exports = {
     let match = VIDEOS.find(v =>
       v.topic.toLowerCase().includes(lower)
     );
-    if (match) return match;
 
     // Try keyword search
-    const keywords = lower.split(/\s+/);
-    for (const keyword of keywords) {
-      match = VIDEOS.find(v =>
-        v.topic.toLowerCase().includes(keyword)
-      );
-      if (match) return match;
+    if (!match) {
+      const keywords = lower.split(/\s+/);
+      for (const keyword of keywords) {
+        match = VIDEOS.find(v =>
+          v.topic.toLowerCase().includes(keyword)
+        );
+        if (match) break;
+      }
     }
 
-    return null;
+    if (!match) return null;
+
+    // If an in-video timestamp matches even more precisely (same lecture,
+    // more specific label), attach it so callers can link straight to that
+    // moment instead of the start of the video.
+    const segmentHits = this.findSegment(topic);
+    const bestSegment = segmentHits.find(s => s.chapter === match.chapter);
+    return bestSegment ? { ...match, segment: bestSegment } : match;
+  },
+
+  /**
+   * Search in-video timestamp segments (chapter markers) for a keyword.
+   * More precise than findBestMatch(): points at the exact moment a
+   * sub-topic is discussed, not just the start of the lecture video.
+   * Requires segments added via add_video_segments.js — videos without
+   * any pasted timestamps simply won't turn up here.
+   * @param {string} keyword
+   * @returns {Array} [{chapter, topic, id, lang, t, label, url}], most
+   *   specific (shortest matching label) first
+   */
+  findSegment(keyword) {
+    const lower = keyword.toLowerCase();
+    const hits = [];
+    VIDEOS.forEach(v => {
+      (v.segments || []).forEach(s => {
+        if (s.label.toLowerCase().includes(lower)) {
+          hits.push({
+            chapter: v.chapter, topic: v.topic, id: v.id, lang: 'en',
+            t: s.t, label: s.label,
+            url: `https://www.youtube.com/watch?v=${v.id}&t=${s.t}s`,
+          });
+        }
+      });
+      (v.segments_fi || []).forEach(s => {
+        if (s.label.toLowerCase().includes(lower)) {
+          hits.push({
+            chapter: v.chapter, topic: v.topic, id: v.id_fi, lang: 'fi',
+            t: s.t, label: s.label,
+            url: `https://www.youtube.com/watch?v=${v.id_fi}&t=${s.t}s`,
+          });
+        }
+      });
+    });
+    hits.sort((a, b) => a.label.length - b.label.length);
+    return hits;
+  },
+
+  /**
+   * Get the raw timestamp segments for a video, by its id or id_fi.
+   * @param {string} videoId
+   * @returns {Array} [{t, label}]
+   */
+  getSegments(videoId) {
+    const v = VIDEOS.find(v => v.id === videoId || v.id_fi === videoId);
+    if (!v) return [];
+    return v.id === videoId ? (v.segments || []) : (v.segments_fi || []);
   },
 
   /**

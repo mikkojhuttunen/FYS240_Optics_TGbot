@@ -1,0 +1,88 @@
+{
+  "KCRFMlnFNbQ": [
+    {
+      "t": 0,
+      "label": "Johdanto (mm. Poyntingin teoreema)"
+    },
+    {
+      "t": 210,
+      "label": "Sähkömagneettinen kenttä siirtää energiaa paikasta A paikkaan B"
+    },
+    {
+      "t": 290,
+      "label": "Sähkö- ja magneettikenttien energiatiheydet u_E ja u_B"
+    },
+    {
+      "t": 400,
+      "label": "E- ja B-kenttien energiatiheydet ovat yhtäsuuret: u_E = u_B"
+    },
+    {
+      "t": 470,
+      "label": "Energia on siis jakautunut tasaisesti kenttäkomponenttien (E ja B) välille"
+    },
+    {
+      "t": 496,
+      "label": "Koko kentän energitiheys u = u_E + u_B"
+    },
+    {
+      "t": 527,
+      "label": "Energia(tiheyde)n etenemissuuntaa kuvaa Poyntingin vektori S"
+    },
+    {
+      "t": 762,
+      "label": "Energiatiheyden suuruutta kuvaa suure irradianssi S (tai I)"
+    },
+    {
+      "t": 896,
+      "label": "Intensiteetti ei ole sama asia kuin irradianssi!"
+    },
+    {
+      "t": 956,
+      "label": "Energiatiheyden suureen yleistys vektorisuureisiin, Poyntingin vektoriksi S"
+    },
+    {
+      "t": 1008,
+      "label": "Poyntingin vektori S = c^2 eps0 ExB"
+    },
+    {
+      "t": 1066,
+      "label": "Poyntingin vektorin amplitudi vastaa irradianssia, |S| = S = I"
+    },
+    {
+      "t": 1174,
+      "label": "Poyntingin vektorin eksplisiittinen laskeminen aikaharmoniselle tasoaallolle"
+    },
+    {
+      "t": 1270,
+      "label": "Poyntingin vektori värähtelee myös ajan suhteen"
+    },
+    {
+      "t": 1318,
+      "label": "Optista kenttää ei voi suoraan mitata elektronisilla laitteilla, elektroniikka ei ole tarpeeksi nopeaa"
+    },
+    {
+      "t": 1416,
+      "label": "Valoilmaisimet eli fotodetektorit mittaavat irradianssin aikakeskiarvoja"
+    },
+    {
+      "t": 1600,
+      "label": "Poyntingin vektorin aikakeskiarvo"
+    },
+    {
+      "t": 1715,
+      "label": "B-kentän vaikutus valon ja aineen vuorovaikutuksessa on usein pieni"
+    },
+    {
+      "t": 1829,
+      "label": "Optinen aktiivisuus on ilmiö, jonka selittäminen vaatii B-kentän huomioimista"
+    },
+    {
+      "t": 2028,
+      "label": "Irradianssin aikakeskiarvoja ei tarvitse usein laskea, riittää tietää E-kentän amplitudi"
+    },
+    {
+      "t": 2076,
+      "label": "Irradianssin aikakeskiarvon laskeminen kompleksiesitystä käyttäen"
+    }
+  ]
+}
