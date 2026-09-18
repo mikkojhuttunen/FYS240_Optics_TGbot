@@ -57,16 +57,20 @@ const QUIZ_BANK_PENDING_PATH = path.join(__dirname, 'quizBankPending_fys240.json
 
 // ---------- Stage 1: local trigger gate (no API call) ----------
 
-const STAGE1_TRIGGER = /\b(quiz|test me|quiz me)\b/i;
+const STAGE1_TRIGGER = /\b(quiz|test me|quiz me|kysele|testaa minua|koe minua)\b/i;
 // FYS.240 runs chapters 2-10, so \d{1,2} (not a hardcoded [1-4]) — this
-// also correctly matches two-digit chapter 10.
-const CHAPTER_HINT = /chapter\s?(\d{1,2})|ch\.?\s?(\d{1,2})/i;
-// e.g. "2.3", "section 10.13" — matched separately from the bare chapter
-// hint above so "chapter 2" alone doesn't get misread as section "2". The
-// section part is \d{1,2} (not [1-9]) since sections run up to X.13.
-const SECTION_HINT = /\b(?:section\s+)?(\d{1,2})\.(\d{1,2})\b/i;
+// also correctly matches two-digit chapter 10. Finnish alternatives cover
+// the inflected forms students actually type: "luvusta 2" (elative,
+// "from chapter 2") and the bare nominative "luku 2".
+const CHAPTER_HINT = /chapter\s?(\d{1,2})|ch\.?\s?(\d{1,2})|luvu\w*\s?(\d{1,2})|luku\s?(\d{1,2})/i;
+// e.g. "2.3", "section 10.13", "osiosta 10.13" — matched separately from
+// the bare chapter hint above so "chapter 2" / "luku 2" alone doesn't get
+// misread as section "2". The section part is \d{1,2} (not [1-9]) since
+// sections run up to X.13.
+const SECTION_HINT = /\b(?:section\s+|osio\w*\s+)?(\d{1,2})\.(\d{1,2})\b/i;
 // Trailing question count, e.g. "/quiz 2.3 10" or "quiz me on chapter 2, 8 questions"
-const COUNT_HINT = /\b(\d{1,2})\s*(?:questions?)?\s*$/i;
+// or "kysele minulta luvusta 2, 8 kysymystä"
+const COUNT_HINT = /\b(\d{1,2})\s*(?:questions?|kysymys(?:tä|iä)?)?\s*$/i;
 
 const DEFAULT_COUNT = 5;
 const MAX_COUNT = 15; // reasonable cap per section 6 of the setup guide
@@ -75,11 +79,24 @@ function isQuizRequest(text) {
   return STAGE1_TRIGGER.test(text);
 }
 
+// Picks the quiz's language ("en" | "fi"). `fallbackLang` is the caller's
+// best guess absent any text signal (bot_fys240.js passes the Telegram
+// client's language_code, same as the deterministic /topics, /week, etc.
+// commands use). Explicit Finnish quiz vocabulary in the student's own
+// message (trigger words, "luvusta"/"luku", "osiosta", "kysymystä") always
+// wins over that fallback, so a Finnish-phrased request is honored even if
+// the student's client happens to be set to English, and vice versa.
+const FI_HINT_RE = /\b(kysele|testaa minua|koe minua|luvu\w*|luku\s?\d|osio\w*|kysymys(?:tä|iä)?)\b/i;
+function resolveQuizLang(text, fallbackLang) {
+  if (FI_HINT_RE.test(text)) return "fi";
+  return fallbackLang === "fi" ? "fi" : "en";
+}
+
 function extractChapterHint(text) {
   const sectionMatch = text.match(SECTION_HINT);
   if (sectionMatch) return sectionMatch[1];
   const m = text.match(CHAPTER_HINT);
-  return m ? (m[1] || m[2]) : null;
+  return m ? (m[1] || m[2] || m[3] || m[4]) : null;
 }
 
 function extractSectionHint(text) {
@@ -104,10 +121,49 @@ function extractCountHint(text) {
   return n === null ? DEFAULT_COUNT : Math.min(n, MAX_COUNT);
 }
 
+// ---------- bilingual UI strings (EN/FI) ----------
+// The quiz QUESTIONS themselves come from the bank (tagged by lang, see
+// sampleFromBank) or live generation (QUIZ_SYSTEM_PROMPT_EN/FI below); this
+// covers the surrounding chrome — prompts, errors, scoring — which bot.js
+// never sees the wording of directly, so it's kept here with the rest of
+// the quiz flow.
+const UI = {
+  en: {
+    askChapter: 'Which chapter would you like to be quizzed on? Try "quiz me on chapter 2" or "quiz me on section 2.3".',
+    noSection: (section, chapter) =>
+      `I don't have section ${section} for chapter ${chapter} — try a chapter-wide quiz instead, e.g. "quiz me on chapter ${chapter}".`,
+    countCapped: (max) => `Let's start with ${max}, you can always ask for another round.`,
+    startFailed: "Sorry, I couldn't put together a quiz for that right now — try again in a bit.",
+    noQuestions: "I couldn't find or generate any questions for that section — try a different chapter/section.",
+    question: (n, total) => `Question ${n}/${total}`,
+    sessionExpired: "Quiz session expired — start a new one with /quiz.",
+    correct: (explanation) => `✅ Correct!\n${explanation}`,
+    incorrect: (answer, explanation) => `❌ Not quite. Correct answer: ${answer}\n${explanation}`,
+    complete: (score, total) => `Quiz complete! Score: ${score}/${total}`,
+  },
+  fi: {
+    askChapter: 'Mistä luvusta haluaisit visan? Kokeile esim. "kysele minulta luvusta 2" tai "kysele minulta osiosta 2.3".',
+    noSection: (section, chapter) =>
+      `Minulla ei ole osiota ${section} luvulle ${chapter} — kokeile koko luvun visaa, esim. "kysele minulta luvusta ${chapter}".`,
+    countCapped: (max) => `Aloitetaan ${max} kysymyksellä — voit aina pyytää lisää toisella kierroksella.`,
+    startFailed: "Pahoittelut, en juuri nyt saanut koottua visaa tästä — yritä hetken kuluttua uudelleen.",
+    noQuestions: "En löytänyt tai osannut luoda kysymyksiä tälle osiolle — kokeile toista lukua tai osiota.",
+    question: (n, total) => `Kysymys ${n}/${total}`,
+    sessionExpired: "Visa vanhentui — aloita uusi komennolla /quiz.",
+    correct: (explanation) => `✅ Oikein!\n${explanation}`,
+    incorrect: (answer, explanation) => `❌ Ei ihan. Oikea vastaus: ${answer}\n${explanation}`,
+    complete: (score, total) => `Visa suoritettu! Tulos: ${score}/${total}`,
+  },
+};
+
+function ui(lang) {
+  return UI[lang] || UI.en;
+}
+
 // ---------- Session state (mirrors checkhw session Map) ----------
 
 const SESSION_TTL_MS = 20 * 60 * 1000; // 20 min, same order as checkhw expiry
-const quizSessions = new Map(); // key: chatId, value: { questions, index, score, expiresAt }
+const quizSessions = new Map(); // key: chatId, value: { questions, index, score, lang, expiresAt }
 
 function getSession(chatId) {
   const s = quizSessions.get(chatId);
@@ -119,11 +175,12 @@ function getSession(chatId) {
   return s;
 }
 
-function createSession(chatId, questions) {
+function createSession(chatId, questions, lang = "en") {
   const session = {
     questions,
     index: 0,
     score: 0,
+    lang,
     expiresAt: Date.now() + SESSION_TTL_MS
   };
   quizSessions.set(chatId, session);
@@ -189,18 +246,24 @@ function shuffle(arr) {
 
 /**
  * Draws up to `count` unused questions from the quiz bank (quizBank_fys240.json) for a given
- * chapter (+ optional section). No API call.
+ * chapter (+ optional section), in the requested language. No API call.
  *
  * - If `section` is given, samples only from that section's pool.
  * - If `section` is omitted, samples across the whole chapter (pooling all
  *   of that chapter's sections together before shuffling, so the result is
  *   naturally proportional to how many questions each section has).
+ * - Each bank question is tagged `lang: 'en'|'fi'`; untagged questions
+ *   (the whole bank as it stands today) are treated as 'en' for backward
+ *   compatibility. A Finnish request only draws from 'fi'-tagged
+ *   questions, so until a Finnish bank exists Finnish quizzes fall
+ *   through to live generation every time — expected, not a bug (see
+ *   module doc comment).
  *
  * @returns {{ questions: object[], shortfall: number }} shortfall is how
  *   many more questions the caller still needs to reach `count` (0 if the
  *   bank fully satisfied the request).
  */
-function sampleFromBank(chapter, section, count, excludeIds = []) {
+function sampleFromBank(chapter, section, count, excludeIds = [], lang = "en") {
   const bank = loadQuizBank();
   const chapterBank = bank[String(chapter)] || {};
   const exclude = new Set(excludeIds);
@@ -212,7 +275,7 @@ function sampleFromBank(chapter, section, count, excludeIds = []) {
     pool = Object.values(chapterBank).flat();
   }
 
-  const available = pool.filter((q) => !exclude.has(q.id));
+  const available = pool.filter((q) => !exclude.has(q.id) && (q.lang || "en") === lang);
   const picked = shuffle(available).slice(0, count);
 
   return {
@@ -223,9 +286,9 @@ function sampleFromBank(chapter, section, count, excludeIds = []) {
 
 // ---------- quizBankPending_fys240.json — self-expansion capture ----------
 
-function appendPendingQuestions(chapter, section, questions) {
+function appendPendingQuestions(chapter, section, questions, lang = "en") {
   const generatedAt = new Date().toISOString();
-  const entries = questions.map((q) => ({ chapter: String(chapter), section: section || null, question: q, generatedAt }));
+  const entries = questions.map((q) => ({ chapter: String(chapter), section: section || null, lang, question: q, generatedAt }));
 
   // Best-effort file append. On deploy environments with an ephemeral
   // filesystem (e.g. Railway without an attached volume), this file may not
@@ -254,7 +317,7 @@ function appendPendingQuestions(chapter, section, questions) {
 
 // ---------- Stage 2: generation (one LLM call, structured JSON out) ----------
 
-const QUIZ_SYSTEM_PROMPT = `You generate multiple-choice quiz questions for an undergraduate optics
+const QUIZ_SYSTEM_PROMPT_EN = `You generate multiple-choice quiz questions for an undergraduate optics
 course (FYS.240 Optics), grounded STRICTLY in the provided corpus excerpt. Rules:
 - Do NOT invent facts outside the excerpt.
 - Do NOT use any homework problems or numeric answer keys as source material.
@@ -266,24 +329,50 @@ course (FYS.240 Optics), grounded STRICTLY in the provided corpus excerpt. Rules
   { "questions": [ { "stem": "...", "options": ["...","...","...","..."],
     "correctIndex": 0, "explanation": "..." } ] }`;
 
+const QUIZ_SYSTEM_PROMPT_FI = `Generoit monivalintakysymyksiä yliopiston optiikan kurssille (FYS.240
+Optiikka), tiukasti annettuun kurssimateriaaliotteeseen pohjautuen. Säännöt:
+- Älä keksi faktoja otteen ulkopuolelta.
+- Älä käytä kotitehtäviä tai niiden numeerisia vastauksia lähdemateriaalina.
+- Ote voi sisältää sekä englannin- että suomenkielistä tekstiä samasta osiosta — kirjoita
+  kysymys ja vastausvaihtoehdot joka tapauksessa suomeksi.
+- Jokainen kysymys: 1 runko, 4 vaihtoehtoa, tasan 1 oikea indeksi (0-3), ja lyhyt
+  (alle 40 sanan) selitys oikealle vastaukselle, suomeksi.
+- Palauta VAIN validi JSON, ei markdown-koodilohkoja, ei alkupuhetta. Muoto:
+  { "questions": [ { "stem": "...", "options": ["...","...","...","..."],
+    "correctIndex": 0, "explanation": "..." } ] }`;
+
 /**
  * Live-generates `count` questions, scoped to a chapter (and, if given, a
  * specific section) via getCorpusSection(chapter, section). Throws if the
  * corpus excerpt can't be found or the model's output can't be parsed —
  * callers should catch and degrade gracefully (see startQuiz).
+ *
+ * lang: "en" | "fi" — picks the system prompt/instructions AND which
+ * corpus language(s) to pull grounding text from. Finnish requests fetch
+ * 'both' (Finnish text plus the English original as backup grounding,
+ * since a handful of sections have no standalone Finnish recording — see
+ * corpusLoader's module doc comment) while still instructing the model to
+ * write the question itself in Finnish.
  */
-async function generateQuiz(chapter, section, count = 5) {
-  const corpusExcerpt = getCorpusSection(chapter, section || undefined);
+async function generateQuiz(chapter, section, count = 5, lang = "en") {
+  const corpusLang = lang === "fi" ? "both" : "en";
+  const corpusExcerpt = getCorpusSection(chapter, section || undefined, { lang: corpusLang });
 
   const scopeLabel = section ? `Section ${section}` : `Chapter ${chapter}`;
+  const systemPrompt = lang === "fi" ? QUIZ_SYSTEM_PROMPT_FI : QUIZ_SYSTEM_PROMPT_EN;
+  const userContent =
+    lang === "fi"
+      ? `Generoi ${count} monivalintakysymystä tästä otteesta (${scopeLabel}):\n\n${corpusExcerpt}`
+      : `Generate ${count} MCQ questions from this excerpt (${scopeLabel}):\n\n${corpusExcerpt}`;
+
   const response = await anthropic.messages.create({
     model: 'claude-haiku-4-5-20251001',
     max_tokens: 1500,
-    system: QUIZ_SYSTEM_PROMPT,
+    system: systemPrompt,
     messages: [
       {
         role: 'user',
-        content: `Generate ${count} MCQ questions from this excerpt (${scopeLabel}):\n\n${corpusExcerpt}`
+        content: userContent
       }
     ]
   });
@@ -313,9 +402,9 @@ async function generateQuiz(chapter, section, count = 5) {
  * startQuiz(). Bank-first, live-generation fallback for the shortfall only,
  * with self-expansion of any freshly generated questions.
  */
-async function getQuizQuestions(chatId, chapter, section, count) {
+async function getQuizQuestions(chatId, chapter, section, count, lang = "en") {
   const excludeIds = getRecentlyServed(chatId);
-  const { questions: bankQuestions, shortfall } = sampleFromBank(chapter, section, count, excludeIds);
+  const { questions: bankQuestions, shortfall } = sampleFromBank(chapter, section, count, excludeIds, lang);
 
   markServed(chatId, bankQuestions.map((q) => q.id));
 
@@ -328,7 +417,7 @@ async function getQuizQuestions(chatId, chapter, section, count) {
   // the excerpt (and cost) small.
   let generated = [];
   try {
-    generated = await generateQuiz(chapter, section, shortfall);
+    generated = await generateQuiz(chapter, section, shortfall, lang);
   } catch (err) {
     console.warn(`quizGenerator_fys240: live fallback generation failed (${err.message}) — serving ${bankQuestions.length}/${count} from the bank only`);
     return bankQuestions;
@@ -338,88 +427,88 @@ async function getQuizQuestions(chatId, chapter, section, count) {
   // code can treat all questions uniformly.
   const stamped = generated.map((q, i) => ({
     ...q,
-    id: `gen_${chapter}${section ? '.' + section.split('.')[1] : ''}_${Date.now()}_${i}`,
+    id: `gen_${lang}_${chapter}${section ? '.' + section.split('.')[1] : ''}_${Date.now()}_${i}`,
+    lang,
   }));
 
-  appendPendingQuestions(chapter, section, stamped);
+  appendPendingQuestions(chapter, section, stamped, lang);
 
   return bankQuestions.concat(stamped);
 }
 
 // ---------- Telegram-facing helpers ----------
 
-const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
-
 function buildQuestionKeyboard(sessionIndex, question) {
   return {
-    inline_keyboard: [
-      question.options.map((opt, i) => ({
-        text: OPTION_LETTERS[i] || String(i + 1),
-        callback_data: `quiz:${sessionIndex}:${i}`
-      }))
-    ]
+    inline_keyboard: question.options.map((opt, i) => ([
+      { text: opt, callback_data: `quiz:${sessionIndex}:${i}` }
+    ]))
   };
 }
 
-function formatQuestionMessage(question, qNumber, total) {
-  const optionsText = question.options
-    .map((opt, i) => `<b>${OPTION_LETTERS[i] || i + 1})</b> ${opt}`)
-    .join('\n');
-  return `<b>Question ${qNumber}/${total}</b>\n\n${question.stem}\n\n${optionsText}`;
+function formatQuestionMessage(question, qNumber, total, lang) {
+  return `<b>${ui(lang).question(qNumber, total)}</b>\n\n${question.stem}`;
 }
 
 // Fallback used when the caller doesn't supply its own askWhichChapter
 // (see the `askWhichChapter` param on startQuiz below). Just a plain text
 // prompt — bot.js can inject a richer version (e.g. an inline-keyboard
 // chapter picker) instead.
-async function defaultAskWhichChapter(bot, chatId) {
-  await bot.sendMessage(
-    chatId,
-    'Which chapter would you like to be quizzed on? Try "quiz me on chapter 2" or "quiz me on section 2.3".'
-  );
+async function defaultAskWhichChapter(bot, chatId, lang = "en") {
+  await bot.sendMessage(chatId, ui(lang).askChapter);
   return null;
 }
 
 // Called from bot.js message handler when isQuizRequest(text) is true.
-// `askWhichChapter(bot, chatId)` is called when the request doesn't name a
-// chapter/section; it should prompt the student and return null (startQuiz
-// then stops, since there's nothing more to do until they respond) or,
-// if it can resolve one itself, return a chapter number/string directly.
-async function startQuiz(bot, chatId, text, askWhichChapter = defaultAskWhichChapter) {
-  const chapter = extractChapterHint(text) || (await askWhichChapter(bot, chatId));
+// `askWhichChapter(bot, chatId, lang)` is called when the request doesn't
+// name a chapter/section; it should prompt the student and return null
+// (startQuiz then stops, since there's nothing more to do until they
+// respond) or, if it can resolve one itself, return a chapter number/string
+// directly.
+//
+// `fallbackLang` ("en" | "fi") is the caller's best guess at the student's
+// language absent any text signal (bot_fys240.js passes the Telegram
+// client's language_code) — resolveQuizLang() upgrades it to "fi" if the
+// request text itself carries Finnish quiz vocabulary, so a Finnish-
+// phrased request is honored even from an English-set client.
+async function startQuiz(bot, chatId, text, askWhichChapter = defaultAskWhichChapter, fallbackLang = "en") {
+  const lang = resolveQuizLang(text, fallbackLang);
+  const t = ui(lang);
+
+  const chapter = extractChapterHint(text) || (await askWhichChapter(bot, chatId, lang));
   if (!chapter) return; // askWhichChapter already sent a prompt (or startQuiz has nothing to do)
 
   const section = extractSectionHint(text); // null => chapter-wide request
   if (section && !corpusLoader.isValidSection(chapter, section)) {
-    await bot.sendMessage(chatId, `I don't have section ${section} for chapter ${chapter} — try a chapter-wide quiz instead, e.g. "quiz me on chapter ${chapter}".`);
+    await bot.sendMessage(chatId, t.noSection(section, chapter));
     return;
   }
 
   const rawCount = extractRawCountHint(text);
   const requestedCount = rawCount === null ? DEFAULT_COUNT : Math.min(rawCount, MAX_COUNT);
   if (rawCount !== null && rawCount > MAX_COUNT) {
-    await bot.sendMessage(chatId, `Let's start with ${MAX_COUNT}, you can always ask for another round.`);
+    await bot.sendMessage(chatId, t.countCapped(MAX_COUNT));
   }
 
   let questions;
   try {
-    questions = await getQuizQuestions(chatId, chapter, section, requestedCount);
+    questions = await getQuizQuestions(chatId, chapter, section, requestedCount, lang);
   } catch (err) {
     console.error(`quizGenerator_fys240: startQuiz failed for chapter ${chapter}${section ? '.' + section : ''}: ${err.message}`);
-    await bot.sendMessage(chatId, "Sorry, I couldn't put together a quiz for that right now — try again in a bit.");
+    await bot.sendMessage(chatId, t.startFailed);
     return;
   }
 
   if (!questions.length) {
-    await bot.sendMessage(chatId, "I couldn't find or generate any questions for that section — try a different chapter/section.");
+    await bot.sendMessage(chatId, t.noQuestions);
     return;
   }
 
-  const session = createSession(chatId, questions);
+  const session = createSession(chatId, questions, lang);
 
   await bot.sendMessage(
     chatId,
-    formatQuestionMessage(session.questions[0], 1, session.questions.length),
+    formatQuestionMessage(session.questions[0], 1, session.questions.length, lang),
     { parse_mode: 'HTML', reply_markup: buildQuestionKeyboard(0, session.questions[0]) }
   );
 }
@@ -433,20 +522,22 @@ async function handleQuizAnswer(bot, callbackQuery) {
 
   const session = getSession(chatId);
   if (!session || qIndex !== session.index) {
-    await bot.answerCallbackQuery(callbackQuery.id, { text: 'Quiz session expired — start a new one with /quiz.' });
+    await bot.answerCallbackQuery(callbackQuery.id, { text: ui(session?.lang).sessionExpired });
     return;
   }
 
+  const lang = session.lang;
+  const t = ui(lang);
   const question = session.questions[qIndex];
   const correct = answerIndex === question.correctIndex;
   if (correct) session.score += 1;
 
   const feedback = correct
-    ? `✅ Correct!\n${question.explanation}`
-    : `❌ Not quite. Correct answer: <b>${OPTION_LETTERS[question.correctIndex]})</b> ${question.options[question.correctIndex]}\n${question.explanation}`;
+    ? t.correct(question.explanation)
+    : t.incorrect(question.options[question.correctIndex], question.explanation);
 
   await bot.editMessageText(
-    `${formatQuestionMessage(question, qIndex + 1, session.questions.length)}\n\n${feedback}`,
+    `${formatQuestionMessage(question, qIndex + 1, session.questions.length, lang)}\n\n${feedback}`,
     { chat_id: chatId, message_id: callbackQuery.message.message_id, parse_mode: 'HTML' }
   );
   await bot.answerCallbackQuery(callbackQuery.id);
@@ -456,11 +547,11 @@ async function handleQuizAnswer(bot, callbackQuery) {
     const next = session.questions[session.index];
     await bot.sendMessage(
       chatId,
-      formatQuestionMessage(next, session.index + 1, session.questions.length),
+      formatQuestionMessage(next, session.index + 1, session.questions.length, lang),
       { parse_mode: 'HTML', reply_markup: buildQuestionKeyboard(session.index, next) }
     );
   } else {
-    await bot.sendMessage(chatId, `Quiz complete! Score: ${session.score}/${session.questions.length}`);
+    await bot.sendMessage(chatId, t.complete(session.score, session.questions.length));
     quizSessions.delete(chatId);
   }
 }
@@ -479,6 +570,7 @@ module.exports = {
   extractSectionHint,
   extractCountHint,
   extractRawCountHint,
+  resolveQuizLang,
 };
 
 /* INTEGRATION NOTES — wired up in bot_fys240.js. Summary of how (mirrors
@@ -491,25 +583,39 @@ module.exports = {
  *
  * In the message handler, alongside the other STAGE1_TRIGGER checks:
  *   if (quizGenerator.isQuizRequest(question)) {
- *     return quizGenerator.startQuiz(quizBot, chatId, question, askWhichChapter);
+ *     return quizGenerator.startQuiz(quizBot, chatId, question, askWhichChapter, lang);
  *   }
+ * where `lang` is bot_fys240.js's getLang(message) (Telegram client
+ * language_code) — startQuiz()/resolveQuizLang() use it only as a
+ * fallback; Finnish quiz vocabulary in `question` itself takes priority.
  *
  * bot_fys240.js has no EventEmitter-style `.on('callback_query', ...)`
  * (it's a plain webhook handler), so callback_query updates are dispatched
  * directly inside handleUpdate()/handleCallbackQuery() instead:
  *   if (data.startsWith('quiz:')) return quizGenerator.handleQuizAnswer(quizBot, cq);
+ * handleQuizAnswer needs no lang argument — it reads session.lang, set by
+ * startQuiz() when the session was created, so every reply in a quiz stays
+ * in the language it started in even though the tap carries no text.
  *
- * bot_fys240.js defines its own askWhichChapter(bot, chatId) — an
+ * bot_fys240.js defines its own askWhichChapter(bot, chatId, lang) — an
  * inline-keyboard chapter picker built from corpusLoader.listChapters()/
- * getChapterTitle(), covering chapters 2-10 — and passes it into
- * startQuiz() explicitly, overriding the plain-text defaultAskWhichChapter()
- * above. Tapping a chapter button sends a "quizchapter:N" callback, which
+ * getChapterTitle()/getChapterTitleFi(), covering chapters 2-10 — and
+ * passes it into startQuiz() explicitly, overriding the plain-text
+ * defaultAskWhichChapter() above. Because there's no session yet at this
+ * point (the student hasn't named a chapter), the chapter-picker's
+ * callback_data carries the language forward explicitly as
+ * "quizchapter:<N>:<lang>" rather than relying on Telegram's language_code
+ * a second time; tapping a button sends that callback, which
  * bot_fys240.js turns into a second startQuiz() call with synthetic text
- * ("quiz me on chapter N").
+ * ("quiz me on chapter N") and that same lang as fallbackLang.
  *
  * /healthz includes `quizBankLooksHealthy: quizGenerator.quizBankLooksHealthy()`
  * and `corpusLooksHealthy: corpusLoader.corpusLooksHealthy()`. Expect
  * quizBankLooksHealthy to report false until quizBank_fys240.json is
  * actually built (see the module doc comment above) — that's expected, not
- * a fault; quizzes still work via live generation in the meantime.
+ * a fault; quizzes still work via live generation in the meantime. The
+ * bank as it exists today is English-only (untagged questions default to
+ * lang "en" in sampleFromBank), so Finnish quizzes are 100% live-generated
+ * until a Finnish bank is curated from quizBankPending_fys240.json's
+ * lang:"fi" entries.
  */
