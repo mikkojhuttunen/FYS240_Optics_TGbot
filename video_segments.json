@@ -84,5 +84,663 @@
       "t": 2076,
       "label": "Irradianssin aikakeskiarvon laskeminen kompleksiesitystä käyttäen"
     }
+  ],
+  "MfFv9Y37cXA": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 165,
+      "label": "Sähkömagneettiset aallot"
+    },
+    {
+      "t": 490,
+      "label": "Maxwellin yhtälöt tyhjiössä"
+    },
+    {
+      "t": 1207,
+      "label": "Aaltoyhtälö"
+    },
+    {
+      "t": 1296,
+      "label": "Aaltoyhtälön ratkaiseva funktio: aikaharmoninen aalto"
+    },
+    {
+      "t": 1565,
+      "label": "Aikaharmonisen aallon paikkariippuvuus"
+    },
+    {
+      "t": 1730,
+      "label": "Aallon aaltovektori k"
+    },
+    {
+      "t": 1790,
+      "label": "Aikaharmonisen aallon aikariippuvuus"
+    },
+    {
+      "t": 1868,
+      "label": "Aallon kulmataajuus"
+    },
+    {
+      "t": 1981,
+      "label": "Valon aaltoluonteen seurauksia: interferenssi, diffraktio"
+    },
+    {
+      "t": 2316,
+      "label": "Näkyvän valon, UV-valon ja lähi-infrapunavalon aallonpituusalueet"
+    }
+  ],
+  "sA15dZsSNV4": [
+    {
+      "t": 0,
+      "label": "Johdanto ja motivaatio valonsäteiden käyttämiseen"
+    },
+    {
+      "t": 55,
+      "label": "Valon aaltoluonne voidaan joskus unohtaa"
+    },
+    {
+      "t": 105,
+      "label": "Geometrinen optiikka ja optiset instrumentit"
+    },
+    {
+      "t": 251,
+      "label": "Linssin toiminta ja kuvanmuodostuminen (esimerkki)"
+    },
+    {
+      "t": 333,
+      "label": "Valonsäteiden käyttäytyminen homogeenisessa aineessa"
+    },
+    {
+      "t": 363,
+      "label": "Valonsäteiden käyttäytyminen kahden optisesti erilaisen aineen rajapinnalla"
+    },
+    {
+      "t": 444,
+      "label": "Taittuminen ja heijastuminen kahden optisesti erilaisen aineen rajapinnalla"
+    },
+    {
+      "t": 607,
+      "label": "Tulotason määritelmä"
+    },
+    {
+      "t": 713,
+      "label": "Snellin laki"
+    }
+  ],
+  "mHYSquFXcvY": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 70,
+      "label": "Kvanttimekaaniset ilmiöt valon ja aineen vuorovaikutuksessa"
+    },
+    {
+      "t": 130,
+      "label": "Valon hiukkasluonne, fotonin käsite"
+    },
+    {
+      "t": 237,
+      "label": "Jatkokursseilla valon hiukkasluonnetta tullaan tarvitsemaan"
+    }
+  ],
+  "vN1Sq4MQmH0": [
+    {
+      "t": 0,
+      "label": "Johdanto lukuun 3. Aaltoliike"
+    },
+    {
+      "t": 526,
+      "label": "Liikkuvan häiriön paikkariippuvuus"
+    },
+    {
+      "t": 575,
+      "label": "Liikkuvan häiriön eteneminen muotoaan muuttamatta"
+    },
+    {
+      "t": 698,
+      "label": "Liikkuvan häiriön funktionaalinen muoto"
+    }
+  ],
+  "II4QfIcltdI": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 16,
+      "label": "Aaltoyhtälön merkitys"
+    },
+    {
+      "t": 72,
+      "label": "Aaltoyhtälö on differentiaaliyhtälö"
+    },
+    {
+      "t": 145,
+      "label": "Aaltoyhtälön muodostaminen"
+    },
+    {
+      "t": 427,
+      "label": "Aaltoyhtälö on toisen kertaluvun differentiaaliyhtälö"
+    },
+    {
+      "t": 587,
+      "label": "Aaltoyhtälö"
+    }
+  ],
+  "BlyOBramP8I": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 37,
+      "label": "Harmoniset aallot"
+    },
+    {
+      "t": 117,
+      "label": "Harmonisen aallon funktionaalinen muoto (sini- tai kosinifunktio)"
+    },
+    {
+      "t": 300,
+      "label": "Harmoninen aalto on jaksollinen"
+    },
+    {
+      "t": 399,
+      "label": "Aallon etenemisluvun eli aaltoluvun k johtaminen ja määritelmä"
+    },
+    {
+      "t": 487,
+      "label": "Harmoninen aalto on jaksollinen myös ajan t suhteen"
+    },
+    {
+      "t": 543,
+      "label": "Aallon taajuuden ja nopeuden määritelmät"
+    },
+    {
+      "t": 648,
+      "label": "Kulmataajuus"
+    },
+    {
+      "t": 834,
+      "label": "Aallon vaiheen yleistäminen mielivaltaiseksi alkuvaiheen avulla"
+    }
+  ],
+  "bjc6RoL_OkI": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 20,
+      "label": "Aallon vaihe ja vaihenopeus"
+    },
+    {
+      "t": 220,
+      "label": "Vaihenopeuden johtaminen vaihefunktion avulla"
+    },
+    {
+      "t": 308,
+      "label": "Vaihefunktion kokonaisderivaatan laskeminen"
+    },
+    {
+      "t": 532,
+      "label": "Vaihenopeuden yhtälö"
+    },
+    {
+      "t": 693,
+      "label": "Harmonisen aallon vaihenopeus"
+    },
+    {
+      "t": 817,
+      "label": "Mielivaltaisemman häiriön etenemisnopeus, ryhmänopeus"
+    }
+  ],
+  "nfvA3Ro-Xgw": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 55,
+      "label": "Kahden aallon superpositio"
+    },
+    {
+      "t": 125,
+      "label": "Derivointi on lineaarinen operaatio"
+    },
+    {
+      "t": 191,
+      "label": "Summa-aalto toteuttaa myös aaltoyhtälön"
+    },
+    {
+      "t": 273,
+      "label": "Superpositioperiaatteen implikaatiot"
+    },
+    {
+      "t": 304,
+      "label": "Valo ei (juurikaan) vuorovaikuta valon kanssa"
+    },
+    {
+      "t": 431,
+      "label": "Summa-aalto on usean aallon superpositio"
+    },
+    {
+      "t": 523,
+      "label": "Konstruktiivinen interferenssi"
+    },
+    {
+      "t": 573,
+      "label": "Destruktiivinen interferenssi"
+    },
+    {
+      "t": 693,
+      "label": "Loppuhöpinät"
+    }
+  ],
+  "4Ws_6MzHe08": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 76,
+      "label": "Eksponenttifunktiot ja kompleksilukunotaatio"
+    },
+    {
+      "t": 141,
+      "label": "Kompleksiluku z"
+    },
+    {
+      "t": 240,
+      "label": "Kompleksiluku z vektorina tai pisteenä kompleksitasossa"
+    },
+    {
+      "t": 287,
+      "label": "Kompleksiluvun vaihekulma"
+    },
+    {
+      "t": 338,
+      "label": "Eksponenttimuoto ja Eulerin kaava"
+    },
+    {
+      "t": 468,
+      "label": "Kompleksilukujen yhteen- ja vähennyslasku"
+    },
+    {
+      "t": 542,
+      "label": "Kompleksilukujen kerto- ja jakolasku"
+    },
+    {
+      "t": 662,
+      "label": "Kompleksiluvun amplitudi/pituus"
+    },
+    {
+      "t": 730,
+      "label": "Reaaliosa"
+    },
+    {
+      "t": 749,
+      "label": "Imaginääriosa"
+    },
+    {
+      "t": 780,
+      "label": "Aaltojen kompleksinen esitys"
+    },
+    {
+      "t": 933,
+      "label": "Sähkökenttä on reaalisuure"
+    },
+    {
+      "t": 1050,
+      "label": "Sähkökenttä voi olla kompleksiarvoinen taajuustasossa"
+    },
+    {
+      "t": 1120,
+      "label": "E-kenttä kirjoitetaan kuitenkin usein kompleksisena"
+    },
+    {
+      "t": 1193,
+      "label": "Aikaharmonisen aallon eksponenttimuoto"
+    },
+    {
+      "t": 1242,
+      "label": "Kertaus luennon sisällöstä"
+    }
+  ],
+  "F_eQY3kH5pU": [
+    {
+      "t": 0,
+      "label": "Johdanto loppulukuun 3 Aaltoliike"
+    },
+    {
+      "t": 313,
+      "label": "Tasoaallon eteneminen mielivaltaiseen suuntaan"
+    },
+    {
+      "t": 390,
+      "label": "Aaltovektori k osoittaa tasoaallon etenemissuuntaan"
+    },
+    {
+      "t": 465,
+      "label": "Aallon vaihe riippuu lineaarisesti paikasta r"
+    },
+    {
+      "t": 490,
+      "label": "Aaltorintama on taso, jossa aallon vaihe on vakioarvoinen"
+    },
+    {
+      "t": 565,
+      "label": "Aaltorintaman S määrittely aaltovektorin k avulla"
+    },
+    {
+      "t": 736,
+      "label": "Tasoaallon matemaattinen kuvaus"
+    },
+    {
+      "t": 858,
+      "label": "Aaltoluvun eli aaltovektorin amplitudin |k| määrittäminen"
+    },
+    {
+      "t": 1275,
+      "label": "Tasoaallon vaihenopeuden v_p laskeminen (kokonaisdifferentiaali)"
+    },
+    {
+      "t": 1346,
+      "label": "Loppuhöpinät"
+    }
+  ],
+  "4comdeP8QWY": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 44,
+      "label": "Aaltovektorin k ja paikkavektorin r komponenttimuodot"
+    },
+    {
+      "t": 110,
+      "label": "Pistetulon k.r laskeminen"
+    },
+    {
+      "t": 145,
+      "label": "Aaltoyhtälön johtaminen"
+    },
+    {
+      "t": 407,
+      "label": "Aaltoyhtälö"
+    },
+    {
+      "t": 428,
+      "label": "Koordinaatistosta vapaa aaltoyhtälö"
+    },
+    {
+      "t": 450,
+      "label": "Gradientti"
+    },
+    {
+      "t": 510,
+      "label": "Laplace-operaattori"
+    },
+    {
+      "t": 600,
+      "label": "Aaltoyhtälö Laplace-operaattorin avulla"
+    },
+    {
+      "t": 663,
+      "label": "Koordinaatisto kannattaa valita tilanteen mukaan"
+    }
+  ],
+  "qvASDTXJss0": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 225,
+      "label": "Koordinaatisto kannattaa valita tilanteen mukaan"
+    },
+    {
+      "t": 298,
+      "label": "Pallokoordinaatisto"
+    },
+    {
+      "t": 394,
+      "label": "Muunnos pallokoordinaatistosta karteesiseen koordinaatistoon"
+    },
+    {
+      "t": 497,
+      "label": "Palloaallon kuvaus"
+    },
+    {
+      "t": 725,
+      "label": "Sylinterikoordinaatisto"
+    },
+    {
+      "t": 854,
+      "label": "Muunnos sylinterikoordinaatistosta karteesiseen koordinaatistoon"
+    },
+    {
+      "t": 928,
+      "label": "Sylinteriaallon kuvaus"
+    },
+    {
+      "t": 1078,
+      "label": "Kaukokenttä voidaan usein approksimoida tasoaalloksi"
+    },
+    {
+      "t": 1168,
+      "label": "Kaikissa koordinaatistoissa on mahdollista kuvata kaikenlaisia aaltoja (muttei aina helppoa/järkevää)"
+    }
+  ],
+  "W37_AzacniU": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 75,
+      "label": "Mikko avautuu :D"
+    },
+    {
+      "t": 496,
+      "label": "Yleistys vektorikenttiin"
+    },
+    {
+      "t": 630,
+      "label": "Vektoriarvoinen kentän amplitudi A = [ A_x , A_y , A_z ]"
+    },
+    {
+      "t": 765,
+      "label": "Valon polarisaatio kuvaa kentän värähtelysuuntaa/tapaa"
+    },
+    {
+      "t": 900,
+      "label": "Valon polarisaatiovektori p, eli valon polarisaatio"
+    },
+    {
+      "t": 998,
+      "label": "Lineaarinen polarisaatio, Ex ja Ey ovat realiarvoisia"
+    },
+    {
+      "t": 1024,
+      "label": "Ympyräpolarisaatio, esim. Ey = +- i Ex"
+    },
+    {
+      "t": 1140,
+      "label": "Oikeakätinen ympyräpolarisaatio, p =1/sqrt(2) * x - iy"
+    },
+    {
+      "t": 1182,
+      "label": "Väsenkätinen ympyräpolarisaatio, p =1/sqrt(2) * x + iy"
+    },
+    {
+      "t": 1290,
+      "label": "Elliptinen polarisaatio on yleisin polarisaatiotila"
+    },
+    {
+      "t": 1418,
+      "label": "Valon polarisaatiotilat kuvien avulla hahmoteltuina"
+    }
+  ],
+  "GP6R2SD7xUs": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 100,
+      "label": "Pitäydytään karteesisessa koordinaatistossa"
+    },
+    {
+      "t": 130,
+      "label": "Vektorien laskusäännöt (yhteenlasku, skalaarilla kertominen, ...)"
+    },
+    {
+      "t": 235,
+      "label": "Piste- eli skalaaritulo (A.B)"
+    },
+    {
+      "t": 293,
+      "label": "Risti- eli vektoritulo (AxB)"
+    },
+    {
+      "t": 490,
+      "label": "Pistetulo Einsteinin summausnotaation avulla"
+    },
+    {
+      "t": 680,
+      "label": "Ristitulo Einsteinin summausnotaation avulla"
+    },
+    {
+      "t": 790,
+      "label": "Levi-Civita pariteettisymboli"
+    },
+    {
+      "t": 1270,
+      "label": "Skalaarikolmoistulo (A.BxC)"
+    },
+    {
+      "t": 1316,
+      "label": "Vektorikolmoistulo (AxBxC)"
+    },
+    {
+      "t": 1382,
+      "label": "Vektorianalyysin alkeet"
+    },
+    {
+      "t": 1540,
+      "label": "Skalaarifunktion gradientti, grad(phi)"
+    },
+    {
+      "t": 1596,
+      "label": "Vektorifunktion gradientti, grad(E)"
+    },
+    {
+      "t": 1705,
+      "label": "Vektorikentän divergenssi, div(E)"
+    },
+    {
+      "t": 1749,
+      "label": "Vektorikentän roottori, rot(E)"
+    },
+    {
+      "t": 1863,
+      "label": "Toisen asteen vektoridifferentiaalioperaattorit"
+    },
+    {
+      "t": 1913,
+      "label": "Laplace skalaarifunktiolle (gradientin divergenssi)"
+    },
+    {
+      "t": 2007,
+      "label": "Laplace vektorifunktiolle"
+    },
+    {
+      "t": 2054,
+      "label": "Identiteetti: Gradientin roottori == 0"
+    },
+    {
+      "t": 2083,
+      "label": "Identiteetti: Roottorin divergenssi == 0"
+    },
+    {
+      "t": 2135,
+      "label": "Lagrangen yhtälö"
+    },
+    {
+      "t": 2235,
+      "label": "Loppuhöpinät"
+    },
+    {
+      "t": 2310,
+      "label": "Muistakaa skalaari- ja vektorikenttien erot!"
+    }
+  ],
+  "xvdkqsoE55c": [
+    {
+      "t": 0,
+      "label": "Johdanto"
+    },
+    {
+      "t": 145,
+      "label": "Sähköstaattinen approksimaatio (sähkövaraukset eivät liiku)"
+    },
+    {
+      "t": 225,
+      "label": "Gaussin laki integraalimuodossa"
+    },
+    {
+      "t": 426,
+      "label": "Divergenssiteoreema"
+    },
+    {
+      "t": 495,
+      "label": "Gaussin laki differentiaalimuodossa"
+    },
+    {
+      "t": 655,
+      "label": "Maxwell-Faradayn laki sähköstaattisessa approksimaatiossa"
+    },
+    {
+      "t": 750,
+      "label": "Sähköstaattinen sähkökenttä on irrotationaalinen eli pyörteetön"
+    },
+    {
+      "t": 785,
+      "label": "Helmholtzin hajotelma: $\\mathrm{E}=-\\operatorname{grad}(\\mathrm{phi})+\\operatorname{rot}(\\mathrm{A})$"
+    },
+    {
+      "t": 1020,
+      "label": "Gaussin laki potentiaalimuodossa"
+    },
+    {
+      "t": 1020,
+      "label": "Gaussin laki potentiaalimuodossa, osa 2"
+    },
+    {
+      "t": 1120,
+      "label": "Poissonin yhtälö"
+    },
+    {
+      "t": 1269,
+      "label": "Poissonin yhtälö EI OLE aaltoyhtälö"
+    },
+    {
+      "t": 1344,
+      "label": "Magnetostaattinen approksimaatio"
+    },
+    {
+      "t": 1368,
+      "label": "Vektoripotentiaali A"
+    },
+    {
+      "t": 1415,
+      "label": "E- ja B-kentät skalaari- ja vektoripotentiaalien avulla ilmaistuna"
+    }
   ]
 }

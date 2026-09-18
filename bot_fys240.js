@@ -90,6 +90,29 @@ const CHAPTER_NAMES = {
   10: "Geometrical Optics",
 };
 
+const CHAPTER_NAMES_FI = {
+  2: "Valon kuvaustavat",
+  3: "Aaltoliike",
+  4: "Sähkömagneettiset aallot",
+  5: "Valon ja aineen vuorovaikutus",
+  6: "Eteneminen",
+  7: "Superpositio",
+  8: "Interferenssi",
+  9: "Diffraktio",
+  10: "Geometrinen optiikka",
+};
+
+// Picks a per-user language ("en" | "fi") for the deterministic, non-AI
+// commands (/help, /topics, /weekN, ...) which have no free-text question
+// to detect language from. Telegram sends the client's language_code
+// (e.g. "fi", "fi-FI") with every message.from; anything not Finnish falls
+// back to English. The AI-answered path instead detects language from the
+// student's own question text (see TA_INSTRUCTIONS), independent of this.
+function getLang(message) {
+  const code = message?.from?.language_code || "";
+  return code.toLowerCase().startsWith("fi") ? "fi" : "en";
+}
+
 // ------------------------------------------------------ build system ----
 const TA_INSTRUCTIONS = `You are the teaching assistant bot for FYS.240 Optics, answering students in a Telegram group.
 
@@ -103,19 +126,20 @@ WHAT YOU KNOW
 WHEN TO SUGGEST VIDEOS
 If a student asks about a topic that's covered in video lectures, suggest the relevant video:
 - Check if the topic matches any video lecture title
-- Write it as a Markdown link with the chapter and topic as the clickable label, e.g.:
-  "That's covered in [Video 5.2 (Refraction)](https://youtube.com/watch?v=pzzjQhhXdkE)."
 - ALWAYS use this exact [Video X.Y (Topic)](URL) format — never write the raw URL on its own, after a colon, or after a dash
-- SOME videos also list in-video timestamps (chapter markers) below their entry in <video_lectures>, e.g. "  16:48 Poyntingin vektori S = c^2 eps0 ExB". When the student's question matches one of these markers specifically (not just the video's general topic), link straight to that moment instead of the start of the video: append &t=<seconds>s to the video URL, using the seconds shown after each marker in parentheses. Label the link with what's actually at that timestamp, e.g.:
-  "That's explained around 16:48 in [Video 4.3 (Poynting vector formula)](https://youtube.com/watch?v=qPxBAoaT_Dc&t=1008s)."
-- If no timestamp marker matches but the video overall covers the topic, link the video without &t= as before
-- Not every video has timestamps yet — only use &t= when a marker is actually listed for that video
+- LANGUAGE OF VIDEO LINKS: <video_lectures> below lists each lecture as an EN pair (topic + url) and, where one exists, an FI pair after "|". ALWAYS match the pair's language to the language you are answering in RIGHT NOW, with or without a timestamp — do not default to the English pair out of habit, even if an example below happens to be in English. If a lecture has no FI pair, use the EN pair even in a Finnish answer.
+  EN example (answering in English): "That's covered in [Video 5.2 (Refraction)](https://youtube.com/watch?v=pzzjQhhXdkE)."
+  FI example (answering in Finnish — same rule, Finnish pair): "Asiasta kerrotaan [Video 5.2 (Taittuminen)](https://youtube.com/watch?v=<fi-id>):ssa."
+- IN-VIDEO TIMESTAMPS: some lectures also list chapter markers indented beneath the EN and/or FI pair, tagged EN: or FI:, e.g. "  FI: 16:48 (1008s) Poyntingin vektori S = c^2 eps0 ExB". When the student's question matches one of these markers specifically (not just the video's general topic), link straight to that moment instead of the start of the video: append &t=<seconds>s to the SAME-LANGUAGE pair's url, using the seconds shown in parentheses after the marker — never recompute it yourself. Only use a marker that's tagged for the language (EN:/FI:) you're actually linking; never mix a FI: marker's seconds onto the EN url or vice versa.
+  FI example (answering in Finnish, using a FI: marker): "Asiasta kerrotaan tarkemmin kohdassa 16:48 videolla [Video 4.3 (Poyntingin vektori)](https://youtube.com/watch?v=KCRFMlnFNbQ&t=1008s)."
+  EN example (answering in English, using an EN: marker for the same lecture): "That's explained around 16:48 in [Video 4.3 (Poynting vector formula)](https://youtube.com/watch?v=qPxBAoaT_Dc&t=1008s)." — only if an EN: marker is actually listed for that video.
+  Not every video has markers yet — only use &t= when one is actually listed for the pair (language) you're linking.
 
 HOW TO HELP
 **LENGTH**: ONE OR TWO SHORT SENTENCES/PARAGRAPH ONLY. Never use section headers, bullets, tables, or sub-points. No "Step 1, Step 2". No "Key insight:". Just talk to them like a person.
 **HOMEWORK**: Give hints, not answers. Name the relevant equation or concept, point to the section, suggest a video if available, ask ONE guiding question. (Students can also use /HW1 ... /HW6 and /HW3.2-style commands to ask about a specific homework set or problem directly.)
 **CONCEPTUAL**: Answer directly and briefly. If they ask about something that has a video, mention it: "That's in [Video X.Y (Topic)](URL). In short, ..."
-**VIDEO REFERENCES**: When appropriate, include video links as [Video X.Y (Topic)](URL) so students can find them easily.
+**VIDEO REFERENCES**: When appropriate, include video links as [Video X.Y (Topic)](URL) so students can find them easily, choosing the EN or FI title/url pair to match the language you're answering in (see LANGUAGE OF VIDEO LINKS above).
 **STUDENT ATTEMPTS**: If they show work, check it quickly, point at one specific error. Don't rewrite the whole thing.
 **REDIRECT**: If it's outside course scope, say "That's beyond FYS.240, ask your instructor during office hours".
 
@@ -126,7 +150,7 @@ ${LATEX_ENABLED
 - These will be automatically rendered as readable images`
   : `- Use UNICODE SYMBOLS ONLY: α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ σ τ υ φ χ ψ ω`
 }
-- Write video links as [Video X.Y (Topic)](URL) Markdown links, never as bare URLs
+- Write video links as [Video X.Y (Topic)](URL) Markdown links, never as bare URLs, using the Finnish topic/url when answering in Finnish and the English topic/url when answering in English (see LANGUAGE OF VIDEO LINKS above)
 - 2-3 short paragraphs maximum
 - Answer in the language the student writes in (English or Finnish)
 - VECTOR QUANTITIES: wrap every vector symbol in **...** (e.g. **E**, **B**, **D**, **H**, **j**, **k**, **r**, **p**, **S**, **F**, **v**), EVERY time it appears — not just on first use, and inside equations as well as prose (e.g. \u2207\u00d7**B** = \u03bc\u2080**j** + \u03bc\u2080\u03b5\u2080\u2202**E**/\u2202t). Do this consistently across microscopic and macroscopic Maxwell's equations alike.
@@ -215,28 +239,30 @@ function formatCourseSchedule() {
 function formatVideoDatabase(db) {
   let context = "\n<video_lectures>\n";
   context += `## FYS.240 Optics - Video Lectures\n\n`;
-  context += `Videos may list in-video timestamps beneath them — for those, the ` +
-    `seconds value in parentheses is exactly what goes after &t= in the URL.\n\n`;
+  context += `Each line: chapter: English topic (EN url) | Finnish topic (FI url)\n`;
+  context += `Use the EN pair when answering in English, the FI pair when answering in Finnish. If a video has no FI pair listed, fall back to the EN pair even in a Finnish answer.\n`;
+  context += `Some lectures also list in-video timestamps indented below them, tagged EN: or FI: for which pair's url they belong to. The seconds value in parentheses is exactly what goes after &t= in that pair's url.\n\n`;
 
-  const secLabel = (seg) => {
+  const segLine = (tag, seg) => {
     const mm = String(Math.floor(seg.t / 60)).padStart(2, "0");
     const ss = String(seg.t % 60).padStart(2, "0");
-    return `  ${mm}:${ss} (${seg.t}s) ${seg.label}`;
+    return `  ${tag}: ${mm}:${ss} (${seg.t}s) ${seg.label}\n`;
   };
 
   const chapters = db.getChapters();
   chapters.forEach(chapter => {
     const videos = db.getChapter(chapter);
     videos.forEach(video => {
-      context += `${video.chapter}: ${video.topic} - https://youtube.com/watch?v=${video.id}\n`;
-      (video.segments || []).forEach(seg => { context += secLabel(seg) + "\n"; });
-      if (video.id_fi) {
-        context += `${video.chapter} (fi): ${video.topic_fi || video.topic} - https://youtube.com/watch?v=${video.id_fi}\n`;
-        (video.segments_fi || []).forEach(seg => { context += secLabel(seg) + "\n"; });
+      context += `${video.chapter}: ${video.topic} (https://youtube.com/watch?v=${video.id})`;
+      if (video.topic_fi && video.id_fi) {
+        context += ` | ${video.topic_fi} (https://youtube.com/watch?v=${video.id_fi})`;
       }
+      context += "\n";
+      (video.segments || []).forEach(seg => { context += segLine("EN", seg); });
+      (video.segments_fi || []).forEach(seg => { context += segLine("FI", seg); });
     });
   });
-
+  
   context += "\n</video_lectures>\n";
   return context;
 }
@@ -308,16 +334,24 @@ const quizBot = {
 // Called by quizGenerator.startQuiz() when the student didn't name a
 // chapter/section (e.g. just typed "quiz me"). Presents an inline-keyboard
 // chapter picker covering FYS.240's chapters 2-10, built from
-// corpusLoader.listChapters()/getChapterTitle(). Tapping a chapter sends a
-// "quizchapter:N" callback, handled in handleCallbackQuery() below, which
-// starts the actual quiz. Returning null tells startQuiz() to stop — there's
-// nothing more for it to do until the student taps a button.
-async function askWhichChapter(bot, chatId) {
-  await bot.sendMessage(chatId, "Which chapter would you like to be quizzed on?", {
+// corpusLoader.listChapters()/getChapterTitle()/getChapterTitleFi() —
+// `lang` (passed through by startQuiz's resolveQuizLang()) picks which.
+// Tapping a chapter sends a "quizchapter:N:lang" callback, handled in
+// handleCallbackQuery() below, which starts the actual quiz in that same
+// language. Returning null tells startQuiz() to stop — there's nothing
+// more for it to do until the student taps a button.
+async function askWhichChapter(bot, chatId, lang = "en") {
+  const text = lang === "fi" ? "Mistä luvusta haluaisit visan?" : "Which chapter would you like to be quizzed on?";
+  await bot.sendMessage(chatId, text, {
     reply_markup: {
-      inline_keyboard: corpusLoader.listChapters().map((ch) => ([
-        { text: `Chapter ${ch} — ${corpusLoader.getChapterTitle(ch)}`, callback_data: `quizchapter:${ch}` },
-      ])),
+      inline_keyboard: corpusLoader.listChapters().map((ch) => {
+        const title = lang === "fi" ? corpusLoader.getChapterTitleFi(ch) : corpusLoader.getChapterTitle(ch);
+        const label = lang === "fi" ? `Luku ${ch} — ${title}` : `Chapter ${ch} — ${title}`;
+        // Language rides along in callback_data ("quizchapter:<N>:<lang>")
+        // since there's no quiz session yet at this point for
+        // handleQuizAnswer's session.lang trick to apply to.
+        return [{ text: label, callback_data: `quizchapter:${ch}:${lang}` }];
+      }),
     },
   });
   return null;
@@ -596,7 +630,7 @@ function buildHwMinimalHintDirective(hwNum, problemNum) {
   );
 }
 
-const HELP_TEXT =
+const HELP_TEXT_EN =
   `Hi! I'm the FYS.240 Optics assistant. I know the lecture notes, textbook, and have ${VIDEO_DB ? VIDEO_DB.all().length : 0} video lectures on all course topics.\n\n` +
   "Ask me things like:\n" +
   "- How do thin lenses work?\n" +
@@ -613,6 +647,27 @@ const HELP_TEXT =
   "/HW_hint3.2 — just a one-line nudge, no explanation\n" +
   "/reset — clear our conversation history";
 
+const HELP_TEXT_FI =
+  `Hei! Olen FYS.240 Optiikka -kurssin avustaja. Tunnen luentomuistiinpanot, oppikirjan ja ${VIDEO_DB ? VIDEO_DB.all().length : 0} luentovideota kaikista kurssin aiheista.\n\n` +
+  "Voit kysyä esimerkiksi:\n" +
+  "- Miten ohut linssi toimii?\n" +
+  "- Mikä ero on reaalikuvalla ja virtuaalikuvalla?\n" +
+  "- Jumitin tehtävässä 5.2, mistä kannattaisi aloittaa?\n" +
+  "- Selitä, miten mikroskooppi toimii\n" +
+  "- \"Kysele minulta luvusta 2\" (tai tietystä osiosta, esim. \"kysele minulta osiosta 2.3\") monivalintavisaa varten\n\n" +
+  "Selitän käsitteitä, ohjaan sinut oikeiden videoiden tai lukujen pariin ja annan vinkkejä kotitehtäviin (mutten valmiita ratkaisuja).\n\n" +
+  "Komennot:\n" +
+  "/topics — kaikki luentovideoiden aiheet\n" +
+  "/week1 ... /week7 — kyseisen kurssiviikon videot (viikko 7 = kertaus)\n" +
+  "/HW1 ... /HW6 — listaa tietyn kotitehtäväsetin tehtävät\n" +
+  "/HW3.2 — vinkki kotitehtävä 3:n tehtävään 2\n" +
+  "/HW_hint3.2 — vain lyhyt vihje, ei selitystä\n" +
+  "/reset — tyhjennä keskusteluhistoriamme";
+
+function helpText(lang) {
+  return lang === "fi" ? HELP_TEXT_FI : HELP_TEXT_EN;
+}
+
 
 // Video topics command
 // Returns an array of HTML-formatted message chunks (Telegram parse_mode:
@@ -627,11 +682,16 @@ function escapeHtml(s) {
     .replace(/>/g, "&gt;");
 }
 
-function buildVideoListChunks(chapterKeys, headerText) {
+// lang: "en" | "fi" — picks Finnish chapter names and, per video, the
+// Finnish topic/url pair (falling back to the English one for any video
+// that has no Finnish recording, same fallback rule as TA_INSTRUCTIONS).
+function buildVideoListChunks(chapterKeys, headerText, lang) {
   const MAX_CHUNK = 3800; // headroom under Telegram's 4096 hard limit
   const messages = [];
   let msg = headerText;
   let lastMajor = null;
+  const names = lang === "fi" ? CHAPTER_NAMES_FI : CHAPTER_NAMES;
+  const chapterWord = lang === "fi" ? "Luku" : "Chapter";
 
   chapterKeys.forEach(chapter => {
     const major = parseInt(chapter.split(".")[0], 10);
@@ -643,16 +703,18 @@ function buildVideoListChunks(chapterKeys, headerText) {
     let prefix = "";
     if (major !== lastMajor) {
       if (lastMajor !== null) prefix += "\n";
-      const title = CHAPTER_NAMES[major]
-        ? `Chapter ${major}: ${CHAPTER_NAMES[major]}`
-        : `Chapter ${major}`;
+      const title = names[major]
+        ? `${chapterWord} ${major}: ${names[major]}`
+        : `${chapterWord} ${major}`;
       prefix += `<b>${escapeHtml(title)}</b>\n`;
       lastMajor = major;
     }
 
     videos.forEach(v => {
-      const label = escapeHtml(`${v.chapter}: ${v.topic}`);
-      const line = `<a href="${escapeHtml(v.url)}">${label}</a>\n`;
+      const topic = lang === "fi" && v.topic_fi ? v.topic_fi : v.topic;
+      const url = lang === "fi" && v.url_fi ? v.url_fi : v.url;
+      const label = escapeHtml(`${v.chapter}: ${topic}`);
+      const line = `<a href="${escapeHtml(url)}">${label}</a>\n`;
       const block = prefix + line;
       if (msg.length + block.length > MAX_CHUNK) {
         messages.push(msg.trim());
@@ -667,14 +729,15 @@ function buildVideoListChunks(chapterKeys, headerText) {
   return messages;
 }
 
-function generateTopicsMessages() {
+function generateTopicsMessages(lang) {
   if (!VIDEO_DB || VIDEO_DB.all().length === 0) {
-    return ["Video database not loaded."];
+    return [lang === "fi" ? "Videotietokantaa ei ole ladattu." : "Video database not loaded."];
   }
-  return buildVideoListChunks(
-    VIDEO_DB.getChapters(),
-    "📺 <b>FYS.240 Optics - Video Lectures</b>\n\n"
-  );
+  const header =
+    lang === "fi"
+      ? "📺 <b>FYS.240 Optiikka - Luentovideot</b>\n\n"
+      : "📺 <b>FYS.240 Optics - Video Lectures</b>\n\n";
+  return buildVideoListChunks(VIDEO_DB.getChapters(), header, lang);
 }
 
 // /weekN command — real FYS.240 course schedule, mapping each course week
@@ -686,22 +749,27 @@ function getAvailableWeeks() {
   return [...Object.keys(WEEK_TO_CHAPTERS).map(Number), RECAP_WEEK].sort((a, b) => a - b);
 }
 
-function generateWeekMessages(weekNum) {
+function generateWeekMessages(weekNum, lang) {
   if (!VIDEO_DB || VIDEO_DB.all().length === 0) {
-    return ["Video database not loaded."];
+    return [lang === "fi" ? "Videotietokantaa ei ole ladattu." : "Video database not loaded."];
   }
 
   if (weekNum === RECAP_WEEK) {
     return [
-      "📚 Week 7 (5.10.-11.10.) is the recap week - no new chapters. " +
-      "Use /topics to browse all videos again, or ask me about anything from chapters 2-10.",
+      lang === "fi"
+        ? "📚 Viikko 7 (5.10.-11.10.) on kertausviikko - ei uusia lukuja. " +
+          "Selaa kaikkia videoita uudelleen komennolla /topics, tai kysy minulta mitä tahansa luvuista 2-10."
+        : "📚 Week 7 (5.10.-11.10.) is the recap week - no new chapters. " +
+          "Use /topics to browse all videos again, or ask me about anything from chapters 2-10.",
     ];
   }
 
   const chapterMajors = WEEK_TO_CHAPTERS[weekNum];
   if (!chapterMajors) {
     return [
-      `No videos found for week ${weekNum}. Available weeks: ${getAvailableWeeks().join(", ")} (7 is the recap week).`,
+      lang === "fi"
+        ? `Viikolle ${weekNum} ei löytynyt videoita. Saatavilla olevat viikot: ${getAvailableWeeks().join(", ")} (7 on kertausviikko).`
+        : `No videos found for week ${weekNum}. Available weeks: ${getAvailableWeeks().join(", ")} (7 is the recap week).`,
     ];
   }
 
@@ -709,8 +777,11 @@ function generateWeekMessages(weekNum) {
     chapterMajors.includes(parseInt(c.split(".")[0], 10))
   );
 
-  const header = `📺 <b>FYS.240 Optics - Week ${weekNum} Videos</b>\n\n`;
-  return buildVideoListChunks(chapters, header);
+  const header =
+    lang === "fi"
+      ? `📺 <b>FYS.240 Optiikka - Viikon ${weekNum} videot</b>\n\n`
+      : `📺 <b>FYS.240 Optics - Week ${weekNum} Videos</b>\n\n`;
+  return buildVideoListChunks(chapters, header, lang);
 }
 
 // ------------------------------------------------------------- webhook ------
@@ -756,13 +827,18 @@ async function handleUpdate(update) {
 
   if (!shouldAnswer(message)) return;
 
-  if (/^\/(start|help)/i.test(text)) return sendMessage(chatId, HELP_TEXT);
+  const lang = getLang(message);
+
+  if (/^\/(start|help)/i.test(text)) return sendMessage(chatId, helpText(lang));
   if (/^\/reset/i.test(text)) {
     history.delete(chatId);
-    return sendMessage(chatId, "Conversation history cleared. Ask me anything.");
+    return sendMessage(
+      chatId,
+      lang === "fi" ? "Keskusteluhistoria tyhjennetty. Kysy mitä vain." : "Conversation history cleared. Ask me anything."
+    );
   }
   if (/^\/topics?/i.test(text)) {
-    for (const chunk of generateTopicsMessages()) {
+    for (const chunk of generateTopicsMessages(lang)) {
       await tg("sendMessage", {
         chat_id: chatId,
         text: chunk,
@@ -777,7 +853,7 @@ async function handleUpdate(update) {
   const weekMatch = text.match(/^\/week(\d+)/i);
   if (weekMatch) {
     const weekNum = parseInt(weekMatch[1], 10);
-    for (const chunk of generateWeekMessages(weekNum)) {
+    for (const chunk of generateWeekMessages(weekNum, lang)) {
       await tg("sendMessage", {
         chat_id: chatId,
         text: chunk,
@@ -826,7 +902,9 @@ async function handleUpdate(update) {
     } catch (e) {
       await sendMessage(
         chatId,
-        "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
+        lang === "fi"
+          ? "Pahoittelut, en juuri nyt saanut yhteyttä aivoihini. Yritä hetken kuluttua uudelleen."
+          : "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
         message.message_id
       );
     }
@@ -845,7 +923,7 @@ async function handleUpdate(update) {
   // ---- "quiz me" / "quiz me on chapter 2" / "quiz me on section 2.3" ----
   if (quizGenerator.isQuizRequest(question)) {
     return quizGenerator
-      .startQuiz(quizBot, chatId, question, askWhichChapter)
+      .startQuiz(quizBot, chatId, question, askWhichChapter, lang)
       .catch((e) => console.error("quizGenerator.startQuiz crashed:", e.message));
   }
 
@@ -859,7 +937,9 @@ async function handleUpdate(update) {
   } catch (e) {
     await sendMessage(
       chatId,
-      "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
+      lang === "fi"
+        ? "Pahoittelut, en juuri nyt saanut yhteyttä aivoihini. Yritä hetken kuluttua uudelleen."
+        : "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
       message.message_id
     );
   }
@@ -867,7 +947,7 @@ async function handleUpdate(update) {
 
 // callback_query updates: answer-option taps ("quiz:...") from
 // quizGenerator's inline keyboards, and chapter-picker taps
-// ("quizchapter:N") from askWhichChapter() above.
+// ("quizchapter:N:lang") from askWhichChapter() above.
 async function handleCallbackQuery(cq) {
   const data = cq.data || "";
 
@@ -878,12 +958,14 @@ async function handleCallbackQuery(cq) {
   }
 
   if (data.startsWith("quizchapter:")) {
-    const chapter = data.split(":")[1];
+    const [, chapterStr, langStr] = data.split(":");
+    const chapter = chapterStr;
+    const lang = langStr === "fi" ? "fi" : "en";
     const chatId = cq.message?.chat?.id;
     await quizBot.answerCallbackQuery(cq.id);
     if (!chatId) return;
     return quizGenerator
-      .startQuiz(quizBot, chatId, `quiz me on chapter ${chapter}`, askWhichChapter)
+      .startQuiz(quizBot, chatId, `quiz me on chapter ${chapter}`, askWhichChapter, lang)
       .catch((e) => console.error("quizGenerator.startQuiz (chapter pick) crashed:", e.message));
   }
 
