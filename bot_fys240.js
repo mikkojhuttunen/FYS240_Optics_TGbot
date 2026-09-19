@@ -10,7 +10,7 @@
  * so you can always confirm which version is actually live on Railway.
  * ============================================================================
  *
- * CURRENT FUNCTIONALITY (v2.3.0):
+ * CURRENT FUNCTIONALITY (v2.6.1):
  *   - Free-text Q&A grounded in course_corpus.txt, answers in whichever
  *     language (EN/FI) the student's question is written in
  *   - Bilingual (EN/FI) video lecture links from fys240_videos.js, with
@@ -18,7 +18,9 @@
  *   - Deterministic correction of wrong-language video links
  *     (fixVideoLinkLanguage/isFinnishText)
  *   - Math sent as plain Unicode text (α, β, √, ², ᵢ, ...) — no LaTeX/image
- *     rendering; latexToUnicode() converts/strips any stray LaTeX Claude emits
+ *     rendering; latexToUnicode() converts/strips any stray LaTeX Claude emits.
+ *     Runs with markdown-link URLs placeholder-protected (see CHANGELOG
+ *     v2.5.0) so a video ID containing an underscore is never corrupted.
  *   - /start, /help — bilingual help text
  *   - /topics — video lecture list, grouped by chapter, in the student's
  *     detected client language
@@ -32,29 +34,166 @@
  *   - /HW_hint3.2 — a one-sentence nudge only
  *   - /HWQ3.2 (or /hwq3.2) — exact verbatim question text, no hint, no API
  *     call, straight from homework_problems.json
+ *   - /define <term> — deterministic glossary lookup, no API call, now
+ *     backed by the official FYS.240 course booklet index (312 terms,
+ *     curated — see CHANGELOG v2.6.0), with a bilingual video link
+ *     (upgraded to the canonical "[Video X.Y (Topic)]" form where a
+ *     match exists)
  *   - "quiz me on chapter N" / "...section N.M" — multiple-choice quiz via
  *     quizGenerator_fys240.js, with an inline-keyboard chapter picker
  *   - /reset — clear conversation history
- *   - /healthz — reports corpus/video/homework/quiz health + BOT_VERSION
+ *   - /source_materials, /source_HW, /source_quizzes — dev-only data-source
+ *     introspection commands (see CHANGELOG v2.6.1). NOT listed in /help or
+ *     /start, but not access-restricted either — same as every other
+ *     command here.
+ *   - /healthz — reports corpus/video/homework/glossary/quiz health + BOT_VERSION
  *   - Conversation history (6 turns) & per-user rate limiting
- *   - Course-mismatch guard on homework_problems.json (added v2.2.0, kept
- *     as a permanent safety net): refuses to serve homework text that
- *     looks like it's from the wrong course instead of silently handing
- *     it to students. Does not fire on the real FYS.240 content added in
- *     v2.3.0 (verified: 15 laser-vocabulary hits vs. 11 optics-vocabulary
- *     hits, well under the trip threshold).
+ *   - Course-mismatch guards, kept as permanent safety nets, on both
+ *     homework_problems.json (v2.2.0) and terminology.json (v2.4.0):
+ *     refuse to serve content that looks like it's from the wrong course
+ *     instead of silently handing it to students. Neither currently fires
+ *     — both homework_problems.json (v2.3.0) and terminology.json (v2.6.0)
+ *     are now real FYS.240 content.
  *
  * KNOWN GAPS (not yet implemented — see redeploy-package README):
- *   - /define <term> — glossary lookup exists in corpusLoader.js
- *     (findGlossaryTerms, backed by terminology.json) but isn't wired to a
- *     command in this bot yet
- *   - No pre-built FYS.240 quiz bank (quizBank_fys240.json) — quizzes always
- *     live-generate via the Claude API
+ *   - quizBank_fys240.json only covers chapters 2, 4 and 5 (39 questions, as
+ *     of the v2.6.1 repo snapshot); every other chapter live-generates via
+ *     the Claude API. /source_quizzes shows the live picture.
  *   - homework_solutions.json (new in v2.3.0) is instructor-reference only —
  *     nothing in this bot loads or serves it; see the file's own header
  *     comment and the redeploy-package README before wiring it to anything
+ *   - terminology.json (v2.6.0) covers the 312 terms in the official course
+ *     booklet index; 61 of those have no matching context in the English
+ *     lecture slides (they're prerequisite math/EM vocabulary the course
+ *     assumes rather than re-teaches) and fall back to a page-only
+ *     reference with no video link — see CHANGELOG v2.6.0. /define still
+ *     answers for these, just without a lecture excerpt attached.
+
  *
  * CHANGELOG:
+ *   v2.6.1 — Merged the /source_* introspection commands (developed on the
+ *            v2.3.x line) into v2.6.0. Three dev-only commands so an
+ *            instructor can verify exactly which data the running bot has
+ *            loaded without reading Railway logs or SSH-ing in:
+ *              /source_materials — course_corpus.txt (size, first line,
+ *                corpusLooksHealthy, and an informational-only laser-vs-
+ *                optics keyword scan that flags a stale/wrong-course
+ *                corpus), fys240_videos.js (lecture count, EN/FI bilingual
+ *                coverage), and terminology.json (term count, health,
+ *                course-mismatch guard status, and the v2.6.0 per-entry
+ *                `source` breakdown incl. how many page-only entries have
+ *                no lecture context).
+ *              /source_HW — homework_problems.json (per-set problem counts,
+ *                course-mismatch guard status) and homework_solutions.json
+ *                (existence + counts ONLY, read fresh from disk each call —
+ *                never cached in memory, never prints any solution text,
+ *                consistent with the no-solutions-to-students rule; see
+ *                HOMEWORK_SOLUTIONS_README.md).
+ *              /source_quizzes — quizBank_fys240.json (per-chapter/section
+ *                question counts, which chapters still live-generate) and
+ *                quizBankPending_fys240.json (saved live-generated question
+ *                count, for later curation).
+ *            All three are plain-text, deterministic, no Claude API call —
+ *            same design as /healthz, just with more human-readable detail.
+ *            Sent via sendDiagnosticReport(), which bypasses sendMessage()'s
+ *            video-link/LaTeX pipeline (latexToUnicode's "_x -> subscript"
+ *            rule would otherwise turn "course_corpus.txt" into
+ *            "coursecorpus.txt"). Deliberately left out of HELP_TEXT_EN/FI
+ *            and /start: bot-development tools, not a student feature.
+ *            Also fixed (found while testing the merge): /define on the 61
+ *            page-only glossary entries (source "booklet-only", null
+ *            context/introducedIn/url) printed "introduced in section
+ *            null\nnull" — formatGlossaryReply now answers with the
+ *            booklet page number (bookletPage) and a plain "no lecture
+ *            excerpt" note instead. Corrected the stale KNOWN GAPS quiz-bank
+ *            entry (the bank exists; it covers chapters 2, 4, 5).
+ *            Deploy note: also restores the glossary course-mismatch guard
+ *            (looksLikeWrongCourseGlossary/glossaryCourseMismatch) to the
+ *            committed corpusLoader.js — v2.4.0 added it, but the copy on
+ *            GitHub never had it, so v2.6.0's startup/healthz calls to
+ *            corpusLoader.glossaryCourseMismatch() would have thrown.
+ *   v2.6.0 — Rebuilt terminology.json from the official FYS.240 course
+ *            booklet index (FYS_240_Optics_glossary_list — supplied as
+ *            scanned index pages, OCR'd and cross-checked by hand into
+ *            booklet_index.json), replacing the previous 759-term
+ *            auto-harvested glossary (v2.5.0, kept as
+ *            terminology_harvested_v2.5_archive.json for reference) with
+ *            312 entries that match a term the booklet itself lists, each
+ *            carrying the booklet's own page number(s) in a new
+ *            `bookletPage` field. 212 of the 312 matched an existing
+ *            harvested entry directly (real lecture context + video link
+ *            kept as-is); 39 more were recovered by searching the actual
+ *            cleaned lecture text (via clean.js's real cleanTex(), not the
+ *            still-stale course_corpus.txt) for genuine occurrences the
+ *            harvester's highlight-only capture had missed — 25 by
+ *            near-exact phrase match, 14 by a looser same-passage
+ *            word-matching pass. Two false-positive matches caught during
+ *            review ("Focus" and "Surface Wave" had each grabbed an
+ *            unrelated sentence) were reset rather than shipped. The
+ *            remaining 61 terms are prerequisite vector-calculus/EM
+ *            vocabulary (Jacobian matrix, Poisson's equation, right-hand
+ *            rule, ...) that genuinely isn't named anywhere in the English
+ *            lecture slides — these get an honest page-only fallback entry
+ *            (context/url/introducedIn all null, tagged
+ *            source: "booklet-only") rather than an invented definition.
+ *            Every entry also carries a new `source` field
+ *            (harvested-glossary / corpus-search / corpus-search-loose /
+ *            booklet-only) recording how it was obtained. Schema is
+ *            additive — corpusLoader.js's loadGlossary() /
+ *            findGlossaryTerms() / looksLikeWrongCourseGlossary() only
+ *            read `term` and `introducedInLecture`, both unchanged in
+ *            shape, so no code changes were needed for /define to keep
+ *            working against the new file.
+ *   v2.5.0 — Replaced terminology.json with a REAL FYS.240 glossary (759
+ *            terms), harvested from the 61 canonical lecture .tex files'
+ *            existing \CDAlert/\Alert term-highlighting via a new
+ *            harvest_terminology.js (scripts/) reusing clean.js's
+ *            cleanTexMarked()/stripTermMarkers()/TERM_OPEN/TERM_CLOSE —
+ *            present in clean.js since it was built for this exact
+ *            purpose, but never actually wired to a script before. The
+ *            v2.4.0 course-mismatch guard now correctly reads
+ *            glossaryCourseMismatch() = false on this real content.
+ *            Building the harvester surfaced and fixed two more bugs:
+ *            (1) \CDAlert/\Alert's optional second {url} argument (a
+ *            hyperlink target used throughout these slides) was leaking
+ *            directly onto the term with no separator, since clean.js's
+ *            highlight-macro handling only expected one argument; (2) a
+ *            "\\}" sequence (a line-break token immediately followed by
+ *            an unescaped closing brace) was misread by clean.js's own
+ *            unescapeChars, which doesn't check backslash parity for
+ *            brace-escaping the way it does for "%" comments, producing
+ *            a stray leaked placeholder glyph. Also fixed, found via
+ *            testing /define directly: latexToUnicode() was running on
+ *            the ENTIRE outgoing message — including inside "(url)" of a
+ *            markdown link — before link-extraction happened, so a video
+ *            ID containing an underscore followed by a letter (e.g. real
+ *            YouTube ID "_mM8QYplWtE", or losing a literal leading
+ *            underscore entirely before an uppercase letter) got silently
+ *            corrupted, breaking the link. This wasn't /define-specific:
+ *            16 of the 61×2 (EN+FI) video IDs in fys240_videos.js contain
+ *            this pattern, so it silently affected video links in every
+ *            kind of reply. sendMessage() now placeholder-protects
+ *            markdown-link URLs before latexToUnicode() runs.
+ *   v2.4.0 — Wired up /define <term>, previously on the bot's TODO list:
+ *            corpusLoader.js already had a working glossary lookup
+ *            (findGlossaryTerms, backed by terminology.json) but it wasn't
+ *            connected to any command. Ported bot.js's (FYS.501) reply
+ *            formatting, made bilingual, and — where an entry's
+ *            introducedIn chapter matches a known video — upgraded its
+ *            link to the canonical "[Video X.Y (Topic)]" form so
+ *            fixVideoLinkLanguage's language correction applies to it too.
+ *            While building this, found terminology.json is ALSO the
+ *            wrong course's data (all 438 entries tagged "Laser
+ *            Physics"/"FYS.510 Laser Physics" in introducedInLecture, zero
+ *            real FYS.240 tags) — the same failure pattern as
+ *            homework_problems.json (v2.2.0) and quiz_content.js. Added
+ *            the same course-mismatch guard pattern to corpusLoader.js's
+ *            loadGlossary() (looksLikeWrongCourseGlossary()), fixed at the
+ *            source this time so every future caller benefits
+ *            automatically, not just this one command. /define currently
+ *            reports "glossary not available" for every term as a result
+ *            — confirmed via /healthz's new glossaryCourseMismatch field —
+ *            until real FYS.240 glossary data is sourced and swapped in.
  *   v2.3.0 — Replaced homework_problems.json with REAL FYS.240 content,
  *            extracted from newly-added HW1_Optics.tex ... HW6_Optics.tex
  *            (LaTeX source with \ExerciseNu/\SolutionNu markup) via a new
@@ -88,21 +227,19 @@
  *            CodeCogs never handled). Replaced with latexToUnicode(),
  *            converting stray LaTeX to Unicode and stripping any leftover
  *            $ / $$ as a backstop — no LATEX_ENABLED flag any more. Added
- *            /HWQ (ported from bot_fys240_HWtext.js's /HWtext, shortened,
- *            case-insensitive). Added /viikkoN and /luennot — Finnish-
- *            forced aliases for /weekN and /topics.
- *   v2.0.0 — First merge: reconciled three branches that had diverged in
- *            the repo — bot_fys240.js (LaTeX rendering + in-video timestamp
- *            segments via findRelevantSegments/&t=Xs), bot_fys240_bilingual_
- *            links.js (fixVideoLinkLanguage/isFinnishText — a deterministic
- *            fix for Claude occasionally picking the wrong-language video
- *            link), and bot_fys240_HWtext.js (verbatim homework question
- *            text). This file became the single source of truth; the three
- *            separate bot_fys240*.js files should be deleted from the repo.
+ *            /HWQ (a shortened, case-insensitive verbatim-question-text
+ *            command; "HWQ" = HW Question). Added /viikkoN and /luennot —
+ *            Finnish-forced aliases for /weekN and /topics.
+ *   v2.0.0 — First merge: reconciled three previously-diverged branches —
+ *            LaTeX rendering + in-video timestamp segments
+ *            (findRelevantSegments/&t=Xs), deterministic wrong-language
+ *            video-link correction (fixVideoLinkLanguage/isFinnishText),
+ *            and verbatim homework question text — into this one file,
+ *            which became the single source of truth.
  *   (earlier history predates version tracking)
  */
 
-const BOT_VERSION = "2.3.0";
+const BOT_VERSION = "2.6.1";
 
 const fs = require("fs");
 const path = require("path");
@@ -144,6 +281,17 @@ try {
 const HW_PROBLEMS_PATH = path.join(__dirname, "homework_problems.json");
 let HOMEWORK_PROBLEMS = {};
 let HOMEWORK_PROBLEMS_COURSE_MISMATCH = false;
+
+// Paths for files this bot does NOT load into memory at startup, but which
+// /source_HW and /source_quizzes (v2.6.1) report metadata on by reading
+// fresh from disk on each call. Kept next to HW_PROBLEMS_PATH/CORPUS_PATH
+// above rather than buried near those commands, so every on-disk data path
+// this bot knows about lives in one place.
+const HW_SOLUTIONS_PATH = path.join(__dirname, "homework_solutions.json");
+const TERMINOLOGY_PATH = path.join(__dirname, "terminology.json");
+const VIDEOS_MODULE_PATH = path.join(__dirname, "fys240_videos.js");
+const QUIZ_BANK_PATH = path.join(__dirname, "quizBank_fys240.json");
+const QUIZ_BANK_PENDING_PATH = path.join(__dirname, "quizBankPending_fys240.json");
 
 // Sanity-check against a recurring failure mode in this repo: this codebase
 // is forked between a FYS.240 Optics bot and a FYS.501 Laser Physics bot,
@@ -548,7 +696,7 @@ function markdownEmphasisToUnicode(text) {
 // essentially never uses them, so a density threshold is a cheap, reliable
 // signal — far more reliable than asking the model to remember which
 // language it's replying in by the time it picks a video link.
-// (Ported from bot_fys240_bilingual_links.js — see fixVideoLinkLanguage.)
+// (See fixVideoLinkLanguage, below, for how this gets used.)
 function isFinnishText(text) {
   const letters = text.match(/[a-zA-ZäöÄÖ]/g) || [];
   if (letters.length < 20) return false; // too short to judge
@@ -590,7 +738,6 @@ function fixVideoLinkLanguage(text) {
 // strips any leftover $ / $$ delimiters and backslash commands so
 // nothing raw ever reaches students. No LATEX_ENABLED flag — this
 // always runs; there is no image-rendering path any more.
-// (Ported from bot_fys240_bilingual_links.js.)
 const GREEK = {
   alpha: "α", beta: "β", gamma: "γ", delta: "δ", epsilon: "ε", zeta: "ζ",
   eta: "η", theta: "θ", iota: "ι", kappa: "κ", lambda: "λ", mu: "μ",
@@ -700,7 +847,30 @@ async function sendPlainChunks(chatId, text, replyTo, parseMode) {
 async function sendMessage(chatId, text, replyTo) {
   text = fixVideoLinkLanguage(text);
   text = markdownEmphasisToUnicode(text);
+
+  // Protect markdown-link URLs from latexToUnicode's math-notation
+  // transforms before running it. Found via testing /define: a video ID
+  // containing an underscore followed by a letter (e.g. real YouTube ID
+  // "_mM8QYplWtE") was silently corrupted into "ₘM8QYplWtE" by
+  // latexToUnicode's "_x -> subscript x" rule, since it runs on the whole
+  // message — including inside "(url)" — before convertLinksAndEscape
+  // gets a chance to extract links out. 16 of the 61×2 (EN+FI) video IDs
+  // in fys240_videos.js contain this pattern, so this silently broke a
+  // meaningful fraction of video links across every reply, not just
+  // /define. Only the URL itself is protected here; the surrounding
+  // label/prose still gets converted normally.
+  const urlPlaceholders = [];
+  text = text.replace(/\(https?:\/\/[^\s)]+\)/g, (m) => {
+    urlPlaceholders.push(m);
+    return `\u0001${urlPlaceholders.length - 1}\u0001`;
+  });
+
   text = latexToUnicode(text);
+
+  urlPlaceholders.forEach((url, i) => {
+    text = text.replace(`\u0001${i}\u0001`, url);
+  });
+
   await sendPlainChunks(chatId, convertLinksAndEscape(text), replyTo, "HTML");
 }
 
@@ -761,6 +931,227 @@ async function askClaude(chatId, question, videoHints) {
   throw new Error("Claude unavailable after 3 attempts");
 }
 
+// Sends a plain-text diagnostic report (the /source_* commands below)
+// straight through, with none of sendMessage()'s video-link/Markdown/LaTeX
+// processing. That pipeline is built for Claude's chat replies and is
+// known to mangle plain underscores followed by a letter — e.g.
+// latexToUnicode's "_x -> subscript x" rule turns "course_corpus.txt" into
+// "coursecorpus.txt" and "/source_HW" into "/sourceHW" (same underlying
+// quirk as the video-ID bug fixed in CHANGELOG v2.5.0, just triggered by
+// ordinary filenames instead of YouTube IDs). A diagnostic report is only
+// ever literal filenames/counts/status text, so it skips that pipeline
+// entirely and just HTML-escapes for safe parse_mode: "HTML" delivery.
+async function sendDiagnosticReport(chatId, text, replyTo) {
+  await sendPlainChunks(chatId, escapeHtml(text), replyTo, "HTML");
+}
+
+// ------------------------------------------- source/introspection (v2.6.1) --
+// Backs /source_materials, /source_HW, /source_quizzes — plain-text,
+// deterministic, no Claude API call (same design as /healthz, just more
+// human-readable). Dev/instructor tools for verifying which data the
+// running bot actually loaded; not listed in HELP_TEXT_EN/FI or /start.
+
+function fileInfo(filePath) {
+  try {
+    const stat = fs.statSync(filePath);
+    return {
+      exists: true,
+      sizeBytes: stat.size,
+      modified: stat.mtime.toISOString().replace("T", " ").slice(0, 16) + " UTC",
+    };
+  } catch (e) {
+    return { exists: false, sizeBytes: 0, modified: null };
+  }
+}
+
+function firstNonEmptyLine(text) {
+  const line = (text || "").split("\n").find((l) => l.trim().length > 0);
+  return line ? line.trim() : "(empty)";
+}
+
+// Informational only — unlike looksLikeWrongCourseHomework() /
+// looksLikeWrongCourseGlossary(), this never blocks anything from being
+// served. It reuses the same laser-vs-optics keyword heuristic so
+// /source_materials can flag a stale/wrong-course course_corpus.txt before
+// a student notices — this exact failure mode has already hit
+// homework_problems.json (v2.2.0) and terminology.json (v2.4.0).
+function corpusCourseSignal(text) {
+  const lower = (text || "").toLowerCase();
+  const laserHits = (lower.match(/laser|cavity|cavities|gain medium|population inversion|nd:yag|ti:sapph|pumping|resonator/g) || []).length;
+  const opticsHits = (lower.match(/thin lens|diffraction|interference|refraction|refractive index|wavefront|polarization|interferometer|grating/g) || []).length;
+  let verdict;
+  if (laserHits >= 10 && laserHits > opticsHits * 3) verdict = "⚠ LOOKS LIKE FYS.501 LASER PHYSICS, not FYS.240 Optics";
+  else if (laserHits === 0 && opticsHits === 0) verdict = "❓ no course-specific keywords matched — can't confirm either way";
+  else verdict = "✓ looks like FYS.240 Optics content";
+  return { laserHits, opticsHits, verdict };
+}
+
+function buildSourceMaterialsReport() {
+  const corpusInfo = fileInfo(CORPUS_PATH);
+  const signal = corpusCourseSignal(COURSE_CORPUS);
+
+  const lines = [];
+  lines.push(`SOURCE: course materials — bot v${BOT_VERSION}`);
+  lines.push("");
+  lines.push("course_corpus.txt (free-text Q&A, /HW hints, quiz live-generation)");
+  lines.push(`- Loaded: ${COURSE_CORPUS ? "yes" : "NO — file missing or empty"}`);
+  lines.push(`- Size: ${COURSE_CORPUS.length.toLocaleString()} chars (~${Math.round(COURSE_CORPUS.length / 3.7).toLocaleString()} tokens)`);
+  lines.push(`- On disk: ${corpusInfo.exists ? `${corpusInfo.sizeBytes.toLocaleString()} bytes, modified ${corpusInfo.modified}` : "file not found"}`);
+  lines.push(`- First line: "${firstNonEmptyLine(COURSE_CORPUS)}"`);
+  lines.push(`- Health check (corpusLooksHealthy): ${corpusLoader.corpusLooksHealthy() ? "ok" : "FAILED"}`);
+  lines.push(`- Course-content scan: ${signal.laserHits} laser-terms vs ${signal.opticsHits} optics-terms -> ${signal.verdict}`);
+  lines.push("");
+
+  const videoInfo = fileInfo(VIDEOS_MODULE_PATH);
+  const videos = VIDEO_DB ? VIDEO_DB.all() : [];
+  const bilingual = videos.filter((v) => v.topic_fi && v.id_fi);
+  const missingFi = videos.filter((v) => !(v.topic_fi && v.id_fi)).map((v) => v.chapter);
+  const chapters = VIDEO_DB ? VIDEO_DB.getChapters() : [];
+  lines.push("fys240_videos.js (video links suggested in replies, /topics, /weekN)");
+  lines.push(`- Loaded: ${VIDEO_DB ? "yes" : "NO"}`);
+  lines.push(
+    `- Lectures: ${videos.length}` +
+    (chapters.length ? ` (chapters ${chapters[0].split(".")[0]}-${chapters[chapters.length - 1].split(".")[0]})` : "")
+  );
+  lines.push(
+    `- Bilingual (EN+FI): ${bilingual.length}/${videos.length}` +
+    (missingFi.length ? ` — missing FI for: ${missingFi.join(", ")}` : "")
+  );
+  lines.push(`- On disk: ${videoInfo.exists ? `modified ${videoInfo.modified}` : "file not found"}`);
+  lines.push("");
+
+  const glossary = corpusLoader._loadGlossary();
+  const termInfo = fileInfo(TERMINOLOGY_PATH);
+  lines.push("terminology.json (glossary — backs /define, no Claude call)");
+  lines.push(`- Terms loaded: ${Array.isArray(glossary) ? glossary.length : 0}`);
+  lines.push(`- Health check (glossaryLooksHealthy): ${corpusLoader.glossaryLooksHealthy() ? "ok" : "FAILED"}`);
+  const glossArr = Array.isArray(glossary) ? glossary : [];
+  const bySource = {};
+  glossArr.forEach((g) => { const k = g.source || "untagged"; bySource[k] = (bySource[k] || 0) + 1; });
+  const pageOnly = glossArr.filter((g) => !g.context).length;
+  lines.push(`- Entry sources: ${Object.keys(bySource).sort().map((k) => `${k} ${bySource[k]}`).join(", ") || "n/a"}`);
+  lines.push(`- Page-only entries (no lecture context/video, /define answers without an excerpt): ${pageOnly}`);
+  lines.push(
+    `- Course-mismatch guard: ${
+      corpusLoader.glossaryCourseMismatch()
+        ? "⚠ FIRED — refusing to serve, /define reports unavailable"
+        : "clear"
+    }`
+  );
+  lines.push(`- On disk: ${termInfo.exists ? `modified ${termInfo.modified}` : "file not found"}`);
+  lines.push("");
+  lines.push("See /source_HW and /source_quizzes for homework and quiz data.");
+  return lines.join("\n");
+}
+
+function buildSourceHwReport() {
+  const probInfo = fileInfo(HW_PROBLEMS_PATH);
+  const solInfo = fileInfo(HW_SOLUTIONS_PATH);
+
+  const hwNums = Object.keys(HOMEWORK_PROBLEMS).sort((a, b) => Number(a) - Number(b));
+  const perHw = hwNums.map((hw) => `HW${hw}: ${Object.keys(HOMEWORK_PROBLEMS[hw]).length}`).join(", ") || "none";
+  const totalProblems = Object.values(HOMEWORK_PROBLEMS).reduce((n, hw) => n + Object.keys(hw).length, 0);
+
+  // Read solutions fresh from disk for METADATA ONLY (counts, per-set
+  // breakdown, mtime) — never held in memory across requests, and never
+  // prints any solution text. This bot's normal request path never touches
+  // this file at all; see HOMEWORK_SOLUTIONS_README.md before ever
+  // changing that.
+  let solutionsLine = "not found on disk";
+  let totalSolutions = 0;
+  if (solInfo.exists) {
+    try {
+      const parsed = JSON.parse(fs.readFileSync(HW_SOLUTIONS_PATH, "utf8"));
+      const solNums = Object.keys(parsed).sort((a, b) => Number(a) - Number(b));
+      totalSolutions = Object.values(parsed).reduce((n, hw) => n + Object.keys(hw).length, 0);
+      solutionsLine = solNums.map((hw) => `HW${hw}: ${Object.keys(parsed[hw]).length}`).join(", ") || "empty";
+    } catch (e) {
+      solutionsLine = `present but failed to parse (${e.message})`;
+    }
+  }
+
+  const lines = [];
+  lines.push(`SOURCE: homework data — bot v${BOT_VERSION}`);
+  lines.push("");
+  lines.push("homework_problems.json (served via /HW, /HW_hint, /HWQ)");
+  lines.push(
+    `- Status: ${
+      HOMEWORK_PROBLEMS_COURSE_MISMATCH
+        ? "⚠ COURSE MISMATCH — refusing to serve, /HW commands fall back to full-corpus search"
+        : totalProblems
+        ? "loaded"
+        : "not loaded / empty — /HW commands fall back to full-corpus search"
+    }`
+  );
+  lines.push(`- Problems: ${totalProblems} total (${perHw})`);
+  lines.push(`- On disk: ${probInfo.exists ? `modified ${probInfo.modified}` : "file not found"}`);
+  lines.push(`- Source pipeline: HW1_Optics.tex ... HW6_Optics.tex -> clean_homework.js -> build_homework.js`);
+  lines.push("");
+  lines.push("homework_solutions.json (INSTRUCTOR-REFERENCE ONLY)");
+  lines.push(`- Loaded/served by this bot: NO — nothing in bot_fys240.js reads this file at request time (by design)`);
+  lines.push(`- Present on disk: ${solInfo.exists ? "yes" : "no"}`);
+  if (solInfo.exists) {
+    lines.push(`- Solutions on disk: ${totalSolutions} total (${solutionsLine})`);
+    lines.push(`- On disk: modified ${solInfo.modified}`);
+  }
+  lines.push(`- Reminder: see HOMEWORK_SOLUTIONS_README.md before ever wiring this to a command`);
+  return lines.join("\n");
+}
+
+function buildSourceQuizzesReport() {
+  const bank = quizGenerator.loadQuizBank();
+  const bankInfo = fileInfo(QUIZ_BANK_PATH);
+  const pendingInfo = fileInfo(QUIZ_BANK_PENDING_PATH);
+
+  const chapters = Object.keys(bank).sort((a, b) => Number(a) - Number(b));
+  let totalQuestions = 0;
+  const chapterLines = chapters.map((ch) => {
+    const secs = bank[ch] || {};
+    const secCounts = Object.keys(secs)
+      .sort()
+      .map((s) => {
+        const n = Array.isArray(secs[s]) ? secs[s].length : 0;
+        totalQuestions += n;
+        return `${s} (${n})`;
+      });
+    return `   Chapter ${ch}: ${secCounts.join(", ") || "no sections"}`;
+  });
+
+  const ALL_CHAPTERS = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const missingChapters = ALL_CHAPTERS.filter((c) => !chapters.includes(String(c)));
+
+  let pendingCount = 0;
+  if (pendingInfo.exists) {
+    try {
+      const pending = JSON.parse(fs.readFileSync(QUIZ_BANK_PENDING_PATH, "utf8"));
+      pendingCount = Array.isArray(pending) ? pending.length : 0;
+    } catch (e) {
+      pendingCount = 0;
+    }
+  }
+
+  const lines = [];
+  lines.push(`SOURCE: quiz data — bot v${BOT_VERSION}`);
+  lines.push("");
+  lines.push("quizBank_fys240.json (pre-built bank, tried before live generation)");
+  lines.push(`- Status: ${bankInfo.exists ? "loaded" : "NOT FOUND — every quiz live-generates via the Claude API"}`);
+  lines.push(`- Health check (quizBankLooksHealthy): ${quizGenerator.quizBankLooksHealthy() ? "ok" : "FAILED"}`);
+  lines.push(`- Coverage: ${chapters.length ? `chapters ${chapters.join(", ")} — ${totalQuestions} questions total` : "none"}`);
+  chapterLines.forEach((l) => lines.push(l));
+  lines.push(`- Missing chapters (live-generate every time): ${missingChapters.length ? missingChapters.join(", ") : "none"}`);
+  lines.push(`- On disk: ${bankInfo.exists ? `modified ${bankInfo.modified}` : "file not found"}`);
+  lines.push("");
+  lines.push("quizBankPending_fys240.json (live-generated questions saved for later curation)");
+  lines.push(`- Present: ${pendingInfo.exists ? "yes" : "no — none saved yet"}`);
+  if (pendingInfo.exists) {
+    lines.push(`- Pending questions saved: ${pendingCount}`);
+    lines.push(`- On disk: modified ${pendingInfo.modified}`);
+  }
+  lines.push("");
+  lines.push(`Live generation model (used for any chapter not in the bank): ${MODEL}`);
+  return lines.join("\n");
+}
+
 // -------------------------------------------------------------- routing -----
 function shouldAnswer(message) {
   const type = message.chat.type;
@@ -775,7 +1166,7 @@ function shouldAnswer(message) {
 function stripMention(text) {
   return text
     .replace(new RegExp(`@${BOT_USERNAME}`, "ig"), "")
-    .replace(/^\/(ask|help|start|reset|video|topics|week\d+|luennot|viikko\d+)(@\S+)?\s*/i, "")
+    .replace(/^\/(ask|help|start|reset|video|topics|week\d+|luennot|viikko\d+|define)(@\S+)?\s*/i, "")
     .trim();
 }
 
@@ -789,11 +1180,10 @@ function stripMention(text) {
 const HW_COMMAND_RE = /^\/HW(_hint)?(\d+)(?:\.(\d+))?(@\S+)?\b/i;
 
 // Matches /HWQ3.2 (case-insensitive, so /hwq3.2 works too) — exact verbatim
-// problem text, no hint, no API call. Ported from bot_fys240_HWtext.js's
-// /HWtext command, shortened per request ("HWQ" = HW Question). Requires
-// the sub-problem number — a whole homework set's text is several problems
-// long and isn't meant to be dumped in one message; /HW3 already gives the
-// one-line overview to navigate from.
+// problem text, no hint, no API call. Shortened per request ("HWQ" = HW
+// Question). Requires the sub-problem number — a whole homework set's text
+// is several problems long and isn't meant to be dumped in one message;
+// /HW3 already gives the one-line overview to navigate from.
 const HW_TEXT_COMMAND_RE = /^\/HWQ(\d+)\.(\d+)(@\S+)?\b/i;
 
 function buildHwOverviewDirective(hwNum) {
@@ -843,10 +1233,9 @@ function buildHwOverviewFromStructuredData(hwNum) {
 
 // Free, deterministic version of the full question text — no Claude call,
 // so it can't paraphrase, hint, or accidentally leak toward a solution.
-// Sends exactly what's stored in homework_problems.json, verbatim.
-// (Ported from bot_fys240_HWtext.js's buildHwFullText.) Not bilingual by
-// design — this returns the stored assignment text as-is, in whatever
-// language it was authored in, rather than translating it.
+// Sends exactly what's stored in homework_problems.json, verbatim. Not
+// bilingual by design — this returns the stored assignment text as-is, in
+// whatever language it was authored in, rather than translating it.
 function buildHwFullText(hwNum, problemNum, lang) {
   const exactText = HOMEWORK_PROBLEMS[hwNum]?.[problemNum];
   if (!exactText) {
@@ -912,6 +1301,7 @@ const HELP_TEXT_EN =
   "/HW3.2 — get a hint on Homework 3, problem 2\n" +
   "/HW_hint3.2 — just a one-line nudge, no explanation\n" +
   "/HWQ3.2 — see the exact question text for a problem, verbatim\n" +
+  "/define <term> — look up a term in the course glossary\n" +
   "/reset — clear our conversation history";
 
 const HELP_TEXT_FI =
@@ -931,6 +1321,7 @@ const HELP_TEXT_FI =
   "/HW3.2 — vinkki kotitehtävä 3:n tehtävään 2\n" +
   "/HW_hint3.2 — vain lyhyt vihje, ei selitystä\n" +
   "/HWQ3.2 — näytä tehtävän tarkka kysymysteksti\n" +
+  "/define <termi> — hae termi kurssin sanastosta\n" +
   "/reset — tyhjennä keskusteluhistoriamme";
 
 function helpText(lang) {
@@ -998,6 +1389,78 @@ function buildVideoListChunks(chapterKeys, headerText, lang) {
   return messages;
 }
 
+// ------------------------------------------------------------- glossary ----
+// Formats a /define reply from corpusLoader.findGlossaryTerms(). Fully
+// deterministic — no Claude API call — same design as /HWQ: can't
+// paraphrase or hallucinate a definition. Bilingual, unlike the FYS.501
+// bot.js this was ported from.
+//
+// Where an entry's introducedIn chapter matches a known video
+// (VIDEO_DB.getChapter), links it in the canonical "[Video X.Y (Topic)]"
+// form so fixVideoLinkLanguage's bilingual correction applies to it same
+// as any other video link in a reply. Falls back to the glossary entry's
+// own stored url/title (plain link, no language pairing available for it)
+// when there's no video match.
+function formatGlossaryReply(query, lang) {
+  if (!corpusLoader.glossaryLooksHealthy()) {
+    return lang === "fi"
+      ? "Sanasto ei ole juuri nyt käytettävissä — yritä myöhemmin uudelleen."
+      : "The glossary isn't available right now — please check back later.";
+  }
+
+  const matches = corpusLoader.findGlossaryTerms(query, 3);
+  if (!matches.length) {
+    return lang === "fi"
+      ? `En löytänyt termiä "${query}" sanastosta. Sanasto on koottu automaattisesti kurssimateriaalin ` +
+        `korostetuista termeistä, joten se ei kata kaikkea — kysy minulta suoraan sen sijaan.`
+      : `I couldn't find "${query}" in the glossary. It's auto-extracted from highlighted terms in the ` +
+        `course material, so it doesn't cover everything — try asking me directly instead.`;
+  }
+
+  return matches
+    .map((g) => {
+      // Page-only entries (terminology.json v2.6.0, source: "booklet-only"):
+      // context/introducedIn/url are all null — the term is in the course
+      // booklet's index but isn't named in the English lecture slides. Answer
+      // honestly with the booklet page instead of printing "null".
+      if (!g.context || !g.introducedIn) {
+        const pages = Array.isArray(g.bookletPage) ? g.bookletPage : [];
+        const pageStr = pages.length ? pages.join(", ") : null;
+        if (lang === "fi") {
+          return `**${g.term}** — mainitaan kurssin kirjan hakemistossa` +
+            (pageStr ? ` (s. ${pageStr})` : "") +
+            `. Tälle termille ei ole luentokatkelmaa tai videota — kysy minulta suoraan, niin selitän sen.`;
+        }
+        return `**${g.term}** — listed in the course booklet index` +
+          (pageStr ? ` (${pages.length > 1 ? "pp." : "p."} ${pageStr})` : "") +
+          `. There's no lecture excerpt or video for this term — ask me directly and I'll explain it.`;
+      }
+
+      const revisit =
+        g.revisitedIn && g.revisitedIn.length
+          ? lang === "fi"
+            ? ` (myös kohdissa ${g.revisitedIn.join(", ")})`
+            : ` (also covered in ${g.revisitedIn.join(", ")})`
+          : "";
+
+      let videoLine = "";
+      const video = VIDEO_DB ? (VIDEO_DB.getChapter(g.introducedIn) || [])[0] : null;
+      if (video) {
+        const useFi = lang === "fi" && video.topic_fi && video.id_fi;
+        const topic = useFi ? video.topic_fi : video.topic;
+        const id = useFi ? video.id_fi : video.id;
+        videoLine = `\n[Video ${g.introducedIn} (${topic})](https://youtube.com/watch?v=${id})`;
+      } else if (g.url) {
+        const label = g.introducedInTitle || g.introducedInLecture || (lang === "fi" ? "Katso video" : "Watch video");
+        videoLine = `\n[${label}](${g.url})`;
+      }
+
+      const sectionLabel = lang === "fi" ? "esitelty kohdassa" : "introduced in section";
+      return `**${g.term}** — ${sectionLabel} ${g.introducedIn}${revisit}\n${g.context}${videoLine}`;
+    })
+    .join("\n\n");
+}
+
 function generateTopicsMessages(lang) {
   if (!VIDEO_DB || VIDEO_DB.all().length === 0) {
     return [lang === "fi" ? "Videotietokantaa ei ole ladattu." : "Video database not loaded."];
@@ -1063,6 +1526,8 @@ app.get("/healthz", (_req, res) => res.json({
   videoLectures: VIDEO_DB ? VIDEO_DB.all().length : 0,
   homeworkProblemsLoaded: Object.values(HOMEWORK_PROBLEMS).reduce((n, hw) => n + Object.keys(hw).length, 0),
   homeworkProblemsCourseMismatch: HOMEWORK_PROBLEMS_COURSE_MISMATCH,
+  glossaryLooksHealthy: corpusLoader.glossaryLooksHealthy(),
+  glossaryCourseMismatch: corpusLoader.glossaryCourseMismatch(),
   quizBankLooksHealthy: quizGenerator.quizBankLooksHealthy(),
 }));
 
@@ -1106,6 +1571,29 @@ async function handleUpdate(update) {
       chatId,
       lang === "fi" ? "Keskusteluhistoria tyhjennetty. Kysy mitä vain." : "Conversation history cleared. Ask me anything."
     );
+  }
+  // ---- dev-only data-source introspection (v2.6.1) — not in /help/start ----
+  if (/^\/source_materials/i.test(text)) {
+    return sendDiagnosticReport(chatId, buildSourceMaterialsReport(), message.message_id);
+  }
+  if (/^\/source_HW/i.test(text)) {
+    return sendDiagnosticReport(chatId, buildSourceHwReport(), message.message_id);
+  }
+  if (/^\/source_quizzes/i.test(text)) {
+    return sendDiagnosticReport(chatId, buildSourceQuizzesReport(), message.message_id);
+  }
+  if (/^\/define/i.test(text)) {
+    const term = text.replace(/^\/define(@\S+)?\s*/i, "").trim();
+    if (!term) {
+      return sendMessage(
+        chatId,
+        lang === "fi"
+          ? 'Käyttö: /define <termi> — esim. "/define diffraktio"'
+          : 'Usage: /define <term> — e.g. "/define diffraction"',
+        message.message_id
+      );
+    }
+    return sendMessage(chatId, formatGlossaryReply(term, lang), message.message_id);
   }
   if (/^\/topics?/i.test(text)) {
     for (const chunk of generateTopicsMessages(lang)) {
@@ -1302,8 +1790,9 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   const videoStatus = VIDEO_DB && VIDEO_DB.all().length > 0 ? "✓" : "⚠";
   const hwStatus = HOMEWORK_PROBLEMS_COURSE_MISMATCH ? "⚠ COURSE MISMATCH" : "✓";
+  const glossaryStatus = corpusLoader.glossaryCourseMismatch() ? "⚠ COURSE MISMATCH" : "✓";
   console.log(
     `FYS.240 Optics bot v${BOT_VERSION} listening on port ${PORT} | model=${MODEL} | cache=${CACHE_TTL} | ` +
-    `Math=Unicode | Videos=${videoStatus} | Homework=${hwStatus}`
+    `Math=Unicode | Videos=${videoStatus} | Homework=${hwStatus} | Glossary=${glossaryStatus}`
   );
 });
