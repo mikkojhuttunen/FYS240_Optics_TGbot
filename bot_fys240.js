@@ -100,7 +100,14 @@
  *            Submit button — the actual option text is written into the
  *            question message body as a lettered list instead, since
  *            Telegram truncates/concatenates long button labels. Grading
- *            is exact-set-match (no partial credit). Uses no new quizBot
+ *            gives partial credit, floored at 0 per question: for k
+ *            correct options and (n-k) wrong ones, selecting c correct and
+ *            w wrong gives max(0, c/k - w/(n-k)) — full credit only for
+ *            the exact set, partial credit for an incomplete-but-clean
+ *            selection, and exactly 0 if every option (right and wrong) is
+ *            ticked, so "select everything" is never a winning strategy.
+ *            The running total is displayed as e.g. "3.25/5.00 (65%)".
+ *            Uses no new quizBot
  *            adapter method: editMessageText already forwards
  *            reply_markup, which is all toggle re-rendering and keyboard-
  *            locking need. /healthz gained multivalueQuizBankLooksHealthy;

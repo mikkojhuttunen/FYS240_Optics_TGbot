@@ -51,10 +51,17 @@
  *     MVQUIZ_PENDING_QUESTION lines) for later curated merge into the real
  *     bank — never written there directly.
  *
- * Grading rule: a question is correct only if the student's final selected
- * set EXACTLY matches question.correctIndices (no partial credit). This
- * keeps the UX and the scoring simple; if partial credit is wanted later,
- * gradeSelection() below is the only place that needs to change.
+ * Grading rule (partial credit, floored at 0 per question):
+ *   Let k = number of correct options, (n-k) = number of wrong options,
+ *   c = how many correct options the student selected, w = how many wrong
+ *   options they selected. Each question is scored out of 1 point as
+ *     score = max(0, c/k - w/(n-k))
+ *   This gives full credit (1) only for the exact correct set, partial
+ *   credit for a correct-but-incomplete selection with no wrong picks, and
+ *   drives the score to exactly 0 if every option (right and wrong) is
+ *   selected — so "just tick everything" is never a winning strategy, but
+ *   a single bad guess can never cost more than that question was worth.
+ *   See gradeSelection() below if this formula ever needs to change.
  */
 
 const fs = require('fs');
@@ -126,9 +133,12 @@ const UI = {
     selectAllNote: "Select ALL letters that apply, then tap Submit.",
     submitLabel: "\u2705 Submit answer",
     sessionExpired: "Quiz session expired — start a new one with a multiquiz request.",
-    correct: (lettersStr, explanation) => `\u2705 Correct! (${lettersStr})\n${explanation}`,
-    incorrect: (lettersStr, explanation) => `\u274c Not quite. Correct answer(s): ${lettersStr}\n${explanation}`,
-    complete: (score, total) => `Multi-select quiz complete! Score: ${score}/${total}`,
+    feedback: (score, lettersStr, explanation) => {
+      if (score >= 1) return `\u2705 Correct! (${lettersStr})\n${explanation}`;
+      if (score <= 0) return `\u274c 0.00/1.00 for this question. Correct answer(s): ${lettersStr}\n${explanation}`;
+      return `\u2797 Partial credit: ${score.toFixed(2)}/1.00. Correct answer(s): ${lettersStr}\n${explanation}`;
+    },
+    complete: (score, total) => `Multi-select quiz complete! Score: ${score.toFixed(2)}/${total.toFixed(2)} (${total > 0 ? Math.round((score / total) * 100) : 0}%)`,
     nothingSelected: "Pick at least one letter before submitting.",
   },
   fi: {
@@ -142,9 +152,12 @@ const UI = {
     selectAllNote: "Valitse KAIKKI oikeat kirjaimet, ja paina sitten Vastaa.",
     submitLabel: "\u2705 Vastaa",
     sessionExpired: "Visa vanhentui — aloita uusi monivalintavisa-pyynnöllä.",
-    correct: (lettersStr, explanation) => `\u2705 Oikein! (${lettersStr})\n${explanation}`,
-    incorrect: (lettersStr, explanation) => `\u274c Ei ihan. Oikea(t) vastaus(vaihtoehdot): ${lettersStr}\n${explanation}`,
-    complete: (score, total) => `Monivalintavisa suoritettu! Tulos: ${score}/${total}`,
+    feedback: (score, lettersStr, explanation) => {
+      if (score >= 1) return `\u2705 Oikein! (${lettersStr})\n${explanation}`;
+      if (score <= 0) return `\u274c 0,00/1,00 tästä kysymyksestä. Oikea(t) vastaus(vaihtoehdot): ${lettersStr}\n${explanation}`;
+      return `\u2797 Osittaiset pisteet: ${score.toFixed(2)}/1,00. Oikea(t) vastaus(vaihtoehdot): ${lettersStr}\n${explanation}`;
+    },
+    complete: (score, total) => `Monivalintavisa suoritettu! Tulos: ${score.toFixed(2)}/${total.toFixed(2)} (${total > 0 ? Math.round((score / total) * 100) : 0} %)`,
     nothingSelected: "Valitse ainakin yksi kirjain ennen vastaamista.",
   },
 };
@@ -473,10 +486,28 @@ async function startMultivalueQuiz(bot, chatId, text, askWhichChapter = defaultA
   await sendQuestion(bot, chatId, session);
 }
 
-function setsEqual(a, b) {
-  if (a.size !== b.size) return false;
-  for (const x of a) if (!b.has(x)) return false;
-  return true;
+// Partial-credit grading, floored at 0 per question. k = number of correct
+// options, (n-k) = number of wrong options; c/w = how many the student
+// selected of each. score = max(0, c/k - w/(n-k)):
+//   - exact correct set              -> 1
+//   - correct-but-incomplete, no wrong picks -> partial (e.g. 3 of 4 -> 0.75)
+//   - every option ticked (right+wrong) -> exactly 0
+//   - a bad guess never drags the question below 0
+function gradeSelection(selected, correctIndices, totalOptions) {
+  const correctSet = new Set(correctIndices);
+  const k = correctIndices.length;
+  const wrongPoolSize = totalOptions - k;
+
+  let c = 0;
+  let w = 0;
+  for (const idx of selected) {
+    if (correctSet.has(idx)) c += 1;
+    else w += 1;
+  }
+
+  const positiveTerm = k > 0 ? c / k : 0;
+  const negativeTerm = wrongPoolSize > 0 ? w / wrongPoolSize : 0;
+  return Math.max(0, positiveTerm - negativeTerm);
 }
 
 function lettersFromIndices(indices) {
@@ -527,12 +558,11 @@ async function handleMultivalueQuizAnswer(bot, callbackQuery) {
       return;
     }
 
-    const correctSet = new Set(question.correctIndices);
-    const correct = setsEqual(session.selected, correctSet);
-    if (correct) session.score += 1;
+    const score = gradeSelection(session.selected, question.correctIndices, question.options.length);
+    session.score += score;
 
     const correctLetters = lettersFromIndices(question.correctIndices);
-    const feedback = correct ? t.correct(correctLetters, question.explanation) : t.incorrect(correctLetters, question.explanation);
+    const feedback = t.feedback(score, correctLetters, question.explanation);
 
     await bot.editMessageText(`${session.currentText}\n\n${feedback}`, {
       chat_id: chatId,
