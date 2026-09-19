@@ -1,40 +1,113 @@
 /**
  * FYS.240 Optics — Telegram teaching-assistant bot
- * MERGED version — reconciles two branches that had diverged in the repo:
- *   - bot_fys240.js            (this file's base): LaTeX $$ image rendering,
- *     in-video timestamp segments (findRelevantSegments, &t=Xs links)
- *   - bot_fys240_bilingual_links.js: a deterministic post-generation fix
- *     (fixVideoLinkLanguage/isFinnishText) for Claude occasionally picking
- *     the wrong-language video link — ported in below, applied first thing
- *     in sendMessage() so it runs regardless of the LaTeX path taken.
- * Both branches were otherwise identical (HW commands, quiz, /topics,
- * /week, /reset, /healthz) — this file is now the single source of truth.
+ * ============================================================================
+ * VERSION: see BOT_VERSION below. Bump it (semver: MAJOR.MINOR.PATCH) any
+ * time you ship a change here, and add a line to the CHANGELOG block —
+ * that's the whole versioning process, no build step needed. Convention:
+ * MAJOR = breaking change to a command's behavior or removed a feature,
+ * MINOR = new command/feature, PATCH = bugfix/content fix with no new
+ * command. BOT_VERSION is surfaced in /healthz and the startup log line,
+ * so you can always confirm which version is actually live on Railway.
+ * ============================================================================
  *
- * Key features:
- *   1. Course material from course_corpus.txt (cached)
- *   2. Bilingual (EN/FI) video lecture links from fys240_videos.js, with
- *      in-video timestamp segments from video_segments.json where added
- *   3. Deterministic correction of wrong-language video links
- *   4. LaTeX equation rendering (optional, LATEX_ENABLED env var)
- *   5. Conversation history & rate limiting
+ * CURRENT FUNCTIONALITY (v2.3.0):
+ *   - Free-text Q&A grounded in course_corpus.txt, answers in whichever
+ *     language (EN/FI) the student's question is written in
+ *   - Bilingual (EN/FI) video lecture links from fys240_videos.js, with
+ *     in-video timestamp links (&t=Xs) from video_segments.json where added
+ *   - Deterministic correction of wrong-language video links
+ *     (fixVideoLinkLanguage/isFinnishText)
+ *   - Math sent as plain Unicode text (α, β, √, ², ᵢ, ...) — no LaTeX/image
+ *     rendering; latexToUnicode() converts/strips any stray LaTeX Claude emits
+ *   - /start, /help — bilingual help text
+ *   - /topics — video lecture list, grouped by chapter, in the student's
+ *     detected client language
+ *   - /luennot — same as /topics, but ALWAYS in Finnish regardless of client
+ *   - /week1 ... /week7 — videos for a given course week (7 = recap), in the
+ *     student's detected client language
+ *   - /viikko1 ... /viikko7 — same as /weekN, but ALWAYS in Finnish
+ *   - /HW1 ... /HW6 — overview of a homework set's problems, from REAL
+ *     FYS.240 content (see CHANGELOG v2.3.0)
+ *   - /HW3.2 — AI-generated hint on a specific problem (no solution)
+ *   - /HW_hint3.2 — a one-sentence nudge only
+ *   - /HWQ3.2 (or /hwq3.2) — exact verbatim question text, no hint, no API
+ *     call, straight from homework_problems.json
+ *   - "quiz me on chapter N" / "...section N.M" — multiple-choice quiz via
+ *     quizGenerator_fys240.js, with an inline-keyboard chapter picker
+ *   - /reset — clear conversation history
+ *   - /healthz — reports corpus/video/homework/quiz health + BOT_VERSION
+ *   - Conversation history (6 turns) & per-user rate limiting
+ *   - Course-mismatch guard on homework_problems.json (added v2.2.0, kept
+ *     as a permanent safety net): refuses to serve homework text that
+ *     looks like it's from the wrong course instead of silently handing
+ *     it to students. Does not fire on the real FYS.240 content added in
+ *     v2.3.0 (verified: 15 laser-vocabulary hits vs. 11 optics-vocabulary
+ *     hits, well under the trip threshold).
  *
- * HOMEWORK-HELPER COMMANDS (ported from the FYS.501 bot):
- *   /HW3          — overview: lists the problems in Homework 3
- *   /HW3.2        — hint on Homework 3, problem 2 (equation/section pointer + guiding question)
- *   /HW_hint3.2   — minimal nudge: one guiding question, nothing else
- *   /HWQ3.2       — exact verbatim question text, no hint, no API call (ported
- *                   from bot_fys240_HWtext.js's /HWtext3.2, shortened; case-
- *                   insensitive so /hwq3.2 also works)
- *   Course has 6 homework sets, so hwNum is expected to be 1-6 (HW1 ... HW6) —
- *   same flat numbering as FYS.501, NOT the chapter numbers (2-10) used elsewhere in this bot.
- *   None of these reveal solutions — same no-solutions rule as the rest of the bot.
+ * KNOWN GAPS (not yet implemented — see redeploy-package README):
+ *   - /define <term> — glossary lookup exists in corpusLoader.js
+ *     (findGlossaryTerms, backed by terminology.json) but isn't wired to a
+ *     command in this bot yet
+ *   - No pre-built FYS.240 quiz bank (quizBank_fys240.json) — quizzes always
+ *     live-generate via the Claude API
+ *   - homework_solutions.json (new in v2.3.0) is instructor-reference only —
+ *     nothing in this bot loads or serves it; see the file's own header
+ *     comment and the redeploy-package README before wiring it to anything
+ *
+ * CHANGELOG:
+ *   v2.3.0 — Replaced homework_problems.json with REAL FYS.240 content,
+ *            extracted from newly-added HW1_Optics.tex ... HW6_Optics.tex
+ *            (LaTeX source with \ExerciseNu/\SolutionNu markup) via a new
+ *            clean_homework.js + build_homework.js pipeline (reusing
+ *            course_corpus.txt's clean.js LaTeX-cleaning helpers). 10
+ *            problems across 6 homework sets, verbatim question text
+ *            including authors' own inline hints. Also produced
+ *            homework_solutions.json (10 solutions) — instructor-reference
+ *            only, deliberately NOT loaded anywhere in this bot file; the
+ *            course's no-solutions-to-students rule means it must stay
+ *            that way unless a future change explicitly and carefully
+ *            decides otherwise. The v2.2.0 course-mismatch guard remains in
+ *            place as a permanent safety net (confirmed it does not fire on
+ *            this real content) rather than being removed.
+ *   v2.2.0 — Added BOT_VERSION + this changelog. Added a course-mismatch
+ *            guard on homework_problems.json: the file in the repo was
+ *            discovered to be 100% FYS.501 Laser Physics content (laser
+ *            cavities, gain media, population inversion — zero FYS.240
+ *            optics content across all 24 stored problems), so /HWQ1.1
+ *            and friends were serving the wrong course's homework verbatim.
+ *            looksLikeWrongCourseHomework() now detects this pattern at
+ *            startup and empties HOMEWORK_PROBLEMS instead of serving it,
+ *            falling through to the existing "not stored" messages. Surfaced
+ *            via console.error and /healthz's homeworkProblemsCourseMismatch.
+ *            The real FYS.240 homework text still needs to be sourced and
+ *            uploaded — this only stops the wrong content from reaching
+ *            students in the meantime.
+ *   v2.1.0 — Removed LaTeX image rendering (CodeCogs via latex-renderer.js)
+ *            entirely: it left raw $ / $$ visible to students whenever
+ *            rendering failed, or for any single-$ inline math (which
+ *            CodeCogs never handled). Replaced with latexToUnicode(),
+ *            converting stray LaTeX to Unicode and stripping any leftover
+ *            $ / $$ as a backstop — no LATEX_ENABLED flag any more. Added
+ *            /HWQ (ported from bot_fys240_HWtext.js's /HWtext, shortened,
+ *            case-insensitive). Added /viikkoN and /luennot — Finnish-
+ *            forced aliases for /weekN and /topics.
+ *   v2.0.0 — First merge: reconciled three branches that had diverged in
+ *            the repo — bot_fys240.js (LaTeX rendering + in-video timestamp
+ *            segments via findRelevantSegments/&t=Xs), bot_fys240_bilingual_
+ *            links.js (fixVideoLinkLanguage/isFinnishText — a deterministic
+ *            fix for Claude occasionally picking the wrong-language video
+ *            link), and bot_fys240_HWtext.js (verbatim homework question
+ *            text). This file became the single source of truth; the three
+ *            separate bot_fys240*.js files should be deleted from the repo.
+ *   (earlier history predates version tracking)
  */
+
+const BOT_VERSION = "2.3.0";
 
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const axios = require("axios");
-const { parseLatexBlocks, sendLatexImage } = require("./latex-renderer");
 const quizGenerator = require("./quizGenerator_fys240");
 const corpusLoader = require("./corpusLoader");
 
@@ -49,7 +122,6 @@ const MODEL = process.env.CLAUDE_MODEL || "claude-haiku-4-5-20251001";
 const CACHE_TTL = process.env.CACHE_TTL || "1h";
 const MAX_TOKENS = parseInt(process.env.MAX_TOKENS || "900", 10);
 const BOT_USERNAME = (process.env.BOT_USERNAME || "").replace(/^@/, "").toLowerCase();
-const LATEX_ENABLED = process.env.LATEX_ENABLED !== "false";
 
 const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
 
@@ -71,10 +143,46 @@ try {
 // Optional: if missing/empty, /HW commands fall back to letting Claude search the full corpus.
 const HW_PROBLEMS_PATH = path.join(__dirname, "homework_problems.json");
 let HOMEWORK_PROBLEMS = {};
+let HOMEWORK_PROBLEMS_COURSE_MISMATCH = false;
+
+// Sanity-check against a recurring failure mode in this repo: this codebase
+// is forked between a FYS.240 Optics bot and a FYS.501 Laser Physics bot,
+// and homework_problems.json has previously been swapped with the WRONG
+// course's file (confirmed in v2.2.0 — the file in place was 100% FYS.501
+// laser-cavity/gain-medium content, zero FYS.240 optics content, across
+// all 24 stored problems). Rather than risk silently handing a student the
+// wrong course's homework questions again, this scans the loaded JSON's
+// text for a simple keyword signal and REFUSES to serve it if it looks
+// like the wrong course — HOMEWORK_PROBLEMS is reset to {} in that case,
+// so /HW, /HW_hint, and /HWQ all fall through to their existing "not
+// stored" fallback paths (same behavior as if the file were simply
+// missing) instead of returning wrong-course text. Only fires when laser
+// terminology heavily dominates over any optics terminology, so a real
+// FYS.240 set that happens to mention lasers once or twice (e.g. in a
+// light-matter-interaction problem) won't be falsely flagged.
+function looksLikeWrongCourseHomework(problems) {
+  const allText = JSON.stringify(problems).toLowerCase();
+  const laserHits = (allText.match(/laser|cavity|cavities|gain medium|population inversion|nd:yag|ti:sapph|pumping|resonator/g) || []).length;
+  const opticsHits = (allText.match(/thin lens|diffraction|interference|refraction|refractive index|wavefront|polarization|interferometer|grating/g) || []).length;
+  return laserHits >= 10 && laserHits > opticsHits * 3;
+}
+
 try {
-  HOMEWORK_PROBLEMS = JSON.parse(fs.readFileSync(HW_PROBLEMS_PATH, "utf8"));
-  const total = Object.values(HOMEWORK_PROBLEMS).reduce((n, hw) => n + Object.keys(hw).length, 0);
-  console.log(`Loaded homework_problems.json: ${total} problems across ${Object.keys(HOMEWORK_PROBLEMS).length} homeworks`);
+  const parsed = JSON.parse(fs.readFileSync(HW_PROBLEMS_PATH, "utf8"));
+  if (looksLikeWrongCourseHomework(parsed)) {
+    HOMEWORK_PROBLEMS_COURSE_MISMATCH = true;
+    HOMEWORK_PROBLEMS = {};
+    console.error(
+      `WARNING: homework_problems.json looks like the WRONG COURSE's homework ` +
+      `(reads like FYS.501 Laser Physics, not FYS.240 Optics) — REFUSING to serve it. ` +
+      `/HW, /HW_hint, and /HWQ will report "not stored" for every problem until the ` +
+      `correct FYS.240 homework text is uploaded. See /healthz: homeworkProblemsCourseMismatch.`
+    );
+  } else {
+    HOMEWORK_PROBLEMS = parsed;
+    const total = Object.values(HOMEWORK_PROBLEMS).reduce((n, hw) => n + Object.keys(hw).length, 0);
+    console.log(`Loaded homework_problems.json: ${total} problems across ${Object.keys(HOMEWORK_PROBLEMS).length} homeworks`);
+  }
 } catch (e) {
   console.log(`No homework_problems.json found (${e.code || e.message}) — /HW commands will fall back to full-corpus search.`);
 }
@@ -158,11 +266,7 @@ HOW TO HELP
 
 FORMAT
 - Plain text for Telegram.
-${LATEX_ENABLED 
-  ? `- Write EQUATIONS in LaTeX between double dollar signs: $$E = mc^2$$
-- These will be automatically rendered as readable images`
-  : `- Use UNICODE SYMBOLS ONLY: α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ σ τ υ φ χ ψ ω`
-}
+- Never use $ or $$ delimiters, and never write raw LaTeX commands (\frac, \sqrt, \alpha, ^{}, _{}, etc.) — write all math directly in Unicode: Greek letters (α β γ δ θ λ μ π φ ω...), superscripts (x², n³), subscripts (n₁, sᵢ, sₒ), √ for roots, × · ÷ ± ∞ ∫ ∑ ∂ ∇ ≈ ≠ ≤ ≥ → for operators, and plain "/" for fractions (e.g. "1/f = 1/sₒ + 1/sᵢ")
 - Write video links as [Video X.Y (Topic)](URL) Markdown links, never as bare URLs, using the Finnish topic/url when answering in Finnish and the English topic/url when answering in English (see LANGUAGE OF VIDEO LINKS above)
 - 2-3 short paragraphs maximum
 - Answer in the language the student writes in (English or Finnish)
@@ -481,11 +585,84 @@ function fixVideoLinkLanguage(text) {
   );
 }
 
+// Converts common LaTeX that Claude might still slip in (despite
+// TA_INSTRUCTIONS telling it to use Unicode only) into Unicode, then
+// strips any leftover $ / $$ delimiters and backslash commands so
+// nothing raw ever reaches students. No LATEX_ENABLED flag — this
+// always runs; there is no image-rendering path any more.
+// (Ported from bot_fys240_bilingual_links.js.)
+const GREEK = {
+  alpha: "α", beta: "β", gamma: "γ", delta: "δ", epsilon: "ε", zeta: "ζ",
+  eta: "η", theta: "θ", iota: "ι", kappa: "κ", lambda: "λ", mu: "μ",
+  nu: "ν", xi: "ξ", omicron: "ο", pi: "π", rho: "ρ", sigma: "σ",
+  tau: "τ", upsilon: "υ", phi: "φ", chi: "χ", psi: "ψ", omega: "ω",
+  Gamma: "Γ", Delta: "Δ", Theta: "Θ", Lambda: "Λ", Xi: "Ξ", Pi: "Π",
+  Sigma: "Σ", Phi: "Φ", Psi: "Ψ", Omega: "Ω",
+};
+const SUP = { "0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹",
+  "+":"⁺","-":"⁻","=":"⁼","(":"⁽",")":"⁾","n":"ⁿ","i":"ⁱ",
+  a:"ᵃ",b:"ᵇ",c:"ᶜ",d:"ᵈ",e:"ᵉ",f:"ᶠ",g:"ᵍ",h:"ʰ",j:"ʲ",k:"ᵏ",l:"ˡ",m:"ᵐ",
+  o:"ᵒ",p:"ᵖ",r:"ʳ",s:"ˢ",t:"ᵗ",u:"ᵘ",v:"ᵛ",w:"ʷ",x:"ˣ",y:"ʸ",z:"ᶻ" };
+const SUB = { "0":"₀","1":"₁","2":"₂","3":"₃","4":"₄","5":"₅","6":"₆","7":"₇","8":"₈","9":"₉",
+  "+":"₊","-":"₋","=":"₌","(":"₍",")":"₎",
+  a:"ₐ",e:"ₑ",h:"ₕ",i:"ᵢ",j:"ⱼ",k:"ₖ",l:"ₗ",m:"ₘ",n:"ₙ",o:"ₒ",p:"ₚ",r:"ᵣ",s:"ₛ",t:"ₜ",u:"ᵤ",v:"ᵥ",x:"ₓ" };
+const toSup = (s) => [...s].map((c) => SUP[c] ?? c).join("");
+const toSub = (s) => [...s].map((c) => SUB[c] ?? c).join("");
+
+// Matches one level of {...} — good enough for the simple exponents/
+// fractions Claude actually generates; anything with nested braces
+// just falls through to the final cleanup pass below.
+const BRACED = "\\{([^{}]*)\\}";
+
+function latexToUnicode(text) {
+  // \frac{a}{b} -> a/b (parens added only if a or b contains a space/operator)
+  text = text.replace(new RegExp(`\\\\frac${BRACED}${BRACED}`, "g"), (_, a, b) => {
+    const wrap = (s) => (/[\s+\-]/.test(s) ? `(${s})` : s);
+    return `${wrap(a)}/${wrap(b)}`;
+  });
+  text = text.replace(/\\sqrt\{([^{}]*)\}/g, (_, x) => `√(${x})`);
+  text = text.replace(/\\sqrt(\w)/g, (_, x) => `√${x}`);
+
+  // superscripts / subscripts: braced or single-char
+  text = text.replace(new RegExp(`\\^${BRACED}`, "g"), (_, x) => toSup(x));
+  text = text.replace(/\^(\w)/g, (_, x) => toSup(x));
+  text = text.replace(new RegExp(`_${BRACED}`, "g"), (_, x) => toSub(x));
+  text = text.replace(/_(\w)/g, (_, x) => toSub(x));
+
+  // Greek letters
+  text = text.replace(/\\([A-Za-z]+)/g, (m, name) => GREEK[name] ?? m);
+
+  // common operators/symbols
+  const OPS = {
+    "\\pm": "±", "\\mp": "∓", "\\times": "×", "\\cdot": "·", "\\div": "÷",
+    "\\approx": "≈", "\\neq": "≠", "\\leq": "≤", "\\geq": "≥",
+    "\\rightarrow": "→", "\\to": "→", "\\infty": "∞", "\\partial": "∂",
+    "\\nabla": "∇", "\\int": "∫", "\\sum": "∑", "\\prod": "∏",
+    "\\left": "", "\\right": "", "\\,": " ", "\\;": " ", "\\!": "",
+    "\\text": "",
+  };
+  for (const [k, v] of Object.entries(OPS)) {
+    text = text.split(k).join(v);
+  }
+
+  // Fallback: strip any remaining backslash commands and stray braces
+  // (covers matrices, unrecognized macros — degrades to plain text
+  // instead of showing raw LaTeX)
+  text = text.replace(/\\[a-zA-Z]+/g, "");
+  text = text.replace(/[{}]/g, "");
+
+  // Finally, strip any leftover $ / $$ delimiters entirely
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, "$1");
+  text = text.replace(/\$([^$\n]+?)\$/g, "$1");
+  text = text.replace(/\$/g, "");
+
+  return text;
+}
+
 // Splits text into <4096-char chunks and sends each as a message. Pass
 // parseMode "HTML" (the normal case now, so video links render as clickable
-// text) or leave it undefined for a literal-text fallback. Used for the
-// non-LaTeX path, and as a fallback if LaTeX parsing/sending fails, so a
-// rendering hiccup degrades to plain text instead of the student getting
+// text) or leave it undefined for a literal-text fallback. A rendering
+// hiccup elsewhere degrades to plain text instead of the student getting
 // nothing at all.
 async function sendPlainChunks(chatId, text, replyTo, parseMode) {
   const chunks = [];
@@ -517,34 +694,14 @@ async function sendPlainChunks(chatId, text, replyTo, parseMode) {
 // Markdown "[label](url)" (per TA_INSTRUCTIONS) and are converted to real
 // <a> tags via convertLinksAndEscape() + parse_mode "HTML", so students see
 // "Video 3.3 (Harmonic waves)" as clickable text instead of a raw URL.
-// $$ LaTeX blocks are pulled out first (via parseLatexBlocks) and sent as
-// separate equation images; the surrounding text segments go through the
-// same link-conversion + HTML send as the non-LaTeX path.
+// Math is sent as plain Unicode text — no image rendering: latexToUnicode()
+// converts any stray LaTeX Claude still emits, and strips $ / $$ delimiters,
+// so no raw dollar signs ever reach the student.
 async function sendMessage(chatId, text, replyTo) {
   text = fixVideoLinkLanguage(text);
   text = markdownEmphasisToUnicode(text);
-
-  if (LATEX_ENABLED) {
-    let segments;
-    try {
-      segments = parseLatexBlocks(text);
-    } catch (e) {
-      console.error("parseLatexBlocks failed, falling back to plain text:", e.message);
-      await sendPlainChunks(chatId, convertLinksAndEscape(text.replace(/\$\$/g, "")), replyTo, "HTML");
-      return;
-    }
-    for (const seg of segments) {
-      if (seg.type === "latex") {
-        await sendLatexImage(tg, chatId, seg.content, replyTo).catch((e) =>
-          console.error("sendLatexImage failed:", e.message)
-        );
-      } else if (seg.content && seg.content.trim()) {
-        await sendPlainChunks(chatId, convertLinksAndEscape(seg.content), replyTo, "HTML");
-      }
-    }
-  } else {
-    await sendPlainChunks(chatId, convertLinksAndEscape(text), replyTo, "HTML");
-  }
+  text = latexToUnicode(text);
+  await sendPlainChunks(chatId, convertLinksAndEscape(text), replyTo, "HTML");
 }
 
 // --------------------------------------------------------------- claude -----
@@ -618,7 +775,7 @@ function shouldAnswer(message) {
 function stripMention(text) {
   return text
     .replace(new RegExp(`@${BOT_USERNAME}`, "ig"), "")
-    .replace(/^\/(ask|help|start|reset|video|topics|week\d+)(@\S+)?\s*/i, "")
+    .replace(/^\/(ask|help|start|reset|video|topics|week\d+|luennot|viikko\d+)(@\S+)?\s*/i, "")
     .trim();
 }
 
@@ -693,6 +850,13 @@ function buildHwOverviewFromStructuredData(hwNum) {
 function buildHwFullText(hwNum, problemNum, lang) {
   const exactText = HOMEWORK_PROBLEMS[hwNum]?.[problemNum];
   if (!exactText) {
+    if (HOMEWORK_PROBLEMS_COURSE_MISMATCH) {
+      return lang === "fi"
+        ? `Kotitehtävien tarkkoja tekstejä ei ole juuri nyt saatavilla (tekninen ongelma kurssimateriaalin kanssa) — opettaja on tietoinen asiasta.\n` +
+          `Kokeile /HW${hwNum} yleiskatsausta tai kysy minulta suoraan tehtävästä ${hwNum}.${problemNum}.`
+        : `Exact homework text isn't available right now (a technical issue with the course material — the instructor's aware) — ` +
+          `try /HW${hwNum} for an overview or just ask me directly about problem ${hwNum}.${problemNum}.`;
+    }
     return lang === "fi"
       ? `Minulla ei ole tallennettuna Kotitehtävä ${hwNum}, tehtävä ${problemNum} tarkkaa tekstiä.\n` +
         `Kokeile /HW${hwNum} yleiskatsausta varten, tai /HW${hwNum}.${problemNum} vihjettä varten.`
@@ -743,6 +907,7 @@ const HELP_TEXT_EN =
   "Commands:\n" +
   "/topics — see all video lecture topics\n" +
   "/week1 ... /week7 — see videos for a specific course week (week 7 = recap)\n" +
+  "/luennot, /viikko1 ... /viikko7 — same as /topics and /week, but always in Finnish\n" +
   "/HW1 ... /HW6 — list the problems in a specific homework set\n" +
   "/HW3.2 — get a hint on Homework 3, problem 2\n" +
   "/HW_hint3.2 — just a one-line nudge, no explanation\n" +
@@ -761,6 +926,7 @@ const HELP_TEXT_FI =
   "Komennot:\n" +
   "/topics — kaikki luentovideoiden aiheet\n" +
   "/week1 ... /week7 — kyseisen kurssiviikon videot (viikko 7 = kertaus)\n" +
+  "/luennot, /viikko1 ... /viikko7 — samat kuin /topics ja /week, mutta aina suomeksi\n" +
   "/HW1 ... /HW6 — listaa tietyn kotitehtäväsetin tehtävät\n" +
   "/HW3.2 — vinkki kotitehtävä 3:n tehtävään 2\n" +
   "/HW_hint3.2 — vain lyhyt vihje, ei selitystä\n" +
@@ -888,14 +1054,15 @@ function generateWeekMessages(weekNum, lang) {
 }
 
 // ------------------------------------------------------------- webhook ------
-app.get("/", (_req, res) => res.send("FYS.240 Optics bot is running"));
+app.get("/", (_req, res) => res.send(`FYS.240 Optics bot v${BOT_VERSION} is running`));
 app.get("/healthz", (_req, res) => res.json({ 
   ok: true, 
+  version: BOT_VERSION,
   corpusChars: COURSE_CORPUS.length,
   corpusLooksHealthy: corpusLoader.corpusLooksHealthy(),
   videoLectures: VIDEO_DB ? VIDEO_DB.all().length : 0,
-  latexEnabled: LATEX_ENABLED,
   homeworkProblemsLoaded: Object.values(HOMEWORK_PROBLEMS).reduce((n, hw) => n + Object.keys(hw).length, 0),
+  homeworkProblemsCourseMismatch: HOMEWORK_PROBLEMS_COURSE_MISMATCH,
   quizBankLooksHealthy: quizGenerator.quizBankLooksHealthy(),
 }));
 
@@ -953,6 +1120,22 @@ async function handleUpdate(update) {
     }
     return;
   }
+  // /luennot — Finnish alias for /topics, always Finnish regardless of the
+  // student's Telegram client language (unlike /topics, which follows
+  // getLang(message)).
+  if (/^\/luennot/i.test(text)) {
+    for (const chunk of generateTopicsMessages("fi")) {
+      await tg("sendMessage", {
+        chat_id: chatId,
+        text: chunk,
+        parse_mode: "HTML",
+        disable_web_page_preview: true,
+      }).catch((e) =>
+        console.error("Telegram sendMessage (/luennot) failed:", e.response?.status, JSON.stringify(e.response?.data))
+      );
+    }
+    return;
+  }
   const weekMatch = text.match(/^\/week(\d+)/i);
   if (weekMatch) {
     const weekNum = parseInt(weekMatch[1], 10);
@@ -964,6 +1147,23 @@ async function handleUpdate(update) {
         disable_web_page_preview: true,
       }).catch((e) =>
         console.error("Telegram sendMessage (/week) failed:", e.response?.status, JSON.stringify(e.response?.data))
+      );
+    }
+    return;
+  }
+  // /viikkoN — Finnish alias for /weekN, always Finnish regardless of the
+  // student's Telegram client language.
+  const viikkoMatch = text.match(/^\/viikko(\d+)/i);
+  if (viikkoMatch) {
+    const weekNum = parseInt(viikkoMatch[1], 10);
+    for (const chunk of generateWeekMessages(weekNum, "fi")) {
+      await tg("sendMessage", {
+        chat_id: chatId,
+        text: chunk,
+        parse_mode: "HTML",
+        disable_web_page_preview: true,
+      }).catch((e) =>
+        console.error("Telegram sendMessage (/viikko) failed:", e.response?.status, JSON.stringify(e.response?.data))
       );
     }
     return;
@@ -1100,10 +1300,10 @@ if (!ANTHROPIC_API_KEY) console.error("WARNING: ANTHROPIC_API_KEY is not set");
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  const latexStatus = LATEX_ENABLED ? "ENABLED ✓" : "disabled";
   const videoStatus = VIDEO_DB && VIDEO_DB.all().length > 0 ? "✓" : "⚠";
+  const hwStatus = HOMEWORK_PROBLEMS_COURSE_MISMATCH ? "⚠ COURSE MISMATCH" : "✓";
   console.log(
-    `FYS.240 Optics bot listening on port ${PORT} | model=${MODEL} | cache=${CACHE_TTL} | ` +
-    `LaTeX=${latexStatus} | Videos=${videoStatus}`
+    `FYS.240 Optics bot v${BOT_VERSION} listening on port ${PORT} | model=${MODEL} | cache=${CACHE_TTL} | ` +
+    `Math=Unicode | Videos=${videoStatus} | Homework=${hwStatus}`
   );
 });

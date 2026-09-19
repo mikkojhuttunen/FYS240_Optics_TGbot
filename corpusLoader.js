@@ -1,5 +1,8 @@
 /**
  * corpusLoader.js
+ * DATA_VERSION: 1.0.0 (bump if SECTION_INDEX, section-heading regexes, or
+ * the glossary loader's behavior change — see bot_fys240.js's BOT_VERSION
+ * for the overall bot versioning convention this follows)
  * -----------------
  * Chapter- and section-tagged access into course_corpus.txt.
  *

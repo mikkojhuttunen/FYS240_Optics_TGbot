@@ -1,5 +1,15 @@
 /**
  * FYS.240 Optics - Video References Database
+ * DATA_VERSION: 1.1.0 (bump when videos/segments are regenerated or the
+ * module's shape changes — see bot_fys240.js's BOT_VERSION/CHANGELOG for
+ * the overall bot versioning convention this follows)
+ *
+ * Functionality:
+ *   - all()/getVideo()/getChapter()/getChapters()/getTopics() — basic lookups
+ *   - search()/findBestMatch() — keyword search across EN + FI titles
+ *   - findSegment()/findRelevantSegments()/getSegments() — in-video
+ *     timestamp lookups, exact substring or fuzzy token-overlap matching
+ *
  * Lightweight data format for Telegram bot
  * Generated from YouTube analytics CSV (English + Finnish playlists)
  *

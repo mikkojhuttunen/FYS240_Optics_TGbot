@@ -1,19 +1,48 @@
 # FYS.240 Optics bot — merged redeploy package
 
+**Current version: 2.3.0** — see `bot_fys240.js`'s top-of-file comment for
+the full functionality list and changelog going forward. From now on, bump
+`BOT_VERSION` in `bot_fys240.js` (and `package.json`'s `version`) any time
+you ship a change, and add a line to the changelog block — that's the whole
+versioning process. `/healthz` and the startup log both report the live
+version, so you can always confirm what's actually deployed on Railway.
+
 This replaces `bot_fys240.js` AND `bot_fys240_bilingual_links.js` with a
 single canonical bot. The repo had diverged into two branches:
 
 | Feature | `bot_fys240.js` (old) | `bot_fys240_bilingual_links.js` (old) | `bot_fys240_HWtext.js` (old) | This merged file |
 |---|---|---|---|---|
-| LaTeX `$$` equation images (CodeCogs) | ✅ | ❌ (Unicode-only) | ✅ | ✅ |
+| LaTeX `$$` equation **images** (CodeCogs) | ✅ | ❌ | ✅ | ❌ — **removed** (see below) |
 | In-video timestamp links (`&t=Xs`, `findRelevantSegments`) | ✅ | ❌ | ❌ | ✅ |
 | Deterministic wrong-language video-link fix (`fixVideoLinkLanguage`) | ❌ | ✅ | ❌ | ✅ |
 | Bilingual (EN/FI) help text, chapter names | ✅ | ✅ | ❌ (EN-only) | ✅ |
 | Verbatim question-text command | ❌ | ❌ | ✅ (`/HWtext3.2`) | ✅ (renamed `/HWQ3.2`, case-insensitive) |
+| Finnish-forced link commands (`/viikkoN`, `/luennot`) | ❌ | ❌ | ❌ | ✅ (new) |
 | HW commands, quiz, /topics, /week, /reset, /healthz | ✅ | ✅ | ✅ | ✅ (unchanged) |
 
 **Delete all three old bot files from the repo and use only `bot_fys240.js`
 from this package.** `package.json`'s `main`/`start` now point at it.
+**`latex-renderer.js` is no longer needed by any bot file — delete it from
+the repo too**, and drop `LATEX_ENABLED` / `LATEX_VERIFY_BEFORE_SEND` from
+Railway's Variables tab if they're set (harmless if left, just unused now).
+
+### LaTeX image rendering — removed
+
+Students were seeing raw `$$...$$` / `$...$` in messages. Root cause: the
+CodeCogs image-rendering path only ever handled `$$...$$` blocks
+(`parseLatexBlocks` in `latex-renderer.js` literally splits on the string
+`"$$"`); any single-`$` inline math, or a `$$` block where the CodeCogs
+request failed/timed out, fell straight through as literal text with the
+delimiters still attached — there was no cleanup pass for that failure
+case. Rather than patch that path, LaTeX image rendering has been removed
+entirely: math is now always sent as plain Unicode text (same approach
+`bot_fys240_bilingual_links.js` used). `latexToUnicode()` converts any
+stray `\frac`, `\sqrt`, `^{}`, `_{}`, Greek commands, and common operators
+Claude still emits into real Unicode (verified: `\frac{1}{\mu_0}` → `1/μ₀`,
+`n_1\sin\theta_1` → `n₁ θ₁`), then strips any leftover `$`/`$$`/backslash
+commands as a backstop — so no raw dollar signs can reach a student even
+if Claude ignores the "Unicode only" instruction. There's no
+`LATEX_ENABLED` flag any more; this always runs.
 
 ### `/HWQ` — new in this merge
 
@@ -26,6 +55,21 @@ back to a plain "not stored" message (bilingual) if that problem isn't in
 requires the sub-problem number and never overlaps with `/HW3.2` or
 `/HW_hint3.2`'s patterns (verified with unit tests).
 
+### `/viikkoN` and `/luennot` — new in this merge
+
+Finnish-named aliases for `/weekN` and `/topics`. The difference from just
+typing `/week3` from a Finnish Telegram client: `/week3`/`/topics` pick
+language via `getLang(message)` (the client's `language_code`), so an
+English-language-client student typing `/week3` gets English chapter
+names/labels even if they'd prefer Finnish. `/viikko3` and `/luennot`
+always call the same underlying `generateWeekMessages()`/
+`generateTopicsMessages()` with `"fi"` hard-coded, regardless of the
+student's client language — for students who want the Finnish list
+specifically. Video links themselves already fell back sensibly either
+way (any video with no Finnish recording uses its English link even in a
+Finnish-language listing) — this only changes which language's chapter
+names/labels and video titles are shown.
+
 ## Files in this package
 
 Runtime (required):
@@ -34,14 +78,20 @@ Runtime (required):
 - `fys240_videos.js` — bilingual (EN/FI) video DB, merges in timestamp
   segments from `video_segments.json` at load time
 - `video_segments.json` — per-video timestamp/chapter-marker data
-- `latex-renderer.js` — turns `$$...$$` into rendered equation images
 - `quizGenerator_fys240.js` — quiz flow (chapter/section picker, grading)
 - `homework_problems.json` — verbatim HW problem text for `/HW` commands
+  (real FYS.240 content as of v2.3.0 — see below)
+- `homework_solutions.json` — instructor-reference solutions (new in
+  v2.3.0). **NOT loaded by `bot_fys240.js` — do not wire it to any
+  student-facing command.**
 - `terminology.json` — glossary data (loaded by `corpusLoader.js`; see
   "Known gaps" below — not yet wired to a `/define` command)
 - `package.json`, `.gitignore`
 
 Maintenance scripts (not required at runtime, kept in `scripts/`):
+- `scripts/clean.js`, `scripts/clean_homework.js`, `scripts/build_homework.js`
+  — the homework `.tex` → JSON extraction pipeline (see "Resolved in
+  v2.3.0" below for what each does and when to re-run it).
 - `scripts/build_optics_videos_bilingual.js` — regenerates `fys240_videos.js`
   from the two YouTube analytics CSVs (EN "Optics ..." + FI "FYS.240
   Optiikka ..."). **Never re-run the old `build_optics_videos.js`** — it's
@@ -64,39 +114,77 @@ Optional (all have working defaults):
 - `CACHE_TTL` (default `1h`)
 - `MAX_TOKENS` (default `900`)
 - `BOT_USERNAME` — needed for @mention detection in group chats
-- `LATEX_ENABLED` — default `true`; set to `false` to fall back to the
-  Unicode-only math the `_bilingual_links` branch used
-- `LATEX_VERIFY_BEFORE_SEND` — default `true`
+
+(No `LATEX_ENABLED`/`LATEX_VERIFY_BEFORE_SEND` any more — LaTeX image
+rendering has been removed; see above.)
 
 ## Redeploy steps
 
-1. In your local clone of `FYS240_Optics_TGbot`, delete `bot_fys240.js` and
-   `bot_fys240_bilingual_links.js`, then copy in every file from this
-   package (keeping the `scripts/` subfolder).
-2. `git add -A && git commit -m "Merge LaTeX/timestamp branch with bilingual-link-fix branch into one bot" && git push`
+1. In your local clone of `FYS240_Optics_TGbot`, delete `bot_fys240.js`,
+   `bot_fys240_bilingual_links.js`, `bot_fys240_HWtext.js`, and
+   `latex-renderer.js`, then copy in every file from this package (keeping
+   the `scripts/` subfolder).
+2. `git add -A && git commit -m "Merge all bot branches, remove broken LaTeX image rendering, add /HWQ + Finnish-forced /viikko,/luennot" && git push`
 3. Confirm Railway's start command / `package.json main` now resolves to
-   `bot_fys240.js` (this package's `package.json` already sets that).
+   `bot_fys240.js` (this package's `package.json` already sets that). If
+   `LATEX_ENABLED` or `LATEX_VERIFY_BEFORE_SEND` are set in Railway's
+   Variables tab, they can be removed (harmless if left, just unused now).
 4. Redeploy, then check `/healthz` — expect `videoLectures: 61`,
-   `latexEnabled: true`, `corpusLooksHealthy: true`.
-5. Sanity-check in Telegram: ask a question in Finnish that has a video
-   with timestamps (e.g. anything from chapter 2 or 4) and confirm you get
-   both a plain video link and, where relevant, a `[mm:ss](...&t=...)`
-   moment link, in Finnish.
+   `corpusLooksHealthy: true`.
+5. Sanity-check in Telegram:
+   - Ask a question whose answer involves an equation (e.g. "what's the
+     thin lens equation?") and confirm no `$` or `$$` appear anywhere in
+     the reply — only Unicode math.
+   - Ask a Finnish question that has a video with timestamps (e.g.
+     anything from chapter 2 or 4) and confirm you get both a plain video
+     link and, where relevant, a `[mm:ss](...&t=...)` moment link, in
+     Finnish.
+   - Try `/viikko3` and `/luennot` and confirm both return Finnish content
+     regardless of your Telegram client's language.
+   - Try `/HWQ1.3` (a real problem now — see v2.3.0) and confirm it returns
+     the actual FYS.240 exercise text, in clean Unicode math, not raw
+     LaTeX and not laser-physics content. Check `/healthz` too:
+     `homeworkProblemsCourseMismatch` should read `false`.
 
-## Known gaps found while auditing (not fixed in this pass — flagging only)
+## Resolved in v2.3.0: real FYS.240 homework content
 
-- **🚨 `homework_problems.json` contains the wrong course's homework.** All
-  24 stored problems (HW1–HW6, 4 problems each) are FYS.501 Laser Physics
-  content — laser cavities, ABCD matrices, gain media, population
-  inversion, Fabry–Pérot resonator design, Nd:YAG/Ti:Sapph gain media, etc.
-  There is **no FYS.240 Optics content in this file at all**. This means
-  `/HW1`–`/HW6`, `/HW_hint`, and the new `/HWQ` command are all currently
-  serving laser-physics homework text to optics students — confirmed by
-  actually running `/HWQ1.1` against this file (see chat). This is a
-  correctness issue, not just a missing feature — I'd treat it as higher
-  priority than the two gaps below. The real FYS.240 homework text doesn't
-  appear to be anywhere in this project's files; it likely needs to be
-  re-extracted from the original FYS.240 assignment PDFs/docs.
+`homework_problems.json` now contains the actual FYS.240 exercises (10
+problems across all 6 homework sets), extracted from `HW1_Optics.tex`
+... `HW6_Optics.tex` — LaTeX source the course uses to typeset the real
+assignments, with `\ExerciseNu{<id>}{...}` / `\SolutionNu{S<id>}{...}`
+markup. A new `homework_solutions.json` (10 solutions) was extracted
+alongside it — **instructor-reference only**; nothing in `bot_fys240.js`
+loads or serves it, and it must stay that way per the course's
+no-solutions-to-students rule. Do not wire it to any command without
+deliberately re-deciding that policy first.
+
+**Maintenance scripts** (in `scripts/`), for when the `.tex` sources get
+revised or extended (a 7th homework set, corrected/added problems, etc.):
+- `scripts/clean.js` — the general LaTeX → clean-Unicode-text pipeline
+  originally built for `course_corpus.txt` (Greek letters, sub/superscripts,
+  `\frac`, matrices, lists, etc.) — the shared engine both this and the
+  corpus builder rely on.
+- `scripts/clean_homework.js` — extends `clean.js` with everything specific
+  to the homework `.tex` files: `\ExerciseNu`/`\SolutionNu` extraction, the
+  physics-package macros (`\vb`, `\vu`, `\pdv`, `\grad`, `\cross`, `\rmi`,
+  `\dd`, ...), `\newcommand`/`\renewcommand` stripping, and the `\abc` /
+  `\item[<label>]` sub-part labeling conventions. Several real bugs in the
+  underlying `clean.js` pipeline were found and fixed while building this
+  (documented in the code comments) — e.g. `\frac`/`\sqrt` silently losing
+  their division/root grouping whenever the argument contained its own
+  nested braces (extremely common with any superscript inside a fraction),
+  and derivative accents (`\dot`, `\ddot`) being dropped entirely. Worth
+  reviewing if `course_corpus.txt` is ever rebuilt from `.tex` sources too,
+  since `clean.js` itself has the same underlying bugs.
+- `scripts/build_homework.js` — runs the extraction: `node
+  scripts/build_homework.js <sourceDir> <outDir>` regenerates both JSON
+  files from `HW1_Optics.tex` ... `HW6_Optics.tex`. **Always spot-check the
+  output by hand after regenerating** — the source LaTeX uses several
+  macro conventions that needed dedicated handling; a future homework file
+  using an as-yet-unseen macro could silently degrade rather than error.
+
+## Known gaps found while auditing
+
 - **`/define` is not wired into any bot branch.** `corpusLoader.js`
   already has a working glossary lookup (`findGlossaryTerms`, backed by
   `terminology.json`'s ~900 entries) and a `/define <term>` command exists

@@ -1,5 +1,8 @@
 /**
  * quizGenerator_fys240.js
+ * DATA_VERSION: 1.0.0 (bump if the quiz flow, bank-loading behavior, or
+ * prompt wording change — see bot_fys240.js's BOT_VERSION for the overall
+ * bot versioning convention this follows)
  * -----------------
  * Chapter/section quiz generation + grading for the FYS.240 Optics bot.
  *
