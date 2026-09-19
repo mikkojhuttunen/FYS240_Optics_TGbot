@@ -51,6 +51,7 @@ const fs = require('fs');
 const path = require('path');
 const Anthropic = require('@anthropic-ai/sdk');
 const corpusLoader = require('./corpusLoader');
+const limiter = require('./usageLimiter');
 const { getCorpusSection } = corpusLoader;
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -143,6 +144,10 @@ const UI = {
     correct: (explanation) => `✅ Correct!\n${explanation}`,
     incorrect: (answer, explanation) => `❌ Not quite. Correct answer: ${answer}\n${explanation}`,
     complete: (score, total) => `Quiz complete! Score: ${score}/${total}`,
+    limitedPartial: (n, wanted) =>
+      `AI-generated extra questions aren't available right now (daily AI limit reached), so this round has ${n} of the ${wanted} you asked for.`,
+    limitedPartialMember: (n, wanted) =>
+      `AI-generated extra questions are for FYS.240 course members (join the course channel to get them), so this round has ${n} of the ${wanted} you asked for.`,
   },
   fi: {
     askChapter: 'Mistä luvusta haluaisit visan? Kokeile esim. "kysele minulta luvusta 2" tai "kysele minulta osiosta 2.3".',
@@ -156,6 +161,10 @@ const UI = {
     correct: (explanation) => `✅ Oikein!\n${explanation}`,
     incorrect: (answer, explanation) => `❌ Ei ihan. Oikea vastaus: ${answer}\n${explanation}`,
     complete: (score, total) => `Visa suoritettu! Tulos: ${score}/${total}`,
+    limitedPartial: (n, wanted) =>
+      `Tekoälyn luomia lisäkysymyksiä ei ole nyt saatavilla (päivittäinen tekoälyraja täynnä), joten tällä kierroksella on ${n}/${wanted} pyytämääsi kysymystä.`,
+    limitedPartialMember: (n, wanted) =>
+      `Tekoälyn luomat lisäkysymykset ovat FYS.240-kurssin jäsenille (liity kurssin kanavalle saadaksesi ne), joten tällä kierroksella on ${n}/${wanted} pyytämääsi kysymystä.`,
   },
 };
 
@@ -368,7 +377,9 @@ async function generateQuiz(chapter, section, count = 5, lang = "en") {
       ? `Generoi ${count} monivalintakysymystä tästä otteesta (${scopeLabel}):\n\n${corpusExcerpt}`
       : `Generate ${count} MCQ questions from this excerpt (${scopeLabel}):\n\n${corpusExcerpt}`;
 
-  const response = await anthropic.messages.create({
+  // trackedCreate() = anthropic.messages.create() + adds the call's cost to the shared daily spend
+  // estimate used by the usageLimiter backstop.
+  const response = await limiter.trackedCreate(anthropic, {
     model: 'claude-haiku-4-5-20251001',
     max_tokens: 1500,
     system: systemPrompt,
@@ -404,15 +415,35 @@ async function generateQuiz(chapter, section, count = 5, lang = "en") {
  * The main "give me N questions for chapter/section X" entry point used by
  * startQuiz(). Bank-first, live-generation fallback for the shortfall only,
  * with self-expansion of any freshly generated questions.
+ *
+ * `hooks` (optional, all members optional) lets bot_fys240.js meter live generation per student
+ * (see usageLimiter.js / accessGuard.js) without this module knowing about users:
+ *   hooks.reserve()             -> { ok, ... } | Promise — called ONLY when the bank can't fully
+ *                                  satisfy the request, i.e. right before a paid API call. ok:false
+ *                                  means "don't call the API": the bank questions are served as-is.
+ *   hooks.refund(reservation)   -> called if the live call fails, so the student isn't charged.
+ * Bank-only quizzes never touch the hooks and are therefore free.
+ *
+ * Returns { questions, reservation, limited }:
+ *   reservation - the successful reservation (a credit was charged) or null
+ *   limited     - the failed reservation if live generation was refused, else null
  */
-async function getQuizQuestions(chatId, chapter, section, count, lang = "en") {
+async function getQuizQuestionsDetailed(chatId, chapter, section, count, lang = "en", hooks = {}) {
   const excludeIds = getRecentlyServed(chatId);
   const { questions: bankQuestions, shortfall } = sampleFromBank(chapter, section, count, excludeIds, lang);
 
   markServed(chatId, bankQuestions.map((q) => q.id));
 
   if (shortfall === 0) {
-    return bankQuestions;
+    return { questions: bankQuestions, reservation: null, limited: null };
+  }
+
+  let reservation = null;
+  if (typeof hooks.reserve === 'function') {
+    reservation = await hooks.reserve();
+    if (reservation && !reservation.ok) {
+      return { questions: bankQuestions, reservation: null, limited: reservation };
+    }
   }
 
   // Top up the shortfall with a live call, scoped to just this
@@ -423,7 +454,8 @@ async function getQuizQuestions(chatId, chapter, section, count, lang = "en") {
     generated = await generateQuiz(chapter, section, shortfall, lang);
   } catch (err) {
     console.warn(`quizGenerator_fys240: live fallback generation failed (${err.message}) — serving ${bankQuestions.length}/${count} from the bank only`);
-    return bankQuestions;
+    if (reservation && typeof hooks.refund === 'function') hooks.refund(reservation);
+    return { questions: bankQuestions, reservation: null, limited: null };
   }
 
   // Tag with a synthetic id (bank questions already have one) so downstream
@@ -436,7 +468,12 @@ async function getQuizQuestions(chatId, chapter, section, count, lang = "en") {
 
   appendPendingQuestions(chapter, section, stamped, lang);
 
-  return bankQuestions.concat(stamped);
+  return { questions: bankQuestions.concat(stamped), reservation, limited: null };
+}
+
+// Original, un-metered signature — returns just the questions. Kept for buildQuizBank.js / tests.
+async function getQuizQuestions(chatId, chapter, section, count, lang = "en") {
+  return (await getQuizQuestionsDetailed(chatId, chapter, section, count, lang)).questions;
 }
 
 // ---------- Telegram-facing helpers ----------
@@ -474,7 +511,15 @@ async function defaultAskWhichChapter(bot, chatId, lang = "en") {
 // client's language_code) — resolveQuizLang() upgrades it to "fi" if the
 // request text itself carries Finnish quiz vocabulary, so a Finnish-
 // phrased request is honored even from an English-set client.
-async function startQuiz(bot, chatId, text, askWhichChapter = defaultAskWhichChapter, fallbackLang = "en") {
+//
+// `hooks` (optional) meters live AI generation per student — see
+// getQuizQuestionsDetailed() above for reserve/refund, plus two more used here:
+//   hooks.onDenied(limited)      - called when live generation was refused AND the bank had
+//                                  nothing to serve (bot tells the student why); without this
+//                                  hook the generic "no questions" message is sent instead
+//   hooks.onCharged(reservation) - called after the first question is sent when a credit was
+//                                  charged (bot uses it for the "N answers left" heads-up)
+async function startQuiz(bot, chatId, text, askWhichChapter = defaultAskWhichChapter, fallbackLang = "en", hooks = {}) {
   const lang = resolveQuizLang(text, fallbackLang);
   const t = ui(lang);
 
@@ -493,9 +538,9 @@ async function startQuiz(bot, chatId, text, askWhichChapter = defaultAskWhichCha
     await bot.sendMessage(chatId, t.countCapped(MAX_COUNT));
   }
 
-  let questions;
+  let questions, reservation, limited;
   try {
-    questions = await getQuizQuestions(chatId, chapter, section, requestedCount, lang);
+    ({ questions, reservation, limited } = await getQuizQuestionsDetailed(chatId, chapter, section, requestedCount, lang, hooks));
   } catch (err) {
     console.error(`quizGenerator_fys240: startQuiz failed for chapter ${chapter}${section ? '.' + section : ''}: ${err.message}`);
     await bot.sendMessage(chatId, t.startFailed);
@@ -503,8 +548,17 @@ async function startQuiz(bot, chatId, text, askWhichChapter = defaultAskWhichCha
   }
 
   if (!questions.length) {
-    await bot.sendMessage(chatId, t.noQuestions);
+    if (limited && typeof hooks.onDenied === 'function') {
+      await hooks.onDenied(limited);
+    } else {
+      await bot.sendMessage(chatId, t.noQuestions);
+    }
     return;
+  }
+
+  if (limited) {
+    // Live generation was refused but the bank had some questions: serve those and say why it's short.
+    await bot.sendMessage(chatId, (limited.reason === 'not_member' ? t.limitedPartialMember : t.limitedPartial)(questions.length, requestedCount));
   }
 
   const session = createSession(chatId, questions, lang);
@@ -514,6 +568,10 @@ async function startQuiz(bot, chatId, text, askWhichChapter = defaultAskWhichCha
     formatQuestionMessage(session.questions[0], 1, session.questions.length, lang),
     { parse_mode: 'HTML', reply_markup: buildQuestionKeyboard(0, session.questions[0]) }
   );
+
+  if (reservation && typeof hooks.onCharged === 'function') {
+    await hooks.onCharged(reservation);
+  }
 }
 
 // Called from bot.js's callback_query handler when data starts with "quiz:"
@@ -567,6 +625,7 @@ module.exports = {
   generateQuiz,
   sampleFromBank,
   getQuizQuestions,
+  getQuizQuestionsDetailed,
   loadQuizBank,
   quizBankLooksHealthy,
   extractChapterHint,

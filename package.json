@@ -1,6 +1,6 @@
 {
   "name": "fys240-optics-bot",
-  "version": "2.6.5",
+  "version": "2.7.1",
   "private": true,
   "main": "bot_fys240.js",
   "scripts": {

@@ -68,6 +68,7 @@ const fs = require('fs');
 const path = require('path');
 const Anthropic = require('@anthropic-ai/sdk');
 const corpusLoader = require('./corpusLoader');
+const limiter = require('./usageLimiter');
 const { getCorpusSection } = corpusLoader;
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -140,6 +141,10 @@ const UI = {
     },
     complete: (score, total) => `Multi-select quiz complete! Score: ${score.toFixed(2)}/${total.toFixed(2)} (${total > 0 ? Math.round((score / total) * 100) : 0}%)`,
     nothingSelected: "Pick at least one letter before submitting.",
+    limitedPartial: (n, wanted) =>
+      `AI-generated extra questions aren't available right now (daily AI limit reached), so this round has ${n} of the ${wanted} you asked for.`,
+    limitedPartialMember: (n, wanted) =>
+      `AI-generated extra questions are for FYS.240 course members (join the course channel to get them), so this round has ${n} of the ${wanted} you asked for.`,
   },
   fi: {
     askChapter: 'Mistä luvusta haluaisit monivalintavisan (valitse kaikki oikeat)? Kokeile esim. "monivalintavisa luvusta 2" tai "monivalintavisa osiosta 2.3".',
@@ -159,6 +164,10 @@ const UI = {
     },
     complete: (score, total) => `Monivalintavisa suoritettu! Tulos: ${score.toFixed(2)}/${total.toFixed(2)} (${total > 0 ? Math.round((score / total) * 100) : 0} %)`,
     nothingSelected: "Valitse ainakin yksi kirjain ennen vastaamista.",
+    limitedPartial: (n, wanted) =>
+      `Tekoälyn luomia lisäkysymyksiä ei ole nyt saatavilla (päivittäinen tekoälyraja täynnä), joten tällä kierroksella on ${n}/${wanted} pyytämääsi kysymystä.`,
+    limitedPartialMember: (n, wanted) =>
+      `Tekoälyn luomat lisäkysymykset ovat FYS.240-kurssin jäsenille (liity kurssin kanavalle saadaksesi ne), joten tällä kierroksella on ${n}/${wanted} pyytämääsi kysymystä.`,
   },
 };
 
@@ -331,7 +340,9 @@ async function generateQuiz(chapter, section, count = 5, lang = "en") {
       ? `Generoi ${count} "valitse kaikki oikeat" -kysymystä tästä otteesta (${scopeLabel}):\n\n${corpusExcerpt}`
       : `Generate ${count} "select all that apply" questions from this excerpt (${scopeLabel}):\n\n${corpusExcerpt}`;
 
-  const response = await anthropic.messages.create({
+  // trackedCreate() = anthropic.messages.create() + adds the call's cost to the shared daily spend
+  // estimate used by the usageLimiter backstop.
+  const response = await limiter.trackedCreate(anthropic, {
     model: 'claude-haiku-4-5-20251001',
     max_tokens: 1800,
     system: systemPrompt,
@@ -368,14 +379,26 @@ async function generateQuiz(chapter, section, count = 5, lang = "en") {
   return sane;
 }
 
-async function getQuizQuestions(chatId, chapter, section, count, lang = "en") {
+// `hooks` (optional) meters live generation per student — same contract as
+// quizGenerator_fys240.js's getQuizQuestionsDetailed(): hooks.reserve() is called only when the bank
+// can't satisfy the request (right before a paid API call), hooks.refund(reservation) if that call
+// fails. Returns { questions, reservation, limited }.
+async function getQuizQuestionsDetailed(chatId, chapter, section, count, lang = "en", hooks = {}) {
   const excludeIds = getRecentlyServed(chatId);
   const { questions: bankQuestions, shortfall } = sampleFromBank(chapter, section, count, excludeIds, lang);
 
   markServed(chatId, bankQuestions.map((q) => q.id));
 
   if (shortfall === 0) {
-    return bankQuestions;
+    return { questions: bankQuestions, reservation: null, limited: null };
+  }
+
+  let reservation = null;
+  if (typeof hooks.reserve === 'function') {
+    reservation = await hooks.reserve();
+    if (reservation && !reservation.ok) {
+      return { questions: bankQuestions, reservation: null, limited: reservation };
+    }
   }
 
   let generated = [];
@@ -383,7 +406,8 @@ async function getQuizQuestions(chatId, chapter, section, count, lang = "en") {
     generated = await generateQuiz(chapter, section, shortfall, lang);
   } catch (err) {
     console.warn(`multivalueQuizGenerator_fys240: live fallback generation failed (${err.message}) — serving ${bankQuestions.length}/${count} from the bank only`);
-    return bankQuestions;
+    if (reservation && typeof hooks.refund === 'function') hooks.refund(reservation);
+    return { questions: bankQuestions, reservation: null, limited: null };
   }
 
   const stamped = generated.map((q, i) => ({
@@ -394,7 +418,12 @@ async function getQuizQuestions(chatId, chapter, section, count, lang = "en") {
 
   appendPendingQuestions(chapter, section, stamped, lang);
 
-  return bankQuestions.concat(stamped);
+  return { questions: bankQuestions.concat(stamped), reservation, limited: null };
+}
+
+// Original, un-metered signature — returns just the questions. Kept for tests / bank-build scripts.
+async function getQuizQuestions(chatId, chapter, section, count, lang = "en") {
+  return (await getQuizQuestionsDetailed(chatId, chapter, section, count, lang)).questions;
 }
 
 // ---------- Telegram-facing helpers ----------
@@ -449,7 +478,10 @@ async function sendQuestion(bot, chatId, session) {
   session.currentText = text;
 }
 
-async function startMultivalueQuiz(bot, chatId, text, askWhichChapter = defaultAskWhichChapter, fallbackLang = "en") {
+// `hooks` (optional): reserve/refund (see getQuizQuestionsDetailed above), onDenied(limited) when live
+// generation was refused and the bank had nothing to serve, onCharged(reservation) after the first
+// question is sent when a credit was charged.
+async function startMultivalueQuiz(bot, chatId, text, askWhichChapter = defaultAskWhichChapter, fallbackLang = "en", hooks = {}) {
   const lang = resolveQuizLang(text, fallbackLang);
   const t = ui(lang);
 
@@ -468,9 +500,9 @@ async function startMultivalueQuiz(bot, chatId, text, askWhichChapter = defaultA
     await bot.sendMessage(chatId, t.countCapped(MAX_COUNT));
   }
 
-  let questions;
+  let questions, reservation, limited;
   try {
-    questions = await getQuizQuestions(chatId, chapter, section, requestedCount, lang);
+    ({ questions, reservation, limited } = await getQuizQuestionsDetailed(chatId, chapter, section, requestedCount, lang, hooks));
   } catch (err) {
     console.error(`multivalueQuizGenerator_fys240: startMultivalueQuiz failed for chapter ${chapter}${section ? '.' + section : ''}: ${err.message}`);
     await bot.sendMessage(chatId, t.startFailed);
@@ -478,12 +510,24 @@ async function startMultivalueQuiz(bot, chatId, text, askWhichChapter = defaultA
   }
 
   if (!questions.length) {
-    await bot.sendMessage(chatId, t.noQuestions);
+    if (limited && typeof hooks.onDenied === 'function') {
+      await hooks.onDenied(limited);
+    } else {
+      await bot.sendMessage(chatId, t.noQuestions);
+    }
     return;
+  }
+
+  if (limited) {
+    await bot.sendMessage(chatId, (limited.reason === 'not_member' ? t.limitedPartialMember : t.limitedPartial)(questions.length, requestedCount));
   }
 
   const session = createSession(chatId, questions, lang);
   await sendQuestion(bot, chatId, session);
+
+  if (reservation && typeof hooks.onCharged === 'function') {
+    await hooks.onCharged(reservation);
+  }
 }
 
 // Partial-credit grading, floored at 0 per question. k = number of correct
@@ -594,6 +638,7 @@ module.exports = {
   generateQuiz,
   sampleFromBank,
   getQuizQuestions,
+  getQuizQuestionsDetailed,
   loadQuizBank,
   quizBankLooksHealthy,
   extractChapterHint,

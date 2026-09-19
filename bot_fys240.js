@@ -10,7 +10,7 @@
  * so you can always confirm which version is actually live on Railway.
  * ============================================================================
  *
- * CURRENT FUNCTIONALITY (v2.6.5):
+ * CURRENT FUNCTIONALITY (v2.7.1):
  *   - Free-text Q&A grounded in course_corpus.txt, answers in whichever
  *     language (EN/FI) the student's question is written in
  *   - Bilingual (EN/FI) video lecture links from fys240_videos.js, with
@@ -52,6 +52,19 @@
  *     option text is written into the question message body as a
  *     lettered list so Telegram never truncates/concatenates it onto a
  *     button.
+ *   - /quiz [chapter | section] [count] — explicit command for the single-select
+ *     multiple-choice quiz (same engine as "quiz me on chapter N", see
+ *     CHANGELOG v2.7.0). "/quiz" alone shows the chapter picker; "/quiz 2",
+ *     "/quiz chapter 2", "/quiz 2.3", "/quiz 2.3 8", "/quiz luku 2" all work.
+ *   - /usage — how many of today's AI credits the student has used (free)
+ *   - Open bot with a members-only AI layer (v2.7.0/v2.7.1): everything that
+ *     doesn't call Claude — /help, /topics, /weekN, /define, /HWQ, /usage and
+ *     quizzes served from the question bank — is open to everyone. The
+ *     AI-backed actions (free-text Q&A, /HW hints, quizzes that need live
+ *     generation) require membership of the course channel (COURSE_CHANNEL_ID,
+ *     membership.js; unset = everyone is a member) and then cost a per-student
+ *     daily credit (usageLimiter.js) under a shared daily spend backstop.
+ *     Student-facing texts live in accessGuard.js.
  *   - /reset — clear conversation history
  *   - /source_materials, /source_HW, /source_quizzes — dev-only data-source
  *     introspection commands (see CHANGELOG v2.6.1). NOT listed in /help or
@@ -67,9 +80,12 @@
  *     are now real FYS.240 content.
  *
  * KNOWN GAPS (not yet implemented — see redeploy-package README):
- *   - quizBank_fys240.json only covers chapters 2, 4 and 5 (39 questions, as
- *     of the v2.6.1 repo snapshot); every other chapter live-generates via
- *     the Claude API. /source_quizzes shows the live picture.
+ *   - Quiz bank coverage (as of v2.7.0): quizBank_fys240.json has questions for
+ *     every chapter 2-10 in both EN and FI (221 each), so /quiz is normally
+ *     served free from the bank; live generation (1 credit) only happens when a
+ *     request asks for more than the bank has left. multivalueQuizBank_fys240.json
+ *     (104 questions) is EN-only, so every Finnish /mvquiz is live-generated and
+ *     costs a credit. /source_quizzes shows the live picture.
  *   - homework_solutions.json (new in v2.3.0) is instructor-reference only —
  *     nothing in this bot loads or serves it; see the file's own header
  *     comment and the redeploy-package README before wiring it to anything
@@ -82,6 +98,59 @@
 
  *
  * CHANGELOG:
+ *   v2.7.1 — Membership gate narrowed to the AI features only. In v2.7.0 the
+ *            course-channel check sat at the top of every handler, so a
+ *            non-member couldn't even use /help or /topics. Now the bot is open
+ *            by default: only the two places that actually call Claude check
+ *            membership — answerWithClaude() (Q&A + /HW hints) and the quiz
+ *            "reserve" hook (live generation only). Bank-served quizzes, quiz
+ *            button taps and every deterministic command need no membership and
+ *            make no getChatMember call. A non-member asking for more questions
+ *            than the bank holds gets the bank's questions plus a note that
+ *            extra AI questions are for members (reservation reason
+ *            "not_member", accessGuard.denialText). Membership is checked before
+ *            credits are reserved, so non-members are never charged. The
+ *            not-a-member texts (EN/FI) now say what IS open to everyone.
+ *   v2.7.0 — Two features.
+ *            (1) /quiz — a dedicated command for the single-select quiz,
+ *            mirroring /mvquiz: "/quiz" (chapter picker), "/quiz 2",
+ *            "/quiz chapter 2", "/quiz 2.3", "/quiz 2.3 8" (section + question
+ *            count), "/quiz luku 2". The free-text triggers ("quiz me on
+ *            chapter 2", "kysele minulta ...") still work unchanged. Bare
+ *            numbers ("/quiz 2") are normalised to "chapter 2" for /quiz AND
+ *            /mvquiz — the quiz modules' own hint regexes only recognise
+ *            "chapter N" / "luku N" / "N.M", so previously "/mvquiz 2" fell
+ *            through to the chapter picker.
+ *            (2) Student usage caps, ported from the FYS.501 bot's
+ *            usageLimiter.js / accessGuard.js / membership.js (new files, all
+ *            configured by optional Railway variables — see each file's header):
+ *              - per-student daily AI credits (STUDENT_LLM_DAILY_USAGE, default
+ *                10; day boundary Europe/Helsinki) + a shared daily spend
+ *                backstop (DAILY_BACKSTOP_EUR, default 5) estimated from real
+ *                token usage. State is in memory, so a restart resets it: a soft
+ *                guard — the monthly limit in the Anthropic Console is the hard stop.
+ *              - metered: free-text Q&A and /HW3.2-style hints (1 credit each,
+ *                refunded if the Claude call fails). Quizzes are metered only when
+ *                the question bank can't fill the request and a live generation is
+ *                needed (1 credit, refunded on failure); bank-served quizzes are
+ *                free. If the limit blocks live generation the student still gets
+ *                whatever the bank had, plus a note. Every Claude call (chat AND
+ *                quiz generation, via usageLimiter.trackedCreate) feeds the shared
+ *                spend estimate, including admins' calls.
+ *              - /usage shows the student's remaining credits; texts are bilingual
+ *                (EN/FI, accessGuard.js); a "N answers left" heads-up appears at <=2.
+ *              - optional membership gate: if COURSE_CHANNEL_ID is set, only
+ *                members of that Telegram channel (bot must be its admin) get the
+ *                AI features (narrowed from "the whole bot" in v2.7.1); unset = gate
+ *                off. ADMIN_USER_IDS bypass both gates.
+ *              - /healthz now includes limiter status (day, active users,
+ *                estimated spend, backstop state).
+ *            Fixes made while porting: membership.js now reads Telegram's real
+ *            error text from axios-style errors (this bot uses axios, so the
+ *            original check would never have recognised "user not found" and, with
+ *            MEMBERSHIP_FAIL_OPEN=true, would have let non-members in); usageLimiter
+ *            prices 1h prompt-cache writes at 2x (this bot's default CACHE_TTL)
+ *            instead of 1.25x.
  *   v2.6.5 — Content-only update to the multivalue quiz add-on (no code
  *            changes anywhere): multivalueQuizBank_fys240.json grew from
  *            74 to 104 questions, by adding 10 new "select all that
@@ -320,7 +389,7 @@
  *   (earlier history predates version tracking)
  */
 
-const BOT_VERSION = "2.6.5";
+const BOT_VERSION = "2.7.1";
 
 const fs = require("fs");
 const path = require("path");
@@ -329,6 +398,8 @@ const axios = require("axios");
 const quizGenerator = require("./quizGenerator_fys240");
 const mvQuizGenerator = require("./multivalueQuizGenerator_fys240");
 const corpusLoader = require("./corpusLoader");
+const limiter = require("./usageLimiter");
+const accessGuard = require("./accessGuard");
 
 const app = express();
 app.use(express.json());
@@ -672,6 +743,12 @@ const quizBot = {
       console.error("Telegram editMessageText (quiz) failed:", e.response?.status, JSON.stringify(e.response?.data))
     );
   },
+  // Used by membership.js (accessGuard.requireMember). Deliberately NOT wrapped in a catch: the
+  // membership check decides what to do with each kind of Telegram error itself.
+  async getChatMember(chatId, userId) {
+    const res = await tg("getChatMember", { chat_id: chatId, user_id: userId });
+    return res.data.result;
+  },
   async answerCallbackQuery(callbackQueryId, opts = {}) {
     return tg("answerCallbackQuery", {
       callback_query_id: callbackQueryId,
@@ -729,6 +806,62 @@ async function askWhichChapterMv(bot, chatId, lang = "en") {
     },
   });
   return null;
+}
+
+// ------------------------------------------ usage caps / access (v2.7.0) ----
+// Hooks handed to the quiz modules (see getQuizQuestionsDetailed() in quizGenerator_fys240.js).
+// reserve() runs only when a live Claude call is about to happen — never for quizzes served from
+// the question bank, which are open to everyone. Live generation is members-only (COURSE_CHANNEL_ID)
+// and then costs a credit.
+function makeQuizHooks(chatId, userId, lang) {
+  return {
+    reserve: async () => {
+      if (!(await accessGuard.isMember(quizBot, userId))) return { ok: false, reason: "not_member" };
+      return limiter.reserve(userId, "quiz");
+    },
+    refund: (reservation) => accessGuard.refundLLM(userId, reservation),
+    onDenied: (reservation) => accessGuard.notifyDenied(quizBot, chatId, reservation, lang),
+    onCharged: (reservation) => accessGuard.maybeWarnLow(quizBot, chatId, reservation, lang),
+  };
+}
+
+// Members-only check, then reserve one credit, ask Claude, deliver the reply, refund if the Claude
+// call itself failed. Used by the free-text Q&A path and by the AI-backed /HW commands.
+async function answerWithClaude({ chatId, userId, lang, replyTo, prompt, rememberAs, videoHints }) {
+  if (!(await accessGuard.requireMember(quizBot, chatId, userId, lang))) return; // told how to join
+  const budget = await accessGuard.requireLLMBudget(quizBot, chatId, userId, "chat", lang);
+  if (!budget.ok) return; // the student has already been told why
+
+  await tg("sendChatAction", { chat_id: chatId, action: "typing" }).catch(() => {});
+
+  let reply;
+  try {
+    reply = await askClaude(chatId, prompt, videoHints);
+  } catch (e) {
+    accessGuard.refundLLM(userId, budget);
+    await sendMessage(
+      chatId,
+      lang === "fi"
+        ? "Pahoittelut, en juuri nyt saanut yhteyttä aivoihini. Yritä hetken kuluttua uudelleen."
+        : "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
+      replyTo
+    );
+    return;
+  }
+
+  remember(chatId, "user", rememberAs);
+  remember(chatId, "assistant", reply);
+  await sendMessage(chatId, reply, replyTo);
+  await accessGuard.maybeWarnLow(quizBot, chatId, budget, lang);
+}
+
+// The quiz modules' hint regexes only understand "chapter N" / "luku N" / "N.M" — a bare
+// "/quiz 2" (or "/quiz 2 8" = chapter 2, 8 questions) is rewritten to "chapter 2" (+ count).
+// Anything else ("2.3", "2.3 8", "luku 2", "chapter 2, 8 questions", ...) passes through as typed.
+function normalizeQuizArgs(rest) {
+  const r = (rest || "").trim();
+  const m = r.match(/^(\d{1,2})(?:\s+(\d{1,2}))?$/);
+  return m ? `chapter ${m[1]}${m[2] ? " " + m[2] : ""}` : r;
 }
 
 // Converts Claude's "[label](url)" Markdown links (video suggestions) into
@@ -1014,6 +1147,7 @@ async function askClaude(chatId, question, videoHints) {
       );
 
       const u = res.data.usage || {};
+      limiter.recordUsage(res.data.model || MODEL, u);
       console.log(
         `Claude ok | in=${u.input_tokens} cache_write=${u.cache_creation_input_tokens || 0} ` +
         `cache_read=${u.cache_read_input_tokens || 0} out=${u.output_tokens}`
@@ -1437,7 +1571,7 @@ const HELP_TEXT_EN =
   "- What's the difference between real and virtual images?\n" +
   "- I'm stuck on problem 5.2, where should I start?\n" +
   "- Explain how a microscope works\n" +
-  "- Quiz me on chapter 2 (or a specific section, e.g. \"quiz me on section 2.3\") for a multiple-choice quiz\n" +
+  "- Quiz me on chapter 2 (or a specific section, e.g. \"quiz me on section 2.3\") for a multiple-choice quiz, or just use /quiz\n" +
   "- /mvquiz chapter 2 for a \"select all that apply\" multi-answer quiz\n\n" +
   "I'll explain concepts, point you to relevant videos or sections, and give hints on homework (but not solutions).\n\n" +
   "Commands:\n" +
@@ -1449,7 +1583,9 @@ const HELP_TEXT_EN =
   "/HW_hint3.2 — just a one-line nudge, no explanation\n" +
   "/HWQ3.2 — see the exact question text for a problem, verbatim\n" +
   "/define <term> — look up a term in the course glossary\n" +
+  "/quiz — multiple-choice quiz (e.g. \"/quiz 2\", \"/quiz 2.3\" or \"/quiz 2.3 8\" for 8 questions; \"/quiz\" alone lets you pick a chapter)\n" +
   "/mvquiz — \"select all that apply\" multi-answer quiz (e.g. \"/mvquiz chapter 2\" or \"/mvquiz 2.3\")\n" +
+  "/usage — see how many AI credits you have used today\n" +
   "/reset — clear our conversation history";
 
 const HELP_TEXT_FI =
@@ -1459,7 +1595,7 @@ const HELP_TEXT_FI =
   "- Mikä ero on reaalikuvalla ja virtuaalikuvalla?\n" +
   "- Jumitin tehtävässä 5.2, mistä kannattaisi aloittaa?\n" +
   "- Selitä, miten mikroskooppi toimii\n" +
-  "- \"Kysele minulta luvusta 2\" (tai tietystä osiosta, esim. \"kysele minulta osiosta 2.3\") monivalintavisaa varten\n" +
+  "- \"Kysele minulta luvusta 2\" (tai tietystä osiosta, esim. \"kysele minulta osiosta 2.3\") monivalintavisaa varten, tai käytä komentoa /quiz\n" +
   "- /mvquiz luvusta 2 saadaksesi \"valitse kaikki oikeat\" -tyyppisen visan\n\n" +
   "Selitän käsitteitä, ohjaan sinut oikeiden videoiden tai lukujen pariin ja annan vinkkejä kotitehtäviin (mutten valmiita ratkaisuja).\n\n" +
   "Komennot:\n" +
@@ -1471,7 +1607,9 @@ const HELP_TEXT_FI =
   "/HW_hint3.2 — vain lyhyt vihje, ei selitystä\n" +
   "/HWQ3.2 — näytä tehtävän tarkka kysymysteksti\n" +
   "/define <termi> — hae termi kurssin sanastosta\n" +
+  "/quiz — monivalintavisa (esim. \"/quiz 2\", \"/quiz 2.3\" tai \"/quiz 2.3 8\" = 8 kysymystä; pelkällä \"/quiz\":lla valitset luvun)\n" +
   "/mvquiz — \"valitse kaikki oikeat\" -monivalintavisa (esim. \"/mvquiz luku 2\" tai \"/mvquiz 2.3\")\n" +
+  "/usage — katso kuinka monta tekoälykrediittiä olet käyttänyt tänään\n" +
   "/reset — tyhjennä keskusteluhistoriamme";
 
 function helpText(lang) {
@@ -1680,6 +1818,8 @@ app.get("/healthz", (_req, res) => res.json({
   glossaryCourseMismatch: corpusLoader.glossaryCourseMismatch(),
   quizBankLooksHealthy: quizGenerator.quizBankLooksHealthy(),
   multivalueQuizBankLooksHealthy: mvQuizGenerator.quizBankLooksHealthy(),
+  limiter: limiter.status(),
+  membershipGate: !!process.env.COURSE_CHANNEL_ID,
 }));
 
 app.post("/webhook", (req, res) => {
@@ -1723,6 +1863,10 @@ async function handleUpdate(update) {
       lang === "fi" ? "Keskusteluhistoria tyhjennetty. Kysy mitä vain." : "Conversation history cleared. Ask me anything."
     );
   }
+  // ---- /usage — the student's AI credits today (free, no Claude call) ----
+  if (/^\/usage(@\S+)?\b/i.test(text)) {
+    return sendDiagnosticReport(chatId, accessGuard.usageText(userId, lang), message.message_id);
+  }
   // ---- dev-only data-source introspection (v2.6.1) — not in /help/start ----
   if (/^\/source_materials/i.test(text)) {
     return sendDiagnosticReport(chatId, buildSourceMaterialsReport(), message.message_id);
@@ -1746,13 +1890,33 @@ async function handleUpdate(update) {
     }
     return sendMessage(chatId, formatGlossaryReply(term, lang), message.message_id);
   }
+  // ---- /quiz — explicit command for the single-select multiple-choice quiz
+  // (v2.7.0). "/quiz" alone shows the chapter picker; "/quiz 2", "/quiz chapter 2",
+  // "/quiz 2.3", "/quiz 2.3 8" (chapter/section + optional question count) and
+  // Finnish forms like "/quiz luku 2" all work — same hint-parsing as the free-text trigger.
+  const quizMatch = text.match(/^\/quiz(@\S+)?\b\s*(.*)$/i);
+  if (quizMatch) {
+    const rest = normalizeQuizArgs(quizMatch[2]);
+    const quizText = rest ? `quiz ${rest}` : "quiz";
+
+    const nowQ = Date.now();
+    if (nowQ - (lastCall.get(userId) || 0) < MIN_INTERVAL_MS) return;
+    lastCall.set(userId, nowQ);
+
+    console.log(`[${message.chat.type}:${chatId}] /quiz command: ${text.slice(0, 60)}`);
+
+    return quizGenerator
+      .startQuiz(quizBot, chatId, quizText, askWhichChapter, lang, makeQuizHooks(chatId, userId, lang))
+      .catch((e) => console.error("quizGenerator.startQuiz (/quiz) crashed:", e.message));
+  }
+
   // ---- /mvquiz — explicit command for the multivalue ("select all that
   // apply") quiz add-on. "/mvquiz", "/mvquiz chapter 2", "/mvquiz 2.3",
   // "/mvquiz 2.3 8" (chapter/section + optional question count, same
   // hint-parsing as the free-text trigger below) are all accepted.
   const mvQuizMatch = text.match(/^\/mvquiz(@\S+)?\b\s*(.*)$/i);
   if (mvQuizMatch) {
-    const rest = (mvQuizMatch[2] || "").trim();
+    const rest = normalizeQuizArgs(mvQuizMatch[2]);
     const mvQuizText = rest ? `multiquiz ${rest}` : "multiquiz";
 
     const nowMv = Date.now();
@@ -1762,7 +1926,7 @@ async function handleUpdate(update) {
     console.log(`[${message.chat.type}:${chatId}] /mvquiz command: ${text.slice(0, 60)}`);
 
     return mvQuizGenerator
-      .startMultivalueQuiz(quizBot, chatId, mvQuizText, askWhichChapterMv, lang)
+      .startMultivalueQuiz(quizBot, chatId, mvQuizText, askWhichChapterMv, lang, makeQuizHooks(chatId, userId, lang))
       .catch((e) => console.error("mvQuizGenerator.startMultivalueQuiz (/mvquiz) crashed:", e.message));
   }
 
@@ -1870,22 +2034,14 @@ async function handleUpdate(update) {
       ? buildHwMinimalHintDirective(hwNum, problemNum)
       : buildHwHintDirective(hwNum, problemNum);
 
-    await tg("sendChatAction", { chat_id: chatId, action: "typing" }).catch(() => {});
-
-    try {
-      const reply = await askClaude(chatId, directive);
-      remember(chatId, "user", text);
-      remember(chatId, "assistant", reply);
-      await sendMessage(chatId, reply, message.message_id);
-    } catch (e) {
-      await sendMessage(
-        chatId,
-        lang === "fi"
-          ? "Pahoittelut, en juuri nyt saanut yhteyttä aivoihini. Yritä hetken kuluttua uudelleen."
-          : "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
-        message.message_id
-      );
-    }
+    await answerWithClaude({
+      chatId,
+      userId,
+      lang,
+      replyTo: message.message_id,
+      prompt: directive,
+      rememberAs: text,
+    });
     return;
   }
 
@@ -1904,34 +2060,26 @@ async function handleUpdate(update) {
   // "quiz me on chapter 2" still reaches the single-select flow untouched.
   if (mvQuizGenerator.isMultivalueQuizRequest(question)) {
     return mvQuizGenerator
-      .startMultivalueQuiz(quizBot, chatId, question, askWhichChapterMv, lang)
+      .startMultivalueQuiz(quizBot, chatId, question, askWhichChapterMv, lang, makeQuizHooks(chatId, userId, lang))
       .catch((e) => console.error("mvQuizGenerator.startMultivalueQuiz crashed:", e.message));
   }
 
   // ---- "quiz me" / "quiz me on chapter 2" / "quiz me on section 2.3" ----
   if (quizGenerator.isQuizRequest(question)) {
     return quizGenerator
-      .startQuiz(quizBot, chatId, question, askWhichChapter, lang)
+      .startQuiz(quizBot, chatId, question, askWhichChapter, lang, makeQuizHooks(chatId, userId, lang))
       .catch((e) => console.error("quizGenerator.startQuiz crashed:", e.message));
   }
 
-  await tg("sendChatAction", { chat_id: chatId, action: "typing" }).catch(() => {});
-
-  try {
-    const videoHints = VIDEO_DB ? VIDEO_DB.findRelevantSegments(question) : [];
-    const reply = await askClaude(chatId, question, videoHints);
-    remember(chatId, "user", question);
-    remember(chatId, "assistant", reply);
-    await sendMessage(chatId, reply, message.message_id);
-  } catch (e) {
-    await sendMessage(
-      chatId,
-      lang === "fi"
-        ? "Pahoittelut, en juuri nyt saanut yhteyttä aivoihini. Yritä hetken kuluttua uudelleen."
-        : "Sorry, I couldn't reach my brain just now. Please try again in a moment.",
-      message.message_id
-    );
-  }
+  await answerWithClaude({
+    chatId,
+    userId,
+    lang,
+    replyTo: message.message_id,
+    prompt: question,
+    rememberAs: question,
+    videoHints: VIDEO_DB ? VIDEO_DB.findRelevantSegments(question) : [],
+  });
 }
 
 // callback_query updates: answer-option taps ("quiz:...") from
@@ -1939,6 +2087,7 @@ async function handleUpdate(update) {
 // ("quizchapter:N:lang") from askWhichChapter() above.
 async function handleCallbackQuery(cq) {
   const data = cq.data || "";
+  const cbUserId = cq.from?.id; // the student who tapped — NOT the chat id (matters in groups)
 
   // ---- multivalue ("select all that apply") quiz add-on — its own
   // callback_data namespace, kept separate from "quiz:"/"quizchapter:" ----
@@ -1956,7 +2105,7 @@ async function handleCallbackQuery(cq) {
     await quizBot.answerCallbackQuery(cq.id);
     if (!chatId) return;
     return mvQuizGenerator
-      .startMultivalueQuiz(quizBot, chatId, `multiquiz chapter ${chapter}`, askWhichChapterMv, lang)
+      .startMultivalueQuiz(quizBot, chatId, `multiquiz chapter ${chapter}`, askWhichChapterMv, lang, makeQuizHooks(chatId, cbUserId, lang))
       .catch((e) => console.error("mvQuizGenerator.startMultivalueQuiz (chapter pick) crashed:", e.message));
   }
 
@@ -1974,7 +2123,7 @@ async function handleCallbackQuery(cq) {
     await quizBot.answerCallbackQuery(cq.id);
     if (!chatId) return;
     return quizGenerator
-      .startQuiz(quizBot, chatId, `quiz me on chapter ${chapter}`, askWhichChapter, lang)
+      .startQuiz(quizBot, chatId, `quiz me on chapter ${chapter}`, askWhichChapter, lang, makeQuizHooks(chatId, cbUserId, lang))
       .catch((e) => console.error("quizGenerator.startQuiz (chapter pick) crashed:", e.message));
   }
 
