@@ -10,7 +10,7 @@
  * so you can always confirm which version is actually live on Railway.
  * ============================================================================
  *
- * CURRENT FUNCTIONALITY (v2.6.1):
+ * CURRENT FUNCTIONALITY (v2.6.2):
  *   - Free-text Q&A grounded in course_corpus.txt, answers in whichever
  *     language (EN/FI) the student's question is written in
  *   - Bilingual (EN/FI) video lecture links from fys240_videos.js, with
@@ -41,6 +41,17 @@
  *     match exists)
  *   - "quiz me on chapter N" / "...section N.M" — multiple-choice quiz via
  *     quizGenerator_fys240.js, with an inline-keyboard chapter picker
+ *   - /mvquiz (or "multiquiz chapter N" / "select all ...") — a SEPARATE
+ *     "select all that apply" multi-answer quiz via the isolated add-on
+ *     multivalueQuizGenerator_fys240.js (see CHANGELOG v2.6.2). Its own
+ *     data file (multivalueQuizBank_fys240.json), its own session state,
+ *     and its own callback_data namespace ("mv:...") — completely
+ *     independent of the single-select quiz flow above, by design.
+ *     Inline-keyboard buttons show only the option letter (A/B/C/...),
+ *     toggled with a ✅ prefix, plus a dedicated Submit button; the actual
+ *     option text is written into the question message body as a
+ *     lettered list so Telegram never truncates/concatenates it onto a
+ *     button.
  *   - /reset — clear conversation history
  *   - /source_materials, /source_HW, /source_quizzes — dev-only data-source
  *     introspection commands (see CHANGELOG v2.6.1). NOT listed in /help or
@@ -71,6 +82,32 @@
 
  *
  * CHANGELOG:
+ *   v2.6.2 — Added a "select all that apply" multi-answer quiz mode as a
+ *            fully separate add-on: multivalueQuizGenerator_fys240.js +
+ *            multivalueQuizBank_fys240.json (14 curated multi-answer
+ *            questions, chapters 2-10). Deliberately built alongside
+ *            quizGenerator_fys240.js rather than inside it — the grading
+ *            contract differs (a SET of correct indices vs. one
+ *            correctIndex), so the bank schema, generation prompt, session
+ *            Map, and callback_data namespace ("mv:..." /
+ *            "mvquizchapter:...") are all separate. New: /mvquiz command
+ *            (plus natural-language triggers "multiquiz"/"select all"/
+ *            "monivalintavisa"/"valitse kaikki"), routed through a new
+ *            askWhichChapterMv() chapter picker (mirrors askWhichChapter()
+ *            but with its own callback prefix so the two pickers can't be
+ *            confused). Inline-keyboard buttons show ONLY the option
+ *            letter (A/B/C/D/E, toggled with a ✅ prefix) plus a dedicated
+ *            Submit button — the actual option text is written into the
+ *            question message body as a lettered list instead, since
+ *            Telegram truncates/concatenates long button labels. Grading
+ *            is exact-set-match (no partial credit). Uses no new quizBot
+ *            adapter method: editMessageText already forwards
+ *            reply_markup, which is all toggle re-rendering and keyboard-
+ *            locking need. /healthz gained multivalueQuizBankLooksHealthy;
+ *            /source_quizzes now also reports the multivalue bank's
+ *            per-chapter coverage. No changes to quizGenerator_fys240.js,
+ *            quizBank_fys240.json, or the existing single-select /quiz
+ *            flow — fully additive.
  *   v2.6.1 — Merged the /source_* introspection commands (developed on the
  *            v2.3.x line) into v2.6.0. Three dev-only commands so an
  *            instructor can verify exactly which data the running bot has
@@ -239,13 +276,14 @@
  *   (earlier history predates version tracking)
  */
 
-const BOT_VERSION = "2.6.1";
+const BOT_VERSION = "2.6.2";
 
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const axios = require("axios");
 const quizGenerator = require("./quizGenerator_fys240");
+const mvQuizGenerator = require("./multivalueQuizGenerator_fys240");
 const corpusLoader = require("./corpusLoader");
 
 const app = express();
@@ -292,6 +330,10 @@ const TERMINOLOGY_PATH = path.join(__dirname, "terminology.json");
 const VIDEOS_MODULE_PATH = path.join(__dirname, "fys240_videos.js");
 const QUIZ_BANK_PATH = path.join(__dirname, "quizBank_fys240.json");
 const QUIZ_BANK_PENDING_PATH = path.join(__dirname, "quizBankPending_fys240.json");
+// Multivalue ("select all that apply") quiz add-on — separate data files,
+// only read here for the /source_quizzes diagnostic report below.
+const MV_QUIZ_BANK_PATH = path.join(__dirname, "multivalueQuizBank_fys240.json");
+const MV_QUIZ_BANK_PENDING_PATH = path.join(__dirname, "multivalueQuizBankPending_fys240.json");
 
 // Sanity-check against a recurring failure mode in this repo: this codebase
 // is forked between a FYS.240 Optics bot and a FYS.501 Laser Physics bot,
@@ -616,6 +658,29 @@ async function askWhichChapter(bot, chatId, lang = "en") {
         // since there's no quiz session yet at this point for
         // handleQuizAnswer's session.lang trick to apply to.
         return [{ text: label, callback_data: `quizchapter:${ch}:${lang}` }];
+      }),
+    },
+  });
+  return null;
+}
+
+// Same idea as askWhichChapter() above, but for the multivalue ("select
+// all that apply") quiz add-on. Kept as a SEPARATE function with its own
+// callback_data prefix ("mvquizchapter:N:lang") rather than reusing
+// askWhichChapter()/"quizchapter:" — a tap on this picker must route to
+// mvQuizGenerator.startMultivalueQuiz(), not quizGenerator.startQuiz(),
+// and handleCallbackQuery() below tells the two apart by prefix alone.
+async function askWhichChapterMv(bot, chatId, lang = "en") {
+  const text =
+    lang === "fi"
+      ? "Mistä luvusta haluaisit monivalintavisan (valitse kaikki oikeat)?"
+      : "Which chapter would you like the multi-select quiz on?";
+  await bot.sendMessage(chatId, text, {
+    reply_markup: {
+      inline_keyboard: corpusLoader.listChapters().map((ch) => {
+        const title = lang === "fi" ? corpusLoader.getChapterTitleFi(ch) : corpusLoader.getChapterTitle(ch);
+        const label = lang === "fi" ? `Luku ${ch} — ${title}` : `Chapter ${ch} — ${title}`;
+        return [{ text: label, callback_data: `mvquizchapter:${ch}:${lang}` }];
       }),
     },
   });
@@ -1149,6 +1214,43 @@ function buildSourceQuizzesReport() {
   }
   lines.push("");
   lines.push(`Live generation model (used for any chapter not in the bank): ${MODEL}`);
+  lines.push("");
+  lines.push("---");
+  lines.push("");
+  lines.push("multivalueQuizBank_fys240.json (\"select all that apply\" add-on, separate from the above)");
+  const mvBank = mvQuizGenerator.loadQuizBank();
+  const mvBankInfo = fileInfo(MV_QUIZ_BANK_PATH);
+  const mvPendingInfo = fileInfo(MV_QUIZ_BANK_PENDING_PATH);
+  const mvChapters = Object.keys(mvBank).sort((a, b) => Number(a) - Number(b));
+  let mvTotalQuestions = 0;
+  const mvChapterLines = mvChapters.map((ch) => {
+    const secs = mvBank[ch] || {};
+    const secCounts = Object.keys(secs)
+      .sort()
+      .map((s) => {
+        const n = Array.isArray(secs[s]) ? secs[s].length : 0;
+        mvTotalQuestions += n;
+        return `${s} (${n})`;
+      });
+    return `   Chapter ${ch}: ${secCounts.join(", ") || "no sections"}`;
+  });
+  const mvMissingChapters = ALL_CHAPTERS.filter((c) => !mvChapters.includes(String(c)));
+  let mvPendingCount = 0;
+  if (mvPendingInfo.exists) {
+    try {
+      const pending = JSON.parse(fs.readFileSync(MV_QUIZ_BANK_PENDING_PATH, "utf8"));
+      mvPendingCount = Array.isArray(pending) ? pending.length : 0;
+    } catch (e) {
+      mvPendingCount = 0;
+    }
+  }
+  lines.push(`- Status: ${mvBankInfo.exists ? "loaded" : "NOT FOUND — every multivalue quiz live-generates via the Claude API"}`);
+  lines.push(`- Health check (multivalueQuizBankLooksHealthy): ${mvQuizGenerator.quizBankLooksHealthy() ? "ok" : "FAILED"}`);
+  lines.push(`- Coverage: ${mvChapters.length ? `chapters ${mvChapters.join(", ")} — ${mvTotalQuestions} questions total` : "none"}`);
+  mvChapterLines.forEach((l) => lines.push(l));
+  lines.push(`- Missing chapters (live-generate every time): ${mvMissingChapters.length ? mvMissingChapters.join(", ") : "none"}`);
+  lines.push(`- On disk: ${mvBankInfo.exists ? `modified ${mvBankInfo.modified}` : "file not found"}`);
+  lines.push(`- multivalueQuizBankPending_fys240.json: ${mvPendingInfo.exists ? `${mvPendingCount} question(s) saved for curation` : "no — none saved yet"}`);
   return lines.join("\n");
 }
 
@@ -1291,7 +1393,8 @@ const HELP_TEXT_EN =
   "- What's the difference between real and virtual images?\n" +
   "- I'm stuck on problem 5.2, where should I start?\n" +
   "- Explain how a microscope works\n" +
-  "- Quiz me on chapter 2 (or a specific section, e.g. \"quiz me on section 2.3\") for a multiple-choice quiz\n\n" +
+  "- Quiz me on chapter 2 (or a specific section, e.g. \"quiz me on section 2.3\") for a multiple-choice quiz\n" +
+  "- /mvquiz chapter 2 for a \"select all that apply\" multi-answer quiz\n\n" +
   "I'll explain concepts, point you to relevant videos or sections, and give hints on homework (but not solutions).\n\n" +
   "Commands:\n" +
   "/topics — see all video lecture topics\n" +
@@ -1302,6 +1405,7 @@ const HELP_TEXT_EN =
   "/HW_hint3.2 — just a one-line nudge, no explanation\n" +
   "/HWQ3.2 — see the exact question text for a problem, verbatim\n" +
   "/define <term> — look up a term in the course glossary\n" +
+  "/mvquiz — \"select all that apply\" multi-answer quiz (e.g. \"/mvquiz chapter 2\" or \"/mvquiz 2.3\")\n" +
   "/reset — clear our conversation history";
 
 const HELP_TEXT_FI =
@@ -1311,7 +1415,8 @@ const HELP_TEXT_FI =
   "- Mikä ero on reaalikuvalla ja virtuaalikuvalla?\n" +
   "- Jumitin tehtävässä 5.2, mistä kannattaisi aloittaa?\n" +
   "- Selitä, miten mikroskooppi toimii\n" +
-  "- \"Kysele minulta luvusta 2\" (tai tietystä osiosta, esim. \"kysele minulta osiosta 2.3\") monivalintavisaa varten\n\n" +
+  "- \"Kysele minulta luvusta 2\" (tai tietystä osiosta, esim. \"kysele minulta osiosta 2.3\") monivalintavisaa varten\n" +
+  "- /mvquiz luvusta 2 saadaksesi \"valitse kaikki oikeat\" -tyyppisen visan\n\n" +
   "Selitän käsitteitä, ohjaan sinut oikeiden videoiden tai lukujen pariin ja annan vinkkejä kotitehtäviin (mutten valmiita ratkaisuja).\n\n" +
   "Komennot:\n" +
   "/topics — kaikki luentovideoiden aiheet\n" +
@@ -1322,6 +1427,7 @@ const HELP_TEXT_FI =
   "/HW_hint3.2 — vain lyhyt vihje, ei selitystä\n" +
   "/HWQ3.2 — näytä tehtävän tarkka kysymysteksti\n" +
   "/define <termi> — hae termi kurssin sanastosta\n" +
+  "/mvquiz — \"valitse kaikki oikeat\" -monivalintavisa (esim. \"/mvquiz luku 2\" tai \"/mvquiz 2.3\")\n" +
   "/reset — tyhjennä keskusteluhistoriamme";
 
 function helpText(lang) {
@@ -1529,6 +1635,7 @@ app.get("/healthz", (_req, res) => res.json({
   glossaryLooksHealthy: corpusLoader.glossaryLooksHealthy(),
   glossaryCourseMismatch: corpusLoader.glossaryCourseMismatch(),
   quizBankLooksHealthy: quizGenerator.quizBankLooksHealthy(),
+  multivalueQuizBankLooksHealthy: mvQuizGenerator.quizBankLooksHealthy(),
 }));
 
 app.post("/webhook", (req, res) => {
@@ -1595,6 +1702,26 @@ async function handleUpdate(update) {
     }
     return sendMessage(chatId, formatGlossaryReply(term, lang), message.message_id);
   }
+  // ---- /mvquiz — explicit command for the multivalue ("select all that
+  // apply") quiz add-on. "/mvquiz", "/mvquiz chapter 2", "/mvquiz 2.3",
+  // "/mvquiz 2.3 8" (chapter/section + optional question count, same
+  // hint-parsing as the free-text trigger below) are all accepted.
+  const mvQuizMatch = text.match(/^\/mvquiz(@\S+)?\b\s*(.*)$/i);
+  if (mvQuizMatch) {
+    const rest = (mvQuizMatch[2] || "").trim();
+    const mvQuizText = rest ? `multiquiz ${rest}` : "multiquiz";
+
+    const nowMv = Date.now();
+    if (nowMv - (lastCall.get(userId) || 0) < MIN_INTERVAL_MS) return;
+    lastCall.set(userId, nowMv);
+
+    console.log(`[${message.chat.type}:${chatId}] /mvquiz command: ${text.slice(0, 60)}`);
+
+    return mvQuizGenerator
+      .startMultivalueQuiz(quizBot, chatId, mvQuizText, askWhichChapterMv, lang)
+      .catch((e) => console.error("mvQuizGenerator.startMultivalueQuiz (/mvquiz) crashed:", e.message));
+  }
+
   if (/^\/topics?/i.test(text)) {
     for (const chunk of generateTopicsMessages(lang)) {
       await tg("sendMessage", {
@@ -1727,6 +1854,16 @@ async function handleUpdate(update) {
 
   console.log(`[${message.chat.type}:${chatId}] ${question.slice(0, 120)}`);
 
+  // ---- "multiquiz" / "select all" / "monivalintavisa" — the SEPARATE
+  // multi-answer quiz add-on. Checked first since its trigger words never
+  // overlap with the single-select "quiz"/"kysele" ones below, so a plain
+  // "quiz me on chapter 2" still reaches the single-select flow untouched.
+  if (mvQuizGenerator.isMultivalueQuizRequest(question)) {
+    return mvQuizGenerator
+      .startMultivalueQuiz(quizBot, chatId, question, askWhichChapterMv, lang)
+      .catch((e) => console.error("mvQuizGenerator.startMultivalueQuiz crashed:", e.message));
+  }
+
   // ---- "quiz me" / "quiz me on chapter 2" / "quiz me on section 2.3" ----
   if (quizGenerator.isQuizRequest(question)) {
     return quizGenerator
@@ -1758,6 +1895,26 @@ async function handleUpdate(update) {
 // ("quizchapter:N:lang") from askWhichChapter() above.
 async function handleCallbackQuery(cq) {
   const data = cq.data || "";
+
+  // ---- multivalue ("select all that apply") quiz add-on — its own
+  // callback_data namespace, kept separate from "quiz:"/"quizchapter:" ----
+  if (data.startsWith("mv:")) {
+    return mvQuizGenerator
+      .handleMultivalueQuizAnswer(quizBot, cq)
+      .catch((e) => console.error("mvQuizGenerator.handleMultivalueQuizAnswer crashed:", e.message));
+  }
+
+  if (data.startsWith("mvquizchapter:")) {
+    const [, chapterStr, langStr] = data.split(":");
+    const chapter = chapterStr;
+    const lang = langStr === "fi" ? "fi" : "en";
+    const chatId = cq.message?.chat?.id;
+    await quizBot.answerCallbackQuery(cq.id);
+    if (!chatId) return;
+    return mvQuizGenerator
+      .startMultivalueQuiz(quizBot, chatId, `multiquiz chapter ${chapter}`, askWhichChapterMv, lang)
+      .catch((e) => console.error("mvQuizGenerator.startMultivalueQuiz (chapter pick) crashed:", e.message));
+  }
 
   if (data.startsWith("quiz:")) {
     return quizGenerator

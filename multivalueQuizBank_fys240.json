@@ -1,0 +1,286 @@
+{
+  "2": {
+    "2.1": [
+      {
+        "id": "q2.1_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following statements about Maxwell's equations and the derived EM wave equation are correct? (Select all that apply)",
+        "options": [
+          "Maxwell's equations in vacuum are Gauss's law, Gauss's law for magnetism, the Maxwell\u2013Faraday equation, and Amp\u00e8re's circuital law",
+          "The wave equation \u2207\u00b2E = \u03bc0\u03b50 \u2202\u00b2E/\u2202t\u00b2 can be derived starting from Maxwell's equations",
+          "A time-harmonic field oscillating at a single frequency is called monochromatic",
+          "The wavevector amplitude k relates to wavelength via k = \u03bb/2\u03c0",
+          "Visible light corresponds to wavelengths outside the 390\u2013780 nm range"
+        ],
+        "correctIndices": [0, 1, 2],
+        "explanation": "Maxwell's four vacuum equations, the derived wave equation, and the definition of a monochromatic time-harmonic field are all stated directly in the notes. k = 2\u03c0/\u03bb (not \u03bb/2\u03c0), and visible light is defined as \u03bb \u2208 390\u2013780 nm, not outside it.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "2.2": [
+      {
+        "id": "q2.2_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are true about the behavior of light at an interface between two media, according to geometrical optics? (Select all that apply)",
+        "options": [
+          "Part of the incident ray reflects and part refracts",
+          "The angle of incidence equals the angle of reflection (\u03b8i = \u03b8r)",
+          "Snell's law relates the angles via ni sin\u03b8i = nt sin\u03b8t",
+          "Reflection and refraction occur in two unrelated, non-coplanar planes",
+          "In a homogeneous medium, rays propagate along curved paths"
+        ],
+        "correctIndices": [0, 1, 2],
+        "explanation": "The notes state that part of a ray reflects and part refracts, with \u03b8i=\u03b8r and Snell's law ni sin\u03b8i = nt sin\u03b8t, all within the same plane of incidence. Rays propagate straight (not curved) in a homogeneous medium.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ]
+  },
+  "3": {
+    "3.2": [
+      {
+        "id": "q3.2_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct properties of the 1D wave equation \u2202\u00b2\u03c8/\u2202z\u00b2 = (1/v\u00b2)\u2202\u00b2\u03c8/\u2202t\u00b2, derived for \u03c8(z,t) = f(z \u00b1 vt)? (Select all that apply)",
+        "options": [
+          "The wave function \u03c8 must be differentiable at least twice",
+          "The equation is obtained by differentiating \u03c8 with respect to both z and t and combining the results",
+          "The equation's form still depends on an arbitrary choice of coordinate orientation",
+          "v is the propagation velocity of the wave",
+          "The equation only describes waves travelling in the +z direction"
+        ],
+        "correctIndices": [0, 1, 3],
+        "explanation": "The notes derive the equation by twice-differentiating \u03c8=f(z\u00b1vt) and require it to be twice differentiable; v is the propagation speed. The whole point of moving to the second-order equation was to remove direction-dependence, and \u00b1vt covers both +z and \u2212z propagation.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "3.7": [
+      {
+        "id": "q3.7_001",
+        "questionType": "multi_select",
+        "stem": "For a 3D plane wave \u03c8(r,t) = A e^{i(k\u00b7r \u2212 \u03c9t)}, which of the following statements are correct? (Select all that apply)",
+        "options": [
+          "The wavevector k defines the wave's propagation direction",
+          "The phasefront is the surface on which the phase is constant",
+          "The phase velocity is vp = \u03c9/k",
+          "The phase must depend quadratically on position r",
+          "k\u00b7r is constant everywhere on a plane perpendicular to k"
+        ],
+        "correctIndices": [0, 1, 2, 4],
+        "explanation": "The notes require the phase to depend linearly (not quadratically) on r, define the phasefront as the constant-phase plane perpendicular to k, and derive vp=\u03c9/k from the total differential of the phase.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ]
+  },
+  "4": {
+    "4.1": [
+      {
+        "id": "q4.1_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct statements about the vacuum Maxwell's equations and the derived EM wave equation? (Select all that apply)",
+        "options": [
+          "In vacuum, \u03c1 = 0 and J = 0 are assumed",
+          "Both E and B satisfy the same form of wave equation",
+          "The speed of light is c0 = 1/\u221a(\u03bc0\u03b50)",
+          "c0 depends on the refractive index of the surrounding medium",
+          "The wave equation for B is derived by taking the curl of Amp\u00e8re's law and applying Lagrange's vector identity"
+        ],
+        "correctIndices": [0, 1, 2, 4],
+        "explanation": "\u03c1=0, J=0 in vacuum; both \u2207\u00b2E and \u2207\u00b2B reduce to the same wave equation with speed c0=1/\u221a(\u03bc0\u03b50), derived via the curl and Lagrange's formula. c0 is a vacuum constant of nature, independent of any medium.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ]
+  },
+  "5": {
+    "5.3": [
+      {
+        "id": "q5.3_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are true about the Lorentz model of an atom? (Select all that apply)",
+        "options": [
+          "The electron is modeled as attached to the atomic core via a harmonic spring",
+          "The model works particularly well for dielectric materials",
+          "The model works well for metals",
+          "The resonance frequency is \u03c90 = (k/m)^(1/2)",
+          "The imaginary part of the derived refractive index corresponds to absorption"
+        ],
+        "correctIndices": [0, 1, 3, 4],
+        "explanation": "The notes describe the harmonic-spring electron model, its resonance frequency \u03c90=(k/m)^(1/2), its good fit for dielectrics, and that Im(n) corresponds to absorption. The model works poorly for metals (the Drude model is used there instead).",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ]
+  },
+  "6": {
+    "6.6": [
+      {
+        "id": "q6.6_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are true about total internal reflection (TIR)? (Select all that apply)",
+        "options": [
+          "TIR can occur when light travels from an optically denser medium toward a less dense one, beyond the critical angle",
+          "The critical angle satisfies sin\u03b8c = nt/ni",
+          "The Fresnel transmission coefficients become exactly zero during TIR",
+          "An evanescent field exists just beyond the interface during TIR, decaying exponentially away from it",
+          "TIR is used in optical fibers, waveguides, and reflecting prisms"
+        ],
+        "correctIndices": [0, 1, 3, 4],
+        "explanation": "TIR occurs beyond the critical angle sin\u03b8c=nt/ni when going from a denser to a less dense medium; the notes explicitly state TIR does NOT mean the transmission coefficients vanish \u2014 an exponentially evanescent surface field forms instead. TIR is used in fibers, waveguides, prisms, and Fresnel rhombs.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ]
+  },
+  "7": {
+    "7.3": [
+      {
+        "id": "q7.3_001",
+        "questionType": "multi_select",
+        "stem": "A wave reflects perfectly off a mirror at z=0, forming a standing wave. Which of the following are correct? (Select all that apply)",
+        "options": [
+          "The total field does not propagate",
+          "Nodes are locations where the field amplitude is always zero",
+          "Antinodes are locations of maximum field amplitude",
+          "For a perfect mirror, the reflected amplitude equals the incident amplitude with the same sign (AR = AI)",
+          "The standing wave still oscillates harmonically in time"
+        ],
+        "correctIndices": [0, 1, 2, 4],
+        "explanation": "The notes describe a non-propagating field with nodes (zero amplitude) and antinodes (maximum amplitude), oscillating harmonically in time. The perfect-mirror boundary condition gives AR = \u2212AI, not AR = AI.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "7.5": [
+      {
+        "id": "q7.5_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are true about optical coherence? (Select all that apply)",
+        "options": [
+          "A perfectly time-harmonic monochromatic wave is fully coherent but not physically realistic",
+          "Coherence time \u03c4c is the time interval within which the phase stays correlated",
+          "Coherence distance is \u2113c = \u03c4c \u00b7 c",
+          "Coherence is strictly a binary (all-or-nothing) property of real light sources",
+          "Real light can be modeled as separate wave packets that are internally coherent but not mutually coherent"
+        ],
+        "correctIndices": [0, 1, 2, 4],
+        "explanation": "The notes describe the idealized fully-coherent monochromatic wave, coherence time/distance (\u2113c=\u03c4c\u00b7c), and the wave-packet model. They explicitly note coherence vanishes gradually rather than being a strict binary property.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ]
+  },
+  "8": {
+    "8.4": [
+      {
+        "id": "q8.4_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are true about the Michelson interferometer? (Select all that apply)",
+        "options": [
+          "It consists of a 50/50 beamsplitter, two mirrors, and a detector",
+          "The optical path difference is \u039b = 2(d2 \u2212 d1)",
+          "For a broadband source, the interferogram (minus its constant term) is related to the source's spectrum via a Fourier cosine transform",
+          "Only strictly monochromatic sources can be used with a Michelson interferometer",
+          "A camera can be used as the detector when light arrives off the optical axis"
+        ],
+        "correctIndices": [0, 1, 2, 4],
+        "explanation": "The notes describe the beamsplitter/mirrors/detector layout, path difference \u039b=2d, the Fourier-transform relation used for spectrometry, and camera detection at an angle \u03b8 (replacing d with d\u00b7cos\u03b8). Broadband sources are explicitly handled too, not just monochromatic ones.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ]
+  },
+  "9": {
+    "9.2": [
+      {
+        "id": "q9.2_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are true about Fraunhofer diffraction? (Select all that apply)",
+        "options": [
+          "It applies in the far field, when R > a\u00b2/\u03bb",
+          "The diffracted field is approximately proportional to the 2D Fourier transform of the aperture field",
+          "It requires the observation point to be very close to the aperture",
+          "A lens can be used to image the diffraction pattern",
+          "The quadratic phase term becomes significant (not negligible) in the Fraunhofer regime"
+        ],
+        "correctIndices": [0, 1, 3],
+        "explanation": "The Fraunhofer condition R>a\u00b2/\u03bb is a far-field (not near-field) condition, under which the quadratic phase term is negligible and the resulting field is the 2D Fourier transform of the aperture field; a lens can be used to image the resulting pattern.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "9.5": [
+      {
+        "id": "q9.5_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are true about diffraction gratings? (Select all that apply)",
+        "options": [
+          "A diffraction maximum forms when the phase difference between waves from adjacent slits equals 2\u03c0m",
+          "The grating equation is a(sin\u03b8m \u2212 sin\u03b8i) = m\u03bb",
+          "Blazed gratings can enhance or suppress specific diffraction orders",
+          "Diffraction gratings can only operate in transmission, never in reflection",
+          "The mth diffraction maximum is called the mth diffraction order"
+        ],
+        "correctIndices": [0, 1, 2, 4],
+        "explanation": "The notes give the grating equation a(sin\u03b8m\u2212sin\u03b8i)=m\u03bb from the 2\u03c0m phase condition, define the mth maximum as the mth order, and mention blazed gratings for order-shaping. Gratings can operate in either transmission or reflection.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ]
+  },
+  "10": {
+    "10.3": [
+      {
+        "id": "q10.3_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are true about thin lenses? (Select all that apply)",
+        "options": [
+          "For a thin lens in air, the lensmaker's equation is 1/f = (n\u2113/nm \u2212 1)(1/R1 \u2212 1/R2)",
+          "Convex lenses have f > 0",
+          "Concave lenses have f > 0",
+          "The Gaussian thin-lens equation is 1/so + 1/si = 1/f",
+          "Lens power D is defined as D = f (the focal length itself)"
+        ],
+        "correctIndices": [0, 1, 3],
+        "explanation": "The notes give the lensmaker's equation, the sign convention f>0 for convex lenses (f<0 for concave), and the Gaussian thin-lens form 1/so+1/si=1/f. Lens power is defined as D \u2261 1/f, not D=f.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "10.13": [
+      {
+        "id": "q10.13_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are true about simple two-lens telescopes? (Select all that apply)",
+        "options": [
+          "The telescope's angular magnification is MT = fo/fe",
+          "A Keplerian telescope produces an inverted image",
+          "A Galilean telescope uses a negative eyepiece focal length and produces an upright image",
+          "Both the Galilean and Keplerian designs are completely free of chromatic aberration",
+          "The Newtonian telescope reduces chromatic aberration by replacing the objective lens with a mirror"
+        ],
+        "correctIndices": [0, 1, 2, 4],
+        "explanation": "MT=fo/fe is the telescope magnification; Keplerian designs (fe>0) invert the image while Galilean designs (fe<0) keep it upright. Both lens-based designs are susceptible to chromatic aberration, which the mirror-based Newtonian design largely avoids.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ]
+  }
+}
