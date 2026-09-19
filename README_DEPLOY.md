@@ -1,6 +1,6 @@
 # FYS.240 Optics bot — merged redeploy package
 
-**Current version: 2.3.0** — see `bot_fys240.js`'s top-of-file comment for
+**Current version: 2.6.1** — see `bot_fys240.js`'s top-of-file comment for
 the full functionality list and changelog going forward. From now on, bump
 `BOT_VERSION` in `bot_fys240.js` (and `package.json`'s `version`) any time
 you ship a change, and add a line to the changelog block — that's the whole
@@ -84,11 +84,27 @@ Runtime (required):
 - `homework_solutions.json` — instructor-reference solutions (new in
   v2.3.0). **NOT loaded by `bot_fys240.js` — do not wire it to any
   student-facing command.**
-- `terminology.json` — glossary data (loaded by `corpusLoader.js`; see
-  "Known gaps" below — not yet wired to a `/define` command)
+- `terminology.json` — glossary data for `/define`, loaded by
+  `corpusLoader.js` (312 terms from the official course booklet index as of
+  v2.6.0 — see below). `corpusLoader.js` also carries the glossary
+  course-mismatch guard that `bot_fys240.js` calls at startup and in
+  `/healthz` (restored in v2.6.1 — see below).
 - `package.json`, `.gitignore`
 
+Reference data (not loaded at runtime):
+- `booklet_index.json` — the raw parsed course-booklet index (term → page)
+  that `terminology.json` was built from (v2.6.0).
+- `terminology_harvested_v2.5_archive.json` — the previous 759-term
+  auto-harvested glossary, kept in case the unmatched slide terms are ever
+  wanted for a broader fuzzy `/define`.
+- `TERMINOLOGY_BOOKLET_UPDATE.md` — how the v2.6.0 glossary was built.
+
 Maintenance scripts (not required at runtime, kept in `scripts/`):
+- `scripts/harvest_terminology.js` — regenerates `terminology.json` from
+  the 61 canonical lecture `.tex` files' `\CDAlert`/`\Alert` highlighting
+  (see "Resolved in v2.5.0" below).
+- `scripts/chapter_file_map.json` — chapter key (e.g. `"3.4"`) → canonical
+  lecture `.tex` filename, used by `scripts/harvest_terminology.js`.
 - `scripts/clean.js`, `scripts/clean_homework.js`, `scripts/build_homework.js`
   — the homework `.tex` → JSON extraction pipeline (see "Resolved in
   v2.3.0" below for what each does and when to re-run it).
@@ -145,6 +161,126 @@ rendering has been removed; see above.)
      the actual FYS.240 exercise text, in clean Unicode math, not raw
      LaTeX and not laser-physics content. Check `/healthz` too:
      `homeworkProblemsCourseMismatch` should read `false`.
+   - Try `/define diffraction` and `/define thin lens` and confirm you get
+     real FYS.240 definitions with a working video link, NOT laser-physics
+     content and NOT "glossary not available". Check `/healthz`:
+     `glossaryCourseMismatch` should read `false`.
+   - Ask something whose answer cites a video with an underscore in its ID
+     (e.g. any chapter-9 question — several of those IDs contain one) and
+     open the link: it should go to the actual video, not a broken/wrong
+     one (see v2.5.0 — this was silently broken before).
+
+## Resolved in v2.6.1: /source_* data-source commands (+ deploy fixes)
+
+Three dev-only commands to verify what data the *running* bot actually
+loaded, without Railway logs: `/source_materials` (course corpus, video DB,
+glossary incl. the guard status and per-entry `source` breakdown),
+`/source_HW` (homework problem counts + guard status; solutions are reported
+as **counts only**, read fresh from disk, never any text), and
+`/source_quizzes` (quiz-bank coverage per chapter/section, pending
+live-generated questions). Plain text, no Claude call. Not listed in `/help`
+or `/start`, and **not access-restricted** — anyone who knows the command
+can run it (they expose file names, counts and status, no solution text).
+Reports go through `sendDiagnosticReport()` so filenames like
+`course_corpus.txt` aren't mangled by the LaTeX→Unicode step.
+
+**Deploy note — files that must change together for v2.6.x.** GitHub was
+still entirely at v2.3.0 when this was merged. `bot_fys240.js` v2.6.x calls
+`corpusLoader.glossaryCourseMismatch()` at startup, which the committed
+`corpusLoader.js` did not export — without the updated `corpusLoader.js` the
+bot crashes on boot with `corpusLoader.glossaryCourseMismatch is not a
+function`. Replace/add these together:
+- `bot_fys240.js`, `corpusLoader.js`, `terminology.json`, `package.json`
+  (version → 2.6.1), this README
+- new: `booklet_index.json`, `terminology_harvested_v2.5_archive.json`,
+  `TERMINOLOGY_BOOKLET_UPDATE.md`, `scripts/harvest_terminology.js`,
+  `scripts/chapter_file_map.json`
+- **Do not** replace `course_corpus.txt`: the GitHub copy is the real
+  FYS.240 corpus; the differently-sized copy in the Claude project files is
+  a stale FYS.501 one. (`/source_materials` flags this if it ever happens.)
+
+Also fixed: `/define` on the 61 page-only glossary entries printed "introduced
+in section null / null"; it now answers with the booklet page number and a
+"no lecture excerpt" note. After redeploying, check `/healthz`
+(`glossaryCourseMismatch: false`, `version: "2.6.1"`), then in Telegram:
+`/source_materials`, `/source_HW`, `/source_quizzes`, `/define diffraction`
+(real definition + working video link) and `/define acoustic wave` (page-only
+answer, no "null").
+
+## Resolved in v2.6.0: glossary rebuilt from the course booklet index
+
+`terminology.json` now holds **312 terms keyed to the official FYS.240
+booklet index**, each with its booklet page(s) (`bookletPage`) and a
+`source` field (`harvested-glossary` 212, `corpus-search` 25,
+`corpus-search-loose` 14, `booklet-only` 61). 251 have real lecture context
+and a video link; the 61 `booklet-only` entries are prerequisite math/EM
+vocabulary not named in the English slides and carry page-only data. Full
+write-up: `TERMINOLOGY_BOOKLET_UPDATE.md`.
+
+## Resolved in v2.5.0: real FYS.240 glossary + a real video-link bug
+
+`terminology.json` now has **759 real FYS.240 terms**, harvested from the
+lecture slides' own `\CDAlert`/`\Alert` term-highlighting — a mechanism
+`clean.js` already had built-in support for (`cleanTexMarked()`,
+`stripTermMarkers()`, `TERM_OPEN`/`TERM_CLOSE`) but that nothing in the
+project had ever actually used. `/define` now returns real definitions
+with working bilingual video links. The v2.4.0 course-mismatch guard
+correctly reads `false` on this content.
+
+Building the harvester (`scripts/harvest_terminology.js`) surfaced two
+more real bugs, both now fixed:
+- `\CDAlert`/`\Alert` sometimes carry a **second** brace argument — a
+  hyperlink URL (`\CDAlert[color]{term}{https://...}`) — that clean.js's
+  highlight-macro handling never expected, so the URL leaked directly onto
+  the term with no separator.
+- **A real, previously-invisible video-link bug**: `sendMessage()`'s
+  `latexToUnicode()` step ran on the *entire* outgoing message, including
+  inside a markdown link's `(url)` — so a video ID containing an
+  underscore followed by a letter (common in real YouTube IDs, e.g.
+  `_mM8QYplWtE`) got silently mangled into garbage, breaking the link.
+  This wasn't specific to `/define` — **16 of the 61×2 (EN+FI) video IDs**
+  in `fys240_videos.js` contain this pattern, so it silently affected
+  video links in ordinary Q&A replies, `/topics`, `/week`, etc. too.
+  `sendMessage()` now placeholder-protects markdown-link URLs before
+  `latexToUnicode()` runs.
+
+**Maintenance**: to regenerate `terminology.json` (e.g. after lecture
+slides are revised), run:
+```
+node scripts/harvest_terminology.js <lecturesDir> scripts/chapter_file_map.json terminology.json
+```
+`<lecturesDir>` is a directory containing the 61 canonical lecture `.tex`
+files (not included in this package — pull them from the course repo);
+`scripts/chapter_file_map.json` maps each chapter key (e.g. `"3.4"`) to
+its canonical filename and is already included — regenerate it too if a
+lecture file is renamed or a new chapter is added (see the mapping logic
+used to build it: match `^[IVX]+_(\d+)_(\d+)_` in the filename, skip
+`_old`/`_copy`/`conflicted_copy` variants and the superseded combined
+`VII_7_4_..._ja_koherenssi.tex`, which was replaced by two split files).
+Quality is good but not perfect — it's an
+auto-harvested glossary from slide highlighting, not hand-curated, so a
+small residual fraction of entries are an over-captured short clause
+rather than a clean term. Worth a manual spot-check pass if this becomes
+a visible issue; the majority of entries are solid.
+
+## Resolved in v2.4.0: /define wired up (glossary data still pending)
+
+`/define <term>` is now a real command — deterministic, no Claude API
+call, ported from the FYS.501 `bot.js` this repo forked from and made
+bilingual. Where a matched term's `introducedIn` chapter has a known video
+in `fys240_videos.js`, its link is upgraded to the canonical
+`[Video X.Y (Topic)]` form so the existing `fixVideoLinkLanguage`
+correction applies to it too, same as any other video link in a reply.
+
+**terminology.json turned out to have the exact same problem as
+`homework_problems.json` (v2.2.0) and `quiz_content.js`** (at the time —
+now resolved, see v2.5.0 above): all 438 entries were tagged "Laser
+Physics"/"FYS.510 Laser Physics" in `introducedInLecture` — zero real
+FYS.240 content. Rather than wire `/define` to serve that silently, the
+same course-mismatch guard pattern was added — fixed directly in
+`corpusLoader.js`'s `loadGlossary()` (`looksLikeWrongCourseGlossary()`),
+so it protects every future caller automatically, not just this one
+command.
 
 ## Resolved in v2.3.0: real FYS.240 homework content
 
@@ -185,17 +321,13 @@ revised or extended (a 7th homework set, corrected/added problems, etc.):
 
 ## Known gaps found while auditing
 
-- **`/define` is not wired into any bot branch.** `corpusLoader.js`
-  already has a working glossary lookup (`findGlossaryTerms`, backed by
-  `terminology.json`'s ~900 entries) and a `/define <term>` command exists
-  in the FYS.501 `bot.js` this was forked from — it was just never ported
-  over to FYS.240's bot file(s).
-- **The FYS.240 quiz bank isn't actually wired up.** `quizGenerator_fys240.js`
-  expects a `quizBank_fys240.json` file, which doesn't exist anywhere in the
-  project — so quizzes always live-generate via the Claude API, never draw
-  from a pre-built bank. The `quiz_content.js` file in the project is *not*
-  read by `quizGenerator_fys240.js` at all (dead file), and on inspection
-  it's actually FYS.501 Laser Physics content (chapters 1–4, laser topics),
-  not the FYS.240 Optics chapters 2–6 quiz bank described in project notes.
-  That FYS.240-specific quiz content doesn't appear to be in this project's
-  files — it may need to be re-generated, or located from an earlier backup.
+- **The FYS.240 quiz bank is only partly filled.** `quizBank_fys240.json`
+  exists in the repo and covers chapters 2, 4 and 5 (39 questions);
+  chapters 3 and 6–10 always live-generate via the Claude API. `/source_quizzes`
+  shows the current coverage and how many live-generated questions have been
+  captured in `quizBankPending_fys240.json` for curation. (An earlier version
+  of this note said the bank didn't exist at all.) `quiz_content.js`, where
+  present, is not read by `quizGenerator_fys240.js` and was FYS.501 content.
+- **`/help` shows `/HWₕint3.2` instead of `/HW_hint3.2`.** Present since at
+  least v2.3.0: `sendMessage()`'s LaTeX→Unicode step turns the `_h` in the
+  help text into a subscript. Not fixed here.

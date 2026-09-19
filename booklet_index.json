@@ -1,0 +1,1905 @@
+[
+  {
+    "term": "Aberrations",
+    "page": [
+      103
+    ]
+  },
+  {
+    "term": "Absorption",
+    "page": [
+      42
+    ]
+  },
+  {
+    "term": "Accommodation",
+    "page": [
+      119
+    ]
+  },
+  {
+    "term": "Acoustic Wave",
+    "page": [
+      65
+    ]
+  },
+  {
+    "term": "Afocal",
+    "page": [
+      125
+    ]
+  },
+  {
+    "term": "Airy Function",
+    "page": [
+      87
+    ]
+  },
+  {
+    "term": "Amplitude",
+    "page": [
+      5,
+      9
+    ]
+  },
+  {
+    "term": "Amplitude-splitting Interferometers",
+    "page": [
+      78
+    ]
+  },
+  {
+    "term": "Angle Of Incidence",
+    "page": [
+      52
+    ]
+  },
+  {
+    "term": "Angular Frequency",
+    "page": [
+      5,
+      11
+    ]
+  },
+  {
+    "term": "Angular Wave Number",
+    "page": [
+      11
+    ]
+  },
+  {
+    "term": "Anomalous Dispersion",
+    "page": [
+      49
+    ]
+  },
+  {
+    "term": "Anti-reflection Coating",
+    "page": [
+      81
+    ]
+  },
+  {
+    "term": "Aperture Stop",
+    "page": [
+      113
+    ]
+  },
+  {
+    "term": "Aspherical Surface",
+    "page": [
+      103
+    ]
+  },
+  {
+    "term": "Astigmatism",
+    "page": [
+      121
+    ]
+  },
+  {
+    "term": "Auxiliary Fields",
+    "page": [
+      39
+    ]
+  },
+  {
+    "term": "Back Focal Length",
+    "page": [
+      105,
+      113
+    ]
+  },
+  {
+    "term": "Back Focal Plane",
+    "page": [
+      108
+    ]
+  },
+  {
+    "term": "Back Focal Point",
+    "page": [
+      108
+    ]
+  },
+  {
+    "term": "Bandwidth",
+    "page": [
+      73
+    ]
+  },
+  {
+    "term": "Beam Splitter",
+    "page": [
+      80
+    ]
+  },
+  {
+    "term": "Bessel Function",
+    "page": [
+      97
+    ]
+  },
+  {
+    "term": "Bianisotropic",
+    "page": [
+      39
+    ]
+  },
+  {
+    "term": "Bifocal Eyeglasses",
+    "page": [
+      121
+    ]
+  },
+  {
+    "term": "Binoculars",
+    "page": [
+      126
+    ]
+  },
+  {
+    "term": "Boltzmann Distribution",
+    "page": [
+      49
+    ]
+  },
+  {
+    "term": "Boundary Conditions",
+    "page": [
+      69
+    ]
+  },
+  {
+    "term": "Box Car Function",
+    "page": [
+      71
+    ]
+  },
+  {
+    "term": "Bra–ket Notation",
+    "page": [
+      42
+    ]
+  },
+  {
+    "term": "Breakthrough Starshot",
+    "page": [
+      35
+    ]
+  },
+  {
+    "term": "Brewster's Angle",
+    "page": [
+      62
+    ]
+  },
+  {
+    "term": "Cataract",
+    "page": [
+      121
+    ]
+  },
+  {
+    "term": "Chain Rule",
+    "page": [
+      12
+    ]
+  },
+  {
+    "term": "Charge Conservation",
+    "page": [
+      31
+    ]
+  },
+  {
+    "term": "Chromatic Aberration",
+    "page": [
+      112,
+      118
+    ]
+  },
+  {
+    "term": "Circ Function",
+    "page": [
+      97
+    ]
+  },
+  {
+    "term": "Circular Polarization",
+    "page": [
+      22
+    ]
+  },
+  {
+    "term": "Classical Electromagnetism And Special Relativity",
+    "page": [
+      31
+    ]
+  },
+  {
+    "term": "Coherence Length",
+    "page": [
+      74
+    ]
+  },
+  {
+    "term": "Coherence Time",
+    "page": [
+      74
+    ]
+  },
+  {
+    "term": "Coherence Width",
+    "page": [
+      76
+    ]
+  },
+  {
+    "term": "Compensator",
+    "page": [
+      82
+    ]
+  },
+  {
+    "term": "Complex Amplitude",
+    "page": [
+      16
+    ]
+  },
+  {
+    "term": "Conjugate Points",
+    "page": [
+      102
+    ]
+  },
+  {
+    "term": "Conservational Vector Field",
+    "page": [
+      26
+    ]
+  },
+  {
+    "term": "Conservative Vector Field",
+    "page": [
+      25
+    ]
+  },
+  {
+    "term": "Constructive Interference",
+    "page": [
+      14
+    ]
+  },
+  {
+    "term": "Continuously Differentiable",
+    "page": [
+      24
+    ]
+  },
+  {
+    "term": "Cornea",
+    "page": [
+      118
+    ]
+  },
+  {
+    "term": "Critical Angle",
+    "page": [
+      64
+    ]
+  },
+  {
+    "term": "Cross Product",
+    "page": [
+      23
+    ]
+  },
+  {
+    "term": "Curl",
+    "page": [
+      24
+    ]
+  },
+  {
+    "term": "Curl Of Gradient",
+    "page": [
+      24
+    ]
+  },
+  {
+    "term": "Cylindrical Coordinates",
+    "page": [
+      20
+    ]
+  },
+  {
+    "term": "Cylindrical Error",
+    "page": [
+      121
+    ]
+  },
+  {
+    "term": "Destructive Interference",
+    "page": [
+      14
+    ]
+  },
+  {
+    "term": "Dielectric Constant",
+    "page": [
+      39
+    ]
+  },
+  {
+    "term": "Diffraction",
+    "page": [
+      6,
+      92,
+      102
+    ]
+  },
+  {
+    "term": "Diffraction Gratings",
+    "page": [
+      100
+    ]
+  },
+  {
+    "term": "Diffraction-limited System",
+    "page": [
+      103
+    ]
+  },
+  {
+    "term": "Dipole Moment",
+    "page": [
+      36
+    ]
+  },
+  {
+    "term": "Dipole Radiation",
+    "page": [
+      36
+    ]
+  },
+  {
+    "term": "Dispersion",
+    "page": [
+      41
+    ]
+  },
+  {
+    "term": "Divergence",
+    "page": [
+      24
+    ]
+  },
+  {
+    "term": "Divergence Of Curl",
+    "page": [
+      24
+    ]
+  },
+  {
+    "term": "Divergence Theorem",
+    "page": [
+      25
+    ]
+  },
+  {
+    "term": "Dot Product",
+    "page": [
+      23,
+      30
+    ]
+  },
+  {
+    "term": "Double Slit Experiment",
+    "page": [
+      77
+    ]
+  },
+  {
+    "term": "Eigensolution",
+    "page": [
+      12
+    ]
+  },
+  {
+    "term": "Eikonal Equation",
+    "page": [
+      103
+    ]
+  },
+  {
+    "term": "Einstein Summation Convention",
+    "page": [
+      23
+    ]
+  },
+  {
+    "term": "Electric Dipoles",
+    "page": [
+      36
+    ]
+  },
+  {
+    "term": "Electric Potential Energy",
+    "page": [
+      31
+    ]
+  },
+  {
+    "term": "Electric Scalar Potential",
+    "page": [
+      26
+    ]
+  },
+  {
+    "term": "Electromagnetic Field Tensor",
+    "page": [
+      29
+    ]
+  },
+  {
+    "term": "Electrostatic Approximation",
+    "page": [
+      24
+    ]
+  },
+  {
+    "term": "Electrostatics",
+    "page": [
+      31
+    ]
+  },
+  {
+    "term": "Elliptically-polarized Light",
+    "page": [
+      22
+    ]
+  },
+  {
+    "term": "Emission",
+    "page": [
+      42
+    ]
+  },
+  {
+    "term": "Energy Density",
+    "page": [
+      31
+    ]
+  },
+  {
+    "term": "Entrance Pupil",
+    "page": [
+      114
+    ]
+  },
+  {
+    "term": "Equation Of Motion",
+    "page": [
+      45
+    ]
+  },
+  {
+    "term": "Etalon",
+    "page": [
+      88
+    ]
+  },
+  {
+    "term": "Euler's Formula",
+    "page": [
+      15
+    ]
+  },
+  {
+    "term": "Evanescent Wave",
+    "page": [
+      66
+    ]
+  },
+  {
+    "term": "Excited States",
+    "page": [
+      42
+    ]
+  },
+  {
+    "term": "Exit Pupil",
+    "page": [
+      114
+    ]
+  },
+  {
+    "term": "Eye Relief",
+    "page": [
+      115
+    ]
+  },
+  {
+    "term": "Eyepiece",
+    "page": [
+      122
+    ]
+  },
+  {
+    "term": "Fabry–Pérot",
+    "page": [
+      88
+    ]
+  },
+  {
+    "term": "Fabry–Pérot Interferometer",
+    "page": [
+      88
+    ]
+  },
+  {
+    "term": "Far Field",
+    "page": [
+      37,
+      92
+    ]
+  },
+  {
+    "term": "Far Point",
+    "page": [
+      120
+    ]
+  },
+  {
+    "term": "Far Zone",
+    "page": [
+      92
+    ]
+  },
+  {
+    "term": "Fermat's Principle",
+    "page": [
+      54,
+      103
+    ]
+  },
+  {
+    "term": "Field Number",
+    "page": [
+      123
+    ]
+  },
+  {
+    "term": "Field Stop",
+    "page": [
+      114
+    ]
+  },
+  {
+    "term": "Field-of-view",
+    "page": [
+      123
+    ]
+  },
+  {
+    "term": "Finesse",
+    "page": [
+      87,
+      89
+    ]
+  },
+  {
+    "term": "Finesse Coefficient",
+    "page": [
+      87
+    ]
+  },
+  {
+    "term": "First-order Optics",
+    "page": [
+      105
+    ]
+  },
+  {
+    "term": "Focal Length",
+    "page": [
+      107
+    ]
+  },
+  {
+    "term": "Focus",
+    "page": [
+      108
+    ]
+  },
+  {
+    "term": "Four-current",
+    "page": [
+      31
+    ]
+  },
+  {
+    "term": "Fourier Analysis",
+    "page": [
+      70
+    ]
+  },
+  {
+    "term": "Fourier Inverse (Cosine) Transform",
+    "page": [
+      83
+    ]
+  },
+  {
+    "term": "Fourier Inversion Theorem",
+    "page": [
+      70
+    ]
+  },
+  {
+    "term": "Fourier Synthesis",
+    "page": [
+      29,
+      70
+    ]
+  },
+  {
+    "term": "Fourier Transform",
+    "page": [
+      70,
+      96
+    ]
+  },
+  {
+    "term": "Fraunhofer Diffraction",
+    "page": [
+      92
+    ]
+  },
+  {
+    "term": "Free Spectral Range",
+    "page": [
+      91
+    ]
+  },
+  {
+    "term": "Frequency",
+    "page": [
+      5,
+      10
+    ]
+  },
+  {
+    "term": "Frequency Shifting Property",
+    "page": [
+      71
+    ]
+  },
+  {
+    "term": "Fresnel Diffraction",
+    "page": [
+      92
+    ]
+  },
+  {
+    "term": "Fresnel Equations",
+    "page": [
+      60
+    ]
+  },
+  {
+    "term": "Fresnel Rhomb",
+    "page": [
+      65
+    ]
+  },
+  {
+    "term": "Fresnel–Arago Laws",
+    "page": [
+      77
+    ]
+  },
+  {
+    "term": "Front Focal Length",
+    "page": [
+      113
+    ]
+  },
+  {
+    "term": "Front Focal Plane",
+    "page": [
+      108
+    ]
+  },
+  {
+    "term": "Front Focal Point",
+    "page": [
+      108
+    ]
+  },
+  {
+    "term": "Frustrated Total Internal Reflection",
+    "page": [
+      66
+    ]
+  },
+  {
+    "term": "Full Width At Half Maximum (FWHM)",
+    "page": [
+      73,
+      89
+    ]
+  },
+  {
+    "term": "Gain",
+    "page": [
+      49
+    ]
+  },
+  {
+    "term": "Galilean Telescope",
+    "page": [
+      125
+    ]
+  },
+  {
+    "term": "Gauss' Law",
+    "page": [
+      25
+    ]
+  },
+  {
+    "term": "Gaussian Lens Formula",
+    "page": [
+      108
+    ]
+  },
+  {
+    "term": "Gaussian Optics",
+    "page": [
+      105
+    ]
+  },
+  {
+    "term": "Generalized Coulomb's Law",
+    "page": [
+      25
+    ]
+  },
+  {
+    "term": "Geometric Definition",
+    "page": [
+      17
+    ]
+  },
+  {
+    "term": "Geometric Sequence",
+    "page": [
+      86
+    ]
+  },
+  {
+    "term": "Geometrical Optics",
+    "page": [
+      6,
+      103
+    ]
+  },
+  {
+    "term": "Gradient",
+    "page": [
+      19,
+      24
+    ]
+  },
+  {
+    "term": "Green's Function Method",
+    "page": [
+      46
+    ]
+  },
+  {
+    "term": "Ground State",
+    "page": [
+      42
+    ]
+  },
+  {
+    "term": "Haidinger Fringes",
+    "page": [
+      80
+    ]
+  },
+  {
+    "term": "Harmonic Oscillator",
+    "page": [
+      45
+    ]
+  },
+  {
+    "term": "Harmonic Wave",
+    "page": [
+      5
+    ]
+  },
+  {
+    "term": "Helmholtz Decomposition",
+    "page": [
+      25,
+      30
+    ]
+  },
+  {
+    "term": "Helmholtz–Ketteler Formula",
+    "page": [
+      48
+    ]
+  },
+  {
+    "term": "High-power Laser",
+    "page": [
+      50
+    ]
+  },
+  {
+    "term": "Huygens–Fresnel Principle",
+    "page": [
+      92
+    ]
+  },
+  {
+    "term": "Hyperopia",
+    "page": [
+      120
+    ]
+  },
+  {
+    "term": "Image Distance",
+    "page": [
+      104
+    ]
+  },
+  {
+    "term": "Image Space",
+    "page": [
+      102
+    ]
+  },
+  {
+    "term": "Imaging System",
+    "page": [
+      102
+    ]
+  },
+  {
+    "term": "In Phase",
+    "page": [
+      14
+    ]
+  },
+  {
+    "term": "Index Of Refraction",
+    "page": [
+      6,
+      40
+    ]
+  },
+  {
+    "term": "Initial Phase",
+    "page": [
+      11
+    ]
+  },
+  {
+    "term": "Integral Transforms",
+    "page": [
+      70
+    ]
+  },
+  {
+    "term": "Intensity",
+    "page": [
+      32
+    ]
+  },
+  {
+    "term": "Interference",
+    "page": [
+      6,
+      75
+    ]
+  },
+  {
+    "term": "Interference Fringes",
+    "page": [
+      77
+    ]
+  },
+  {
+    "term": "Interferogram",
+    "page": [
+      84
+    ]
+  },
+  {
+    "term": "Interferometer",
+    "page": [
+      77
+    ]
+  },
+  {
+    "term": "Inverse Transform",
+    "page": [
+      70
+    ]
+  },
+  {
+    "term": "Ionosphere",
+    "page": [
+      65
+    ]
+  },
+  {
+    "term": "Iris",
+    "page": [
+      119
+    ]
+  },
+  {
+    "term": "Irradiance",
+    "page": [
+      32
+    ]
+  },
+  {
+    "term": "Irrotational Vector Field",
+    "page": [
+      25
+    ]
+  },
+  {
+    "term": "Jacobian Matrix",
+    "page": [
+      24
+    ]
+  },
+  {
+    "term": "Kelvin–Stokes Theorem",
+    "page": [
+      55
+    ]
+  },
+  {
+    "term": "Keplerian Telescope",
+    "page": [
+      126
+    ]
+  },
+  {
+    "term": "Lagrange's Formula",
+    "page": [
+      24
+    ]
+  },
+  {
+    "term": "Laplacian",
+    "page": [
+      19,
+      24
+    ]
+  },
+  {
+    "term": "Laser Pumping",
+    "page": [
+      50
+    ]
+  },
+  {
+    "term": "Lasers",
+    "page": [
+      49
+    ]
+  },
+  {
+    "term": "Lens",
+    "page": [
+      119
+    ]
+  },
+  {
+    "term": "Lensmaker's Equation",
+    "page": [
+      107
+    ]
+  },
+  {
+    "term": "Levi–Civita Parity Symbol",
+    "page": [
+      23
+    ]
+  },
+  {
+    "term": "Lifetime Of A State",
+    "page": [
+      42
+    ]
+  },
+  {
+    "term": "Linear Operators",
+    "page": [
+      13
+    ]
+  },
+  {
+    "term": "Linear Polarization",
+    "page": [
+      22
+    ]
+  },
+  {
+    "term": "Longitudinal Magnification",
+    "page": [
+      111
+    ]
+  },
+  {
+    "term": "Lorentz Force",
+    "page": [
+      45
+    ]
+  },
+  {
+    "term": "Lorentz Invariant",
+    "page": [
+      31
+    ]
+  },
+  {
+    "term": "Lorentz Model",
+    "page": [
+      44
+    ]
+  },
+  {
+    "term": "Macroscopic Maxwell's Equations",
+    "page": [
+      38
+    ]
+  },
+  {
+    "term": "Macula",
+    "page": [
+      119
+    ]
+  },
+  {
+    "term": "Magnetic Vector Potential",
+    "page": [
+      26
+    ]
+  },
+  {
+    "term": "Magnetostatics",
+    "page": [
+      26,
+      31
+    ]
+  },
+  {
+    "term": "Magnification",
+    "page": [
+      110
+    ]
+  },
+  {
+    "term": "Magnifying Glass",
+    "page": [
+      121
+    ]
+  },
+  {
+    "term": "Magnifying Power",
+    "page": [
+      122
+    ]
+  },
+  {
+    "term": "Many-body Problem",
+    "page": [
+      38
+    ]
+  },
+  {
+    "term": "Maxwell's Equations",
+    "page": [
+      28
+    ]
+  },
+  {
+    "term": "Michelson Interferometer",
+    "page": [
+      80
+    ]
+  },
+  {
+    "term": "Microscope",
+    "page": [
+      122
+    ]
+  },
+  {
+    "term": "Microscopic Maxwell's Equations",
+    "page": [
+      28
+    ]
+  },
+  {
+    "term": "Minkowski Space",
+    "page": [
+      22
+    ]
+  },
+  {
+    "term": "Molecular Polarizability",
+    "page": [
+      36
+    ]
+  },
+  {
+    "term": "Momentum Density",
+    "page": [
+      35
+    ]
+  },
+  {
+    "term": "Multifocal",
+    "page": [
+      121
+    ]
+  },
+  {
+    "term": "Multiphoton Processes",
+    "page": [
+      44
+    ]
+  },
+  {
+    "term": "Multiplicatively Separable Function",
+    "page": [
+      95
+    ]
+  },
+  {
+    "term": "Myopia",
+    "page": [
+      120
+    ]
+  },
+  {
+    "term": "Near Field",
+    "page": [
+      37
+    ]
+  },
+  {
+    "term": "Near Point",
+    "page": [
+      120
+    ]
+  },
+  {
+    "term": "Nearsightedness",
+    "page": [
+      120
+    ]
+  },
+  {
+    "term": "Newtonian Lens Formula",
+    "page": [
+      110
+    ]
+  },
+  {
+    "term": "Newtonian Telescope",
+    "page": [
+      126
+    ]
+  },
+  {
+    "term": "Newton's Rings",
+    "page": [
+      80
+    ]
+  },
+  {
+    "term": "Nodal Points",
+    "page": [
+      69
+    ]
+  },
+  {
+    "term": "Nonlinear Optics",
+    "page": [
+      63
+    ]
+  },
+  {
+    "term": "Normal Dispersion",
+    "page": [
+      49
+    ]
+  },
+  {
+    "term": "Numerical Aperture",
+    "page": [
+      124
+    ]
+  },
+  {
+    "term": "Object Distance",
+    "page": [
+      104
+    ]
+  },
+  {
+    "term": "Object Space",
+    "page": [
+      102
+    ]
+  },
+  {
+    "term": "Objective",
+    "page": [
+      122
+    ]
+  },
+  {
+    "term": "Ocular",
+    "page": [
+      122
+    ]
+  },
+  {
+    "term": "Optical Amplifier",
+    "page": [
+      50
+    ]
+  },
+  {
+    "term": "Optical Axis",
+    "page": [
+      104
+    ]
+  },
+  {
+    "term": "Optical Center",
+    "page": [
+      108
+    ]
+  },
+  {
+    "term": "Optical Fiber",
+    "page": [
+      65
+    ]
+  },
+  {
+    "term": "Optical Parametric Oscillator",
+    "page": [
+      50
+    ]
+  },
+  {
+    "term": "Optical Path Length",
+    "page": [
+      41
+    ]
+  },
+  {
+    "term": "Optical Repeater",
+    "page": [
+      50
+    ]
+  },
+  {
+    "term": "Order Of Diffraction",
+    "page": [
+      100
+    ]
+  },
+  {
+    "term": "Order Of Interference",
+    "page": [
+      78
+    ]
+  },
+  {
+    "term": "Oscillator Strength",
+    "page": [
+      48
+    ]
+  },
+  {
+    "term": "Out Of Phase",
+    "page": [
+      14
+    ]
+  },
+  {
+    "term": "Paraxial Approximation",
+    "page": [
+      105
+    ]
+  },
+  {
+    "term": "Paraxial Optics",
+    "page": [
+      105
+    ]
+  },
+  {
+    "term": "Permittivity",
+    "page": [
+      40
+    ]
+  },
+  {
+    "term": "Phase",
+    "page": [
+      5,
+      9
+    ]
+  },
+  {
+    "term": "Phase Velocity",
+    "page": [
+      12
+    ]
+  },
+  {
+    "term": "Photon",
+    "page": [
+      7
+    ]
+  },
+  {
+    "term": "Plane Of Incidence",
+    "page": [
+      53,
+      57
+    ]
+  },
+  {
+    "term": "Plane Wave",
+    "page": [
+      17
+    ]
+  },
+  {
+    "term": "Poisson's Equation",
+    "page": [
+      26
+    ]
+  },
+  {
+    "term": "Polarization Density",
+    "page": [
+      39
+    ]
+  },
+  {
+    "term": "Polarization Of Light",
+    "page": [
+      30
+    ]
+  },
+  {
+    "term": "Population Inversion",
+    "page": [
+      50
+    ]
+  },
+  {
+    "term": "Power Spectrum",
+    "page": [
+      72
+    ]
+  },
+  {
+    "term": "Poynting Vector",
+    "page": [
+      32
+    ]
+  },
+  {
+    "term": "Principle Of Least Action",
+    "page": [
+      39,
+      54
+    ]
+  },
+  {
+    "term": "Propagation Constant",
+    "page": [
+      10
+    ]
+  },
+  {
+    "term": "Pseudoscalars",
+    "page": [
+      22
+    ]
+  },
+  {
+    "term": "Pseudovectors",
+    "page": [
+      22
+    ]
+  },
+  {
+    "term": "Pulse Length",
+    "page": [
+      73
+    ]
+  },
+  {
+    "term": "Pupil",
+    "page": [
+      119
+    ]
+  },
+  {
+    "term": "Quantum Electrodynamics (QED)",
+    "page": [
+      52
+    ]
+  },
+  {
+    "term": "Quantum Mechanics",
+    "page": [
+      36
+    ]
+  },
+  {
+    "term": "Radiation Field",
+    "page": [
+      37
+    ]
+  },
+  {
+    "term": "Radiation Pressure",
+    "page": [
+      35
+    ]
+  },
+  {
+    "term": "Radiation Zone",
+    "page": [
+      37
+    ]
+  },
+  {
+    "term": "Ray",
+    "page": [
+      51
+    ]
+  },
+  {
+    "term": "Ray Tracing",
+    "page": [
+      113
+    ]
+  },
+  {
+    "term": "Real Image",
+    "page": [
+      103
+    ]
+  },
+  {
+    "term": "Rectangular Function",
+    "page": [
+      96
+    ]
+  },
+  {
+    "term": "Reflection",
+    "page": [
+      6
+    ]
+  },
+  {
+    "term": "Reflective Prism",
+    "page": [
+      65
+    ]
+  },
+  {
+    "term": "Reflectivity",
+    "page": [
+      63
+    ]
+  },
+  {
+    "term": "Refracted Wave",
+    "page": [
+      53
+    ]
+  },
+  {
+    "term": "Refraction",
+    "page": [
+      6
+    ]
+  },
+  {
+    "term": "Refractive Power",
+    "page": [
+      108
+    ]
+  },
+  {
+    "term": "Relative Aperture",
+    "page": [
+      115
+    ]
+  },
+  {
+    "term": "Relativistic Electromagnetism",
+    "page": [
+      27
+    ]
+  },
+  {
+    "term": "Resolving Power",
+    "page": [
+      91
+    ]
+  },
+  {
+    "term": "Resonance Frequency",
+    "page": [
+      42
+    ]
+  },
+  {
+    "term": "Retina",
+    "page": [
+      119
+    ]
+  },
+  {
+    "term": "Right-hand Rule",
+    "page": [
+      23
+    ]
+  },
+  {
+    "term": "Scalar Multiplication",
+    "page": [
+      23
+    ]
+  },
+  {
+    "term": "Scalar Triple Product",
+    "page": [
+      23
+    ]
+  },
+  {
+    "term": "Scattering",
+    "page": [
+      44
+    ]
+  },
+  {
+    "term": "Second Derivative Identities",
+    "page": [
+      24
+    ]
+  },
+  {
+    "term": "Selection Rules",
+    "page": [
+      47
+    ]
+  },
+  {
+    "term": "Sellmeyer Equation",
+    "page": [
+      48
+    ]
+  },
+  {
+    "term": "Sinc-function",
+    "page": [
+      98
+    ]
+  },
+  {
+    "term": "Slow Light",
+    "page": [
+      63
+    ]
+  },
+  {
+    "term": "Snell's Law",
+    "page": [
+      7,
+      53
+    ]
+  },
+  {
+    "term": "Solenoidal Vector Field",
+    "page": [
+      30
+    ]
+  },
+  {
+    "term": "Solid State System",
+    "page": [
+      48
+    ]
+  },
+  {
+    "term": "Spatial (Transverse) Coherence",
+    "page": [
+      76
+    ]
+  },
+  {
+    "term": "Spatial Frequency",
+    "page": [
+      11
+    ]
+  },
+  {
+    "term": "Special Relativity",
+    "page": [
+      22,
+      31
+    ]
+  },
+  {
+    "term": "Spectroscopy",
+    "page": [
+      89
+    ]
+  },
+  {
+    "term": "Spectrum",
+    "page": [
+      70
+    ]
+  },
+  {
+    "term": "Speed Of Light",
+    "page": [
+      29
+    ]
+  },
+  {
+    "term": "Spherical Coordinates",
+    "page": [
+      20
+    ]
+  },
+  {
+    "term": "Spherical Mirror",
+    "page": [
+      117
+    ]
+  },
+  {
+    "term": "Spherical Surface",
+    "page": [
+      103
+    ]
+  },
+  {
+    "term": "Spontaneous Emission",
+    "page": [
+      42
+    ]
+  },
+  {
+    "term": "Standing Wave",
+    "page": [
+      70
+    ]
+  },
+  {
+    "term": "State Population",
+    "page": [
+      49
+    ]
+  },
+  {
+    "term": "Stigmatic",
+    "page": [
+      102
+    ]
+  },
+  {
+    "term": "Stimulated Emission",
+    "page": [
+      43
+    ]
+  },
+  {
+    "term": "Superposition",
+    "page": [
+      13
+    ]
+  },
+  {
+    "term": "Superposition Principle",
+    "page": [
+      14
+    ]
+  },
+  {
+    "term": "Surface Wave",
+    "page": [
+      66
+    ]
+  },
+  {
+    "term": "Telescope",
+    "page": [
+      124
+    ]
+  },
+  {
+    "term": "Temporal (Longitudinal) Coherence",
+    "page": [
+      76
+    ]
+  },
+  {
+    "term": "Transmissivity",
+    "page": [
+      63
+    ]
+  },
+  {
+    "term": "Transverse Magnification",
+    "page": [
+      110
+    ]
+  },
+  {
+    "term": "Transverse Wave",
+    "page": [
+      30
+    ]
+  },
+  {
+    "term": "Triple Product",
+    "page": [
+      23
+    ]
+  },
+  {
+    "term": "Tube Length",
+    "page": [
+      123
+    ]
+  },
+  {
+    "term": "Tube Lens",
+    "page": [
+      124
+    ]
+  },
+  {
+    "term": "Uncertainty Principle",
+    "page": [
+      73
+    ]
+  },
+  {
+    "term": "Vector Addition",
+    "page": [
+      23
+    ]
+  },
+  {
+    "term": "Vector Calculus",
+    "page": [
+      22,
+      23
+    ]
+  },
+  {
+    "term": "Vector Laplacian",
+    "page": [
+      24
+    ]
+  },
+  {
+    "term": "Vector Triple Product",
+    "page": [
+      23,
+      29
+    ]
+  },
+  {
+    "term": "Viewing Angle",
+    "page": [
+      121
+    ]
+  },
+  {
+    "term": "Vignetting",
+    "page": [
+      115
+    ]
+  },
+  {
+    "term": "Virtual Image",
+    "page": [
+      103
+    ]
+  },
+  {
+    "term": "Vitreous Humor",
+    "page": [
+      119
+    ]
+  },
+  {
+    "term": "Wave Equation",
+    "page": [
+      5,
+      9
+    ]
+  },
+  {
+    "term": "Wave Number",
+    "page": [
+      10
+    ]
+  },
+  {
+    "term": "Wave Vector",
+    "page": [
+      16,
+      17
+    ]
+  },
+  {
+    "term": "Wavefront",
+    "page": [
+      18,
+      77
+    ]
+  },
+  {
+    "term": "Wavelength",
+    "page": [
+      5
+    ]
+  }
+]
