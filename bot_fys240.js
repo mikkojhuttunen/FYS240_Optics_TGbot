@@ -10,7 +10,7 @@
  * so you can always confirm which version is actually live on Railway.
  * ============================================================================
  *
- * CURRENT FUNCTIONALITY (v2.6.2):
+ * CURRENT FUNCTIONALITY (v2.6.5):
  *   - Free-text Q&A grounded in course_corpus.txt, answers in whichever
  *     language (EN/FI) the student's question is written in
  *   - Bilingual (EN/FI) video lecture links from fys240_videos.js, with
@@ -82,6 +82,43 @@
 
  *
  * CHANGELOG:
+ *   v2.6.5 — Content-only update to the multivalue quiz add-on (no code
+ *            changes anywhere): multivalueQuizBank_fys240.json grew from
+ *            74 to 104 questions, by adding 10 new "select all that
+ *            apply" questions each for chapters 8 (8.1 x2, 8.2 x2, 8.3
+ *            x2, 8.5 x1, 8.6 x2, 8.7 x1), 9 (9.1 x3, 9.3 x4, 9.4 x3), and
+ *            10 (one question each for 10.1, 10.2, 10.4, 10.5, 10.6, 10.7,
+ *            10.8, 10.9, 10.10, 10.11), authored fresh from the chapters'
+ *            .tex lecture sources. This completes the first full pass:
+ *            every chapter 2-10 now has at least one curated multi-answer
+ *            question in most of its sections (10.3/10.12/10.13 remain
+ *            the only chapter-10 sections without one). Same schema and
+ *            validation as v2.6.3/v2.6.4's additions (no id collisions,
+ *            2 ≤ correct count < total options for every question).
+ *   v2.6.4 — Content-only update to the multivalue quiz add-on (no code
+ *            changes anywhere): multivalueQuizBank_fys240.json grew from
+ *            44 to 74 questions, by adding 10 new "select all that apply"
+ *            questions each for chapters 5 (5.1 x3, 5.2 x4, 5.3 +1, 5.4
+ *            x2), 6 (6.1 x1, 6.2 x2, 6.3 x3, 6.4 x2, 6.5 x2), and 7 (7.1
+ *            x2, 7.2 x4, 7.4 x4), authored fresh from the chapters' .tex
+ *            lecture sources. Chapters 8-10 unchanged (still 1-2 questions
+ *            each). Same schema and validation as v2.6.3's additions (no
+ *            id collisions, 2 \u2264 correct count < total options for every
+ *            question).
+ *   v2.6.3 — Content-only update to the multivalue quiz add-on (no code
+ *            changes to bot_fys240.js's logic, multivalueQuizGenerator_fys240.js,
+ *            or any other module): multivalueQuizBank_fys240.json grew from
+ *            14 curated questions (2-per-chapter across chapters 2-10) to
+ *            44, by adding 10 new "select all that apply" questions each
+ *            for chapters 2 (2.1/2.2/2.3), 3 (3.1, 3.3-3.6, 3.8-3.12 — one
+ *            per section, skipping 3.2/3.7 which already had a question),
+ *            and 4 (4.2-4.6, two per section), authored fresh from the
+ *            chapters' .tex lecture sources. Chapters 5-10 unchanged (still
+ *            2 questions each, as shipped in v2.6.2). Every new question
+ *            follows the same schema as before (id, questionType, stem,
+ *            options, correctIndices, explanation, addedAt, source, lang)
+ *            and was checked for id collisions and correctIndices validity
+ *            (2 \u2264 correct count < total options) before merging.
  *   v2.6.2 — Added a "select all that apply" multi-answer quiz mode as a
  *            fully separate add-on: multivalueQuizGenerator_fys240.js +
  *            multivalueQuizBank_fys240.json (14 curated multi-answer
@@ -283,7 +320,7 @@
  *   (earlier history predates version tracking)
  */
 
-const BOT_VERSION = "2.6.2";
+const BOT_VERSION = "2.6.5";
 
 const fs = require("fs");
 const path = require("path");

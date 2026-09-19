@@ -6,14 +6,103 @@
         "questionType": "multi_select",
         "stem": "Which of the following statements about Maxwell's equations and the derived EM wave equation are correct? (Select all that apply)",
         "options": [
-          "Maxwell's equations in vacuum are Gauss's law, Gauss's law for magnetism, the Maxwell\u2013Faraday equation, and Amp\u00e8re's circuital law",
-          "The wave equation \u2207\u00b2E = \u03bc0\u03b50 \u2202\u00b2E/\u2202t\u00b2 can be derived starting from Maxwell's equations",
+          "Maxwell's equations in vacuum are Gauss's law, Gauss's law for magnetism, the Maxwell–Faraday equation, and Ampère's circuital law",
+          "The wave equation ∇²E = μ0ε0 ∂²E/∂t² can be derived starting from Maxwell's equations",
           "A time-harmonic field oscillating at a single frequency is called monochromatic",
-          "The wavevector amplitude k relates to wavelength via k = \u03bb/2\u03c0",
-          "Visible light corresponds to wavelengths outside the 390\u2013780 nm range"
+          "The wavevector amplitude k relates to wavelength via k = λ/2π",
+          "Visible light corresponds to wavelengths outside the 390–780 nm range"
         ],
-        "correctIndices": [0, 1, 2],
-        "explanation": "Maxwell's four vacuum equations, the derived wave equation, and the definition of a monochromatic time-harmonic field are all stated directly in the notes. k = 2\u03c0/\u03bb (not \u03bb/2\u03c0), and visible light is defined as \u03bb \u2208 390\u2013780 nm, not outside it.",
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Maxwell's four vacuum equations, the derived wave equation, and the definition of a monochromatic time-harmonic field are all stated directly in the notes. k = 2π/λ (not λ/2π), and visible light is defined as λ ∈ 390–780 nm, not outside it.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q2.1_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the time-harmonic wave solution derived from Maxwell's equations, of the form Ψ(z,t) = A sin[k(z − vt)]? (Select all that apply)",
+        "options": [
+          "A time-harmonic field oscillating at a single frequency is called monochromatic",
+          "A is the wave's amplitude and k is its wavevector",
+          "v represents the wave's amplitude rather than its propagation velocity",
+          "This solution follows from assuming the E-field is harmonic in time",
+          "The sine term in the expression describes the wave's phase"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "The notes define A as amplitude, k as wavevector, and v as the wave's velocity (not amplitude); the harmonic time-dependence assumption for E leads to this solution, and the sine term carries the phase.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q2.1_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following correctly describe how a harmonic wave's spatial periodicity (wavelength) is derived? (Select all that apply)",
+        "options": [
+          "The wave reproduces itself after propagating a distance equal to one wavelength λ",
+          "The condition kλ = 2πm (m an integer) follows from requiring the wave to repeat after distance λ",
+          "The wavevector amplitude is k = 2π/λ",
+          "The wavevector amplitude is k = λ/(2π)",
+          "Wavelength has no relationship to the wavevector k"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Requiring ψ(z,0) = ψ(z+λ,0) gives kλ = 2πm, and with m=1 this yields k = 2π/λ — not λ/(2π), and clearly related to λ.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q2.1_004",
+        "questionType": "multi_select",
+        "stem": "Which of the following wavelength ranges does the course explicitly mention as regimes where this treatment of light still applies (even though 'light' strictly means the visible range)? (Select all that apply)",
+        "options": [
+          "Visible light, λ ≈ 390–780 nm",
+          "UV light, λ ≈ 200–400 nm",
+          "Near-infrared, λ ≈ 780 nm to 6 μm",
+          "X-rays, λ < 10 nm",
+          "Radio waves, λ > 1 m"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "The notes state the treatment is fine for the visible range (390–780 nm, violet–red), UV (200–400 nm), and near-infrared (780 nm–6 μm); X-rays and radio waves are not mentioned in this context.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q2.1_005",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the historical and mathematical origin of the electromagnetic wave equation, as described in this section? (Select all that apply)",
+        "options": [
+          "James Clerk Maxwell combined the laws of electricity and magnetism in 1865",
+          "The Lorentz law, together with Maxwell's equations, describes electromagnetic phenomena",
+          "The wave equation cannot be derived starting from Maxwell's equations",
+          "Solving the derived wave equation gives functions describing a propagating electromagnetic disturbance",
+          "Maxwell's equations were first formulated in the 20th century"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "The notes credit Maxwell (1865) with unifying electricity and magnetism, note the Lorentz law's role alongside Maxwell's equations, and state that solving the derivable wave equation describes propagating EM disturbances — the wave equation is very much derivable from Maxwell's equations, and this happened in the 19th century.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -26,13 +115,147 @@
         "stem": "Which of the following are true about the behavior of light at an interface between two media, according to geometrical optics? (Select all that apply)",
         "options": [
           "Part of the incident ray reflects and part refracts",
-          "The angle of incidence equals the angle of reflection (\u03b8i = \u03b8r)",
-          "Snell's law relates the angles via ni sin\u03b8i = nt sin\u03b8t",
+          "The angle of incidence equals the angle of reflection (θi = θr)",
+          "Snell's law relates the angles via ni sinθi = nt sinθt",
           "Reflection and refraction occur in two unrelated, non-coplanar planes",
           "In a homogeneous medium, rays propagate along curved paths"
         ],
-        "correctIndices": [0, 1, 2],
-        "explanation": "The notes state that part of a ray reflects and part refracts, with \u03b8i=\u03b8r and Snell's law ni sin\u03b8i = nt sin\u03b8t, all within the same plane of incidence. Rays propagate straight (not curved) in a homogeneous medium.",
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "The notes state that part of a ray reflects and part refracts, with θi=θr and Snell's law ni sinθi = nt sinθt, all within the same plane of incidence. Rays propagate straight (not curved) in a homogeneous medium.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q2.2_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct statements about geometrical optics, as introduced in this section? (Select all that apply)",
+        "options": [
+          "Geometrical optics is an adequate treatment when the wave nature of light (diffraction) can be neglected",
+          "Rays describe the direction along which the energy of light propagates",
+          "The refractive index n describes how light refracts and reflects at an interface",
+          "Geometrical optics is the correct treatment specifically when λ becomes very large",
+          "Rays change direction randomly even inside a single homogeneous medium"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "The notes describe geometrical optics as valid in the λ→0 limit (not large λ), using rays to track energy flow, with the refractive index n governing reflection/refraction; rays travel straight, not randomly, within a homogeneous medium.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q2.2_003",
+        "questionType": "multi_select",
+        "stem": "At an interface between two media, which of the following are true according to this section? (Select all that apply)",
+        "options": [
+          "The angle of incidence equals the angle of reflection",
+          "The incident, reflected, and refracted rays all lie in the same plane of incidence",
+          "Snell's law states n_i sinθ_i = n_t sinθ_t",
+          "The angle of refraction is always exactly equal to the angle of incidence",
+          "Only the reflected ray follows a definite angular rule; the refracted ray's angle is unconstrained"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "θ_i = θ_r for reflection, both rays lie in the plane of incidence together with the refracted ray, and Snell's law n_i sinθ_i = n_t sinθ_t governs refraction — the refraction angle equals the incidence angle only when n_i = n_t, and it is very much constrained by Snell's law.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q2.2_004",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about using rays to describe optical instruments, as discussed in this section? (Select all that apply)",
+        "options": [
+          "In a homogeneous medium, rays propagate in straight lines",
+          "Ray-based (geometrical) treatment is often adequate for understanding the behavior of optical instruments such as lenses",
+          "Rays can be used to describe image formation by lenses",
+          "Ray optics fully accounts for interference and diffraction effects",
+          "Rays bend unpredictably at every point inside a homogeneous medium"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "The notes state rays travel straight in a homogeneous medium and are used to understand lens behavior and image formation; ray optics is specifically the approximation used when diffraction/interference (wave effects) are neglected, not a framework that fully captures them.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "2.3": [
+      {
+        "id": "q2.3_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct regarding the particle (quantum) description of light introduced in this section? (Select all that apply)",
+        "options": [
+          "Light can be treated as quantized particles called photons",
+          "A photon's energy is E = hν = ħω",
+          "The reduced Planck's constant is ħ = h/(2π)",
+          "Photon energy is inversely proportional to frequency",
+          "The particle nature of light must be considered whenever quantum-mechanical effects matter in light–matter interaction"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Photons are the quantized description of light with energy E=hν=ħω (ħ=h/2π), a proportional — not inverse — relationship to frequency, and this treatment matters whenever quantum effects are significant.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q2.3_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about when the particle nature of light becomes important, and how this course treats it? (Select all that apply)",
+        "options": [
+          "The particle nature of light is often important when weak light sources (e.g. individual atoms or molecules) are involved",
+          "This course neglects the quantum nature of light throughout",
+          "Photon energy scales with frequency via Planck's constant h",
+          "The quantum nature of light is the primary framework used throughout this entire course",
+          "Only classical (wave) electromagnetism is needed to explain photon energy quantization"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "The notes say the particle nature matters for weak sources like individual atoms/molecules, that photon energy scales with frequency via h, and state explicitly that this course neglects the quantum nature of light — the opposite of treating it as the primary framework.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q2.3_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following correctly describe the reduced Planck's constant ħ and its role in photon energy? (Select all that apply)",
+        "options": [
+          "ħ = h/(2π)",
+          "Photon energy can be written as E = ħω, where ω is angular frequency",
+          "Photon energy can equivalently be written as E = hν, where ν is frequency",
+          "ħ has units of frequency",
+          "E=hν and E=ħω are equivalent expressions of the same photon energy"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "ħ=h/2π is a constant of action (not frequency); E=hν and E=ħω are the same energy expressed via frequency or angular frequency respectively, since ω=2πν.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -44,16 +267,20 @@
       {
         "id": "q3.2_001",
         "questionType": "multi_select",
-        "stem": "Which of the following are correct properties of the 1D wave equation \u2202\u00b2\u03c8/\u2202z\u00b2 = (1/v\u00b2)\u2202\u00b2\u03c8/\u2202t\u00b2, derived for \u03c8(z,t) = f(z \u00b1 vt)? (Select all that apply)",
+        "stem": "Which of the following are correct properties of the 1D wave equation ∂²ψ/∂z² = (1/v²)∂²ψ/∂t², derived for ψ(z,t) = f(z ± vt)? (Select all that apply)",
         "options": [
-          "The wave function \u03c8 must be differentiable at least twice",
-          "The equation is obtained by differentiating \u03c8 with respect to both z and t and combining the results",
+          "The wave function ψ must be differentiable at least twice",
+          "The equation is obtained by differentiating ψ with respect to both z and t and combining the results",
           "The equation's form still depends on an arbitrary choice of coordinate orientation",
           "v is the propagation velocity of the wave",
           "The equation only describes waves travelling in the +z direction"
         ],
-        "correctIndices": [0, 1, 3],
-        "explanation": "The notes derive the equation by twice-differentiating \u03c8=f(z\u00b1vt) and require it to be twice differentiable; v is the propagation speed. The whole point of moving to the second-order equation was to remove direction-dependence, and \u00b1vt covers both +z and \u2212z propagation.",
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "The notes derive the equation by twice-differentiating ψ=f(z±vt) and require it to be twice differentiable; v is the propagation speed. The whole point of moving to the second-order equation was to remove direction-dependence, and ±vt covers both +z and −z propagation.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -63,16 +290,259 @@
       {
         "id": "q3.7_001",
         "questionType": "multi_select",
-        "stem": "For a 3D plane wave \u03c8(r,t) = A e^{i(k\u00b7r \u2212 \u03c9t)}, which of the following statements are correct? (Select all that apply)",
+        "stem": "For a 3D plane wave ψ(r,t) = A e^{i(k·r − ωt)}, which of the following statements are correct? (Select all that apply)",
         "options": [
           "The wavevector k defines the wave's propagation direction",
           "The phasefront is the surface on which the phase is constant",
-          "The phase velocity is vp = \u03c9/k",
+          "The phase velocity is vp = ω/k",
           "The phase must depend quadratically on position r",
-          "k\u00b7r is constant everywhere on a plane perpendicular to k"
+          "k·r is constant everywhere on a plane perpendicular to k"
         ],
-        "correctIndices": [0, 1, 2, 4],
-        "explanation": "The notes require the phase to depend linearly (not quadratically) on r, define the phasefront as the constant-phase plane perpendicular to k, and derive vp=\u03c9/k from the total differential of the phase.",
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The notes require the phase to depend linearly (not quadratically) on r, define the phasefront as the constant-phase plane perpendicular to k, and derive vp=ω/k from the total differential of the phase.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "3.1": [
+      {
+        "id": "q3.1_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about describing an arbitrary propagating disturbance ψ(z,t) = f(z − vt)? (Select all that apply)",
+        "options": [
+          "Shifting the function's argument by z0 = vt makes it propagate along +z without changing its shape",
+          "The functional form of the disturbance depends only on the combination z − vt (for propagation along +z)",
+          "This description requires the disturbance to oscillate at a single fixed frequency",
+          "The velocity v must be positive for propagation along the +z direction",
+          "The resulting wave equation depends on which coordinate axis is chosen as 'z'"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "A disturbance of the form f(z-vt) shifts rigidly along +z as z0=vt increases, with v>0 for +z propagation; the description works for ANY functional form f, not just single-frequency ones, and the resulting (second-order) wave equation is coordinate-independent.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "3.3": [
+      {
+        "id": "q3.3_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following relations for a harmonic wave are correct, as derived in this section? (Select all that apply)",
+        "options": [
+          "Period and velocity are related by τ = λ/v",
+          "Frequency is ν = 1/τ = v/λ",
+          "Angular frequency is ω = 2πν",
+          "Velocity is v = λ/ν",
+          "An initial phase ε can be included, giving ψ(z,t) = A sin(kz − ωt + ε)"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The notes derive τ=λ/v, ν=1/τ=v/λ, ω=2πν, and generalize the wave with an initial phase ε; velocity is v=λν, not λ/ν.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "3.4": [
+      {
+        "id": "q3.4_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the phase velocity vp of a harmonic wave, as derived in this section? (Select all that apply)",
+        "options": [
+          "The phase velocity is found by requiring the total time-derivative of the phase φ(z,t) to vanish",
+          "For φ = kz − ωt + ε, this gives phase velocity vp = ω/k",
+          "Phase velocity describes the velocity of an arbitrary disturbance built from many harmonic waves of different frequencies",
+          "An arbitrary (non-harmonic) disturbance can propagate at a different velocity, called the group velocity",
+          "The phase φ of a wave depends on time both explicitly and implicitly (through z(t))"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Setting dφ/dt=0 for constant phase gives vp=ω/k; this is specifically the velocity of a single harmonic wave point, while a superposition of many harmonic waves generally propagates at the group velocity instead, and φ(z(t),t) depends on t both directly and via z(t).",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "3.5": [
+      {
+        "id": "q3.5_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct consequences of the linearity of the wave equation, as discussed in this section? (Select all that apply)",
+        "options": [
+          "Two solutions ψ1 and ψ2 of the wave equation can be combined as αψ1 + βψ2, and the result also satisfies the wave equation",
+          "In a linear system, light does not interact with light",
+          "Waves propagate independently, retaining their individual properties even when superposed",
+          "Superposition of waves only holds when the two waves have equal amplitude",
+          "Two waves with a 0° relative phase difference (in-phase) interfere constructively"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Linearity of the wave equation means any combination αψ1+βψ2 is also a solution, waves don't interact with each other, and each retains its properties; superposition works for any amplitudes, and in-phase waves add constructively.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "3.6": [
+      {
+        "id": "q3.6_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about representing waves using complex numbers, as introduced in this section? (Select all that apply)",
+        "options": [
+          "A complex number z = x + iy can be written in polar form as z = re^(iθ) using Euler's formula",
+          "The squared magnitude of z equals z·z* = x² + y²",
+          "Multiplying two complex numbers in polar form adds their phase angles",
+          "The real part of z can be recovered as Re(z) = (z + z*)/2",
+          "A harmonic wave A cos(kz − ωt + ε) equals the imaginary part of A e^{i(kz−ωt+ε)}"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "z=re^{iθ}, |z|²=zz*=x²+y², polar multiplication adds phases, and Re(z)=(z+z*)/2 are all correct; the cosine wave equals the REAL part (not imaginary part) of the complex exponential.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "3.8": [
+      {
+        "id": "q3.8_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about generalizing the wave equation to three dimensions, as shown in this section? (Select all that apply)",
+        "options": [
+          "The 3D wave equation can be written compactly as ∇²ψ = (1/v²)∂²ψ/∂t² using the Laplace operator",
+          "Writing the wave equation with ∇² makes it coordinate-free, so it can be transformed into other coordinate systems",
+          "The wavevector's Cartesian components satisfy kx² + ky² + kz² = k²",
+          "The gradient operator ∇ is itself a second-order differential operator",
+          "This section only ever works in spherical coordinates"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "The Laplace-operator form of the wave equation is coordinate-free, and k²=kx²+ky²+kz² by construction; the gradient ∇ is first-order (the Laplacian ∇² is second-order), and the notes explicitly favor Cartesian coordinates as usually the smartest choice.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "3.9": [
+      {
+        "id": "q3.9_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about spherical and cylindrical waves, as described in this section? (Select all that apply)",
+        "options": [
+          "A spherical wave's amplitude decreases as 1/r away from the source",
+          "A spherical wave's phasefronts are origo-centered spheres",
+          "The (+) sign in a spherical wave's exponent corresponds to an outgoing/diverging wave",
+          "A cylindrical wave's amplitude far from the z-axis decreases as 1/ρ",
+          "Both spherical and cylindrical waves resemble plane waves far away from their source"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Spherical-wave amplitude falls as 1/r with spherical, origo-centered phasefronts and an outgoing (+) convention; cylindrical-wave amplitude falls as 1/√ρ, not 1/ρ, and both wave types look locally planar far from their source.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "3.10": [
+      {
+        "id": "q3.10_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the polarization of light, as introduced in this section? (Select all that apply)",
+        "options": [
+          "The polarization vector describes the direction along which the E-field oscillates",
+          "In linear polarization, the field components Ex and Ey can both be written as real-valued",
+          "In circular polarization, there is a phase difference of ±π/2 between the field components Ex and Ey",
+          "Elliptical polarization only occurs when Ex and Ey have exactly equal magnitude",
+          "Elliptical polarization is the most general polarization state, with an arbitrary complex ratio Ex/Ey"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Polarization tracks the E-field's oscillation direction; linear polarization has real-valued Ex, Ey, circular polarization has a ±π/2 phase offset between them, and elliptical polarization is the fully general case with an arbitrary complex Ex/Ey ratio — not one requiring equal magnitudes.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "3.11": [
+      {
+        "id": "q3.11_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following vector-calculus identities, introduced in this section, are correct? (Select all that apply)",
+        "options": [
+          "The curl of a gradient is always the zero vector: ∇ × (∇φ) = 0",
+          "The divergence of a curl is always zero: ∇ · (∇ × E) = 0",
+          "Lagrange's formula states ∇ × ∇ × E = ∇(∇·E) − ∇²E",
+          "The dot product of two vectors is itself a vector quantity",
+          "The Levi-Civita symbol is used to write the cross product compactly using index notation"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Curl-of-gradient and divergence-of-curl both vanish identically, Lagrange's formula gives the vector Laplacian identity, and the Levi-Civita symbol ε^{ijk} encodes the cross product in index form; the dot product itself is a scalar, not a vector.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "3.12": [
+      {
+        "id": "q3.12_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the electrostatic approximation introduced in this section? (Select all that apply)",
+        "options": [
+          "Gauss's law in differential form is ∇·E = ρ/ε0",
+          "An electrostatic field can be written as E = −∇φ, where φ satisfies the Poisson equation",
+          "Solutions of the Poisson equation also satisfy the wave equation, so a purely electrostatic field can propagate as light",
+          "For stationary charges, the E-field is irrotational (curl-free)",
+          "The Helmholtz decomposition splits a vector field into an irrotational part and a solenoidal part"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Gauss's law ∇·E=ρ/ε0, the potential relation E=−∇φ with Poisson's equation Δφ=−ρ/ε0, and the curl-free E-field for stationary charges are all correct, as is the Helmholtz decomposition; Poisson-equation solutions specifically do NOT satisfy the wave equation, so electrostatic fields don't propagate as light.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -86,14 +556,248 @@
         "questionType": "multi_select",
         "stem": "Which of the following are correct statements about the vacuum Maxwell's equations and the derived EM wave equation? (Select all that apply)",
         "options": [
-          "In vacuum, \u03c1 = 0 and J = 0 are assumed",
+          "In vacuum, ρ = 0 and J = 0 are assumed",
           "Both E and B satisfy the same form of wave equation",
-          "The speed of light is c0 = 1/\u221a(\u03bc0\u03b50)",
+          "The speed of light is c0 = 1/√(μ0ε0)",
           "c0 depends on the refractive index of the surrounding medium",
-          "The wave equation for B is derived by taking the curl of Amp\u00e8re's law and applying Lagrange's vector identity"
+          "The wave equation for B is derived by taking the curl of Ampère's law and applying Lagrange's vector identity"
         ],
-        "correctIndices": [0, 1, 2, 4],
-        "explanation": "\u03c1=0, J=0 in vacuum; both \u2207\u00b2E and \u2207\u00b2B reduce to the same wave equation with speed c0=1/\u221a(\u03bc0\u03b50), derived via the curl and Lagrange's formula. c0 is a vacuum constant of nature, independent of any medium.",
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "ρ=0, J=0 in vacuum; both ∇²E and ∇²B reduce to the same wave equation with speed c0=1/√(μ0ε0), derived via the curl and Lagrange's formula. c0 is a vacuum constant of nature, independent of any medium.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "4.2": [
+      {
+        "id": "q4.2_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the electromagnetic plane-wave properties derived from Maxwell's equations in vacuum? (Select all that apply)",
+        "options": [
+          "The E-field of a plane wave in vacuum is transverse to the propagation direction k",
+          "The B-field of a plane wave in vacuum is also transverse to k",
+          "The vectors k, E, and B are mutually perpendicular",
+          "The E- and B-fields oscillate 90° out of phase with each other",
+          "|B| = |E|/c for a plane wave in vacuum"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "∇·E=0 and ∇·B=0 make both fields transverse to k, and the Maxwell–Faraday relation shows k, E, B are mutually perpendicular with E and B oscillating IN phase (not 90° apart), and |B|=|E|/c.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.2_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the conservation of electric charge, as derived from Maxwell's equations in this section? (Select all that apply)",
+        "options": [
+          "Charge conservation follows from taking the divergence of both sides of Ampère's circuital law",
+          "The continuity equation is ∇·J + ∂ρ/∂t = 0",
+          "Charge conservation must be assumed independently; it does not follow from Maxwell's equations",
+          "The identity 'divergence of a curl is zero' is used in deriving charge conservation",
+          "Charge conservation implies that current density J and charge density ρ are always both exactly zero"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Taking the divergence of Ampère's law and using 'divergence of curl = 0' together with Gauss's law directly yields the continuity equation ∇·J+∂ρ/∂t=0 — charge conservation is a direct consequence of Maxwell's equations, not an independent assumption, and it constrains how J and ρ change together rather than forcing them to vanish.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "4.3": [
+      {
+        "id": "q4.3_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the energy carried by an electromagnetic wave, as derived in this section? (Select all that apply)",
+        "options": [
+          "The energy density of the electric field is uE = (ε0/2)E²",
+          "The energy density of the magnetic field is uB = B²/(2μ0)",
+          "For a propagating EM wave in vacuum, uE and uB are equal",
+          "The total energy density is u = uE + uB = ε0E²",
+          "The magnetic field carries essentially all of the energy in an EM wave, while the electric field carries almost none"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "uE=(ε0/2)E² and uB=B²/(2μ0) are shown to be equal for a propagating EM wave (using B=E/c), giving total u=ε0E² — energy is split evenly between the fields, not concentrated mostly in the magnetic field.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.3_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the Poynting vector and irradiance, as derived in this section? (Select all that apply)",
+        "options": [
+          "The Poynting vector is S = c²ε0 (E × B)",
+          "Irradiance is the time average of the magnitude of the Poynting vector",
+          "For a time-harmonic wave, the time average of cos(ωt) is zero, while the time average of cos²(ωt) is 1/2",
+          "Irradiance can be calculated directly from the field amplitude as I = (1/2)cε0|E0|²",
+          "The Poynting vector oscillates slowly enough that photodetectors can directly track it in real time"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "S=c²ε0(E×B), with irradiance as its time-averaged magnitude; <cosωt>=0 while <cos²ωt>=1/2 gives I=(1/2)cε0|E0|². The Poynting vector actually oscillates at optical frequencies (~10¹⁵ Hz), far too fast for photodetectors (~10¹⁰ Hz) to track directly — they measure only the time average.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "4.4": [
+      {
+        "id": "q4.4_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about radiation pressure, as introduced in this section? (Select all that apply)",
+        "options": [
+          "Radiation pressure equals the field's energy density: P = u = S/c",
+          "The time-averaged radiation pressure is <P>_T = I/c",
+          "An EM wave carries momentum, with momentum density pV = I/c²",
+          "Radiation pressure is independent of the field's irradiance",
+          "The idea that light causes radiation pressure was already predicted by Maxwell"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Radiation pressure P=u=S/c, time-averaged as I/c, with momentum density pV=I/c², was predicted by Maxwell — and by definition it depends directly on irradiance, not independently of it.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.4_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about how the momentum density of light was derived in this section? (Select all that apply)",
+        "options": [
+          "The derivation starts from the classical-mechanics relation F = ma = ∂p/∂t",
+          "A fully-absorbing object was assumed for the derivation",
+          "The derivation combines the pressure relation P = F/A with the radiation-pressure result <P>_T = I/c",
+          "The derivation shows momentum density is independent of irradiance I",
+          "The final result obtained is pV = I/c²"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The derivation uses F=ma=∂p/∂t for a fully absorbing object, combines P=F/A with <P>_T=I/c, and arrives at momentum density pV=I/c² — which explicitly depends on I, not independent of it.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "4.5": [
+      {
+        "id": "q4.5_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about how electromagnetic radiation is generated, as described in this section? (Select all that apply)",
+        "options": [
+          "Accelerating (e.g. oscillating) electric charges give rise to electromagnetic radiation",
+          "A time-dependent current density acts as a source term in the wave equation",
+          "At visible wavelengths, the most important radiation source is typically an electric dipole emitter",
+          "Radiation sources only exist at radio frequencies, never at visible wavelengths",
+          "A dipole moment is defined as p = qd, where q is the charge and d is the separation vector between charges"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Accelerating charges and time-varying current densities source radiation; at visible wavelengths dipole emitters (fluorescent molecules, atoms, quantum dots) dominate, with dipole moment p=qd — radiation sources exist across the spectrum, not only at radio frequencies.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.5_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the far-field radiation of an oscillating electric dipole, as derived in this section? (Select all that apply)",
+        "options": [
+          "The far-field (radiation zone) is simpler to describe than the near-field",
+          "The dipole's irradiance pattern is proportional to sin²θ/r², where θ is measured from the dipole moment",
+          "Radiation is most intense along directions perpendicular to the dipole moment",
+          "The irradiance is independent of the oscillation frequency ω",
+          "Shorter wavelengths scatter more strongly, due to the ω⁴ dependence of dipole radiation"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The far-field is the simpler regime, with irradiance I(r,θ) ∝ sin²θ/r² peaking perpendicular to the dipole moment; the result depends on ω⁴, so shorter wavelengths (higher ω) scatter more strongly — irradiance is very much frequency-dependent.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "4.6": [
+      {
+        "id": "q4.6_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about Maxwell's equations in matter (macroscopic Maxwell's equations), as introduced in this section? (Select all that apply)",
+        "options": [
+          "The electric displacement field is defined as D = ε0E + P",
+          "The magnetizing field is defined as H = B/μ0 − M",
+          "Free charges and bound charges together make up the total charge density",
+          "Macroscopic Maxwell's equations are needed because treating ~10²³ atoms individually is impractical",
+          "Most optical materials have strong, non-negligible magnetic properties that must always be included"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "D=ε0E+P and H=B/μ0−M are the auxiliary-field definitions, with total charge = free + bound charge; macroscopic Maxwell's equations exist precisely because a ~10²³-atom many-body treatment is intractable. Most materials' magnetic properties are negligible at optical frequencies, not strong.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.6_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the refractive index n, as introduced from Maxwell's equations in a medium? (Select all that apply)",
+        "options": [
+          "The refractive index is defined as n = c/v, where v is the speed of light in the medium",
+          "Approximately, n ≈ √(ε/ε0) when magnetic effects are neglected",
+          "The wavelength of light in a medium is λ = λ0/n",
+          "The frequency of light changes when it enters a medium with a different refractive index",
+          "The refractive index generally depends on wavelength, a phenomenon called material dispersion"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "n=c/v ≈ √(ε/ε0) when magnetic effects are negligible, and λ=λ0/n in the medium; the notes explicitly state the oscillation frequency ω (or ν) does NOT change when light enters a medium — only wavelength and wavevector do — and n(λ) dependence is called material dispersion.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -110,11 +814,241 @@
           "The electron is modeled as attached to the atomic core via a harmonic spring",
           "The model works particularly well for dielectric materials",
           "The model works well for metals",
-          "The resonance frequency is \u03c90 = (k/m)^(1/2)",
+          "The resonance frequency is ω0 = (k/m)^(1/2)",
           "The imaginary part of the derived refractive index corresponds to absorption"
         ],
-        "correctIndices": [0, 1, 3, 4],
-        "explanation": "The notes describe the harmonic-spring electron model, its resonance frequency \u03c90=(k/m)^(1/2), its good fit for dielectrics, and that Im(n) corresponds to absorption. The model works poorly for metals (the Drude model is used there instead).",
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "The notes describe the harmonic-spring electron model, its resonance frequency ω0=(k/m)^(1/2), its good fit for dielectrics, and that Im(n) corresponds to absorption. The model works poorly for metals (the Drude model is used there instead).",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q5.3_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the generalized (damped, multi-resonance) Lorentz oscillator model of a dielectric material? (Select all that apply)",
+        "options": [
+          "Adding a damping term to the electron's equation of motion introduces an imaginary part into the refractive index",
+          "The generalized multi-resonance model gives n²(ω) = 1 + (Nq²/ε0m) Σ_j f_j/(ω₀,j² − ω² − iγ_jω)",
+          "This multi-resonance formula is known as the Helmholtz–Ketteler equation",
+          "Near a resonance frequency, the refractive index shows anomalous dispersion (rising, then falling)",
+          "Away from all resonances (e.g. visible light in typical dielectrics), the dispersion is anomalous rather than normal"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The damping term introduces Im(n)≠ 0 (absorption), the multi-resonance formula is the Helmholtz–Ketteler equation, and anomalous dispersion occurs near resonances; away from resonances (the usual visible-light case for dielectrics) dispersion is normal, not anomalous.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "5.1": [
+      {
+        "id": "q5.1_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the electronic-state picture of light–matter interaction introduced in this section? (Select all that apply)",
+        "options": [
+          "|g⟩ denotes the ground state of the electron",
+          "The energy difference between two electronic states is ΔE = hν_ig = ħω_ig",
+          "A solid medium's electronic band structure arises from its atomic structure",
+          "This course only ever considers two electronic states — a ground state and a single excited state",
+          "The resonance frequency ω_ig corresponds to the energy gap between states i and g"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The ground state |g⟩, energy gap ΔE=hν_ig=ħω_ig, and band structure arising from atomic structure are all correct; the notes explicitly introduce multiple excited states |1⟩, |2⟩, not just one.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q5.1_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the dynamic, statistical behavior of electrons in matter, as introduced in this section? (Select all that apply)",
+        "options": [
+          "A system's total energy tends to minimize while its entropy tends to maximize",
+          "Non-zero temperature affects the electron population, e.g. k_BT ≈ 26 meV at 300 K",
+          "Because many electrons are involved, the treatment must be statistical",
+          "Excited electronic states never relax back to lower-energy states",
+          "The lifetime τ of an excited state characterizes how quickly it typically relaxes"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Energy minimization/entropy maximization, thermal effects (k_BT≈26 meV at 300K), the need for statistical treatment with many electrons, and lifetimes τ characterizing relaxation are all correct; excited states DO relax to lower states over time.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q5.1_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the lifetimes and relaxation dynamics introduced in this section? (Select all that apply)",
+        "options": [
+          "Excited electronic states tend to relax toward lower-energy states over time",
+          "The lifetime τ of an excited state discussed here is of the order of ~10 ns",
+          "Relaxation dynamics are entirely independent of the system's temperature",
+          "The energy gap between electronic states directly sets the resonance frequency ω_ig",
+          "Having a larger population of electrons removes the need for any statistical treatment"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "States relax toward lower energy over a ~10 ns lifetime τ, and the energy gap directly sets ω_ig; temperature very much affects relaxation dynamics, and MORE electrons make statistical treatment more necessary, not less.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "5.2": [
+      {
+        "id": "q5.2_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about absorption and relaxation processes, as introduced in this section? (Select all that apply)",
+        "options": [
+          "A photon can be absorbed when its frequency ω is close to a resonance frequency ω_ig of the material, raising an electron to an excited state",
+          "If relaxation happens through a single process while emitting a photon, it is called a radiative process",
+          "If relaxation happens through several processes without emitting a photon, it is called a non-radiative process",
+          "Non-radiative relaxation typically creates phonons and heats the material",
+          "Absorption probability is completely independent of how close the photon frequency is to a resonance frequency"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Resonant absorption, single-process radiative relaxation (photon emitted), multi-process non-radiative relaxation (phonons, heating) are all correctly described; absorption is explicitly resonance-dependent, not independent of frequency.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q5.2_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about spontaneous emission, as described in this section? (Select all that apply)",
+        "options": [
+          "In spontaneous emission, an electron relaxes to the ground state and spontaneously emits a photon",
+          "Emission typically occurs from a volume much smaller than the wavelength, so it can be modeled as a dipole source",
+          "The initial phase of spontaneously emitted photons is random",
+          "Spontaneous emission requires an incident photon to trigger it",
+          "Spontaneous emission is a statistical/probabilistic process"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Spontaneous emission is a random, dipole-like, statistical process with random initial phase upon relaxation to the ground state; it specifically does NOT require a triggering photon — that's stimulated emission.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q5.2_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about stimulated emission, as described in this section? (Select all that apply)",
+        "options": [
+          "Stimulated emission is triggered by an incident photon interacting with an already-excited electron",
+          "Photons produced via stimulated emission share the same wavevector, phase, and polarization as the triggering photon",
+          "Stimulated emission enables the amplification of light",
+          "Stimulated emission is a purely random, uncorrelated process, just like spontaneous emission",
+          "Stimulated emission occurs when the incident photon's frequency is close to a transition frequency of the material"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Stimulated emission is triggered by a resonant incident photon and produces photons correlated in k, phase, and polarization with it, enabling amplification — the opposite of spontaneous emission's uncorrelated, random nature.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q5.2_004",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about light scattering far from resonance, as described in this section? (Select all that apply)",
+        "options": [
+          "When the photon frequency is far from any resonance frequency of matter, the photon is scattered rather than absorbed",
+          "Scattering displaces an electron from equilibrium, creating a dipole moment and hence a material polarization",
+          "The phases of incident and scattered photons remain correlated during scattering",
+          "Phase correlation between photons is preserved during absorption and spontaneous emission",
+          "Phase correlation is preserved during stimulated emission"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Off-resonance scattering (rather than absorption), the resulting induced polarization, and phase correlation during scattering and stimulated emission are all correctly described; the notes explicitly state phase correlation is LOST (not preserved) during absorption and spontaneous emission.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "5.4": [
+      {
+        "id": "q5.4_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about population densities and thermal equilibrium, as introduced in this section on laser operating principles? (Select all that apply)",
+        "options": [
+          "In thermal equilibrium, population densities follow the Boltzmann distribution N2/N1 = e^{-hν0/k_BT}",
+          "At room temperature, k_BT is much smaller than typical electronic excitation energies",
+          "Because k_BT is small compared to excitation energies, the vast majority of electrons are in the ground state",
+          "Under these thermal-equilibrium conditions, stimulated emission is more probable than absorption",
+          "Absorption is the most probable process in thermal equilibrium"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The Boltzmann distribution, the small k_BT compared to excitation energies (26 meV vs. 1.6–3.2 eV), and the resulting ground-state-dominated population all correctly lead to absorption being the dominant process — not stimulated emission — in thermal equilibrium.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q5.4_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about achieving laser action, as described in this section? (Select all that apply)",
+        "options": [
+          "Population inversion means the higher-energy state's population N2 exceeds the lower state's N1",
+          "Breaking thermal equilibrium via pumping (optical, electronic, or thermal) is necessary to achieve population inversion",
+          "An optical amplifier (a gain medium with population inversion) is, by itself, already a complete laser",
+          "A feedback mechanism, such as an optical resonator formed by mirrors, is needed in addition to the gain medium for lasing",
+          "Only light oscillating at the resonator's resonance frequencies gets efficiently amplified in a laser cavity"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Population inversion (N2>N1), pumping to break equilibrium, and a resonator/feedback mechanism selecting specific resonant frequencies are all required; an optical amplifier alone is explicitly stated to not yet be a laser — feedback is still needed.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -129,13 +1063,247 @@
         "stem": "Which of the following are true about total internal reflection (TIR)? (Select all that apply)",
         "options": [
           "TIR can occur when light travels from an optically denser medium toward a less dense one, beyond the critical angle",
-          "The critical angle satisfies sin\u03b8c = nt/ni",
+          "The critical angle satisfies sinθc = nt/ni",
           "The Fresnel transmission coefficients become exactly zero during TIR",
           "An evanescent field exists just beyond the interface during TIR, decaying exponentially away from it",
           "TIR is used in optical fibers, waveguides, and reflecting prisms"
         ],
-        "correctIndices": [0, 1, 3, 4],
-        "explanation": "TIR occurs beyond the critical angle sin\u03b8c=nt/ni when going from a denser to a less dense medium; the notes explicitly state TIR does NOT mean the transmission coefficients vanish \u2014 an exponentially evanescent surface field forms instead. TIR is used in fibers, waveguides, prisms, and Fresnel rhombs.",
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "TIR occurs beyond the critical angle sinθc=nt/ni when going from a denser to a less dense medium; the notes explicitly state TIR does NOT mean the transmission coefficients vanish — an exponentially evanescent surface field forms instead. TIR is used in fibers, waveguides, prisms, and Fresnel rhombs.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "6.1": [
+      {
+        "id": "q6.1_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the two treatments of light propagation introduced at the start of this chapter (rays and wavefronts)? (Select all that apply)",
+        "options": [
+          "A ray describes the direction along which the energy of light propagates",
+          "A ray is orthogonal to the wavefront",
+          "A wavefront is a surface on which the phase of the wave is constant",
+          "A wavefront propagates at velocity c/n",
+          "The wavevector k is parallel to the local wavefront surface, rather than perpendicular to it"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Rays track energy flow and are orthogonal to wavefronts, which are constant-phase surfaces propagating at c/n; the wavevector k is perpendicular to the local wavefront, not parallel to it.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "6.2": [
+      {
+        "id": "q6.2_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about describing the refractive index at different scales, as introduced in this section? (Select all that apply)",
+        "options": [
+          "On the atomic (microscopic) scale, light–matter interaction is described via the atomic dipole moment p = ε0αE",
+          "On the macroscopic scale, light–matter interaction is described via the material polarization P = ε0χE",
+          "The refractive index n can be defined without any reference to polarizability α or susceptibility χ",
+          "The refractive index is a macroscopic parameter that summarizes most of what's needed to describe light propagation in a medium",
+          "The microscopic and macroscopic descriptions of light–matter interaction are entirely unrelated to each other"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "The microscopic (p=ε0αE) and macroscopic (P=ε0χE) descriptions both feed into defining the macroscopic refractive index n — they are directly related, and n is defined precisely through α/χ, not independently of them.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.2_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about deriving the laws of reflection and refraction from wavefront geometry, as shown in this section? (Select all that apply)",
+        "options": [
+          "Requiring the optical path lengths of two wavefront segments to be equal leads to the law of reflection, θ_i = θ_r",
+          "A similar wavefront argument, using refractive indices n_i and n_t, leads to Snell's law n_i sinθ_i = n_t sinθ_t",
+          "The optical path length (OPL) can be written as an integral, OPL = ∫ n(s) ds",
+          "Fermat's principle states that light always travels along the path with the globally longest possible optical path length",
+          "These laws can also be derived by requiring conservation of the photon momentum component along the surface"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Equal-OPL wavefront arguments give both the law of reflection and Snell's law, with OPL expressible as ∫n(s)ds, and an equivalent derivation follows from photon momentum conservation along the surface; Fermat's principle actually requires a STATIONARY path (usually the shortest), not the longest.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "6.3": [
+      {
+        "id": "q6.3_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about deriving reflection and refraction from electromagnetic boundary conditions, as shown in this section? (Select all that apply)",
+        "options": [
+          "The derivation starts from the Maxwell–Faraday equation in integral form",
+          "Shrinking the loop area to zero at the interface shows that the tangential component of the E-field is continuous across the boundary",
+          "The derivation initially allows the incident, reflected, and transmitted waves to have different wavevectors and, in general, different frequencies",
+          "Requiring the boundary condition to hold at all times forces the frequencies of the incident, reflected, and transmitted waves to be equal",
+          "The boundary conditions derived here apply unchanged at any interface, including air–metal interfaces"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The Kelvin–Stokes/Maxwell–Faraday argument, tangential-E continuity, initially-general wavevectors/frequencies, and the resulting equal-frequency condition are all correctly described; the notes explicitly note that air–metal interfaces need DIFFERENT boundary conditions.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.3_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the geometric consequences of the electromagnetic boundary conditions, as derived in this section? (Select all that apply)",
+        "options": [
+          "The incident wavevector, reflected wavevector, and surface normal all lie in the same plane, called the plane of incidence",
+          "The wavevector amplitudes of the incident and reflected waves are equal, k_i = k_r",
+          "Combining these facts leads directly to the law of reflection, θ_i = θ_r",
+          "The wavevector amplitudes of the incident and transmitted waves are also always equal, k_i = k_t",
+          "Repeating the same argument for the transmitted wave leads to Snell's law"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The plane-of-incidence condition, equal incident/reflected wavevector amplitudes, and the resulting law of reflection are all correct, as is the parallel derivation of Snell's law for the transmitted wave; k_i and k_t generally differ since n_i≠n_t.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.3_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the electromagnetic derivation of Snell's law, as shown in this section? (Select all that apply)",
+        "options": [
+          "The wavevector amplitude in a medium relates to the refractive index via k = nω/c",
+          "Using this relation in the boundary-condition equations yields Snell's law, n_i sinθ_i = n_t sinθ_t",
+          "This derivation of Snell's law assumes an interface between two dielectric media",
+          "The same boundary/continuity equations used for dielectrics apply unchanged at an air–metal interface",
+          "For the transmitted wave, the wavevector amplitudes k_i and k_t are generally NOT equal to each other"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "k=nω/c substituted into the boundary conditions yields Snell's law for a dielectric–dielectric interface, with k_i≠k_t in general; the notes flag that air–metal interfaces need different boundary conditions, not the same ones.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "6.4": [
+      {
+        "id": "q6.4_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the Fresnel coefficients for the perpendicular (⊥) polarization, as derived in this section? (Select all that apply)",
+        "options": [
+          "The Fresnel reflection coefficient is r_⊥ = (n_i cosθ_i − n_t cosθ_t)/(n_i cosθ_i + n_t cosθ_t)",
+          "The derivation assumes non-magnetic media (μ = μ0)",
+          "Fresnel coefficients r and t can be negative, corresponding to a phase shift of π",
+          "Fresnel coefficients can never exceed unity in magnitude, since field amplitude can never exceed irradiance",
+          "The transmission coefficient t_⊥ is generally different from the reflection coefficient r_⊥"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The formula for r_⊥, the non-magnetic-media assumption, and the sign/phase-shift behavior of r and t are all correctly described, as is t_⊥≠r_⊥; the notes explicitly note Fresnel coefficients CAN exceed unity, since field amplitude and irradiance are different quantities.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.4_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about Brewster's angle, as introduced in this section? (Select all that apply)",
+        "options": [
+          "Brewster's angle is found where the parallel-polarization Fresnel reflection coefficient r_∥ becomes zero",
+          "At Brewster's angle, the incidence and refraction angles are complementary (θ_i + θ_t = 90°)",
+          "At Brewster's angle, ALL polarizations — both perpendicular and parallel — are fully transmitted with zero reflection",
+          "Brewster's angle is also known as the polarization angle",
+          "The Brewster's-angle effect can be used to build polarizers"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Brewster's angle is the zero of r_∥, occurring when θ_i+θ_t=90°, and is also called the polarization angle, useful for building polarizers; but only the PARALLEL-polarized component fully transmits at Brewster's angle — the perpendicular component still partially reflects.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "6.5": [
+      {
+        "id": "q6.5_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about reflectance R and transmittance T, as defined in this section? (Select all that apply)",
+        "options": [
+          "Reflectance R is defined as the ratio of reflected to incident power, and equals |r|²",
+          "Transmittance T is directly proportional to |t|² with no other factors involved",
+          "Reflectance and transmittance satisfy R + T = 1",
+          "The reflectance/transmittance framework also applies to lossy media, using complex-valued reflection coefficients",
+          "Reflectance R can be calculated directly from the field irradiance formula I = (1/2)ncε0|E0|²"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "explanation": "R=|r|² with R+T=1, the framework extending to lossy (complex-r) media, and the irradiance formula for R are all correctly described; the notes explicitly flag that T is NOT simply proportional to |t|² — it also carries a factor of (n_t cosθ_t)/(n_i cosθ_i).",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.5_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the reflectance/transmittance behavior at a glass–air interface, as shown in this section? (Select all that apply)",
+        "options": [
+          "At a certain critical incidence angle, total internal reflection begins to occur",
+          "This critical angle for the discussed glass–air interface is around 42°",
+          "Total internal reflection can only happen at an air–glass interface, never at a glass–air interface",
+          "Reflectance and transmittance curves differ between the air–glass and glass–air interface directions",
+          "Total internal reflection is associated with reflectance R rising to 1"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "TIR sets in near θ≈ 42° for the glass–air case shown, with R→1 there, and the R/T curves genuinely differ by direction; TIR specifically requires going from the OPTICALLY DENSER medium (glass) to the less dense one (air), so it's a glass-to-air phenomenon, not an air-to-glass one.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -155,8 +1323,13 @@
           "For a perfect mirror, the reflected amplitude equals the incident amplitude with the same sign (AR = AI)",
           "The standing wave still oscillates harmonically in time"
         ],
-        "correctIndices": [0, 1, 2, 4],
-        "explanation": "The notes describe a non-propagating field with nodes (zero amplitude) and antinodes (maximum amplitude), oscillating harmonically in time. The perfect-mirror boundary condition gives AR = \u2212AI, not AR = AI.",
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The notes describe a non-propagating field with nodes (zero amplitude) and antinodes (maximum amplitude), oscillating harmonically in time. The perfect-mirror boundary condition gives AR = −AI, not AR = AI.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -169,13 +1342,244 @@
         "stem": "Which of the following are true about optical coherence? (Select all that apply)",
         "options": [
           "A perfectly time-harmonic monochromatic wave is fully coherent but not physically realistic",
-          "Coherence time \u03c4c is the time interval within which the phase stays correlated",
-          "Coherence distance is \u2113c = \u03c4c \u00b7 c",
+          "Coherence time τc is the time interval within which the phase stays correlated",
+          "Coherence distance is ℓc = τc · c",
           "Coherence is strictly a binary (all-or-nothing) property of real light sources",
           "Real light can be modeled as separate wave packets that are internally coherent but not mutually coherent"
         ],
-        "correctIndices": [0, 1, 2, 4],
-        "explanation": "The notes describe the idealized fully-coherent monochromatic wave, coherence time/distance (\u2113c=\u03c4c\u00b7c), and the wave-packet model. They explicitly note coherence vanishes gradually rather than being a strict binary property.",
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The notes describe the idealized fully-coherent monochromatic wave, coherence time/distance (ℓc=τc·c), and the wave-packet model. They explicitly note coherence vanishes gradually rather than being a strict binary property.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "7.1": [
+      {
+        "id": "q7.1_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the superposition principle, as introduced at the start of this chapter? (Select all that apply)",
+        "options": [
+          "Because differential operations are linear, any superposition of solutions to the wave equation is itself a solution of the wave equation",
+          "An arbitrary superposition of waves can be written as ψ = Σ_i c_iψ_i",
+          "The superposition principle is specific to optics and doesn't apply in other branches of physics",
+          "This chapter's treatment forms a basis for understanding interference (Chapter 8) and diffraction (Chapter 9)",
+          "This chapter returns to treating light propagation as wave motion, complementing the ray-optics treatment of Chapter 10"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Linearity of the wave equation makes any weighted sum of solutions also a solution, underpinning both interference and diffraction; the notes explicitly state superposition is of general importance across almost all of physics, not just optics.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.1_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the role of this chapter within the course, as stated in its introduction? (Select all that apply)",
+        "options": [
+          "This chapter's motivation is to build a foundation for the treatments of interference and diffraction",
+          "Interference and diffraction phenomena are both based on the superposition principle",
+          "Ray optics (Chapter 10) is introduced as an alternative treatment of light propagation, distinct from the wave-based treatment here",
+          "Superposition of waves is a phenomenon unique to electromagnetic waves and doesn't occur for other wave types",
+          "The general wave equation ∇²ψ = (1/v²)∂²ψ/∂t² underlies the superposition treatment in this chapter"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The chapter explicitly frames itself as groundwork for Chapters 8 (interference) and 9 (diffraction), both built on superposition, with ray optics (Ch.10) as a separate treatment; superposition applies broadly to any linear wave equation, not only EM waves.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "7.2": [
+      {
+        "id": "q7.2_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the complex-number treatment of two superposed time-harmonic waves, as shown in this section? (Select all that apply)",
+        "options": [
+          "Each wave's position-dependent phase term α_i includes both its initial phase ε_i and its propagation phase kz_i",
+          "Two waves can have different initial phases ε₁≠ε₂ and different propagation paths z₁≠z₂",
+          "The superposition of two same-frequency waves is always mathematically equivalent to a single wave with amplitude A₁+A₂, regardless of their relative phase",
+          "The superposition irradiance includes a term A₁²+A₂² plus an interference cross-term",
+          "The interference cross-term depends on the phase difference δ = α₂−α₁"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "α_i=ε_i+kz_i, arbitrary ε's and z's, and the irradiance decomposition A₁²+A₂²+interference term(δ) are all correctly described; the resulting amplitude only simplifies to A₁+A₂ when the waves are in phase — in general it depends on δ.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.2_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the phase difference δ between two superposed waves, as derived in this section? (Select all that apply)",
+        "options": [
+          "δ can be decomposed as δ = (ε₂−ε₁) + k(z₂−z₁), i.e. an initial-phase difference plus an optical-path-difference term",
+          "Interference maxima occur when δ = 2πm for integer m",
+          "Interference minima occur when δ = 2πm + π",
+          "The superposition irradiance is I(z) ∝ A₁² + A₂² + 2A₁A₂ cos(α₂−α₁)",
+          "Interference maxima and minima each occur at only one unique value of δ, never repeating"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "δ's decomposition and the maxima/minima conditions and irradiance formula are all correctly stated; because waves are periodic, infinitely many maxima and minima recur at δ=2πm and 2πm+π respectively, not just one each.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.2_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about generalizing wave superposition to N waves, as shown in this section? (Select all that apply)",
+        "options": [
+          "The superposition of N same-frequency waves can be written as a single sum Σ_j A_j e^{iα_j}",
+          "This superposition of N mutually coherent waves is mathematically equivalent to a single wave",
+          "This equivalence to a single wave holds specifically because the waves are assumed to be perfectly coherent with each other",
+          "The superposition of N waves is always exactly zero, regardless of their individual phases",
+          "Each wave's contribution enters the sum through its complex amplitude A_j e^{iα_j}"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Summing N coherent, same-frequency waves via their complex amplitudes A_j e^{iα_j} yields a result mathematically equivalent to one wave, precisely because coherence is assumed; the sum is not generally zero — it depends on the individual phases α_j.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.2_004",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the generalized description of a wave's propagation path, as introduced in this section? (Select all that apply)",
+        "options": [
+          "The optical path length (OPL) traversed by a field can be written as a line integral, OPL = ∫_S n(s) ds",
+          "A propagating field can be written as E(z) = Ae^{iα}, where α = ε + kz",
+          "The notation Ẽ (tilde) is used to denote a field that includes the rapidly-oscillating time-dependence e^{-iωt}",
+          "The optical path length depends only on the geometric distance traveled, never on the refractive index of the medium",
+          "This generalized OPL notation is introduced to describe arbitrary propagation paths of light, not just straight-line paths in a single medium"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "OPL as ∫n(s)ds, the E(z)=Ae^{iα} notation with α=ε+kz, and the tilde-notation for the fast time-oscillation are all correctly described, and this generalization exists precisely to handle arbitrary (multi-medium, curved) paths; OPL explicitly depends on the refractive index n(s), not just geometric distance.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "7.4": [
+      {
+        "id": "q7.4_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the Fourier-transform description of a time-varying wave, as introduced in this section? (Select all that apply)",
+        "options": [
+          "An arbitrary well-behaved time-varying function f(t) can be represented as an integral (Fourier synthesis) over frequency components",
+          "The function F(ω), obtained via Fourier analysis of f(t), is called the spectrum of f(t)",
+          "The Fourier transform F(ω) is generally real-valued",
+          "The power spectrum is defined as S(ω) = |F(ω)|²",
+          "F(ω) can be interpreted as the amplitude of the wave at a given frequency ω"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Fourier synthesis/analysis, the spectrum F(ω), and the power spectrum S(ω)=|F(ω)|² are all correctly described, as is interpreting F(ω) as a per-frequency amplitude; F(ω) is generally COMPLEX-valued, not real.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.4_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the finite-duration harmonic wave-packet example worked out in this section? (Select all that apply)",
+        "options": [
+          "A wave packet of duration T, oscillating at frequency ω₀, has a spectrum proportional to a sinc function centered at ω₀",
+          "The cardinal sine function can be normalized as sinc(α) = sin(πα)/(πα)",
+          "A finite-duration wave packet has a perfectly sharp, single-frequency spectrum",
+          "The spectral shape F(ω) is derived by directly computing the Fourier transform of the finite-duration time-domain pulse",
+          "The wave packet's spectral width can be estimated from the location of the first zeros of the sinc function"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "The sinc-shaped spectrum, its normalized definition, its direct derivation via Fourier transform, and estimating spectral width from the sinc's first zeros are all correctly described; a FINITE-duration pulse necessarily has a spread-out (not perfectly sharp) spectrum.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.4_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the time-bandwidth relation derived in this section? (Select all that apply)",
+        "options": [
+          "The relation ΔωΔt ~ 1 (order of magnitude) connects a pulse's duration to its spectral width",
+          "In terms of ordinary frequency, this can be written as ΔνΔt ~ 1",
+          "This relation shows that a shorter pulse in time must have a broader spread in frequency, and vice versa",
+          "Time (t) and (angular) frequency (ω) are conjugate variables linked via the Fourier transform",
+          "This time-bandwidth relation implies a pulse can be made arbitrarily short in time while keeping an arbitrarily narrow spectral width"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "ΔωΔt~1 (or ΔνΔt~1) links pulse duration and spectral width as Fourier-conjugate variables, meaning shorter pulses need broader spectra; you can NOT have both an arbitrarily short pulse and an arbitrarily narrow spectrum simultaneously — that's exactly what the relation forbids.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.4_004",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the specific numerical relation derived for the wave-packet example in this section? (Select all that apply)",
+        "options": [
+          "Defining the spectral width Δω via the first nodal points of F(ω) gives Δω = 4π/T",
+          "This leads to the relation ΔωΔt = 4π, where Δt = T is the pulse duration",
+          "Because the starting assumptions in this derivation were somewhat ambiguous, the notes caution that the numeric prefactor should only be trusted as an order-of-magnitude estimate",
+          "A more rigorous derivation of the time-bandwidth relation would require using more detailed properties of the Fourier transform",
+          "The relation ΔωΔt = 4π is presented as an exact, universally precise constant for every possible pulse shape"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Δω=4π/T, giving ΔωΔt=4π for this specific pulse shape, are correctly derived, but the notes explicitly caveat this numeric prefactor as only an order-of-magnitude estimate given the ambiguous starting assumptions — not a universal exact constant for all pulse shapes.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -190,13 +1594,250 @@
         "stem": "Which of the following are true about the Michelson interferometer? (Select all that apply)",
         "options": [
           "It consists of a 50/50 beamsplitter, two mirrors, and a detector",
-          "The optical path difference is \u039b = 2(d2 \u2212 d1)",
+          "The optical path difference is Λ = 2(d2 − d1)",
           "For a broadband source, the interferogram (minus its constant term) is related to the source's spectrum via a Fourier cosine transform",
           "Only strictly monochromatic sources can be used with a Michelson interferometer",
           "A camera can be used as the detector when light arrives off the optical axis"
         ],
-        "correctIndices": [0, 1, 2, 4],
-        "explanation": "The notes describe the beamsplitter/mirrors/detector layout, path difference \u039b=2d, the Fourier-transform relation used for spectrometry, and camera detection at an angle \u03b8 (replacing d with d\u00b7cos\u03b8). Broadband sources are explicitly handled too, not just monochromatic ones.",
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The notes describe the beamsplitter/mirrors/detector layout, path difference Λ=2d, the Fourier-transform relation used for spectrometry, and camera detection at an angle θ (replacing d with d·cosθ). Broadband sources are explicitly handled too, not just monochromatic ones.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "8.1": [
+      {
+        "id": "q8.1_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the basic requirements for interference between two waves, as derived in this section? (Select all that apply)",
+        "options": [
+          "For two waves with parallel (identical) polarizations, the total irradiance is I = I1 + I2 + 2√(I1 I2) cos δ",
+          "If two waves have orthogonal (perpendicular) polarizations, their interference term vanishes and no visible interference results",
+          "The phase difference δ between two waves includes both a difference of initial phases and a term from their differing wavevectors/positions",
+          "Two waves with equal irradiance I0 give a superposition I = 4I0 cos²(δ/2)",
+          "Interference between two waves occurs identically regardless of their relative polarization"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The scalar irradiance formula, the vanishing interference term for orthogonal polarizations, the phase-difference decomposition, and the equal-irradiance simplification are all correctly derived; orthogonal polarizations specifically give NO visible interference, so results are not identical regardless of polarization.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.1_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the coherence requirements for interference, as introduced in this section? (Select all that apply)",
+        "options": [
+          "Two waves interfere only if their time difference is smaller than the source's coherence time τc",
+          "The corresponding spatial condition uses the coherence length ℓc = cτc",
+          "Temporal coherence is also called longitudinal coherence",
+          "Spatial coherence concerns the mutual coherence between different points of the same phasefront",
+          "Waves separated by more than the coherence width wc still interfere perfectly well"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Coherence time τc, coherence length ℓc=cτc, temporal/longitudinal coherence, and spatial/transverse coherence (comparing points on the same phasefront) are all correctly described; the notes state fields separated by MORE than wc do NOT interfere well.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "8.2": [
+      {
+        "id": "q8.2_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about wavefront-splitting interferometers, as introduced in this section? (Select all that apply)",
+        "options": [
+          "Wavefront-splitting interferometers rely on fields from the same original phasefront interfering with each other",
+          "Young's double-slit experiment is a classic example of a wavefront-splitting interferometer",
+          "In Young's experiment, the first slit improves the spatial coherence of the incoming light",
+          "Amplitude-splitting and wavefront-splitting interferometers are exactly the same kind of instrument",
+          "Interferometers, in general, are instruments based on interference"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Wavefront-splitting (e.g. Young's double slit, with its coherence-improving first slit) is one of two distinct classes of interferometer described — amplitude-splitting is explicitly the other, separate class.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.2_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the Young's double-slit interference pattern derived in this section? (Select all that apply)",
+        "options": [
+          "In the far-field approximation, the optical path difference between the two slits is approximately a sinθ",
+          "The phase difference is δ = (2π/λ)(a/s)y, using the small-angle approximation",
+          "An interference maximum occurs when the path difference equals an integer number of wavelengths, (r1−r2) = mλ",
+          "The integer m in this condition is called the interference order",
+          "The positions of interference maxima on the screen do not depend on the slit separation a"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The far-field path difference asinθ, resulting phase δ, maxima at (r1-r2)=mλ, and m being the interference order are all correctly derived; the maxima positions y_m=mλs/a explicitly DO depend on the slit separation a.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "8.3": [
+      {
+        "id": "q8.3_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about thin-film interference, as derived in this section? (Select all that apply)",
+        "options": [
+          "Amplitude-splitting interferometers split an incident wave into two or more components that later interfere on a detector",
+          "A thin film's thickness is typically of the order of the wavelength of light",
+          "The optical path difference for a thin film works out to Λ = 2n_t d cosθ_t",
+          "A π phase shift occurs upon one of the two reflections when the media on both sides of the film are identical and differ from the film's index",
+          "Thin-film interference is completely independent of the film's thickness"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Amplitude-splitting via a thin film of wavelength-scale thickness, with optical path difference Λ=2n_t d cosθ_t and a π phase shift on one reflection (per Fresnel coefficients), are all correctly derived; the pattern explicitly DOES depend on thickness d.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.3_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the conditions for interference maxima in a thin film, as derived in this section? (Select all that apply)",
+        "options": [
+          "Interference maxima occur when d cosθ_t = (m + 1/2)(λ_t/2), where λ_t = λ0/n_t",
+          "The interference pattern depends on the film thickness d, the incidence/refraction angles, and the wavelength",
+          "Real-world examples of thin-film interference include soap bubbles and oil films",
+          "Anti-reflection coatings on optical instruments are, in practice, stacks of thin films",
+          "Thin-film interference maxima never depend on the angle of incidence"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The maxima condition, its dependence on d/angles/wavelength, and the real-world examples (soap bubbles, oil films, AR coatings) are all correctly described; the condition explicitly involves θ_t, so maxima DO depend on incidence angle.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "8.5": [
+      {
+        "id": "q8.5_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about multiple-beam interference in a thin film, as derived in this section? (Select all that apply)",
+        "options": [
+          "When surfaces are strongly reflecting, many multiply-reflected beams must be summed to find the total field",
+          "The resulting sum over reflected/transmitted amplitudes forms a geometric series",
+          "The transmitted irradiance can be written as I_t = I0/(1 + F sin²(δ/2)), where F is the finesse coefficient",
+          "In an ideal (lossless) case, the reflected and transmitted irradiances satisfy I_r + I_t = I0",
+          "Multiple-beam interference is only relevant when surfaces are weakly reflecting"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Strongly-reflecting surfaces require summing a geometric series of multiply-reflected beams, yielding the Airy-function transmittance I_t=I0/(1+Fsin²(δ/2)) and energy conservation I_r+I_t=I0; this treatment matters precisely BECAUSE surfaces are strongly (not weakly) reflecting.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "8.6": [
+      {
+        "id": "q8.6_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about Fabry–Pérot instruments, as introduced in this section? (Select all that apply)",
+        "options": [
+          "The transmittance of a Fabry–Pérot instrument depends on the Airy function A = 1/(1+F sin²(δ/2))",
+          "Fabry–Pérot interferometers and etalons are two classes of these instruments",
+          "In a Fabry–Pérot interferometer, the term n_t d is typically adjusted, while in an etalon the angle θ_t is adjusted",
+          "The FWHM of a transmittance peak is γ = 4/√F",
+          "A larger finesse coefficient F always results in broader transmittance peaks"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The Airy-function transmittance, the interferometer/etalon distinction (adjusting n_t d vs. θ_t), and the FWHM formula γ=4/√F are all correctly described; a LARGER F gives NARROWER (not broader) peaks.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.6_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the finesse of a Fabry–Pérot cavity, as introduced in this section? (Select all that apply)",
+        "options": [
+          "Finesse is defined as the ratio of the spacing between adjacent peaks (2π in phase) to the peak's FWHM",
+          "Finesse does not depend on the length of the cavity, but does depend on its losses",
+          "Typical etalons have a finesse on the order of ~10",
+          "Typical high-quality interferometers can have finesse values exceeding 100,000",
+          "A cavity's finesse is entirely determined by its physical length, regardless of mirror reflectivity"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Finesse = 2π/γ, independent of cavity length but dependent on losses, with typical values ~10 for etalons and >100,000 for high-quality interferometers, are all correctly described; finesse is explicitly loss-dependent (via reflectivity), not purely length-determined.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "8.7": [
+      {
+        "id": "q8.7_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the spectroscopic use of Fabry–Pérot instruments, as introduced in this section? (Select all that apply)",
+        "options": [
+          "The free spectral range (FSR) is the frequency spacing between adjacent transmittance peaks, Δν_fsr = c/(2L)",
+          "Frequencies separated by more than the FSR risk being confused between adjacent interference orders",
+          "The spectral resolution Δν_min improves (gets smaller) as the finesse F increases",
+          "The spectral resolving power ν_m/Δν_min is a unitless quantity proportional to the interference order m and the finesse",
+          "A larger effective cavity length L always worsens the spectral resolution"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "FSR=c/(2L), the order-confusion risk beyond FSR, resolution improving with finesse, and the unitless resolving power m·ℱ are all correctly described; the notes explicitly state resolution IMPROVES (Δν_min shrinks) as L increases, not worsens.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -210,14 +1851,18 @@
         "questionType": "multi_select",
         "stem": "Which of the following are true about Fraunhofer diffraction? (Select all that apply)",
         "options": [
-          "It applies in the far field, when R > a\u00b2/\u03bb",
+          "It applies in the far field, when R > a²/λ",
           "The diffracted field is approximately proportional to the 2D Fourier transform of the aperture field",
           "It requires the observation point to be very close to the aperture",
           "A lens can be used to image the diffraction pattern",
           "The quadratic phase term becomes significant (not negligible) in the Fraunhofer regime"
         ],
-        "correctIndices": [0, 1, 3],
-        "explanation": "The Fraunhofer condition R>a\u00b2/\u03bb is a far-field (not near-field) condition, under which the quadratic phase term is negligible and the resulting field is the 2D Fourier transform of the aperture field; a lens can be used to image the resulting pattern.",
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "The Fraunhofer condition R>a²/λ is a far-field (not near-field) condition, under which the quadratic phase term is negligible and the resulting field is the 2D Fourier transform of the aperture field; a lens can be used to image the resulting pattern.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -229,14 +1874,245 @@
         "questionType": "multi_select",
         "stem": "Which of the following are true about diffraction gratings? (Select all that apply)",
         "options": [
-          "A diffraction maximum forms when the phase difference between waves from adjacent slits equals 2\u03c0m",
-          "The grating equation is a(sin\u03b8m \u2212 sin\u03b8i) = m\u03bb",
+          "A diffraction maximum forms when the phase difference between waves from adjacent slits equals 2πm",
+          "The grating equation is a(sinθm − sinθi) = mλ",
           "Blazed gratings can enhance or suppress specific diffraction orders",
           "Diffraction gratings can only operate in transmission, never in reflection",
           "The mth diffraction maximum is called the mth diffraction order"
         ],
-        "correctIndices": [0, 1, 2, 4],
-        "explanation": "The notes give the grating equation a(sin\u03b8m\u2212sin\u03b8i)=m\u03bb from the 2\u03c0m phase condition, define the mth maximum as the mth order, and mention blazed gratings for order-shaping. Gratings can operate in either transmission or reflection.",
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The notes give the grating equation a(sinθm−sinθi)=mλ from the 2πm phase condition, define the mth maximum as the mth order, and mention blazed gratings for order-shaping. Gratings can operate in either transmission or reflection.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "9.1": [
+      {
+        "id": "q9.1_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the concept of diffraction, as introduced at the start of this chapter? (Select all that apply)",
+        "options": [
+          "Diffraction phenomena arise when the superposition principle is applied to a continuous distribution of wave sources",
+          "Interference phenomena, by contrast, arise from discrete distributions of sources",
+          "The Huygens-Fresnel principle states that every point on a wavefront acts as a source of a new (secondary) wave",
+          "Diffraction and interference are governed by entirely unrelated physical principles",
+          "According to Huygens' principle, a new spherical wave originates from each point of the aperture"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Diffraction (continuous source distributions) is explicitly contrasted with interference (discrete distributions), both built on the same superposition principle via the Huygens-Fresnel picture of secondary spherical wavelets — so they are closely related, not unrelated.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q9.1_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the general diffraction integral introduced in this section? (Select all that apply)",
+        "options": [
+          "The total field at an observation point is found by integrating spherical waves originating from infinitesimal elements of the aperture",
+          "This diffraction integral can be solved analytically only in certain approximation regimes",
+          "Fresnel diffraction applies when the observation point is a moderate distance from the aperture",
+          "Fraunhofer diffraction is the far-field approximation, valid when the observation point is very far from the aperture",
+          "The diffraction integral can always be solved in closed form for any aperture shape and observation distance"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The integral over aperture-element spherical wavelets is generally intractable in closed form, solvable analytically only in the Fresnel (moderate distance) or Fraunhofer (far-field) regimes — not for arbitrary apertures/distances.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q9.1_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the Huygens-wavelet description used to build up the diffraction integral in this section? (Select all that apply)",
+        "options": [
+          "Each new spherical wavelet, from a point on the aperture, has the form (E_A(r)/r) e^{ikr}",
+          "This wavelet treatment applies specifically to a monochromatic field",
+          "The choice of coordinate system used to describe the aperture shape affects how easily the diffraction integral can be evaluated",
+          "How to approximate the distance r between a source point and the observation point is an important part of solving the integral",
+          "The wavelet treatment works identically well for any wavelength range, without any monochromaticity assumption"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The spherical-wavelet form, its monochromatic-field restriction, and the two key challenges (coordinate choice, approximating r) are all correctly described; the notes explicitly restrict this treatment to a monochromatic field.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "9.3": [
+      {
+        "id": "q9.3_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about diffraction from a single narrow slit, as derived in this section? (Select all that apply)",
+        "options": [
+          "The diffraction integral for a narrow slit separates into independent integrals along the x- and y-directions",
+          "The irradiance pattern along the slit's finite dimension is proportional to sinc²(α), where α is a normalized angular variable",
+          "Narrowing the slit width a makes the diffraction pattern spread out more",
+          "The slit width a and the observation coordinate X behave as conjugate variables",
+          "A narrow slit produces a diffraction pattern that is completely independent of the slit's width"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The separable x/y integrals, the sinc²(α) pattern, the conjugate-variable relationship between a and X, and the resulting wider spread for narrower slits are all correctly derived; the pattern very much depends on slit width a.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q9.3_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about diffraction from a rectangular aperture, as derived in this section? (Select all that apply)",
+        "options": [
+          "A rectangular aperture's irradiance pattern is I(X,Y) = I(0,0) sinc²(α) sinc²(β)",
+          "The rectangular-aperture result generalizes the single-slit result to both transverse directions",
+          "Light diffracts along both the X- and Y-directions for a rectangular aperture, unlike a narrow (1D) slit",
+          "The variable β is defined analogously to α, but using the aperture's height b instead of its width a",
+          "A rectangular aperture produces a diffraction pattern identical to a circular aperture of the same area"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The 2D sinc²×sinc² pattern, its generalization of the 1D single-slit result, 2D diffraction, and the analogous α/β definitions are all correctly derived; a rectangular aperture's pattern is a product of sincs, quite different from a circular aperture's Bessel-function (Airy) pattern.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q9.3_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about diffraction from a circular aperture, as derived in this section? (Select all that apply)",
+        "options": [
+          "The circularly symmetric problem is more naturally solved in cylindrical, rather than Cartesian, coordinates",
+          "The resulting irradiance pattern involves the first-order Bessel function J1",
+          "The central bright region of this pattern has its first zero at a specific value of kaq/R (approximately 3.83)",
+          "This diffraction pattern from a circular aperture is known as the Airy pattern",
+          "Circular apertures produce diffraction patterns with sharp, well-defined edges and no spreading"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The cylindrical-coordinate approach, the J1 Bessel-function result, its first zero near kaq/R≈3.83, and the resulting Airy pattern are all correctly described; diffraction from any finite aperture, circular included, inherently spreads the pattern rather than giving a sharp edge.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q9.3_004",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the angular size of the Airy diffraction pattern, as derived in this section? (Select all that apply)",
+        "options": [
+          "The first zero of the central Airy disk occurs at approximately sinθ_r ≈ 1.22λ/D, where D is the aperture diameter",
+          "A larger aperture diameter D results in a smaller (more tightly confined) diffraction pattern",
+          "A longer wavelength λ results in a larger diffraction pattern for the same aperture",
+          "The angular size of the diffraction pattern is entirely independent of both wavelength and aperture size",
+          "This angular-spread result underlies the diffraction limit on the resolution of imaging systems using circular apertures"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "sinθ_r≈1.22λ/D shows the pattern shrinks with larger D and grows with larger λ, and this relation is exactly what sets the diffraction-limited resolution of circular-aperture imaging systems — it is very much wavelength- and aperture-dependent.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "9.4": [
+      {
+        "id": "q9.4_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about diffraction from a periodic array of N slits, as derived in this section? (Select all that apply)",
+        "options": [
+          "The diffracted field is a sum over N shifted copies of the single-slit diffraction integral",
+          "The resulting irradiance factors into a single-slit diffraction term and a separate periodicity (interference) term",
+          "The single-slit term is proportional to (sinα/α)², matching the single-narrow-slit result",
+          "The periodicity term is proportional to (sin(Nβ)/sinβ)²",
+          "For a periodic array of slits, diffraction only occurs along the direction perpendicular to the slits, never along the slit direction"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Summing N shifted single-slit integrals gives an irradiance that factors into a single-slit envelope (sinα/α)² and a periodicity term (sinNβ/sinβ)² — diffraction along the slit's own length direction still occurs too, just governed by that dimension's own geometry.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q9.4_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the mathematical structure of the multi-slit diffraction sum, as shown in this section? (Select all that apply)",
+        "options": [
+          "The sum over N slits' phase factors forms a finite geometric series",
+          "Redefining a variable β = kXb/2R (with b the grating period) simplifies the sum considerably",
+          "The summed geometric series can be reduced to a closed-form expression involving sin(Nβ)/sinβ",
+          "This geometric-series structure is unrelated to the periodic arrangement of the slits",
+          "The width a of each individual slit and the period b of the array play distinct roles in the final diffracted field"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The N-term phase sum is exactly a finite geometric series, simplified via β=kXb/2R into the sin(Nβ)/sinβ form — this structure arises PRECISELY BECAUSE of the periodic slit arrangement, and slit width a (envelope) and period b (fine structure) play clearly distinct roles.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q9.4_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the physical interpretation of the multi-slit diffraction irradiance, as derived in this section? (Select all that apply)",
+        "options": [
+          "The single-slit factor (sinα/α)² describes the diffraction envelope caused by each individual slit's finite width",
+          "The periodicity factor (sinNβ/sinβ)² describes the fine interference structure caused by the regular spacing of the slits",
+          "As the number of slits N increases, the periodicity term produces progressively sharper, more well-defined peaks",
+          "The single-slit envelope and the periodicity term are entirely independent of each other and never multiply together",
+          "This combined single-slit/periodicity structure is the basis for understanding diffraction gratings"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The single-slit envelope and periodicity term correctly describe the physical roles of slit width vs. spacing, with sharper peaks for larger N, forming the basis of diffraction-grating behavior; the notes' own irradiance formula explicitly MULTIPLIES these two terms together, not treats them as unrelated.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -250,14 +2126,18 @@
         "questionType": "multi_select",
         "stem": "Which of the following are true about thin lenses? (Select all that apply)",
         "options": [
-          "For a thin lens in air, the lensmaker's equation is 1/f = (n\u2113/nm \u2212 1)(1/R1 \u2212 1/R2)",
+          "For a thin lens in air, the lensmaker's equation is 1/f = (nℓ/nm − 1)(1/R1 − 1/R2)",
           "Convex lenses have f > 0",
           "Concave lenses have f > 0",
           "The Gaussian thin-lens equation is 1/so + 1/si = 1/f",
           "Lens power D is defined as D = f (the focal length itself)"
         ],
-        "correctIndices": [0, 1, 3],
-        "explanation": "The notes give the lensmaker's equation, the sign convention f>0 for convex lenses (f<0 for concave), and the Gaussian thin-lens form 1/so+1/si=1/f. Lens power is defined as D \u2261 1/f, not D=f.",
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "The notes give the lensmaker's equation, the sign convention f>0 for convex lenses (f<0 for concave), and the Gaussian thin-lens form 1/so+1/si=1/f. Lens power is defined as D ≡ 1/f, not D=f.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
@@ -275,8 +2155,253 @@
           "Both the Galilean and Keplerian designs are completely free of chromatic aberration",
           "The Newtonian telescope reduces chromatic aberration by replacing the objective lens with a mirror"
         ],
-        "correctIndices": [0, 1, 2, 4],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
         "explanation": "MT=fo/fe is the telescope magnification; Keplerian designs (fe>0) invert the image while Galilean designs (fe<0) keep it upright. Both lens-based designs are susceptible to chromatic aberration, which the mirror-based Newtonian design largely avoids.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "10.1": [
+      {
+        "id": "q10.1_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the basic definitions of imaging optics introduced in this section? (Select all that apply)",
+        "options": [
+          "A system is called stigmatic if every object point is imaged perfectly into a single image point",
+          "Perfectly stigmatic systems cannot actually be realized, due to the wave nature of light (diffraction)",
+          "A real image forms where incident rays actually cross each other",
+          "A virtual image forms where rays only seem to cross, or seem to originate from",
+          "Virtual images and real images are optically indistinguishable and interchangeable in every situation"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Stigmatic imaging, its impossibility in a strict sense due to diffraction, and the real-vs-virtual image distinction (rays actually crossing vs. only appearing to) are all correctly defined; real and virtual images are explicitly distinct concepts, not interchangeable.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "10.2": [
+      {
+        "id": "q10.2_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about refraction at a single spherical surface, as derived in this section? (Select all that apply)",
+        "options": [
+          "The exact relation between object and image distances, from Snell's law, is generally transcendental (not solvable in closed form)",
+          "The paraxial approximation assumes sinφ ≈ φ and cosφ ≈ 1 for small angles",
+          "Under the paraxial approximation, the relation n1/so + n2/si = (n2−n1)/R holds, independent of the ray's height h",
+          "The front and back focal lengths of a single spherical surface are always exactly equal to each other",
+          "The paraxial approximation is also known as Gaussian optics"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The exact Snell's-law relation is transcendental; the paraxial (small-angle) approximation, also called Gaussian optics, yields the h-independent relation n1/so+n2/si=(n2-n1)/R; the notes explicitly show fo≠fi for a single interface, so front and back focal lengths are generally NOT equal.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "10.4": [
+      {
+        "id": "q10.4_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about image formation for off-axis object points, as derived in this section? (Select all that apply)",
+        "options": [
+          "The thin-lens equation 1/so + 1/si = 1/f also holds for object points off the optical axis (yo ≠ 0)",
+          "Newton's formula relates the object and image distances from the focal points as xo·xi = f²",
+          "The transverse magnification is MT = yi/yo = −si/so",
+          "The longitudinal magnification ML relates to the transverse magnification via ML = −MT²",
+          "The three chief rays used to trace image formation through an ideal lens are only valid for concave (diverging) lenses"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The lens equation extends to off-axis points, Newton's formula xo·xi=f² and the magnification relations MT=-si/so and ML=-MT² are all correctly derived; the three chief-ray construction is a general technique for ideal lenses, not restricted to concave ones.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "10.5": [
+      {
+        "id": "q10.5_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about systems of two thin lenses, as derived in this section? (Select all that apply)",
+        "options": [
+          "For two thin lenses in contact (separation d≈0), the combined focal length satisfies 1/f = 1/f1 + 1/f2",
+          "Equivalently, using lens powers, the combined power is D = D1 + D2",
+          "The overall magnification of a two-lens system is the product of each lens's individual magnification, MT = MT1·MT2",
+          "In lens systems generally (e.g. thick lenses), front and back focal lengths must be redefined relative to the whole system",
+          "Combining lenses made of different materials can never help reduce chromatic aberration"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The combined-focal-length and lens-power addition rules, the multiplicative magnification MT1·MT2, and the need to redefine front/back focal lengths for lens systems are all correctly derived; the notes explicitly describe using different-dispersion materials (doublets/triplets) specifically to REDUCE chromatic aberration.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "10.6": [
+      {
+        "id": "q10.6_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about apertures, stops, and pupils in an optical system, as introduced in this section? (Select all that apply)",
+        "options": [
+          "The aperture stop (AS) restricts the total amount of light propagating through the system",
+          "The field stop (FS) restricts the size of the image, rather than the amount of light",
+          "The entrance pupil is the image of the aperture stop as seen from object space",
+          "The exit pupil is the image of the aperture stop as seen from image space",
+          "Aperture stops and field stops always refer to the exact same physical component in a system"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The aperture stop (light quantity) and field stop (image size) are distinct components; the entrance and exit pupils are the images of the aperture stop as seen from object space and image space respectively — the two stops are conceptually and often physically distinct components, not always the same one.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "10.7": [
+      {
+        "id": "q10.7_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about mirrors, as introduced in this section? (Select all that apply)",
+        "options": [
+          "A flat mirror forms a virtual image that is the mirror image of the object, reversing its handedness",
+          "A spherical mirror obeys the same lens-equation form 1/so+1/si=1/f, with f ≡ −R/2",
+          "The transverse magnification for a mirror is defined the same way as for lenses, MT = yi/yo",
+          "Unlike lenses, mirrors are largely free of chromatic aberration since their behavior doesn't depend much on wavelength",
+          "It is generally easier to manufacture very large lenses than very large mirrors"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The flat-mirror handedness reversal, the spherical-mirror lens-equation form with f=-R/2, the mirror magnification MT=yi/yo, and mirrors' near-wavelength-independence (hence low chromatic aberration) are all correctly described; the notes state it's actually easier to manufacture large MIRRORS than large lenses, not the reverse.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "10.8": [
+      {
+        "id": "q10.8_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about prisms, as introduced in this section? (Select all that apply)",
+        "options": [
+          "A prism's behavior can be based on refraction at the interfaces of a dispersive medium",
+          "A prism's behavior can alternatively be based on total internal reflection at a prism-air interface",
+          "Prisms can be used, like diffraction gratings, to separate different frequency components of light (e.g. in spectrometers)",
+          "Prisms can be used to guide/reflect broadband light with low losses, or to flip images (e.g. in binoculars)",
+          "Prisms exploit exactly the same physical mechanism as diffraction gratings to disperse light"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Refraction-based dispersion and TIR-based reflection are the two prism mechanisms described, used respectively for spectral separation and for lossless broadband guiding/image-flipping; prisms disperse light via material dispersion (wavelength-dependent refractive index), a different physical mechanism from a grating's periodic interference.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "10.9": [
+      {
+        "id": "q10.9_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the optics of the human eye, as introduced in this section? (Select all that apply)",
+        "options": [
+          "Light is most strongly refracted at the air-cornea interface, where the refractive-index contrast is largest",
+          "The eye's ability to focus on both near and far objects is called accommodation",
+          "The iris adjusts the amount of light entering the eye, acting as a variable aperture stop",
+          "Rod cells sense color but not intensity, while cone cells sense intensity but not color",
+          "The fovea centralis is the retinal location where the sharpest vision occurs"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Strongest refraction at the cornea, accommodation, the iris as a variable aperture stop, and the fovea centralis as the sharpest-vision location are all correctly described; the notes state the OPPOSITE role split — rod cells sense intensity (enabling night vision) but not color, while cone cells sense both intensity and color.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "10.10": [
+      {
+        "id": "q10.10_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the magnifying glass (simple magnifier), as derived in this section? (Select all that apply)",
+        "options": [
+          "A magnifying glass increases the apparent angular size of an object by allowing it to be brought closer to the eye than the unaided near point permits",
+          "Ideally, a magnifying glass forms a virtual image infinitely far from the eye",
+          "The angular magnification of a simple magnifier is MP = do/f = do·D, where D is the lens power",
+          "Using an arbitrarily short focal length gives arbitrarily large useful magnification, with no practical downside",
+          "Any positive (converging) lens can, in principle, act as a magnifying glass"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "The magnifier's angular-magnification mechanism MP=do/f=do·D, the virtual-image-at-infinity design goal, and any converging lens's ability to act as one are all correctly described; the notes explicitly note that lens aberrations limit how much useful magnification a simple magnifier can practically achieve.",
+        "addedAt": "2026-09-19",
+        "source": "claude-authored",
+        "lang": "en"
+      }
+    ],
+    "10.11": [
+      {
+        "id": "q10.11_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about instruments designed to be used directly by the human eye, as introduced in this section on the eyepiece? (Select all that apply)",
+        "options": [
+          "In the simplest case, such an instrument consists of an objective lens and an eyepiece (ocular)",
+          "The objective lens forms an intermediate image between the two lenses",
+          "The eyepiece is placed one focal length away from the intermediate image",
+          "The purpose of the eyepiece is to further magnify the intermediate image for viewing by the eye",
+          "In this two-lens layout, the objective and eyepiece must always have identical focal lengths"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The two-lens (objective + eyepiece) layout, the objective's intermediate image, the eyepiece's placement one focal length away, and its magnifying role are all correctly described; nothing requires the two lenses to share the same focal length — in fact their differing focal lengths set the overall magnification.",
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
