@@ -23,6 +23,28 @@
         "lang": "en"
       },
       {
+        "id": "q2.1_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista väittämistä Maxwellin yhtälöistä ja niistä johdetusta sähkömagneettisen aallon aaltoyhtälöstä pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Maxwellin yhtälöt tyhjiössä ovat Gaussin laki, magnetismin Gaussin laki, Maxwellin–Faradayn yhtälö ja Ampèren kiertolaki",
+          "Aaltoyhtälö ∇²E = μ0ε0 ∂²E/∂t² voidaan johtaa Maxwellin yhtälöistä lähtien",
+          "Kenttää, joka värähtelee ajan suhteen harmonisesti yhdellä taajuudella, kutsutaan monokromaattiseksi",
+          "Aaltovektorin pituus k liittyy aallonpituuteen yhtälöllä k = λ/2π",
+          "Näkyvä valo vastaa aallonpituuksia, jotka ovat alueen 390–780 nm ulkopuolella"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Maxwellin neljä tyhjiöyhtälöä, niistä johdettu aaltoyhtälö ja monokromaattisen, ajan suhteen harmonisen kentän määritelmä esitetään kaikki suoraan muistiinpanoissa. Oikea yhteys on k = 2π/λ (ei λ/2π), ja näkyvä valo määritellään aallonpituusalueeksi λ ∈ 390–780 nm, ei sen ulkopuolella olevaksi.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.1_001"
+      },
+      {
         "id": "q2.1_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the time-harmonic wave solution derived from Maxwell's equations, of the form Ψ(z,t) = A sin[k(z − vt)]? (Select all that apply)",
@@ -43,6 +65,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q2.1_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Maxwellin yhtälöistä johdetusta ajan suhteen harmonisesta aaltoratkaisusta, jonka muoto on Ψ(z,t) = A sin[k(z − vt)]? (Valitse kaikki oikeat)",
+        "options": [
+          "Kenttää, joka värähtelee ajan suhteen harmonisesti yhdellä taajuudella, kutsutaan monokromaattiseksi",
+          "A on aallon amplitudi ja k on sen aaltovektori",
+          "v kuvaa aallon amplitudia eikä sen etenemisnopeutta",
+          "Tämä ratkaisu seuraa olettamuksesta, että E-kenttä on ajan suhteen harmoninen",
+          "Lausekkeen sinitermi kuvaa aallon vaihetta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Muistiinpanoissa A määritellään amplitudiksi, k aaltovektoriksi ja v aallon nopeudeksi (ei amplitudiksi); oletus E:n harmonisesta aikariippuvuudesta johtaa tähän ratkaisuun, ja sinitermi kuvaa vaihetta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.1_002"
       },
       {
         "id": "q2.1_003",
@@ -66,6 +111,28 @@
         "lang": "en"
       },
       {
+        "id": "q2.1_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista kuvaavat oikein, miten harmonisen aallon avaruudellinen jaksollisuus (aallonpituus) johdetaan? (Valitse kaikki oikeat)",
+        "options": [
+          "Aalto toistaa itsensä edettyään yhden aallonpituuden λ verran",
+          "Ehto kλ = 2πm (m kokonaisluku) seuraa vaatimuksesta, että aalto toistuu etäisyyden λ jälkeen",
+          "Aaltovektorin pituus on k = 2π/λ",
+          "Aaltovektorin pituus on k = λ/(2π)",
+          "Aallonpituudella ei ole mitään yhteyttä aaltovektoriin k"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Vaatimus ψ(z,0) = ψ(z+λ,0) antaa kλ = 2πm, ja arvolla m=1 tästä saadaan k = 2π/λ — ei λ/(2π) — ja k riippuu selvästi λ:sta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.1_003"
+      },
+      {
         "id": "q2.1_004",
         "questionType": "multi_select",
         "stem": "Which of the following wavelength ranges does the course explicitly mention as regimes where this treatment of light still applies (even though 'light' strictly means the visible range)? (Select all that apply)",
@@ -87,6 +154,28 @@
         "lang": "en"
       },
       {
+        "id": "q2.1_004_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista aallonpituusalueista kurssi mainitsee nimenomaisesti alueina, joilla tämä käsittely pätee edelleen (vaikka ‘valo’ tarkoittaakin tiukasti ottaen näkyvää aluetta)? (Valitse kaikki oikeat)",
+        "options": [
+          "Näkyvä valo, λ ≈ 390–780 nm",
+          "UV-valo, λ ≈ 200–400 nm",
+          "Lähi-infrapuna, λ ≈ 780 nm – 6 μm",
+          "Röntgensäteily, λ < 10 nm",
+          "Radioaallot, λ > 1 m"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Muistiinpanojen mukaan käsittely soveltuu näkyvälle alueelle (390–780 nm, violetista punaiseen), UV-alueelle (200–400 nm) ja lähi-infrapuna-alueelle (780 nm – 6 μm); röntgensäteitä ja radioaaltoja ei mainita tässä yhteydessä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.1_004"
+      },
+      {
         "id": "q2.1_005",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the historical and mathematical origin of the electromagnetic wave equation, as described in this section? (Select all that apply)",
@@ -106,6 +195,28 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q2.1_005_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa sähkömagneettisen aaltoyhtälön historiallisesta ja matemaattisesta alkuperästä tässä osiossa kuvatulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "James Clerk Maxwell yhdisti sähkön ja magnetismin lait vuonna 1865",
+          "Lorentzin laki yhdessä Maxwellin yhtälöiden kanssa kuvaa sähkömagneettisia ilmiöitä",
+          "Aaltoyhtälöä ei voida johtaa Maxwellin yhtälöistä lähtien",
+          "Johdetun aaltoyhtälön ratkaiseminen antaa funktiot, jotka kuvaavat etenevää sähkömagneettista häiriötä",
+          "Maxwellin yhtälöt muotoiltiin ensimmäisen kerran 1900-luvulla"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Muistiinpanoissa Maxwellin (1865) todetaan yhdistäneen sähkön ja magnetismin lait, Lorentzin lain rooli Maxwellin yhtälöiden rinnalla mainitaan, ja johdetun aaltoyhtälön ratkaisujen todetaan kuvaavan etenevää sähkömagneettista häiriötä — aaltoyhtälö on täysin johdettavissa Maxwellin yhtälöistä, ja tämä tapahtui 1800-luvulla.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.1_005"
       }
     ],
     "2.2": [
@@ -131,6 +242,28 @@
         "lang": "en"
       },
       {
+        "id": "q2.2_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa valon käyttäytymisestä kahden aineen rajapinnalla geometrisen optiikan mukaan? (Valitse kaikki oikeat)",
+        "options": [
+          "Osa tulevasta säteestä heijastuu ja osa taittuu",
+          "Tulokulma on yhtä suuri kuin heijastuskulma (θi = θr)",
+          "Snellin laki yhdistää kulmat yhtälöllä ni sinθi = nt sinθt",
+          "Heijastus ja taittuminen tapahtuvat toisistaan riippumattomissa, eri tasoissa",
+          "Homogeenisessa aineessa säteet etenevät kaarevia ratoja pitkin"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Muistiinpanojen mukaan osa säteestä heijastuu ja osa taittuu niin, että θi=θr ja Snellin laki ni sinθi = nt sinθt pätee, kaikki samassa tulotasossa. Säteet etenevät homogeenisessa aineessa suoraan (ei kaarevasti).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.2_001"
+      },
+      {
         "id": "q2.2_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct statements about geometrical optics, as introduced in this section? (Select all that apply)",
@@ -150,6 +283,28 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q2.2_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista väittämistä geometrisesta optiikasta, sellaisena kuin se tässä osiossa esitellään, pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Geometrinen optiikka on riittävä käsittely, kun valon aaltoluonne (diffraktio) voidaan jättää huomiotta",
+          "Säteet kuvaavat suuntaa, johon valon energia etenee",
+          "Taitekerroin n kuvaa, miten valo taittuu ja heijastuu rajapinnalla",
+          "Geometrinen optiikka on oikea käsittely nimenomaan silloin, kun λ on hyvin suuri",
+          "Säteet muuttavat suuntaansa satunnaisesti jopa yhden homogeenisen aineen sisällä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Muistiinpanoissa geometrinen optiikka kuvataan päteväksi rajalla λ→0 (ei suurilla λ:n arvoilla): säteet seuraavat energian kulkua, taitekerroin n määrää heijastuksen ja taittumisen, ja säteet etenevät homogeenisessa aineessa suoraan, ei satunnaisesti.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.2_002"
       },
       {
         "id": "q2.2_003",
@@ -173,6 +328,28 @@
         "lang": "en"
       },
       {
+        "id": "q2.2_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kahden aineen rajapinnalla tämän osion mukaan? (Valitse kaikki oikeat)",
+        "options": [
+          "Tulokulma on yhtä suuri kuin heijastuskulma",
+          "Tuleva, heijastunut ja taittunut säde ovat kaikki samassa tulotasossa",
+          "Snellin lain mukaan n_i sinθ_i = n_t sinθ_t",
+          "Taitekulma on aina täsmälleen yhtä suuri kuin tulokulma",
+          "Vain heijastunut säde noudattaa määrättyä kulmasääntöä; taittuneen säteen kulmaa mikään ei rajoita"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Heijastuksessa θ_i = θ_r, molemmat säteet ovat tulotasossa yhdessä taittuneen säteen kanssa, ja taittumista säätelee Snellin laki n_i sinθ_i = n_t sinθ_t — taitekulma on yhtä suuri kuin tulokulma vain kun n_i = n_t, ja Snellin laki rajoittaa sitä täysin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.2_003"
+      },
+      {
         "id": "q2.2_004",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about using rays to describe optical instruments, as discussed in this section? (Select all that apply)",
@@ -192,6 +369,28 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q2.2_004_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa säteiden käytöstä optisten laitteiden kuvaamiseen tässä osiossa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Homogeenisessa aineessa säteet etenevät suoraviivaisesti",
+          "Sädeoptinen (geometrinen) käsittely riittää usein optisten laitteiden, kuten linssien, toiminnan ymmärtämiseen",
+          "Säteillä voidaan kuvata linssien muodostamaa kuvaa",
+          "Sädeoptiikka selittää täysin interferenssi- ja diffraktioilmiöt",
+          "Säteet taipuvat arvaamattomasti joka kohdassa homogeenisen aineen sisällä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Muistiinpanojen mukaan säteet etenevät homogeenisessa aineessa suoraan ja niitä käytetään linssien toiminnan ja kuvanmuodostuksen ymmärtämiseen; sädeoptiikka on nimenomaan approksimaatio, jossa diffraktio ja interferenssi (aaltoilmiöt) jätetään huomiotta, eikä se kata niitä täysin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.2_004"
       }
     ],
     "2.3": [
@@ -218,6 +417,29 @@
         "lang": "en"
       },
       {
+        "id": "q2.3_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tässä osiossa esitellystä valon hiukkaskuvauksesta (kvanttikuvauksesta)? (Valitse kaikki oikeat)",
+        "options": [
+          "Valoa voidaan käsitellä kvantittuneina hiukkasina, joita kutsutaan fotoneiksi",
+          "Fotonin energia on E = hν = ħω",
+          "Redusoitu Planckin vakio on ħ = h/(2π)",
+          "Fotonin energia on kääntäen verrannollinen taajuuteen",
+          "Valon hiukkasluonne on otettava huomioon aina, kun kvanttimekaaniset ilmiöt ovat merkittäviä valon ja aineen vuorovaikutuksessa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Fotonit ovat valon kvantittunut kuvaus, jonka energia on E=hν=ħω (ħ=h/2π); energia on suoraan (ei kääntäen) verrannollinen taajuuteen, ja tämä käsittely on tarpeen aina kun kvanttimekaaniset ilmiöt ovat merkittäviä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.3_001"
+      },
+      {
         "id": "q2.3_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about when the particle nature of light becomes important, and how this course treats it? (Select all that apply)",
@@ -237,6 +459,28 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q2.3_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa siitä, milloin valon hiukkasluonne tulee tärkeäksi ja miten tämä kurssi sen käsittelee? (Valitse kaikki oikeat)",
+        "options": [
+          "Valon hiukkasluonne on usein tärkeä, kun mukana on heikkoja valonlähteitä (esim. yksittäisiä atomeja tai molekyylejä)",
+          "Tämä kurssi jättää valon kvanttiluonteen huomiotta",
+          "Fotonin energia skaalautuu taajuuden mukana Planckin vakion h kautta",
+          "Valon kvanttiluonne on koko tämän kurssin ensisijainen viitekehys",
+          "Fotonin energian kvantittumisen selittämiseen riittää pelkkä klassinen (aalto)sähkömagnetismi"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Muistiinpanoissa todetaan, että hiukkasluonne on tärkeä heikoille lähteille, kuten yksittäisille atomeille ja molekyyleille, että fotonin energia skaalautuu taajuuden mukana Planckin vakion h kautta ja että tämä kurssi jättää valon kvanttiluonteen huomiotta — eli kvanttiluonne ei suinkaan ole kurssin ensisijainen viitekehys.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.3_002"
       },
       {
         "id": "q2.3_003",
@@ -259,6 +503,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q2.3_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista kuvaavat oikein redusoitua Planckin vakiota ħ ja sen roolia fotonin energiassa? (Valitse kaikki oikeat)",
+        "options": [
+          "ħ = h/(2π)",
+          "Fotonin energia voidaan kirjoittaa muodossa E = ħω, missä ω on kulmataajuus",
+          "Fotonin energia voidaan yhtäpitävästi kirjoittaa muodossa E = hν, missä ν on taajuus",
+          "ħ:n yksikkö on taajuuden yksikkö",
+          "E = hν ja E = ħω ovat saman fotonienergian yhtäpitäviä lausekkeita"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "ħ = h/2π on vaikutuksen dimension omaava vakio (ei taajuus); E = hν ja E = ħω ovat sama energia lausuttuna taajuuden tai kulmataajuuden avulla, sillä ω = 2πν.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.3_003"
       }
     ]
   },
@@ -284,6 +551,28 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.2_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista ovat oikeita ominaisuuksia yksiulotteiselle aaltoyhtälölle ∂²ψ/∂z² = (1/v²)∂²ψ/∂t², joka on johdettu muodolle ψ(z,t) = f(z ± vt)? (Valitse kaikki oikeat)",
+        "options": [
+          "Aaltofunktion ψ on oltava vähintään kahdesti derivoituva",
+          "Yhtälö saadaan derivoimalla ψ sekä z:n että t:n suhteen ja yhdistämällä tulokset",
+          "Yhtälön muoto riippuu edelleen koordinaatiston suunnan mielivaltaisesta valinnasta",
+          "v on aallon etenemisnopeus",
+          "Yhtälö kuvaa vain +z-suuntaan etenevää aaltoa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Muistiinpanoissa yhtälö johdetaan derivoimalla ψ=f(z±vt) kahdesti, ja sen vaaditaan olevan kahdesti derivoituva; v on etenemisnopeus. Toisen kertaluvun yhtälöön siirtymisen koko idea oli poistaa suuntariippuvuus, ja ±vt kattaa sekä +z- että −z-suuntaisen etenemisen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.2_001"
       }
     ],
     "3.7": [
@@ -308,6 +597,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.7_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista väittämistä kolmiulotteisesta tasoaallosta ψ(r,t) = A e^{i(k·r − ωt)} pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Aaltovektori k määrää aallon etenemissuunnan",
+          "Aaltorintama on pinta, jolla vaihe on vakio",
+          "Vaihenopeus on vp = ω/k",
+          "Vaiheen täytyy riippua paikasta r toisen asteen tavalla (neliöllisesti)",
+          "k·r on vakio kaikkialla k:ta vastaan kohtisuoralla tasolla"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Muistiinpanoissa vaiheen vaaditaan riippuvan paikasta r lineaarisesti (ei neliöllisesti), aaltorintama määritellään k:ta vastaan kohtisuoraksi vakiovaihetasoksi ja vp=ω/k johdetaan vaiheen kokonaisdifferentiaalista.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.7_001"
       }
     ],
     "3.1": [
@@ -331,6 +643,28 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.1_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa mielivaltaisen etenevän häiriön ψ(z,t) = f(z − vt) kuvauksesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Funktion argumentin siirtäminen määrällä z0 = vt saa sen etenemään +z-suuntaan muotoaan muuttamatta",
+          "Häiriön funktiomuoto riippuu vain yhdistelmästä z − vt (+z-suuntaisessa etenemisessä)",
+          "Tämä kuvaus edellyttää, että häiriö värähtelee yhdellä kiinteällä taajuudella",
+          "Nopeuden v on oltava positiivinen, jotta eteneminen tapahtuu +z-suuntaan",
+          "Tuloksena saatava aaltoyhtälö riippuu siitä, mikä koordinaattiakseli valitaan ‘z’-akseliksi"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Muotoa f(z-vt) oleva häiriö siirtyy jäykästi +z-suuntaan, kun z0=vt kasvaa, ja +z-suuntaiselle etenemiselle v>0; kuvaus toimii MILLE TAHANSA funktiolle f, ei vain yhdellä taajuudella värähtelevälle, ja saatu (toisen kertaluvun) aaltoyhtälö on koordinaatistosta riippumaton.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.1_001"
       }
     ],
     "3.3": [
@@ -355,6 +689,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.3_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista harmonisen aallon relaatioista pitävät paikkansa tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Jaksonaika ja nopeus liittyvät toisiinsa yhtälöllä τ = λ/v",
+          "Taajuus on ν = 1/τ = v/λ",
+          "Kulmataajuus on ω = 2πν",
+          "Nopeus on v = λ/ν",
+          "Alkuvaihe ε voidaan ottaa mukaan, jolloin ψ(z,t) = A sin(kz − ωt + ε)"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Muistiinpanoissa johdetaan τ=λ/v, ν=1/τ=v/λ ja ω=2πν, ja aalto yleistetään alkuvaiheella ε; nopeus on v=λν, ei λ/ν.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.3_001"
       }
     ],
     "3.4": [
@@ -379,6 +736,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.4_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa harmonisen aallon vaihenopeudesta vp tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Vaihenopeus saadaan vaatimalla, että vaiheen φ(z,t) kokonaisaikaderivaatta on nolla",
+          "Kun φ = kz − ωt + ε, tästä saadaan vaihenopeus vp = ω/k",
+          "Vaihenopeus kuvaa mielivaltaisen, monista eri taajuisista harmonisista aalloista koostuvan häiriön nopeutta",
+          "Mielivaltainen (ei-harmoninen) häiriö voi edetä eri nopeudella, jota kutsutaan ryhmänopeudeksi",
+          "Aallon vaihe φ riippuu ajasta sekä eksplisiittisesti että implisiittisesti (z(t):n kautta)"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Ehdosta dφ/dt=0 (vakiovaihe) saadaan vp=ω/k; tämä on nimenomaan yksittäisen harmonisen aallon pisteen nopeus, kun taas monen harmonisen aallon superpositio etenee yleensä ryhmänopeudella, ja φ(z(t),t) riippuu t:stä sekä suoraan että z(t):n kautta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.4_001"
       }
     ],
     "3.5": [
@@ -403,6 +783,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.5_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista ovat oikeita seurauksia aaltoyhtälön lineaarisuudesta tässä osiossa käsitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Aaltoyhtälön kaksi ratkaisua ψ1 ja ψ2 voidaan yhdistää muotoon αψ1 + βψ2, ja tulos toteuttaa myös aaltoyhtälön",
+          "Lineaarisessa systeemissä valo ei vuorovaikuta valon kanssa",
+          "Aallot etenevät toisistaan riippumatta ja säilyttävät omat ominaisuutensa myös superponoituessaan",
+          "Superpositio pätee vain, kun kahdella aallolla on yhtä suuri amplitudi",
+          "Kaksi aaltoa, joiden välinen vaihe-ero on 0° (samassa vaiheessa), interferoivat konstruktiivisesti"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Aaltoyhtälön lineaarisuus tarkoittaa, että mikä tahansa yhdistelmä αψ1+βψ2 on myös ratkaisu, aallot eivät vuorovaikuta keskenään ja kukin säilyttää ominaisuutensa; superpositio toimii kaikilla amplitudeilla, ja samassa vaiheessa olevat aallot summautuvat konstruktiivisesti.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.5_001"
       }
     ],
     "3.6": [
@@ -427,6 +830,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.6_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa aaltojen esittämisestä kompleksilukujen avulla tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kompleksiluku z = x + iy voidaan kirjoittaa napamuodossa z = re^(iθ) Eulerin kaavan avulla",
+          "z:n itseisarvon neliö on z·z* = x² + y²",
+          "Kahden napamuotoisen kompleksiluvun tulo laskee yhteen niiden vaihekulmat",
+          "z:n reaaliosa saadaan lausekkeesta Re(z) = (z + z*)/2",
+          "Harmoninen aalto A cos(kz − ωt + ε) on kompleksieksponentin A e^{i(kz−ωt+ε)} imaginaariosa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "z=re^{iθ}, |z|²=zz*=x²+y², napamuotoisten lukujen tulo laskee yhteen vaiheet ja Re(z)=(z+z*)/2 ovat kaikki oikein; kosiniaalto on kompleksieksponentin REAALIOSA (ei imaginaariosa).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.6_001"
       }
     ],
     "3.8": [
@@ -450,6 +876,28 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.8_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa aaltoyhtälön yleistämisestä kolmeen ulottuvuuteen tässä osiossa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kolmiulotteinen aaltoyhtälö voidaan kirjoittaa tiiviisti muotoon ∇²ψ = (1/v²)∂²ψ/∂t² Laplacen operaattorin avulla",
+          "Kun aaltoyhtälö kirjoitetaan ∇²:n avulla, se on koordinaatistosta riippumaton, joten se voidaan muuntaa muihin koordinaatistoihin",
+          "Aaltovektorin karteesiset komponentit toteuttavat ehdon kx² + ky² + kz² = k²",
+          "Gradienttioperaattori ∇ on itse toisen kertaluvun differentiaalioperaattori",
+          "Tässä osiossa työskennellään vain pallokoordinaatistossa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Aaltoyhtälön Laplacen operaattorimuoto on koordinaatistosta riippumaton, ja k²=kx²+ky²+kz² pätee konstruktion mukaan; gradientti ∇ on ensimmäisen kertaluvun operaattori (Laplacen operaattori ∇² on toisen kertaluvun), ja muistiinpanoissa nimenomaan suositaan karteesisia koordinaatteja yleensä älykkäimpänä valintana.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.8_001"
       }
     ],
     "3.9": [
@@ -474,6 +922,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.9_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa pallo- ja sylinteriaalloista tässä osiossa kuvatulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Palloaallon amplitudi pienenee kuten 1/r etäisyyden lähteestä kasvaessa",
+          "Palloaallon aaltorintamat ovat origokeskisiä palloja",
+          "Palloaallon eksponentin (+)-merkki vastaa ulospäin etenevää / hajaantuvaa aaltoa",
+          "Sylinteriaallon amplitudi pienenee kaukana z-akselista kuten 1/ρ",
+          "Sekä pallo- että sylinteriaallot muistuttavat tasoaaltoja kaukana lähteestään"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Palloaallon amplitudi pienenee kuten 1/r, sen aaltorintamat ovat origokeskisiä palloja ja ulospäin etenevä aalto vastaa (+)-merkintää; sylinteriaallon amplitudi pienenee kuten 1/√ρ eikä 1/ρ, ja molemmat aaltotyypit näyttävät paikallisesti tasomaisilta kaukana lähteestään.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.9_001"
       }
     ],
     "3.10": [
@@ -498,6 +969,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.10_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa valon polarisaatiosta tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Polarisaatiovektori kuvaa suuntaa, jossa E-kenttä värähtelee",
+          "Lineaarisessa polarisaatiossa kentän komponentit Ex ja Ey voidaan molemmat kirjoittaa reaalisina",
+          "Ympyräpolarisaatiossa kentän komponenttien Ex ja Ey välillä on ±π/2:n vaihe-ero",
+          "Elliptinen polarisaatio esiintyy vain, kun Ex:llä ja Ey:llä on täsmälleen yhtä suuri suuruus",
+          "Elliptinen polarisaatio on yleisin polarisaatiotila, jossa suhde Ex/Ey on mielivaltainen kompleksiluku"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Polarisaatio seuraa E-kentän värähtelysuuntaa; lineaarisessa polarisaatiossa Ex ja Ey ovat reaalisia, ympyräpolarisaatiossa niiden välillä on ±π/2:n vaihe-ero, ja elliptinen polarisaatio on täysin yleinen tapaus, jossa suhde Ex/Ey on mielivaltainen kompleksiluku — ei sellainen, joka vaatisi yhtä suuret suuruudet.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.10_001"
       }
     ],
     "3.11": [
@@ -522,6 +1016,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.11_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista tässä osiossa esitellyistä vektorianalyysin identiteeteistä pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Gradientin roottori on aina nollavektori: ∇ × (∇φ) = 0",
+          "Roottorin divergenssi on aina nolla: ∇ · (∇ × E) = 0",
+          "Lagrangen kaavan mukaan ∇ × ∇ × E = ∇(∇·E) − ∇²E",
+          "Kahden vektorin pistetulo on itse vektorisuure",
+          "Levi-Civitan symbolia käytetään ristitulon kirjoittamiseen tiiviisti indeksimerkinnöin"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Gradientin roottori ja roottorin divergenssi häviävät kumpikin identtisesti, Lagrangen kaava antaa vektorin Laplacen operaattorin identiteetin, ja Levi-Civitan symboli ε^{ijk} koodaa ristitulon indeksimuotoon; pistetulo itse on skalaari, ei vektori.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.11_001"
       }
     ],
     "3.12": [
@@ -546,6 +1063,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q3.12_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tässä osiossa esitellystä sähköstaattisesta approksimaatiosta? (Valitse kaikki oikeat)",
+        "options": [
+          "Gaussin laki differentiaalimuodossa on ∇·E = ρ/ε0",
+          "Sähköstaattinen kenttä voidaan kirjoittaa muodossa E = −∇φ, missä φ toteuttaa Poissonin yhtälön",
+          "Poissonin yhtälön ratkaisut toteuttavat myös aaltoyhtälön, joten puhtaasti sähköstaattinen kenttä voi edetä valona",
+          "Paikallaan olevilla varauksilla E-kenttä on pyörteetön (roottorivapaa)",
+          "Helmholtzin hajotelma jakaa vektorikentän pyörteettömään ja lähteettömään (solenoidaaliseen) osaan"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Gaussin laki ∇·E=ρ/ε0, potentiaaliyhteys E=−∇φ Poissonin yhtälön Δφ=−ρ/ε0 kanssa ja paikallaan olevien varausten roottorivapaa E-kenttä ovat kaikki oikein, samoin Helmholtzin hajotelma; Poissonin yhtälön ratkaisut EIVÄT toteuta aaltoyhtälöä, joten sähköstaattiset kentät eivät etene valona.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.12_001"
       }
     ]
   },
@@ -572,6 +1112,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q4.1_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista väittämistä tyhjiön Maxwellin yhtälöistä ja niistä johdetusta sähkömagneettisesta aaltoyhtälöstä pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Tyhjiössä oletetaan ρ = 0 ja J = 0",
+          "Sekä E että B toteuttavat saman muotoisen aaltoyhtälön",
+          "Valon nopeus on c0 = 1/√(μ0ε0)",
+          "c0 riippuu ympäröivän aineen taitekertoimesta",
+          "B:n aaltoyhtälö johdetaan ottamalla Ampèren lain roottori ja soveltamalla Lagrangen vektori-identiteettiä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Tyhjiössä ρ=0 ja J=0; sekä ∇²E että ∇²B palautuvat samaan aaltoyhtälöön, jonka nopeus on c0=1/√(μ0ε0), roottorin ja Lagrangen kaavan avulla johdettuna. c0 on tyhjiön luonnonvakio, joka ei riipu mistään väliaineesta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.1_001"
       }
     ],
     "4.2": [
@@ -598,6 +1161,29 @@
         "lang": "en"
       },
       {
+        "id": "q4.2_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tyhjiössä Maxwellin yhtälöistä johdetuista sähkömagneettisen tasoaallon ominaisuuksista? (Valitse kaikki oikeat)",
+        "options": [
+          "Tasoaallon E-kenttä tyhjiössä on poikittainen etenemissuuntaan k nähden",
+          "Tasoaallon B-kenttä tyhjiössä on myös poikittainen k:hon nähden",
+          "Vektorit k, E ja B ovat keskenään kohtisuorassa",
+          "E- ja B-kentät värähtelevät 90° vaihe-erolla toisiinsa nähden",
+          "|B| = |E|/c tasoaallolle tyhjiössä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "∇·E=0 ja ∇·B=0 tekevät molemmista kentistä poikittaisia k:hon nähden, ja Maxwellin–Faradayn yhtälö osoittaa, että k, E ja B ovat keskenään kohtisuorassa ja että E ja B värähtelevät SAMASSA vaiheessa (eivät 90° vaihe-erolla), ja |B|=|E|/c.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.2_001"
+      },
+      {
         "id": "q4.2_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the conservation of electric charge, as derived from Maxwell's equations in this section? (Select all that apply)",
@@ -617,6 +1203,28 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q4.2_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa sähkövarauksen säilymisestä, sellaisena kuin se tässä osiossa johdetaan Maxwellin yhtälöistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Varauksen säilyminen seuraa ottamalla Ampèren kiertolain molempien puolten divergenssi",
+          "Jatkuvuusyhtälö on ∇·J + ∂ρ/∂t = 0",
+          "Varauksen säilyminen on oletettava erikseen; se ei seuraa Maxwellin yhtälöistä",
+          "Identiteettiä ‘roottorin divergenssi on nolla’ käytetään varauksen säilymisen johtamisessa",
+          "Varauksen säilyminen tarkoittaa, että virrantiheys J ja varaustiheys ρ ovat aina molemmat täsmälleen nolla"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Kun otetaan Ampèren lain divergenssi ja käytetään identiteettiä ‘roottorin divergenssi = 0’ sekä Gaussin lakia, saadaan suoraan jatkuvuusyhtälö ∇·J+∂ρ/∂t=0 — varauksen säilyminen on suora seuraus Maxwellin yhtälöistä, ei erillinen oletus, ja se rajoittaa sitä, miten J ja ρ muuttuvat yhdessä, sen sijaan että pakottaisi ne nollaksi.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.2_002"
       }
     ],
     "4.3": [
@@ -643,6 +1251,29 @@
         "lang": "en"
       },
       {
+        "id": "q4.3_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa sähkömagneettisen aallon kuljettamasta energiasta tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Sähkökentän energiatiheys on uE = (ε0/2)E²",
+          "Magneettikentän energiatiheys on uB = B²/(2μ0)",
+          "Tyhjiössä etenevälle sähkömagneettiselle aallolle uE ja uB ovat yhtä suuret",
+          "Kokonaisenergiatiheys on u = uE + uB = ε0E²",
+          "Magneettikenttä kuljettaa käytännössä kaiken sähkömagneettisen aallon energian, kun taas sähkökenttä kuljettaa lähes ei mitään"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "uE=(ε0/2)E² ja uB=B²/(2μ0) osoitetaan yhtä suuriksi etenevälle sähkömagneettiselle aallolle (käyttäen B=E/c), jolloin kokonaisenergiatiheys on u=ε0E² — energia jakautuu tasan kenttien kesken, eikä keskity pääosin magneettikenttään.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.3_001"
+      },
+      {
         "id": "q4.3_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the Poynting vector and irradiance, as derived in this section? (Select all that apply)",
@@ -663,6 +1294,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q4.3_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Poyntingin vektorista ja irradianssista tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Poyntingin vektori on S = c²ε0 (E × B)",
+          "Irradianssi on Poyntingin vektorin itseisarvon aikakeskiarvo",
+          "Ajan suhteen harmoniselle aallolle cos(ωt):n aikakeskiarvo on nolla, kun taas cos²(ωt):n aikakeskiarvo on 1/2",
+          "Irradianssi voidaan laskea suoraan kentän amplitudista kaavalla I = (1/2)cε0|E0|²",
+          "Poyntingin vektori värähtelee niin hitaasti, että valodetektorit voivat seurata sitä suoraan reaaliajassa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "S=c²ε0(E×B), ja irradianssi on sen aikakeskiarvoistettu itseisarvo; <cosωt>=0 ja <cos²ωt>=1/2 antavat I=(1/2)cε0|E0|². Poyntingin vektori värähtelee itse asiassa optisilla taajuuksilla (~10¹⁵ Hz), aivan liian nopeasti valodetektoreille (~10¹⁰ Hz) seurattavaksi suoraan — ne mittaavat vain aikakeskiarvon.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.3_002"
       }
     ],
     "4.4": [
@@ -689,6 +1343,29 @@
         "lang": "en"
       },
       {
+        "id": "q4.4_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa säteilypaineesta tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Säteilypaine on yhtä suuri kuin kentän energiatiheys: P = u = S/c",
+          "Aikakeskiarvoistettu säteilypaine on <P>_T = I/c",
+          "Sähkömagneettinen aalto kuljettaa liikemäärää, jonka liikemäärätiheys on pV = I/c²",
+          "Säteilypaine ei riipu kentän irradianssista",
+          "Ajatuksen siitä, että valo aiheuttaa säteilypainetta, ennusti jo Maxwell"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Säteilypaine P=u=S/c, aikakeskiarvoistettuna I/c, ja liikemäärätiheys pV=I/c², jonka Maxwell ennusti — ja määritelmän mukaan se riippuu suoraan irradianssista, ei siitä riippumatta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.4_001"
+      },
+      {
         "id": "q4.4_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about how the momentum density of light was derived in this section? (Select all that apply)",
@@ -709,6 +1386,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q4.4_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa siitä, miten valon liikemäärätiheys johdettiin tässä osiossa? (Valitse kaikki oikeat)",
+        "options": [
+          "Johdon lähtökohtana on klassisen mekaniikan yhtälö F = ma = ∂p/∂t",
+          "Johdossa oletettiin täysin absorboiva kappale",
+          "Johdossa yhdistetään paineen määritelmä P = F/A säteilypaineen tulokseen <P>_T = I/c",
+          "Johto osoittaa, että liikemäärätiheys ei riipu irradianssista I",
+          "Lopputuloksena saadaan pV = I/c²"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Johdossa käytetään yhtälöä F=ma=∂p/∂t täysin absorboivalle kappaleelle, yhdistetään P=F/A tulokseen <P>_T=I/c ja päädytään liikemäärätiheyteen pV=I/c² — joka nimenomaisesti riippuu I:stä eikä ole siitä riippumaton.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.4_002"
       }
     ],
     "4.5": [
@@ -735,6 +1435,29 @@
         "lang": "en"
       },
       {
+        "id": "q4.5_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa sähkömagneettisen säteilyn syntymisestä tässä osiossa kuvatulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kiihtyvät (esim. värähtelevät) sähkövaraukset synnyttävät sähkömagneettista säteilyä",
+          "Ajasta riippuva virrantiheys toimii lähdetermina aaltoyhtälössä",
+          "Näkyvillä aallonpituuksilla tärkein säteilylähde on tyypillisesti sähköinen dipolisäteilijä",
+          "Säteilylähteitä on vain radiotaajuuksilla, ei koskaan näkyvillä aallonpituuksilla",
+          "Dipolimomentti määritellään p = qd, missä q on varaus ja d on varausten välinen erotusvektori"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Kiihtyvät varaukset ja ajasta riippuvat virrantiheydet toimivat säteilyn lähteinä; näkyvillä aallonpituuksilla dipolisäteilijät (fluoresoivat molekyylit, atomit, kvanttipisteet) ovat hallitsevia, ja dipolimomentti on p=qd — säteilylähteitä on koko spektrin alueella, ei vain radiotaajuuksilla.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.5_001"
+      },
+      {
         "id": "q4.5_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the far-field radiation of an oscillating electric dipole, as derived in this section? (Select all that apply)",
@@ -755,6 +1478,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q4.5_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa värähtelevän sähköisen dipolin kaukokenttäsäteilystä tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kaukokenttä (säteilyalue) on yksinkertaisempi kuvata kuin lähikenttä",
+          "Dipolin irradianssijakauma on verrannollinen lausekkeeseen sin²θ/r², missä θ mitataan dipolimomentista",
+          "Säteily on voimakkainta dipolimomenttia vastaan kohtisuorissa suunnissa",
+          "Irradianssi ei riipu värähtelytaajuudesta ω",
+          "Lyhyemmät aallonpituudet sirottuvat voimakkaammin dipolisäteilyn ω⁴-riippuvuuden vuoksi"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Kaukokenttä on yksinkertaisempi alue, jossa irradianssi I(r,θ) ∝ sin²θ/r² saavuttaa maksiminsa dipolimomenttia vastaan kohtisuorassa suunnassa; tulos riippuu ω⁴:stä, joten lyhyemmät aallonpituudet (suurempi ω) sirottuvat voimakkaammin — irradianssi riippuu ehdottomasti taajuudesta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.5_002"
       }
     ],
     "4.6": [
@@ -781,6 +1527,29 @@
         "lang": "en"
       },
       {
+        "id": "q4.6_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa aineen Maxwellin yhtälöistä (makroskooppiset Maxwellin yhtälöt) tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Sähkövuon tiheys (sähköinen siirtymä) määritellään D = ε0E + P",
+          "Magneettikentän voimakkuus määritellään H = B/μ0 − M",
+          "Vapaat varaukset ja sidotut varaukset muodostavat yhdessä kokonaisvaraustiheyden",
+          "Makroskooppisia Maxwellin yhtälöitä tarvitaan, koska ~10²³ atomin käsitteleminen yksitellen on epäkäytännöllistä",
+          "Useimmilla optisilla materiaaleilla on voimakkaat, merkittävät magneettiset ominaisuudet, jotka on aina otettava huomioon"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "D=ε0E+P ja H=B/μ0−M ovat apukenttien määritelmät, ja kokonaisvaraus = vapaa + sidottu varaus; makroskooppiset Maxwellin yhtälöt ovat olemassa nimenomaan siksi, että ~10²³ atomin monihiukkaskäsittely on mahdoton. Useimpien materiaalien magneettiset ominaisuudet ovat optisilla taajuuksilla mitättömiä, eivät voimakkaita.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.6_001"
+      },
+      {
         "id": "q4.6_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the refractive index n, as introduced from Maxwell's equations in a medium? (Select all that apply)",
@@ -801,6 +1570,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q4.6_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa taitekertoimesta n, sellaisena kuin se esitellään Maxwellin yhtälöistä aineessa? (Valitse kaikki oikeat)",
+        "options": [
+          "Taitekerroin määritellään n = c/v, missä v on valon nopeus aineessa",
+          "Approksimatiivisesti n ≈ √(ε/ε0), kun magneettiset vaikutukset jätetään huomiotta",
+          "Valon aallonpituus aineessa on λ = λ0/n",
+          "Valon taajuus muuttuu, kun se siirtyy aineeseen, jolla on eri taitekerroin",
+          "Taitekerroin riippuu yleensä aallonpituudesta, ilmiö jota kutsutaan materiaalidispersioksi"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "n=c/v ≈ √(ε/ε0), kun magneettiset vaikutukset ovat mitättömiä, ja λ=λ0/n aineessa; muistiinpanoissa todetaan nimenomaisesti, että värähtelytaajuus ω (tai ν) EI muutu valon siirtyessä aineeseen — vain aallonpituus ja aaltovektori muuttuvat — ja n(λ)-riippuvuutta kutsutaan materiaalidispersioksi.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.6_002"
       }
     ]
   },
@@ -829,6 +1621,29 @@
         "lang": "en"
       },
       {
+        "id": "q5.3_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa atomin Lorentzin mallista? (Valitse kaikki oikeat)",
+        "options": [
+          "Elektronin mallinnetaan olevan kiinnittynyt atomiytimeen harmonisella jousella",
+          "Malli toimii erityisen hyvin dielektrisille materiaaleille",
+          "Malli toimii hyvin metalleille",
+          "Resonanssitaajuus on ω0 = (k/m)^(1/2)",
+          "Johdetun taitekertoimen imaginaariosa vastaa absorptiota"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Muistiinpanoissa kuvataan harmonisen jousen elektronimalli, sen resonanssitaajuus ω0=(k/m)^(1/2), sen hyvä sopivuus dielektrisille aineille ja se, että Im(n) vastaa absorptiota. Malli toimii huonosti metalleille (niille käytetään Druden mallia).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.3_001"
+      },
+      {
         "id": "q5.3_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the generalized (damped, multi-resonance) Lorentz oscillator model of a dielectric material? (Select all that apply)",
@@ -849,6 +1664,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q5.3_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa dielektrisen materiaalin yleistetystä (vaimennetusta, monen resonanssin) Lorentzin oskillaattorimallista? (Valitse kaikki oikeat)",
+        "options": [
+          "Vaimennustermin lisääminen elektronin liikeyhtälöön tuo taitekertoimeen imaginaariosan",
+          "Yleistetty monen resonanssin malli antaa n²(ω) = 1 + (Nq²/ε0m) Σ_j f_j/(ω₀,j² − ω² − iγ_jω)",
+          "Tämä monen resonanssin kaava tunnetaan Helmholtzin–Ketterlerin yhtälönä",
+          "Resonanssitaajuuden lähellä taitekerroin osoittaa anomaalista dispersiota (nousee ja laskee)",
+          "Kaukana kaikista resonansseista (esim. näkyvä valo tyypillisissä dielektrisissä aineissa) dispersio on anomaalista eikä normaalia"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Vaimennustermi tuo mukaan Im(n)≠0 (absorptio), monen resonanssin kaava on Helmholtzin–Ketterlerin yhtälö, ja anomaalinen dispersio esiintyy resonanssien lähellä; kaukana resonansseista (dielektrisillä aineilla tavallinen näkyvän valon tapaus) dispersio on normaalia, ei anomaalista.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.3_002"
       }
     ],
     "5.1": [
@@ -875,6 +1713,29 @@
         "lang": "en"
       },
       {
+        "id": "q5.1_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tässä osiossa esitellystä valon ja aineen vuorovaikutuksen elektronitilakuvasta? (Valitse kaikki oikeat)",
+        "options": [
+          "|g⟩ tarkoittaa elektronin perustilaa",
+          "Kahden elektronitilan energiaero on ΔE = hν_ig = ħω_ig",
+          "Kiinteän aineen elektroninen vyörakenne syntyy sen atomirakenteesta",
+          "Tällä kurssilla tarkastellaan aina vain kahta elektronitilaa — perustilaa ja yhtä viritystilaa",
+          "Resonanssitaajuus ω_ig vastaa tilojen i ja g välistä energia-aukkoa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Perustila |g⟩, energiaero ΔE=hν_ig=ħω_ig ja atomirakenteesta syntyvä vyörakenne ovat kaikki oikein; muistiinpanoissa esitellään nimenomaisesti useita viritystiloja |1⟩, |2⟩, ei vain yhtä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.1_001"
+      },
+      {
         "id": "q5.1_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the dynamic, statistical behavior of electrons in matter, as introduced in this section? (Select all that apply)",
@@ -897,6 +1758,29 @@
         "lang": "en"
       },
       {
+        "id": "q5.1_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa elektronien dynaamisesta, tilastollisesta käyttäytymisestä aineessa tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Systeemin kokonaisenergia pyrkii minimoitumaan ja sen entropia maksimoitumaan",
+          "Nollasta poikkeava lämpötila vaikuttaa elektronipopulaatioon, esim. k_BT ≈ 26 meV lämpötilassa 300 K",
+          "Koska mukana on paljon elektroneja, käsittelyn on oltava tilastollinen",
+          "Viritystilat eivät koskaan relaksoidu takaisin alemman energian tiloihin",
+          "Viritystilan elinaika τ kuvaa, kuinka nopeasti se tyypillisesti relaksoituu"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Energian minimointi ja entropian maksimointi, lämpövaikutukset (k_BT≈26 meV lämpötilassa 300 K), tilastollisen käsittelyn tarve suurella elektronimäärällä ja relaksaatiota kuvaavat elinajat τ ovat kaikki oikein; viritystilat KYLLÄ relaksoituvat ajan myötä alempiin tiloihin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.1_002"
+      },
+      {
         "id": "q5.1_003",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the lifetimes and relaxation dynamics introduced in this section? (Select all that apply)",
@@ -916,6 +1800,28 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q5.1_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tässä osiossa esitellyistä elinajoista ja relaksaatiodynamiikasta? (Valitse kaikki oikeat)",
+        "options": [
+          "Viritystilat pyrkivät relaksoitumaan ajan myötä kohti alemman energian tiloja",
+          "Tässä käsitellyn viritystilan elinaika τ on suuruusluokkaa ~10 ns",
+          "Relaksaatiodynamiikka on täysin riippumaton systeemin lämpötilasta",
+          "Elektronitilojen välinen energiaero määrää suoraan resonanssitaajuuden ω_ig",
+          "Suurempi elektronimäärä poistaa tarpeen tilastolliselle käsittelylle"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Tilat relaksoituvat kohti alempaa energiaa ~10 ns elinajalla τ, ja energiaero määrää suoraan ω_ig:n; lämpötila vaikuttaa relaksaatiodynamiikkaan ehdottomasti, ja LISÄÄ elektroneja tekee tilastollisesta käsittelystä tarpeellisemman, ei vähemmän tarpeellista.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.1_003"
       }
     ],
     "5.2": [
@@ -942,6 +1848,29 @@
         "lang": "en"
       },
       {
+        "id": "q5.2_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa absorptio- ja relaksaatioprosesseista tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Fotoni voi absorboitua, kun sen taajuus ω on lähellä materiaalin resonanssitaajuutta ω_ig, jolloin elektroni siirtyy viritystilaan",
+          "Jos relaksaatio tapahtuu yhden prosessin kautta fotonin emittoituessa, sitä kutsutaan säteileväksi prosessiksi",
+          "Jos relaksaatio tapahtuu usean prosessin kautta ilman fotonin emissiota, sitä kutsutaan säteilemättömäksi prosessiksi",
+          "Säteilemätön relaksaatio synnyttää tyypillisesti fononeja ja lämmittää materiaalia",
+          "Absorptiotodennäköisyys on täysin riippumaton siitä, kuinka lähellä fotonin taajuus on resonanssitaajuutta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Resonanttinen absorptio, yhden prosessin säteilevä relaksaatio (fotoni emittoituu) ja usean prosessin säteilemätön relaksaatio (fononit, lämpeneminen) on kaikki kuvattu oikein; absorptio riippuu nimenomaisesti resonanssista eikä ole taajuudesta riippumaton.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.2_001"
+      },
+      {
         "id": "q5.2_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about spontaneous emission, as described in this section? (Select all that apply)",
@@ -962,6 +1891,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q5.2_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa spontaanista emissiosta tässä osiossa kuvatulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Spontaanissa emissiossa elektroni relaksoituu perustilaan ja emittoi spontaanisti fotonin",
+          "Emissio tapahtuu tyypillisesti aallonpituutta paljon pienemmästä tilavuudesta, joten sitä voidaan mallintaa dipolilähteenä",
+          "Spontaanisti emittoituneiden fotonien alkuvaihe on satunnainen",
+          "Spontaani emissio vaatii tulevan fotonin laukaisemaan sen",
+          "Spontaani emissio on tilastollinen (todennäköisyyspohjainen) prosessi"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Spontaani emissio on satunnainen, dipolimainen, tilastollinen prosessi, jossa alkuvaihe on satunnainen relaksaatiossa perustilaan; se EI nimenomaisesti vaadi laukaisevaa fotonia — se on stimuloitua emissiota.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.2_002"
       },
       {
         "id": "q5.2_003",
@@ -986,6 +1938,29 @@
         "lang": "en"
       },
       {
+        "id": "q5.2_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa stimuloidusta emissiosta tässä osiossa kuvatulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Stimuloidun emission laukaisee tuleva fotoni, joka vuorovaikuttaa jo virittyneen elektronin kanssa",
+          "Stimuloidussa emissiossa syntyvillä fotoneilla on sama aaltovektori, vaihe ja polarisaatio kuin laukaisevalla fotonilla",
+          "Stimuloitu emissio mahdollistaa valon vahvistamisen",
+          "Stimuloitu emissio on puhtaasti satunnainen, korreloimaton prosessi aivan kuten spontaani emissio",
+          "Stimuloitu emissio tapahtuu, kun tulevan fotonin taajuus on lähellä materiaalin transitiotaajuutta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Stimuloidun emission laukaisee resonanttinen tuleva fotoni, ja se tuottaa fotoneja, jotka ovat korreloituneita sen kanssa aaltovektorin, vaiheen ja polarisaation suhteen, mikä mahdollistaa vahvistamisen — täysin päinvastoin kuin spontaanin emission korreloimaton, satunnainen luonne.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.2_003"
+      },
+      {
         "id": "q5.2_004",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about light scattering far from resonance, as described in this section? (Select all that apply)",
@@ -1006,6 +1981,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q5.2_004_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa valon sironnasta kaukana resonanssista tässä osiossa kuvatulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kun fotonin taajuus on kaukana kaikista aineen resonanssitaajuuksista, fotoni sirontuu absorboitumisen sijaan",
+          "Sironta siirtää elektronin pois tasapainosta, mikä luo dipolimomentin ja siten materiaalin polarisaation",
+          "Tulevan ja sironneen fotonin vaiheet pysyvät korreloituneina sironnan aikana",
+          "Fotonien välinen vaihekorrelaatio säilyy absorptiossa ja spontaanissa emissiossa",
+          "Vaihekorrelaatio säilyy stimuloidussa emissiossa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Resonanssin ulkopuolinen sironta (absorption sijaan), siitä seuraava indusoitu polarisaatio sekä vaihekorrelaatio sironnassa ja stimuloidussa emissiossa on kaikki kuvattu oikein; muistiinpanoissa todetaan nimenomaisesti, että vaihekorrelaatio MENETETÄÄN (ei säily) absorptiossa ja spontaanissa emissiossa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.2_004"
       }
     ],
     "5.4": [
@@ -1032,6 +2030,29 @@
         "lang": "en"
       },
       {
+        "id": "q5.4_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa miehitystiheyksistä ja termisestä tasapainosta tässä laserin toimintaperiaatteita käsittelevässä osiossa? (Valitse kaikki oikeat)",
+        "options": [
+          "Termisessä tasapainossa miehitystiheydet noudattavat Boltzmannin jakaumaa N2/N1 = e^{-hν0/k_BT}",
+          "Huoneenlämpötilassa k_BT on paljon pienempi kuin tyypilliset elektronien virityksen energiat",
+          "Koska k_BT on pieni virityksen energioihin verrattuna, valtaosa elektroneista on perustilassa",
+          "Näissä termisen tasapainon olosuhteissa stimuloitu emissio on todennäköisempi kuin absorptio",
+          "Absorptio on todennäköisin prosessi termisessä tasapainossa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Boltzmannin jakauma, pieni k_BT virityksen energioihin verrattuna (26 meV vs. 1,6–3,2 eV) ja siitä seuraava perustilan hallitsema miehitys johtavat kaikki siihen, että absorptio — ei stimuloitu emissio — on hallitseva prosessi termisessä tasapainossa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.4_001"
+      },
+      {
         "id": "q5.4_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about achieving laser action, as described in this section? (Select all that apply)",
@@ -1052,6 +2073,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q5.4_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa laserin toiminnan aikaansaamisesta tässä osiossa kuvatulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Inversio (populaatioinversio) tarkoittaa, että ylemmän energiatilan miehitys N2 on suurempi kuin alemman tilan N1",
+          "Termisen tasapainon rikkominen pumppaamalla (optisesti, sähköisesti tai termisesti) on välttämätöntä inversion aikaansaamiseksi",
+          "Optinen vahvistin (vahvistinaine, jossa on inversio) on jo sellaisenaan täydellinen laser",
+          "Laserin toimintaan tarvitaan vahvistinaineen lisäksi takaisinkytkentämekanismi, kuten peilien muodostama optinen resonaattori",
+          "Laserresonaattorissa tehokkaasti vahvistuu vain valo, joka värähtelee resonaattorin resonanssitaajuuksilla"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Inversio (N2>N1), pumppaus tasapainon rikkomiseksi ja tiettyjä resonanssitaajuuksia valitseva resonaattori/takaisinkytkentämekanismi ovat kaikki välttämättömiä; optisen vahvistimen todetaan nimenomaisesti olevan vielä ei laser — takaisinkytkentä tarvitaan lisäksi.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.4_002"
       }
     ]
   },
@@ -1078,6 +2122,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q6.6_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kokonaisheijastuksesta (TIR)? (Valitse kaikki oikeat)",
+        "options": [
+          "Kokonaisheijastus voi tapahtua, kun valo kulkee optisesti tiheämmästä aineesta kohti harvempaa yli kriittisen kulman",
+          "Kriittinen kulma toteuttaa ehdon sinθc = nt/ni",
+          "Fresnelin läpäisykertoimet ovat täsmälleen nolla kokonaisheijastuksen aikana",
+          "Kokonaisheijastuksessa rajapinnan takana on evanescentti kenttä, joka vaimenee eksponentiaalisesti rajapinnasta poispäin",
+          "Kokonaisheijastusta hyödynnetään optisissa kuiduissa, aaltoputkissa ja heijastavissa prismoissa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Kokonaisheijastus tapahtuu kriittisen kulman sinθc=nt/ni jälkeen siirryttäessä tiheämmästä harvempaan aineeseen; muistiinpanoissa todetaan nimenomaisesti, että kokonaisheijastus EI tarkoita läpäisykertoimien häviämistä — sen sijaan muodostuu eksponentiaalisesti vaimeneva evanescentti pintakenttä. Kokonaisheijastusta käytetään kuiduissa, aaltoputkissa, prismoissa ja Fresnelin romboedreissä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.6_001"
       }
     ],
     "6.1": [
@@ -1102,6 +2169,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q6.1_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa luvun alussa esitellyistä kahdesta valon etenemisen käsittelytavasta (säteet ja aaltorintamat)? (Valitse kaikki oikeat)",
+        "options": [
+          "Säde kuvaa suuntaa, johon valon energia etenee",
+          "Säde on kohtisuorassa aaltorintamaa vastaan",
+          "Aaltorintama on pinta, jolla aallon vaihe on vakio",
+          "Aaltorintama etenee nopeudella c/n",
+          "Aaltovektori k on yhdensuuntainen paikallisen aaltorintamapinnan kanssa, ei kohtisuorassa sitä vastaan"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Säteet seuraavat energian kulkua ja ovat kohtisuorassa aaltorintamiin nähden, jotka ovat vakiovaihepintoja ja etenevät nopeudella c/n; aaltovektori k on kohtisuorassa paikalliseen aaltorintamaan nähden, ei sen suuntainen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.1_001"
       }
     ],
     "6.2": [
@@ -1127,6 +2217,28 @@
         "lang": "en"
       },
       {
+        "id": "q6.2_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa taitekertoimen kuvaamisesta eri skaaloilla tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Atomitasolla (mikroskooppisesti) valon ja aineen vuorovaikutus kuvataan atomin dipolimomentin p = ε0αE avulla",
+          "Makroskooppisella tasolla valon ja aineen vuorovaikutus kuvataan materiaalin polarisaation P = ε0χE avulla",
+          "Taitekerroin n voidaan määritellä ilman mitään viittausta polarisoituvuuteen α tai suskeptibiliteettiin χ",
+          "Taitekerroin on makroskooppinen parametri, joka tiivistää suurimman osan siitä, mitä tarvitaan valon etenemisen kuvaamiseen aineessa",
+          "Mikroskooppinen ja makroskooppinen kuvaus valon ja aineen vuorovaikutuksesta eivät liity toisiinsa lainkaan"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Mikroskooppinen (p=ε0αE) ja makroskooppinen (P=ε0χE) kuvaus johtavat molemmat makroskooppisen taitekertoimen n määrittelyyn — ne liittyvät suoraan toisiinsa, ja n määritellään juuri α:n/χ:n kautta, ei niistä riippumatta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.2_001"
+      },
+      {
         "id": "q6.2_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about deriving the laws of reflection and refraction from wavefront geometry, as shown in this section? (Select all that apply)",
@@ -1147,6 +2259,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q6.2_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa heijastus- ja taittumislakien johtamisesta aaltorintaman geometriasta tässä osiossa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Vaatimus, että kahden aaltorintaman osan optiset matkat ovat yhtä pitkät, johtaa heijastuslakiin θ_i = θ_r",
+          "Vastaava aaltorintamapäättely taitekertoimia n_i ja n_t käyttäen johtaa Snellin lakiin n_i sinθ_i = n_t sinθ_t",
+          "Optinen matka (OPL) voidaan kirjoittaa integraalina OPL = ∫ n(s) ds",
+          "Fermat'n periaatteen mukaan valo kulkee aina reittiä, jolla optinen matka on globaalisti pisin mahdollinen",
+          "Nämä lait voidaan johtaa myös vaatimalla, että fotonin liikemäärän pinnan suuntainen komponentti säilyy"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Yhtä pitkän optisen matkan aaltorintamapäättely antaa sekä heijastuslain että Snellin lain, kun OPL lausutaan muodossa ∫n(s)ds, ja vastaava johto seuraa fotonin liikemäärän säilymisestä pinnan suunnassa; Fermat'n periaate vaatii itse asiassa STATIONAARISTA reittiä (yleensä lyhintä), ei pisintä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.2_002"
       }
     ],
     "6.3": [
@@ -1173,6 +2308,29 @@
         "lang": "en"
       },
       {
+        "id": "q6.3_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa heijastuksen ja taittumisen johtamisesta sähkömagneettisista reunaehdoista tässä osiossa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Johto lähtee Maxwellin–Faradayn yhtälöstä integraalimuodossa",
+          "Silmukan alan kutistaminen nollaan rajapinnalla osoittaa, että E-kentän tangentiaalikomponentti on jatkuva rajapinnan yli",
+          "Johdossa tulevalle, heijastuneelle ja läpäisseelle aallolle sallitaan aluksi eri aaltovektorit ja yleisesti eri taajuudet",
+          "Vaatimus, että reunaehto pätee kaikkina ajanhetkinä, pakottaa tulevan, heijastuneen ja läpäisseen aallon taajuudet yhtä suuriksi",
+          "Tässä johdetut reunaehdot pätevät muuttumattomina kaikilla rajapinnoilla, myös ilma–metalli-rajapinnoilla"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Kelvinin–Stokesin / Maxwellin–Faradayn päättely, E:n tangentiaalikomponentin jatkuvuus, aluksi yleiset aaltovektorit ja taajuudet sekä siitä seuraava yhtäsuurten taajuuksien ehto on kuvattu oikein; muistiinpanoissa todetaan nimenomaisesti, että ilma–metalli-rajapinnoilla tarvitaan ERILAISET reunaehdot.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.3_001"
+      },
+      {
         "id": "q6.3_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the geometric consequences of the electromagnetic boundary conditions, as derived in this section? (Select all that apply)",
@@ -1195,6 +2353,29 @@
         "lang": "en"
       },
       {
+        "id": "q6.3_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa sähkömagneettisten reunaehtojen geometrisista seurauksista tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Tuleva aaltovektori, heijastunut aaltovektori ja pinnan normaali ovat kaikki samassa tasossa, jota kutsutaan tulotasoksi",
+          "Tulevan ja heijastuneen aallon aaltovektorien pituudet ovat yhtä suuret, k_i = k_r",
+          "Näiden tosiasioiden yhdistäminen johtaa suoraan heijastuslakiin θ_i = θ_r",
+          "Tulevan ja läpäisseen aallon aaltovektorien pituudet ovat myös aina yhtä suuret, k_i = k_t",
+          "Saman päättelyn toistaminen läpäisseelle aallolle johtaa Snellin lakiin"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Tulotasoehto, tulevan ja heijastuneen aaltovektorin yhtä suuret pituudet ja siitä seuraava heijastuslaki ovat kaikki oikein, samoin Snellin lain rinnakkainen johto läpäisseelle aallolle; k_i ja k_t eroavat yleensä toisistaan, koska n_i≠n_t.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.3_002"
+      },
+      {
         "id": "q6.3_003",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the electromagnetic derivation of Snell's law, as shown in this section? (Select all that apply)",
@@ -1215,6 +2396,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q6.3_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Snellin lain sähkömagneettisesta johdosta tässä osiossa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Aaltovektorin pituus aineessa liittyy taitekertoimeen yhtälöllä k = nω/c",
+          "Tämän relaation käyttö reunaehtoyhtälöissä antaa Snellin lain n_i sinθ_i = n_t sinθ_t",
+          "Tämä Snellin lain johto olettaa rajapinnan kahden dielektrisen aineen välillä",
+          "Samat dielektrisille aineille käytetyt reuna- ja jatkuvuusehtoyhtälöt pätevät muuttumattomina ilma–metalli-rajapinnalla",
+          "Läpäisseelle aallolle aaltovektorien pituudet k_i ja k_t eivät yleensä ole yhtä suuret"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Sijoittamalla k=nω/c reunaehtoihin saadaan Snellin laki kahden dielektrisen aineen rajapinnalle, kun yleensä k_i≠k_t; muistiinpanoissa huomautetaan, että ilma–metalli-rajapinnoilla tarvitaan eri reunaehdot, ei samoja.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.3_003"
       }
     ],
     "6.4": [
@@ -1241,6 +2445,29 @@
         "lang": "en"
       },
       {
+        "id": "q6.4_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kohtisuoran (⊥) polarisaation Fresnelin kertoimista tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Fresnelin heijastuskerroin on r_⊥ = (n_i cosθ_i − n_t cosθ_t)/(n_i cosθ_i + n_t cosθ_t)",
+          "Johdossa oletetaan aineet ei-magneettisiksi (μ = μ0)",
+          "Fresnelin kertoimet r ja t voivat olla negatiivisia, mikä vastaa π:n vaihesiirtoa",
+          "Fresnelin kertoimet eivät voi koskaan ylittää itseisarvoltaan arvoa yksi, koska kentän amplitudi ei voi koskaan ylittää irradianssia",
+          "Läpäisykerroin t_⊥ on yleensä eri suuruinen kuin heijastuskerroin r_⊥"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Kaava r_⊥:lle, ei-magneettisten aineiden oletus sekä r:n ja t:n etumerkki- ja vaihesiirtokäyttäytyminen on kuvattu oikein, samoin t_⊥≠r_⊥; muistiinpanoissa todetaan nimenomaisesti, että Fresnelin kertoimet VOIVAT ylittää yhden, koska kentän amplitudi ja irradianssi ovat eri suureita.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.4_001"
+      },
+      {
         "id": "q6.4_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about Brewster's angle, as introduced in this section? (Select all that apply)",
@@ -1261,6 +2488,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q6.4_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Brewsterin kulmasta tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Brewsterin kulma löytyy kohdasta, jossa yhdensuuntaisen polarisaation Fresnelin heijastuskerroin r_∥ on nolla",
+          "Brewsterin kulmassa tulo- ja taitekulma ovat toisiaan täydentävät (θ_i + θ_t = 90°)",
+          "Brewsterin kulmassa KAIKKI polarisaatiot — sekä kohtisuora että yhdensuuntainen — läpäisevät täysin ilman heijastusta",
+          "Brewsterin kulmaa kutsutaan myös polarisaatiokulmaksi",
+          "Brewsterin kulman ilmiötä voidaan hyödyntää polarisaattoreiden rakentamisessa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Brewsterin kulma on r_∥:n nollakohta, joka esiintyy kun θ_i+θ_t=90°, ja sitä kutsutaan myös polarisaatiokulmaksi, joka on hyödyllinen polarisaattoreiden rakentamisessa; mutta vain YHDENSUUNTAISESTI polarisoitunut komponentti läpäisee täysin Brewsterin kulmassa — kohtisuora komponentti heijastuu edelleen osittain.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.4_002"
       }
     ],
     "6.5": [
@@ -1287,6 +2537,29 @@
         "lang": "en"
       },
       {
+        "id": "q6.5_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa reflektanssista R ja transmittanssista T tässä osiossa määritellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Reflektanssi R määritellään heijastuneen ja tulevan tehon suhteena, ja se on |r|²",
+          "Transmittanssi T on suoraan verrannollinen |t|²:een ilman muita tekijöitä",
+          "Reflektanssille ja transmittanssille pätee R + T = 1",
+          "Reflektanssi/transmittanssi-kehys soveltuu myös häviöllisille aineille kompleksiarvoisten heijastuskertoimien avulla",
+          "Reflektanssi R voidaan laskea suoraan kentän irradianssikaavasta I = (1/2)ncε0|E0|²"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "explanation": "R=|r|² ja R+T=1, kehyksen ulottuminen häviöllisiin (kompleksinen r) aineisiin sekä irradianssikaava R:lle on kuvattu oikein; muistiinpanoissa huomautetaan nimenomaisesti, että T EI ole yksinkertaisesti verrannollinen |t|²:een — siinä on myös tekijä (n_t cosθ_t)/(n_i cosθ_i).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.5_001"
+      },
+      {
         "id": "q6.5_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the reflectance/transmittance behavior at a glass–air interface, as shown in this section? (Select all that apply)",
@@ -1307,6 +2580,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q6.5_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa reflektanssin ja transmittanssin käyttäytymisestä lasi–ilma-rajapinnalla tässä osiossa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Tietyllä kriittisellä tulokulmalla kokonaisheijastus alkaa",
+          "Tämä kriittinen kulma on käsiteltävällä lasi–ilma-rajapinnalla noin 42°",
+          "Kokonaisheijastus voi tapahtua vain ilma–lasi-rajapinnalla, ei koskaan lasi–ilma-rajapinnalla",
+          "Reflektanssi- ja transmittanssikäyrät eroavat ilma–lasi- ja lasi–ilma-suuntien välillä",
+          "Kokonaisheijastukseen liittyy reflektanssin R nouseminen arvoon 1"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Kokonaisheijastus alkaa lähellä θ≈42° esitetyssä lasi–ilma-tapauksessa, jolloin R→1, ja R/T-käyrät todella eroavat suunnan mukaan; kokonaisheijastus edellyttää siirtymistä OPTISESTI TIHEÄMMÄSTÄ aineesta (lasi) harvempaan (ilma), joten se on lasista ilmaan -ilmiö, ei ilmasta lasiin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.5_002"
       }
     ]
   },
@@ -1333,6 +2629,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q7.3_001_fi",
+        "questionType": "multi_select",
+        "stem": "Aalto heijastuu täydellisesti peilistä kohdassa z=0 muodostaen seisovan aallon. Mitkä seuraavista pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Kokonaiskenttä ei etene",
+          "Solmukohdat ovat paikkoja, joissa kentän amplitudi on aina nolla",
+          "Kupukohdat ovat paikkoja, joissa kentän amplitudi on maksimissaan",
+          "Täydelliselle peilille heijastuneen aallon amplitudi on yhtä suuri kuin tulevan aallon ja samanmerkkinen (AR = AI)",
+          "Seisova aalto värähtelee edelleen harmonisesti ajan funktiona"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Muistiinpanoissa kuvataan etenemätön kenttä, jossa on solmukohtia (nollaamplitudi) ja kupukohtia (maksimiamplitudi), ja joka värähtelee harmonisesti ajan suhteen. Täydellisen peilin reunaehto antaa AR = −AI, ei AR = AI.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.3_001"
       }
     ],
     "7.5": [
@@ -1357,6 +2676,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q7.5_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa optisesta koherenssista? (Valitse kaikki oikeat)",
+        "options": [
+          "Täydellisen ajan suhteen harmoninen monokromaattinen aalto on täysin koherentti mutta ei fysikaalisesti realistinen",
+          "Koherenssiaika τc on aikaväli, jonka sisällä vaihe pysyy korreloituneena",
+          "Koherenssipituus on ℓc = τc · c",
+          "Koherenssi on todellisten valonlähteiden tiukasti binäärinen (kaikki tai ei mitään) ominaisuus",
+          "Todellista valoa voidaan mallintaa erillisinä aaltopaketteina, jotka ovat sisäisesti koherentteja mutta eivät keskenään koherentteja"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Muistiinpanoissa kuvataan idealisoitu täysin koherentti monokromaattinen aalto, koherenssiaika ja -pituus (ℓc=τc·c) sekä aaltopakettimalli. Niissä todetaan nimenomaisesti, että koherenssi häviää vähitellen eikä ole tiukasti binäärinen ominaisuus.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.5_001"
       }
     ],
     "7.1": [
@@ -1383,6 +2725,29 @@
         "lang": "en"
       },
       {
+        "id": "q7.1_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa superpositioperiaatteesta tämän luvun alussa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Koska derivointi on lineaarinen operaatio, aaltoyhtälön ratkaisujen mikä tahansa superpositio on itsekin aaltoyhtälön ratkaisu",
+          "Mielivaltainen aaltojen superpositio voidaan kirjoittaa muodossa ψ = Σ_i c_iψ_i",
+          "Superpositioperiaate on ominainen optiikalle eikä päde fysiikan muilla aloilla",
+          "Tämän luvun käsittely muodostaa perustan interferenssin (luku 8) ja diffraktion (luku 9) ymmärtämiselle",
+          "Tässä luvussa palataan käsittelemään valon etenemistä aaltoliikkeenä, mikä täydentää luvun 10 sädeoptiikkakäsittelyä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Aaltoyhtälön lineaarisuus tekee ratkaisujen mistä tahansa painotetusta summasta myös ratkaisun, mikä on sekä interferenssin että diffraktion perustana; muistiinpanoissa todetaan nimenomaisesti, että superpositio on yleisesti tärkeä lähes kaikessa fysiikassa, ei vain optiikassa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.1_001"
+      },
+      {
         "id": "q7.1_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the role of this chapter within the course, as stated in its introduction? (Select all that apply)",
@@ -1403,6 +2768,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q7.1_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tämän luvun roolista kurssilla, sellaisena kuin se johdannossa esitetään? (Valitse kaikki oikeat)",
+        "options": [
+          "Tämän luvun tarkoitus on luoda perusta interferenssin ja diffraktion käsittelylle",
+          "Interferenssi- ja diffraktioilmiöt perustuvat molemmat superpositioperiaatteeseen",
+          "Sädeoptiikka (luku 10) esitellään vaihtoehtoisena valon etenemisen käsittelynä, joka eroaa tässä esitetystä aaltopohjaisesta käsittelystä",
+          "Aaltojen superpositio on sähkömagneettisille aalloille ominainen ilmiö, jota ei esiinny muilla aaltotyypeillä",
+          "Yleinen aaltoyhtälö ∇²ψ = (1/v²)∂²ψ/∂t² on tämän luvun superpositiokäsittelyn taustalla"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Luku esitetään nimenomaisesti pohjatyönä luvuille 8 (interferenssi) ja 9 (diffraktio), jotka molemmat perustuvat superpositioon, ja sädeoptiikka (luku 10) on erillinen käsittely; superpositio pätee laajasti mille tahansa lineaariselle aaltoyhtälölle, ei vain sähkömagneettisille aalloille.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.1_002"
       }
     ],
     "7.2": [
@@ -1429,6 +2817,29 @@
         "lang": "en"
       },
       {
+        "id": "q7.2_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kahden superponoituvan ajan suhteen harmonisen aallon kompleksilukukäsittelystä tässä osiossa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kunkin aallon paikasta riippuva vaihetermi α_i sisältää sekä alkuvaiheen ε_i että etenemisvaiheen kz_i",
+          "Kahdella aallolla voi olla eri alkuvaiheet ε₁≠ε₂ ja eri etenemismatkat z₁≠z₂",
+          "Kahden samataajuisen aallon superpositio on aina matemaattisesti yhtäpitävä yhden aallon kanssa, jonka amplitudi on A₁+A₂, riippumatta niiden suhteellisesta vaiheesta",
+          "Superposition irradianssi sisältää termin A₁²+A₂² sekä interferenssitermin",
+          "Interferenssitermi riippuu vaihe-erosta δ = α₂−α₁"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "α_i=ε_i+kz_i, mielivaltaiset ε:t ja z:t sekä irradianssin jako A₁²+A₂²+interferenssitermi(δ) on kaikki kuvattu oikein; syntyvä amplitudi yksinkertaistuu muotoon A₁+A₂ vain, kun aallot ovat samassa vaiheessa — yleisesti se riippuu δ:sta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.2_001"
+      },
+      {
         "id": "q7.2_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the phase difference δ between two superposed waves, as derived in this section? (Select all that apply)",
@@ -1449,6 +2860,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q7.2_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kahden superponoituvan aallon vaihe-erosta δ tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "δ voidaan jakaa muotoon δ = (ε₂−ε₁) + k(z₂−z₁), eli alkuvaihe-eron ja optisen matkaeron termin summaksi",
+          "Interferenssimaksimit esiintyvät, kun δ = 2πm kokonaisluvulle m",
+          "Interferenssiminimit esiintyvät, kun δ = 2πm + π",
+          "Superposition irradianssi on I(z) ∝ A₁² + A₂² + 2A₁A₂ cos(α₂−α₁)",
+          "Interferenssimaksimit ja -minimit esiintyvät kumpikin vain yhdellä yksittäisellä δ:n arvolla eivätkä koskaan toistu"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "δ:n jako, maksimi- ja minimiehdot sekä irradianssikaava on kaikki esitetty oikein; koska aallot ovat jaksollisia, äärettömän monta maksimia ja minimiä toistuu arvoilla δ=2πm ja 2πm+π, ei vain yksi kumpaakin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.2_002"
       },
       {
         "id": "q7.2_003",
@@ -1473,6 +2907,29 @@
         "lang": "en"
       },
       {
+        "id": "q7.2_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa aaltojen superposition yleistämisestä N aallolle tässä osiossa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "N samataajuisen aallon superpositio voidaan kirjoittaa yhtenä summana Σ_j A_j e^{iα_j}",
+          "Tämä N keskenään koherentin aallon superpositio on matemaattisesti yhtäpitävä yhden aallon kanssa",
+          "Tämä yhtäpitävyys yhden aallon kanssa pätee nimenomaan siksi, että aaltojen oletetaan olevan täysin koherentteja keskenään",
+          "N aallon superpositio on aina täsmälleen nolla riippumatta niiden yksittäisistä vaiheista",
+          "Kunkin aallon osuus tulee summaan sen kompleksisen amplitudin A_j e^{iα_j} kautta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "N koherentin, samataajuisen aallon summaaminen kompleksisten amplitudien A_j e^{iα_j} avulla antaa tuloksen, joka on matemaattisesti yhtäpitävä yhden aallon kanssa juuri koherenssin oletuksen ansiosta; summa ei yleisesti ole nolla — se riippuu yksittäisistä vaiheista α_j.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.2_003"
+      },
+      {
         "id": "q7.2_004",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the generalized description of a wave's propagation path, as introduced in this section? (Select all that apply)",
@@ -1493,6 +2950,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q7.2_004_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa aallon etenemisreitin yleistetystä kuvauksesta tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kentän kulkema optinen matka (OPL) voidaan kirjoittaa viivaintegraalina OPL = ∫_S n(s) ds",
+          "Etenevä kenttä voidaan kirjoittaa muodossa E(z) = Ae^{iα}, missä α = ε + kz",
+          "Merkintää Ẽ (tilde) käytetään kentälle, joka sisältää nopeasti värähtelevän aikariippuvuuden e^{-iωt}",
+          "Optinen matka riippuu vain kuljetusta geometrisesta etäisyydestä, ei koskaan aineen taitekertoimesta",
+          "Tämä yleistetty OPL-merkintä esitellään kuvaamaan valon mielivaltaisia etenemisreittejä, ei vain suoraviivaisia reittejä yhdessä aineessa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "OPL muodossa ∫n(s)ds, merkintä E(z)=Ae^{iα}, α=ε+kz, sekä tilde-merkintä nopealle aikavärähtelylle on kaikki kuvattu oikein, ja tämä yleistys on olemassa juuri mielivaltaisten (usean aineen, kaarevien) reittien käsittelemiseksi; OPL riippuu nimenomaisesti taitekertoimesta n(s), ei vain geometrisesta etäisyydestä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.2_004"
       }
     ],
     "7.4": [
@@ -1519,6 +2999,29 @@
         "lang": "en"
       },
       {
+        "id": "q7.4_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ajasta riippuvan aallon Fourier-muunnoskuvauksesta tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Mielivaltainen hyvin käyttäytyvä ajasta riippuva funktio f(t) voidaan esittää taajuuskomponenttien yli otettuna integraalina (Fourier-synteesi)",
+          "Funktiota F(ω), joka saadaan f(t):n Fourier-analyysillä, kutsutaan f(t):n spektriksi",
+          "Fourier-muunnos F(ω) on yleensä reaaliarvoinen",
+          "Tehospektri määritellään S(ω) = |F(ω)|²",
+          "F(ω) voidaan tulkita aallon amplitudiksi tietyllä taajuudella ω"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Fourier-synteesi ja -analyysi, spektri F(ω) ja tehospektri S(ω)=|F(ω)|² sekä F(ω):n tulkinta taajuuskohtaisena amplitudina on kaikki kuvattu oikein; F(ω) on yleensä KOMPLEKSIARVOINEN, ei reaalinen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.4_001"
+      },
+      {
         "id": "q7.4_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the finite-duration harmonic wave-packet example worked out in this section? (Select all that apply)",
@@ -1539,6 +3042,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q7.4_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tässä osiossa läpikäydystä äärellisen keston harmonisen aaltopaketin esimerkistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Aaltopaketin, jonka kesto on T ja joka värähtelee taajuudella ω₀, spektri on verrannollinen ω₀:n ympärille keskittyvään sinc-funktioon",
+          "Kardinaalisini voidaan normittaa muotoon sinc(α) = sin(πα)/(πα)",
+          "Äärellisen keston aaltopaketilla on täysin terävä, yksitaajuinen spektri",
+          "Spektrin muoto F(ω) johdetaan laskemalla suoraan äärellisen keston aikatason pulssin Fourier-muunnos",
+          "Aaltopaketin spektrin leveyttä voidaan arvioida sinc-funktion ensimmäisten nollakohtien sijainnista"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "explanation": "Sinc-muotoinen spektri, sen normitettu määritelmä, sen suora johto Fourier-muunnoksella sekä spektrin leveyden arviointi sincin ensimmäisistä nollakohdista on kaikki kuvattu oikein; ÄÄRELLISEN keston pulssilla on välttämättä levinnyt (ei täysin terävä) spektri.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.4_002"
       },
       {
         "id": "q7.4_003",
@@ -1563,6 +3089,29 @@
         "lang": "en"
       },
       {
+        "id": "q7.4_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tässä osiossa johdetusta aika–kaistanleveys-relaatiosta? (Valitse kaikki oikeat)",
+        "options": [
+          "Relaatio ΔωΔt ~ 1 (suuruusluokka) yhdistää pulssin keston sen spektrin leveyteen",
+          "Tavallisen taajuuden avulla tämä voidaan kirjoittaa ΔνΔt ~ 1",
+          "Tämä relaatio osoittaa, että ajassa lyhyemmällä pulssilla on oltava leveämpi taajuusjakauma ja päinvastoin",
+          "Aika (t) ja (kulma)taajuus (ω) ovat konjugaattimuuttujia, joita yhdistää Fourier-muunnos",
+          "Tämä aika–kaistanleveys-relaatio tarkoittaa, että pulssi voidaan tehdä mielivaltaisen lyhyeksi ajassa säilyttäen mielivaltaisen kapean spektrin leveyden"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "ΔωΔt~1 (tai ΔνΔt~1) yhdistää pulssin keston ja spektrin leveyden Fourier-konjugaattimuuttujina, mikä tarkoittaa, että lyhyemmät pulssit tarvitsevat leveämmän spektrin; EI voi olla sekä mielivaltaisen lyhyttä pulssia että mielivaltaisen kapeaa spektriä yhtä aikaa — juuri sen relaatio kieltää.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.4_003"
+      },
+      {
         "id": "q7.4_004",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the specific numerical relation derived for the wave-packet example in this section? (Select all that apply)",
@@ -1583,6 +3132,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q7.4_004_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tässä osiossa aaltopaketti-esimerkille johdetusta täsmällisestä numeerisesta relaatiosta? (Valitse kaikki oikeat)",
+        "options": [
+          "Kun spektrin leveys Δω määritellään F(ω):n ensimmäisten nollakohtien avulla, saadaan Δω = 4π/T",
+          "Tämä johtaa relaatioon ΔωΔt = 4π, missä Δt = T on pulssin kesto",
+          "Koska tämän johdon lähtöoletukset olivat jokseenkin epäselviä, muistiinpanoissa varoitetaan, että numeerista kerrointa tulee pitää vain suuruusluokka-arviona",
+          "Aika–kaistanleveys-relaation tarkempi johto vaatisi Fourier-muunnoksen yksityiskohtaisempien ominaisuuksien käyttöä",
+          "Relaatio ΔωΔt = 4π esitetään täsmällisenä, yleispätevänä vakiona kaikille mahdollisille pulssimuodoille"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Δω=4π/T, josta ΔωΔt=4π tälle tietylle pulssimuodolle, on johdettu oikein, mutta muistiinpanoissa tähän numeeriseen kertoimeen liitetään nimenomainen varaus: se on vain suuruusluokka-arvio epäselvien lähtöoletusten vuoksi, ei yleispätevä täsmällinen vakio kaikille pulssimuodoille.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.4_004"
       }
     ]
   },
@@ -1609,6 +3181,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q8.4_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Michelsonin interferometristä? (Valitse kaikki oikeat)",
+        "options": [
+          "Se koostuu 50/50-säteenjakajasta, kahdesta peilistä ja ilmaisimesta",
+          "Optinen matkaero on Λ = 2(d2 − d1)",
+          "Laajakaistaisella lähteellä interferogrammi (vakiotermiä lukuun ottamatta) liittyy lähteen spektriin Fourier-kosinimuunnoksella",
+          "Michelsonin interferometrin kanssa voidaan käyttää vain tiukasti monokromaattisia lähteitä",
+          "Ilmaisimena voidaan käyttää kameraa, kun valo saapuu optisen akselin ulkopuolelta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Muistiinpanoissa kuvataan säteenjakajan, peilien ja ilmaisimen asettelu, matkaero Λ=2d, spektrometriassa käytetty Fourier-muunnosrelaatio sekä kameralla tapahtuva ilmaisu kulmassa θ (d korvataan lausekkeella d·cosθ). Myös laajakaistaiset lähteet käsitellään nimenomaisesti, ei vain monokromaattisia.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.4_001"
       }
     ],
     "8.1": [
@@ -1635,6 +3230,29 @@
         "lang": "en"
       },
       {
+        "id": "q8.1_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kahden aallon välisen interferenssin perusedellytyksistä tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kahdelle aallolle, joilla on yhdensuuntaiset (samat) polarisaatiot, kokonaisirradianssi on I = I1 + I2 + 2√(I1 I2) cos δ",
+          "Jos kahdella aallolla on kohtisuorat polarisaatiot, niiden interferenssitermi häviää eikä näkyvää interferenssiä synny",
+          "Kahden aallon vaihe-ero δ sisältää sekä alkuvaiheiden eron että niiden erilaisista aaltovektoreista/paikoista johtuvan termin",
+          "Kahden yhtä suuren irradianssin I0 omaavan aallon superpositio on I = 4I0 cos²(δ/2)",
+          "Kahden aallon välinen interferenssi tapahtuu samalla tavoin riippumatta niiden suhteellisesta polarisaatiosta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Skalaarinen irradianssikaava, kohtisuorien polarisaatioiden häviävä interferenssitermi, vaihe-eron jako ja yhtä suurten irradianssien sieventäminen on kaikki johdettu oikein; kohtisuorat polarisaatiot antavat nimenomaan EI näkyvää interferenssiä, joten tulokset eivät ole samat riippumatta polarisaatiosta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.1_001"
+      },
+      {
         "id": "q8.1_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the coherence requirements for interference, as introduced in this section? (Select all that apply)",
@@ -1655,6 +3273,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q8.1_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa interferenssin koherenssivaatimuksista tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kaksi aaltoa interferoi vain, jos niiden aikaero on pienempi kuin lähteen koherenssiaika τc",
+          "Vastaava avaruudellinen ehto käyttää koherenssipituutta ℓc = cτc",
+          "Ajallista koherenssia kutsutaan myös pitkittäiseksi koherenssiksi",
+          "Avaruudellinen koherenssi koskee saman aaltorintaman eri pisteiden välistä keskinäistä koherenssia",
+          "Koherenssileveyttä wc suuremmalla etäisyydellä toisistaan olevat aallot interferoivat edelleen täysin hyvin"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Koherenssiaika τc, koherenssipituus ℓc=cτc, ajallinen/pitkittäinen koherenssi sekä avaruudellinen/poikittainen koherenssi (saman aaltorintaman pisteiden vertailu) on kaikki kuvattu oikein; muistiinpanoissa todetaan, että wc:tä SUUREMMALLA etäisyydellä toisistaan olevat kentät EIVÄT interferoi hyvin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.1_002"
       }
     ],
     "8.2": [
@@ -1681,6 +3322,29 @@
         "lang": "en"
       },
       {
+        "id": "q8.2_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa aaltorintaman jakavista interferometreistä tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Aaltorintaman jakavat interferometrit perustuvat siihen, että saman alkuperäisen aaltorintaman kentät interferoivat keskenään",
+          "Youngin kaksoisrakokoe on klassinen esimerkki aaltorintaman jakavasta interferometristä",
+          "Youngin kokeessa ensimmäinen rako parantaa saapuvan valon avaruudellista koherenssia",
+          "Amplitudin jakavat ja aaltorintaman jakavat interferometrit ovat täsmälleen samanlaisia laitteita",
+          "Interferometrit ovat yleisesti ottaen interferenssiin perustuvia laitteita"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Aaltorintaman jakava interferometri (esim. Youngin kaksoisrako, jonka ensimmäinen rako parantaa koherenssia) on toinen kahdesta kuvatusta erillisestä interferometriluokasta — amplitudin jakava on nimenomaisesti toinen, erillinen luokka.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.2_001"
+      },
+      {
         "id": "q8.2_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the Young's double-slit interference pattern derived in this section? (Select all that apply)",
@@ -1701,6 +3365,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q8.2_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tässä osiossa johdetusta Youngin kaksoisrakokokeen interferenssikuviosta? (Valitse kaikki oikeat)",
+        "options": [
+          "Kaukokenttäapproksimaatiossa kahden raon välinen optinen matkaero on likimain a sinθ",
+          "Vaihe-ero on δ = (2π/λ)(a/s)y pienten kulmien approksimaatiossa",
+          "Interferenssimaksimi esiintyy, kun matkaero on kokonaisluku aallonpituuksia, (r1−r2) = mλ",
+          "Tämän ehdon kokonaislukua m kutsutaan interferenssin kertaluvuksi",
+          "Interferenssimaksimien paikat varjostimella eivät riipu rakojen etäisyydestä a"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Kaukokentän matkaero asinθ, siitä seuraava vaihe δ, maksimit kohdissa (r1-r2)=mλ ja m interferenssin kertalukuna on kaikki johdettu oikein; maksimien paikat y_m=mλs/a riippuvat nimenomaan rakojen etäisyydestä a.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.2_002"
       }
     ],
     "8.3": [
@@ -1727,6 +3414,29 @@
         "lang": "en"
       },
       {
+        "id": "q8.3_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ohutkalvointerferenssistä tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Amplitudin jakavat interferometrit jakavat tulevan aallon kahteen tai useampaan komponenttiin, jotka myöhemmin interferoivat ilmaisimella",
+          "Ohutkalvon paksuus on tyypillisesti valon aallonpituuden suuruusluokkaa",
+          "Ohutkalvon optiseksi matkaeroksi saadaan Λ = 2n_t d cosθ_t",
+          "π:n vaihesiirto tapahtuu toisessa kahdesta heijastuksesta, kun kalvon molemmilla puolilla olevat aineet ovat samat ja eroavat kalvon taitekertoimesta",
+          "Ohutkalvointerferenssi on täysin riippumaton kalvon paksuudesta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Amplitudin jako aallonpituuden suuruisen paksuisella ohutkalvolla, optinen matkaero Λ=2n_t d cosθ_t sekä π:n vaihesiirto yhdessä heijastuksessa (Fresnelin kertoimien mukaan) on kaikki johdettu oikein; kuvio riippuu nimenomaan paksuudesta d.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.3_001"
+      },
+      {
         "id": "q8.3_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the conditions for interference maxima in a thin film, as derived in this section? (Select all that apply)",
@@ -1747,6 +3457,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q8.3_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ohutkalvon interferenssimaksimien ehdoista tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Interferenssimaksimit esiintyvät, kun d cosθ_t = (m + 1/2)(λ_t/2), missä λ_t = λ0/n_t",
+          "Interferenssikuvio riippuu kalvon paksuudesta d, tulo- ja taitekulmista sekä aallonpituudesta",
+          "Käytännön esimerkkejä ohutkalvointerferenssistä ovat saippuakuplat ja öljykalvot",
+          "Optisten laitteiden heijastuksenestopinnoitteet ovat käytännössä ohutkalvopinoja",
+          "Ohutkalvon interferenssimaksimit eivät koskaan riipu tulokulmasta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Maksimiehto, sen riippuvuus d:stä, kulmista ja aallonpituudesta sekä käytännön esimerkit (saippuakuplat, öljykalvot, heijastuksenestopinnoitteet) on kaikki kuvattu oikein; ehto sisältää nimenomaan θ_t:n, joten maksimit RIIPPUVAT tulokulmasta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.3_002"
       }
     ],
     "8.5": [
@@ -1771,6 +3504,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q8.5_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa monisädeinterferenssistä ohutkalvossa tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kun pinnat heijastavat voimakkaasti, kokonaiskentän selvittämiseksi on summattava monta moneen kertaan heijastunutta sädettä",
+          "Heijastuneiden/läpäisseiden amplitudien summa muodostaa geometrisen sarjan",
+          "Läpäisty irradianssi voidaan kirjoittaa muodossa I_t = I0/(1 + F sin²(δ/2)), missä F on finessitekijä",
+          "Ihannetapauksessa (häviöttömänä) heijastuneelle ja läpäistylle irradianssille pätee I_r + I_t = I0",
+          "Monisädeinterferenssi on merkityksellinen vain, kun pinnat heijastavat heikosti"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Voimakkaasti heijastavat pinnat vaativat moneen kertaan heijastuneiden säteiden geometrisen sarjan summaamista, mikä antaa Airyn funktion mukaisen läpäisyn I_t=I0/(1+Fsin²(δ/2)) ja energian säilymisen I_r+I_t=I0; tämä käsittely on tarpeen juuri SIKSI, että pinnat heijastavat voimakkaasti (eivät heikosti).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.5_001"
       }
     ],
     "8.6": [
@@ -1797,6 +3553,29 @@
         "lang": "en"
       },
       {
+        "id": "q8.6_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Fabryn–Perot-laitteista tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Fabryn–Perot-laitteen transmittanssi riippuu Airyn funktiosta A = 1/(1+F sin²(δ/2))",
+          "Fabryn–Perot-interferometrit ja etalonit ovat kaksi näiden laitteiden luokkaa",
+          "Fabryn–Perot-interferometrissa säädetään tyypillisesti termiä n_t d, kun taas etalonissa säädetään kulmaa θ_t",
+          "Transmittanssihuipun FWHM on γ = 4/√F",
+          "Suurempi finessitekijä F johtaa aina leveämpiin transmittanssihuippuihin"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Airyn funktion mukainen transmittanssi, interferometrin ja etalonin ero (n_t d:n vs. θ_t:n säätäminen) sekä FWHM-kaava γ=4/√F on kaikki kuvattu oikein; SUUREMPI F antaa KAPEAMMAT (ei leveämmät) huiput.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.6_001"
+      },
+      {
         "id": "q8.6_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the finesse of a Fabry–Pérot cavity, as introduced in this section? (Select all that apply)",
@@ -1817,6 +3596,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q8.6_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Fabryn–Perot-resonaattorin finessistä tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Finessi määritellään vierekkäisten huippujen välisen etäisyyden (vaiheessa 2π) ja huipun FWHM:n suhteena",
+          "Finessi ei riipu resonaattorin pituudesta, mutta riippuu sen häviöistä",
+          "Tyypillisten etalonien finessi on suuruusluokkaa ~10",
+          "Tyypillisten korkealaatuisten interferometrien finessi voi ylittää 100 000",
+          "Resonaattorin finessi määräytyy kokonaan sen fysikaalisesta pituudesta peilien heijastavuudesta riippumatta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Finessi = 2π/γ, riippumaton resonaattorin pituudesta mutta häviöistä riippuva, tyypillisin arvoin ~10 etaloneille ja >100 000 korkealaatuisille interferometreille, on kaikki kuvattu oikein; finessi riippuu nimenomaan häviöistä (peilien heijastavuuden kautta), ei pelkästään pituudesta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.6_002"
       }
     ],
     "8.7": [
@@ -1841,6 +3643,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q8.7_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Fabryn–Perot-laitteiden spektroskooppisesta käytöstä tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Vapaa spektrialue (FSR) on vierekkäisten transmittanssihuippujen taajuusväli, Δν_fsr = c/(2L)",
+          "Taajuudet, joiden ero on suurempi kuin FSR, voivat sekoittua vierekkäisten interferenssin kertalukujen kesken",
+          "Spektrinen resoluutio Δν_min paranee (pienenee) finessin F kasvaessa",
+          "Spektrinen erotuskyky ν_m/Δν_min on dimensioton suure, joka on verrannollinen interferenssin kertalukuun m ja finessiin",
+          "Suurempi tehokas resonaattorin pituus L huonontaa aina spektristä resoluutiota"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "FSR=c/(2L), kertalukujen sekoittumisen riski FSR:n yli, resoluution paraneminen finessin kasvaessa sekä dimensioton erotuskyky m·ℱ on kaikki kuvattu oikein; muistiinpanoissa todetaan nimenomaisesti, että resoluutio PARANEE (Δν_min pienenee) L:n kasvaessa, ei huonone.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.7_001"
       }
     ]
   },
@@ -1866,6 +3691,28 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q9.2_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Fraunhoferin diffraktiosta? (Valitse kaikki oikeat)",
+        "options": [
+          "Se pätee kaukokentässä, kun R > a²/λ",
+          "Diffraktoitunut kenttä on likimain verrannollinen aukon kentän kaksiulotteiseen Fourier-muunnokseen",
+          "Se edellyttää, että havaintopiste on hyvin lähellä aukkoa",
+          "Diffraktiokuvio voidaan kuvantaa linssin avulla",
+          "Neliöllinen vaihetermi tulee merkittäväksi (ei mitättömäksi) Fraunhoferin alueella"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Fraunhoferin ehto R>a²/λ on kaukokenttäehto (ei lähikenttä), jossa neliöllinen vaihetermi on mitätön ja syntyvä kenttä on aukon kentän kaksiulotteinen Fourier-muunnos; syntyvä kuvio voidaan kuvantaa linssillä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.2_001"
       }
     ],
     "9.5": [
@@ -1890,6 +3737,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q9.5_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa diffraktiohiloista? (Valitse kaikki oikeat)",
+        "options": [
+          "Diffraktiomaksimi muodostuu, kun vierekkäisistä raoista tulevien aaltojen vaihe-ero on 2πm",
+          "Hilayhtälö on a(sinθm − sinθi) = mλ",
+          "Blaze-hilat voivat vahvistaa tai vaimentaa tiettyjä diffraktion kertalukuja",
+          "Diffraktiohilat voivat toimia vain läpäisyssä, eivät koskaan heijastuksessa",
+          "M:ttä diffraktiomaksimia kutsutaan m:nneksi diffraktion kertaluvuksi"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Muistiinpanoissa esitetään hilayhtälö a(sinθm−sinθi)=mλ 2πm-vaiheehdosta, määritellään m:s maksimi m:nneksi kertaluvuksi ja mainitaan blaze-hilat kertalukujen muokkaamiseen. Hilat voivat toimia joko läpäisyssä tai heijastuksessa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.5_001"
       }
     ],
     "9.1": [
@@ -1916,6 +3786,29 @@
         "lang": "en"
       },
       {
+        "id": "q9.1_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa diffraktion käsitteestä tämän luvun alussa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Diffraktioilmiöt syntyvät, kun superpositioperiaatetta sovelletaan aaltolähteiden jatkuvaan jakaumaan",
+          "Interferenssi-ilmiöt sitä vastoin syntyvät lähteiden diskreeteistä jakaumista",
+          "Huygensin–Fresnelin periaatteen mukaan jokainen aaltorintaman piste toimii uuden (toissijaisen) aallon lähteenä",
+          "Diffraktiota ja interferenssiä säätelevät täysin toisistaan riippumattomat fysikaaliset periaatteet",
+          "Huygensin periaatteen mukaan uusi pallomainen aalto lähtee jokaisesta aukon pisteestä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Diffraktio (lähteiden jatkuvat jakaumat) asetetaan nimenomaisesti vastakkain interferenssin (diskreetit jakaumat) kanssa, ja molemmat perustuvat samaan superpositioperiaatteeseen Huygensin–Fresnelin kuvassa toissijaisista pallomaisista alkeisaalloista — ne ovat siis läheisesti yhteydessä, ei toisistaan riippumattomia.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.1_001"
+      },
+      {
         "id": "q9.1_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the general diffraction integral introduced in this section? (Select all that apply)",
@@ -1938,6 +3831,29 @@
         "lang": "en"
       },
       {
+        "id": "q9.1_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tässä osiossa esitellystä yleisestä diffraktiointegraalista? (Valitse kaikki oikeat)",
+        "options": [
+          "Kokonaiskenttä havaintopisteessä saadaan integroimalla aukon äärettömän pienistä alkioista lähteviä pallomaisia aaltoja",
+          "Tämä diffraktiointegraali voidaan ratkaista analyyttisesti vain tietyissä approksimaatioalueissa",
+          "Fresnelin diffraktio pätee, kun havaintopiste on kohtalaisen etäisyyden päässä aukosta",
+          "Fraunhoferin diffraktio on kaukokenttäapproksimaatio, joka pätee, kun havaintopiste on hyvin kaukana aukosta",
+          "Diffraktiointegraali voidaan aina ratkaista suljetussa muodossa mille tahansa aukon muodolle ja havaintoetäisyydelle"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Aukon alkioiden pallomaisten alkeisaaltojen yli otettu integraali on yleisesti ratkeamaton suljetussa muodossa, ja analyyttisesti ratkaistavissa vain Fresnelin (kohtalainen etäisyys) tai Fraunhoferin (kaukokenttä) alueissa — ei mielivaltaisille aukoille/etäisyyksille.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.1_002"
+      },
+      {
         "id": "q9.1_003",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the Huygens-wavelet description used to build up the diffraction integral in this section? (Select all that apply)",
@@ -1958,6 +3874,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q9.1_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Huygensin alkeisaaltokuvauksesta, jolla diffraktiointegraali tässä osiossa rakennetaan? (Valitse kaikki oikeat)",
+        "options": [
+          "Jokaisella aukon pisteestä lähtevällä uudella pallomaisella alkeisaallolla on muoto (E_A(r)/r) e^{ikr}",
+          "Tämä alkeisaaltokäsittely pätee nimenomaan monokromaattiselle kentälle",
+          "Aukon muodon kuvaamiseen valittu koordinaatisto vaikuttaa siihen, kuinka helposti diffraktiointegraali voidaan laskea",
+          "Lähdepisteen ja havaintopisteen välisen etäisyyden r approksimointi on tärkeä osa integraalin ratkaisemista",
+          "Alkeisaaltokäsittely toimii yhtä hyvin millä tahansa aallonpituusalueella ilman monokromaattisuusoletusta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Pallomaisen alkeisaallon muoto, sen monokromaattisen kentän rajoitus sekä kaksi keskeistä haastetta (koordinaatiston valinta, r:n approksimointi) on kaikki kuvattu oikein; muistiinpanoissa tämä käsittely rajataan nimenomaisesti monokromaattiseen kenttään.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.1_003"
       }
     ],
     "9.3": [
@@ -1984,6 +3923,29 @@
         "lang": "en"
       },
       {
+        "id": "q9.3_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa yhden kapean raon diffraktiosta tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kapean raon diffraktiointegraali separoituu itsenäisiksi integraaleiksi x- ja y-suunnissa",
+          "Irradianssikuvio raon äärellisen ulottuvuuden suunnassa on verrannollinen sinc²(α):aan, missä α on normitettu kulmamuuttuja",
+          "Raon leveyden a kaventaminen levittää diffraktiokuviota enemmän",
+          "Raon leveys a ja havaintokoordinaatti X käyttäytyvät konjugaattimuuttujina",
+          "Kapea rako tuottaa diffraktiokuvion, joka on täysin riippumaton raon leveydestä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Separoituvat x/y-integraalit, sinc²(α)-kuvio, a:n ja X:n konjugaattimuuttujasuhde sekä siitä seuraava leveämpi levinneisyys kapeammille raoille on kaikki johdettu oikein; kuvio riippuu ehdottomasti raon leveydestä a.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.3_001"
+      },
+      {
         "id": "q9.3_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about diffraction from a rectangular aperture, as derived in this section? (Select all that apply)",
@@ -2004,6 +3966,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q9.3_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa suorakulmaisen aukon diffraktiosta tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Suorakulmaisen aukon irradianssikuvio on I(X,Y) = I(0,0) sinc²(α) sinc²(β)",
+          "Suorakulmaisen aukon tulos yleistää yhden raon tuloksen molempiin poikittaissuuntiin",
+          "Valo diffraktoituu suorakulmaisessa aukossa sekä X- että Y-suunnassa, toisin kuin kapeassa (1D) raossa",
+          "Muuttuja β määritellään analogisesti α:n kanssa, mutta käyttäen aukon korkeutta b sen leveyden a sijaan",
+          "Suorakulmainen aukko tuottaa diffraktiokuvion, joka on identtinen samanpinta-alaisen ympyräaukon kanssa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Kaksiulotteinen sinc²×sinc²-kuvio, sen yleistys yksiulotteisesta yhden raon tuloksesta, kaksiulotteinen diffraktio sekä analogiset α/β-määritelmät on kaikki johdettu oikein; suorakulmaisen aukon kuvio on sincien tulo, aivan erilainen kuin ympyräaukon Besselin funktion (Airyn) kuvio.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.3_002"
       },
       {
         "id": "q9.3_003",
@@ -2028,6 +4013,29 @@
         "lang": "en"
       },
       {
+        "id": "q9.3_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ympyräaukon diffraktiosta tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Ympyräsymmetrinen ongelma ratkeaa luontevammin sylinterikoordinaatistossa kuin karteesisessa koordinaatistossa",
+          "Syntyvä irradianssikuvio sisältää ensimmäisen kertaluvun Besselin funktion J1",
+          "Kuvion keskeisen kirkkaan alueen ensimmäinen nollakohta on tietyllä kaq/R:n arvolla (noin 3,83)",
+          "Tätä ympyräaukon diffraktiokuviota kutsutaan Airyn kuvioksi",
+          "Ympyräaukot tuottavat diffraktiokuvioita, joilla on terävät, selvärajaiset reunat eikä lainkaan levenemistä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Sylinterikoordinaatistolähestymistapa, J1-Besselin funktion tulos, ensimmäinen nollakohta lähellä kaq/R≈3,83 ja siitä seuraava Airyn kuvio on kaikki kuvattu oikein; minkä tahansa äärellisen aukon, ympyräaukko mukaan lukien, diffraktio levittää kuviota väistämättä terävän reunan sijaan.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.3_003"
+      },
+      {
         "id": "q9.3_004",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the angular size of the Airy diffraction pattern, as derived in this section? (Select all that apply)",
@@ -2048,6 +4056,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q9.3_004_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Airyn diffraktiokuvion kulmakoosta tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Airyn keskikiekon ensimmäinen nollakohta on likimain kohdassa sinθ_r ≈ 1,22λ/D, missä D on aukon halkaisija",
+          "Suurempi aukon halkaisija D tuottaa pienemmän (tiiviimmän) diffraktiokuvion",
+          "Pidempi aallonpituus λ tuottaa suuremman diffraktiokuvion samalle aukolle",
+          "Diffraktiokuvion kulmakoko on täysin riippumaton sekä aallonpituudesta että aukon koosta",
+          "Tämä kulmalevenemistulos on ympyräaukkoja käyttävien kuvantamisjärjestelmien erotuskyvyn diffraktiorajan taustalla"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "sinθ_r≈1,22λ/D osoittaa, että kuvio kutistuu suuremmalla D:llä ja kasvaa suuremmalla λ:lla, ja juuri tämä relaatio määrää ympyräaukkoisten kuvantamisjärjestelmien diffraktiorajoitetun erotuskyvyn — se riippuu ehdottomasti sekä aallonpituudesta että aukon koosta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.3_004"
       }
     ],
     "9.4": [
@@ -2074,6 +4105,29 @@
         "lang": "en"
       },
       {
+        "id": "q9.4_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa N raon jaksollisen ryhmän diffraktiosta tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Diffraktoitunut kenttä on summa N siirretystä kopiosta yhden raon diffraktiointegraalia",
+          "Syntyvä irradianssi jakautuu tekijöihin: yhden raon diffraktiotermi ja erillinen jaksollisuus- (interferenssi)termi",
+          "Yhden raon termi on verrannollinen (sinα/α)²:een, mikä vastaa yhden kapean raon tulosta",
+          "Jaksollisuustermi on verrannollinen (sin(Nβ)/sinβ)²:een",
+          "Jaksollisella rakoryhmällä diffraktiota tapahtuu vain rakoja vastaan kohtisuorassa suunnassa, ei koskaan raon suunnassa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "N siirretyn yhden raon integraalin summaaminen antaa irradianssin, joka jakautuu yhden raon vaippaan (sinα/α)² ja jaksollisuustermiin (sinNβ/sinβ)² — diffraktiota tapahtuu myös raon oman pituussuunnan mukaisesti, sitä vain säätelee kyseisen ulottuvuuden oma geometria.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.4_001"
+      },
+      {
         "id": "q9.4_002",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the mathematical structure of the multi-slit diffraction sum, as shown in this section? (Select all that apply)",
@@ -2096,6 +4150,29 @@
         "lang": "en"
       },
       {
+        "id": "q9.4_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa monirakodiffraktion summan matemaattisesta rakenteesta tässä osiossa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "N raon vaihetekijöiden summa muodostaa äärellisen geometrisen sarjan",
+          "Muuttujan β = kXb/2R uudelleenmäärittely (b hilan jakso) yksinkertaistaa summaa huomattavasti",
+          "Summattu geometrinen sarja voidaan sieventää suljettuun muotoon, joka sisältää lausekkeen sin(Nβ)/sinβ",
+          "Tämä geometrisen sarjan rakenne ei liity rakojen jaksolliseen asetteluun",
+          "Yksittäisen raon leveydellä a ja ryhmän jaksolla b on erilliset roolit lopullisessa diffraktoituneessa kentässä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "N-termisen vaihesumman muoto on täsmälleen äärellinen geometrinen sarja, joka sievenee muuttujalla β=kXb/2R muotoon sin(Nβ)/sinβ — tämä rakenne syntyy JUURI rakojen jaksollisen asettelun vuoksi, ja raon leveydellä a (vaippa) ja jaksolla b (hienorakenne) on selvästi eri roolit.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.4_002"
+      },
+      {
         "id": "q9.4_003",
         "questionType": "multi_select",
         "stem": "Which of the following are correct about the physical interpretation of the multi-slit diffraction irradiance, as derived in this section? (Select all that apply)",
@@ -2116,6 +4193,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q9.4_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa monirakodiffraktion irradianssin fysikaalisesta tulkinnasta tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Yhden raon tekijä (sinα/α)² kuvaa kunkin yksittäisen raon äärellisen leveyden aiheuttamaa diffraktiovaippaa",
+          "Jaksollisuustekijä (sinNβ/sinβ)² kuvaa rakojen säännöllisen välin aiheuttamaa interferenssin hienorakennetta",
+          "Rakojen määrän N kasvaessa jaksollisuustermi tuottaa yhä terävämpiä, selvemmin rajautuneita huippuja",
+          "Yhden raon vaippa ja jaksollisuustermi ovat täysin riippumattomia toisistaan eivätkä koskaan kerrotu keskenään",
+          "Tämä yhdistetty yhden raon/jaksollisuuden rakenne on diffraktiohilojen ymmärtämisen perusta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Yhden raon vaippa ja jaksollisuustermi kuvaavat oikein raon leveyden ja välin fysikaalisia rooleja, huiput terävöityvät N:n kasvaessa, ja tämä muodostaa diffraktiohilojen käyttäytymisen perustan; muistiinpanojen oma irradianssikaava nimenomaan KERTOO nämä kaksi termiä keskenään, eikä käsittele niitä toisistaan riippumattomina.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.4_003"
       }
     ]
   },
@@ -2141,6 +4241,28 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.3_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ohuista linsseistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Ilmassa olevalle ohuelle linssille linssintekijän yhtälö on 1/f = (nℓ/nm − 1)(1/R1 − 1/R2)",
+          "Kuperilla linsseillä f > 0",
+          "Koverilla linsseillä f > 0",
+          "Gaussin ohuen linssin yhtälö on 1/so + 1/si = 1/f",
+          "Linssin optinen voimakkuus D määritellään D = f (polttoväli itse)"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Muistiinpanoissa esitetään linssintekijän yhtälö, etumerkkikonventio f>0 kuperille linsseille (f<0 koverille) ja ohuen linssin Gaussin muoto 1/so+1/si=1/f. Linssin optinen voimakkuus määritellään D ≡ 1/f, ei D=f.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.3_001"
       }
     ],
     "10.13": [
@@ -2165,6 +4287,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.13_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa yksinkertaisista kahden linssin kaukoputkista? (Valitse kaikki oikeat)",
+        "options": [
+          "Kaukoputken kulmasuurennus on MT = fo/fe",
+          "Keplerin kaukoputki tuottaa ylösalaisin olevan kuvan",
+          "Galilein kaukoputkessa okulaarin polttoväli on negatiivinen ja se tuottaa pystyn kuvan",
+          "Sekä Galilein että Keplerin rakenteet ovat täysin vapaita kromaattisesta aberraatiosta",
+          "Newtonin kaukoputki vähentää kromaattista aberraatiota korvaamalla objektiivilinssin peilillä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "MT=fo/fe on kaukoputken suurennus; Keplerin rakenteet (fe>0) kääntävät kuvan ylösalaisin, kun taas Galilein rakenteet (fe<0) pitävät sen pystynä. Molemmat linssipohjaiset rakenteet ovat alttiita kromaattiselle aberraatiolle, jota peilipohjainen Newtonin rakenne välttää suurelta osin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.13_001"
       }
     ],
     "10.1": [
@@ -2189,6 +4334,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.1_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tässä osiossa esitellyistä kuvantavan optiikan perusmäärittelyistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Systeemi on stigmaattinen, jos jokainen kohdepiste kuvautuu täydellisesti yhdeksi kuvapisteeksi",
+          "Täydellisesti stigmaattisia systeemejä ei voida todellisuudessa toteuttaa valon aaltoluonteen (diffraktion) vuoksi",
+          "Todellinen kuva muodostuu paikkaan, jossa tulevat säteet todella leikkaavat toisensa",
+          "Virtuaalinen kuva muodostuu paikkaan, jossa säteet vain näyttävät leikkaavan tai näyttävät lähtevän",
+          "Virtuaaliset ja todelliset kuvat ovat optisesti erottamattomia ja keskenään vaihdettavissa kaikissa tilanteissa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Stigmaattinen kuvaus, sen mahdottomuus tiukassa mielessä diffraktion vuoksi sekä todellisen ja virtuaalisen kuvan ero (säteet todella leikkaavat vs. vain näyttävät leikkaavan) on kaikki määritelty oikein; todelliset ja virtuaaliset kuvat ovat nimenomaisesti erilliset käsitteet, eivät vaihdettavissa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.1_001"
       }
     ],
     "10.2": [
@@ -2213,6 +4381,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.2_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa taittumisesta yhdellä pallopinnalla tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Tarkka Snellin laista johdettu kohde- ja kuvaetäisyyden välinen relaatio on yleisesti transkendenttinen (ei ratkaistavissa suljetussa muodossa)",
+          "Paraksiaaliapproksimaatio olettaa pienillä kulmilla sinφ ≈ φ ja cosφ ≈ 1",
+          "Paraksiaaliapproksimaatiossa pätee relaatio n1/so + n2/si = (n2−n1)/R riippumatta säteen korkeudesta h",
+          "Yksittäisen pallopinnan etu- ja takapolttovälit ovat aina täsmälleen yhtä suuret",
+          "Paraksiaaliapproksimaatiota kutsutaan myös Gaussin optiikaksi"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Tarkka Snellin lain relaatio on transkendenttinen; paraksiaaliapproksimaatio (pienten kulmien approksimaatio), jota kutsutaan myös Gaussin optiikaksi, antaa h:sta riippumattoman relaation n1/so+n2/si=(n2-n1)/R; muistiinpanoissa osoitetaan nimenomaisesti fo≠fi yksittäiselle rajapinnalle, joten etu- ja takapolttovälit EIVÄT yleensä ole yhtä suuret.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.2_001"
       }
     ],
     "10.4": [
@@ -2237,6 +4428,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.4_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa optisen akselin ulkopuolisten kohdepisteiden kuvanmuodostuksesta tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Ohuen linssin yhtälö 1/so + 1/si = 1/f pätee myös optisen akselin ulkopuolisille kohdepisteille (yo ≠ 0)",
+          "Newtonin kaava yhdistää kohde- ja kuvaetäisyydet polttopisteistä mitattuna: xo·xi = f²",
+          "Poikittaissuurennus on MT = yi/yo = −si/so",
+          "Pitkittäissuurennus ML liittyy poikittaissuurennukseen yhtälöllä ML = −MT²",
+          "Kolme pääsädettä, joilla kuvanmuodostus jäljitetään ihanteellisen linssin läpi, pätevät vain koverille (hajottaville) linsseille"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Linssiyhtälö ulottuu optisen akselin ulkopuolisiin pisteisiin, ja Newtonin kaava xo·xi=f² sekä suurennusrelaatiot MT=-si/so ja ML=-MT² on kaikki johdettu oikein; kolmen pääsäteen konstruktio on yleinen tekniikka ihanteellisille linsseille, ei rajoitettu koveriin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.4_001"
       }
     ],
     "10.5": [
@@ -2261,6 +4475,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.5_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kahden ohuen linssin systeemeistä tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Kahdelle toisiinsa kosketuksissa olevalle ohuelle linssille (etäisyys d≈0) yhdistetty polttoväli toteuttaa ehdon 1/f = 1/f1 + 1/f2",
+          "Vastaavasti linssien optisia voimakkuuksia käyttäen yhdistetty voimakkuus on D = D1 + D2",
+          "Kahden linssin systeemin kokonaissuurennus on kunkin linssin yksittäisten suurennusten tulo, MT = MT1·MT2",
+          "Linssisysteemeissä yleisesti (esim. paksuilla linsseillä) etu- ja takapolttovälit on määriteltävä uudelleen koko systeemin suhteen",
+          "Eri materiaaleista valmistettujen linssien yhdistäminen ei koskaan voi auttaa vähentämään kromaattista aberraatiota"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Yhdistetyn polttovälin ja optisten voimakkuuksien yhteenlaskusäännöt, kertova suurennus MT1·MT2 sekä tarve määritellä etu- ja takapolttovälit uudelleen linssisysteemeille on kaikki johdettu oikein; muistiinpanoissa kuvataan nimenomaisesti eri dispersiomateriaalien (dubletit/tripletit) käyttöä kromaattisen aberraation VÄHENTÄMISEKSI.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.5_001"
       }
     ],
     "10.6": [
@@ -2285,6 +4522,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.6_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa optisen systeemin aukoista, rajoittimista ja pupilleista tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Aukkorajoitin (AS) rajoittaa systeemin läpi etenevän valon kokonaismäärää",
+          "Kenttärajoitin (FS) rajoittaa kuvan kokoa valon määrän sijaan",
+          "Sisääntulopupilli on aukkorajoittimen kuva katsottuna kohdeavaruudesta",
+          "Ulostulopupilli on aukkorajoittimen kuva katsottuna kuva-avaruudesta",
+          "Aukkorajoitin ja kenttärajoitin tarkoittavat aina täsmälleen samaa fysikaalista komponenttia systeemissä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Aukkorajoitin (valon määrä) ja kenttärajoitin (kuvan koko) ovat erilliset komponentit; sisääntulo- ja ulostulopupilli ovat aukkorajoittimen kuvat katsottuna kohde- ja kuva-avaruudesta — nämä kaksi rajoitinta ovat käsitteellisesti ja usein fysikaalisestikin erilliset komponentit, eivät aina sama.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.6_001"
       }
     ],
     "10.7": [
@@ -2309,6 +4569,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.7_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa peileistä tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Tasopeili muodostaa virtuaalisen kuvan, joka on kohteen peilikuva ja kääntää sen kätisyyden",
+          "Pallopeili noudattaa samaa linssiyhtälön muotoa 1/so+1/si=1/f, missä f ≡ −R/2",
+          "Peilin poikittaissuurennus määritellään samalla tavalla kuin linsseille, MT = yi/yo",
+          "Toisin kuin linssit, peilit ovat pitkälti vapaita kromaattisesta aberraatiosta, koska niiden käyttäytyminen ei riipu juurikaan aallonpituudesta",
+          "Hyvin suuria linssejä on yleensä helpompi valmistaa kuin hyvin suuria peilejä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Tasopeilin kätisyyden kääntyminen, pallopeilin linssiyhtälön muoto f=-R/2, peilin suurennus MT=yi/yo sekä peilien lähes aallonpituudesta riippumaton käyttäytyminen (siten pieni kromaattinen aberraatio) on kaikki kuvattu oikein; muistiinpanoissa todetaan, että suuria PEILEJÄ on itse asiassa helpompi valmistaa kuin suuria linssejä, ei päinvastoin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.7_001"
       }
     ],
     "10.8": [
@@ -2333,6 +4616,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.8_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa prismoista tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Prisman toiminta voi perustua taittumiseen dispersiivisen aineen rajapinnoilla",
+          "Prisman toiminta voi vaihtoehtoisesti perustua kokonaisheijastukseen prisman ja ilman rajapinnalla",
+          "Prismoja voidaan diffraktiohilojen tavoin käyttää valon eri taajuuskomponenttien erottamiseen (esim. spektrometreissä)",
+          "Prismoja voidaan käyttää laajakaistaisen valon ohjaamiseen/heijastamiseen pienillä häviöillä tai kuvien kääntämiseen (esim. kiikareissa)",
+          "Prismat hyödyntävät täsmälleen samaa fysikaalista mekanismia kuin diffraktiohilat valon hajottamiseen"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Taittumiseen perustuva dispersio ja kokonaisheijastukseen perustuva heijastus ovat kaksi kuvattua prisman mekanismia, joita käytetään vastaavasti spektrin erottamiseen sekä häviöttömään laajakaistaiseen ohjaukseen/kuvan kääntämiseen; prismat hajottavat valoa materiaalidispersion (aallonpituudesta riippuva taitekerroin) kautta, mikä on eri fysikaalinen mekanismi kuin hilan jaksollinen interferenssi.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.8_001"
       }
     ],
     "10.9": [
@@ -2357,6 +4663,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.9_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ihmissilmän optiikasta tässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Valo taittuu voimakkaimmin ilman ja sarveiskalvon rajapinnalla, jossa taitekerroinkontrasti on suurin",
+          "Silmän kykyä tarkentaa sekä lähellä oleviin että kaukana oleviin kohteisiin kutsutaan akkommodaatioksi",
+          "Värikalvo säätää silmään tulevan valon määrää toimien muuttuvana aukkorajoittimena",
+          "Sauvasolut aistivat värejä mutta eivät voimakkuutta, kun taas tappisolut aistivat voimakkuutta mutta eivät värejä",
+          "Keskikuoppa (fovea centralis) on verkkokalvon kohta, jossa näkö on terävin"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Voimakkain taittuminen sarveiskalvolla, akkommodaatio, värikalvo muuttuvana aukkorajoittimena sekä keskikuoppa terävimmän näön paikkana on kaikki kuvattu oikein; muistiinpanoissa roolijako todetaan PÄINVASTAISEKSI — sauvasolut aistivat voimakkuutta (mahdollistavat yönäön) mutta eivät värejä, kun taas tappisolut aistivat sekä voimakkuutta että värejä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.9_001"
       }
     ],
     "10.10": [
@@ -2381,6 +4710,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.10_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa suurennuslasista (yksinkertaisesta suurentimesta) tässä osiossa johdetulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Suurennuslasi kasvattaa kohteen näennäistä kulmakokoa sallimalla sen tuomisen lähemmäs silmää kuin paljaan silmän lähipiste sallii",
+          "Ihanteellisesti suurennuslasi muodostaa virtuaalisen kuvan äärettömän kauas silmästä",
+          "Yksinkertaisen suurentimen kulmasuurennus on MP = do/f = do·D, missä D on linssin optinen voimakkuus",
+          "Mielivaltaisen lyhyen polttovälin käyttö antaa mielivaltaisen suuren hyödyllisen suurennuksen ilman käytännön haittoja",
+          "Mikä tahansa positiivinen (kokoava) linssi voi periaatteessa toimia suurennuslasina"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Suurentimen kulmasuurennusmekanismi MP=do/f=do·D, tavoite muodostaa virtuaalikuva äärettömyyteen sekä se, että mikä tahansa kokoava linssi voi toimia suurentimena, on kaikki kuvattu oikein; muistiinpanoissa huomautetaan nimenomaisesti, että linssien aberraatiot rajoittavat, kuinka paljon hyödyllistä suurennusta yksinkertaisella suurentimella käytännössä voidaan saavuttaa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.10_001"
       }
     ],
     "10.11": [
@@ -2405,6 +4757,29 @@
         "addedAt": "2026-09-19",
         "source": "claude-authored",
         "lang": "en"
+      },
+      {
+        "id": "q10.11_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa suoraan ihmissilmällä käytettäväksi suunnitelluista laitteista tässä okulaaria käsittelevässä osiossa esitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Yksinkertaisimmassa tapauksessa tällainen laite koostuu objektiivilinssistä ja okulaarista",
+          "Objektiivilinssi muodostaa linssien välille välikuvan",
+          "Okulaari asetetaan yhden polttovälin päähän välikuvasta",
+          "Okulaarin tarkoitus on suurentaa välikuvaa edelleen silmällä katsottavaksi",
+          "Tässä kahden linssin asettelussa objektiivilla ja okulaarilla on aina oltava identtiset polttovälit"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Kahden linssin (objektiivi + okulaari) asettelu, objektiivin välikuva, okulaarin sijoitus yhden polttovälin päähän sekä sen suurentava rooli on kaikki kuvattu oikein; mikään ei vaadi linsseille samaa polttoväliä — itse asiassa niiden erilaiset polttovälit määräävät kokonaissuurennuksen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.11_001"
       }
     ]
   }
