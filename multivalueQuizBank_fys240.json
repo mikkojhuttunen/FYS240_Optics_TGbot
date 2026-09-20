@@ -2171,6 +2171,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.1_001"
+      },
+      {
+        "id": "q4.1_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about Maxwell's equations and their history? (Select all that apply)",
+        "options": [
+          "The Lorentz force law was not part of Maxwell's original treatise",
+          "In vacuum Ampère's circuital law reads ∇ × B = μ0J − μ0ε0 ∂E/∂t",
+          "In 1865 J. C. Maxwell merged the phenomena and laws of electricity and magnetism into a unified treatment of electrodynamics",
+          "The Maxwell–Faraday equation is ∇ × E = −∂B/∂t",
+          "Gauss's law for magnetism, ∇·B = 0, is one of the four Maxwell's equations"
+        ],
+        "correctIndices": [
+          2,
+          3,
+          4
+        ],
+        "explanation": "Maxwell unified electricity and magnetism in 1865; ∇·B = 0 and ∇ × E = −∂B/∂t are two of the four equations. Ampère's law has a plus sign, ∇ × B = μ0J + μ0ε0 ∂E/∂t, and the Lorentz force equation was included in Maxwell's original treatise.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.1_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Maxwellin yhtälöistä ja niiden historiasta? (Valitse kaikki oikeat)",
+        "options": [
+          "Lorentzin voimalaki ei kuulunut Maxwellin alkuperäiseen tutkielmaan",
+          "Tyhjiössä Ampèren kiertolaki on ∇ × B = μ0J − μ0ε0 ∂E/∂t",
+          "Vuonna 1865 J. C. Maxwell yhdisti sähkön ja magnetismin ilmiöt ja lait yhtenäiseksi sähködynamiikan käsittelyksi",
+          "Maxwellin–Faradayn yhtälö on ∇ × E = −∂B/∂t",
+          "Magnetismin Gaussin laki, ∇·B = 0, on yksi neljästä Maxwellin yhtälöstä"
+        ],
+        "correctIndices": [
+          2,
+          3,
+          4
+        ],
+        "explanation": "Maxwell yhdisti sähkön ja magnetismin vuonna 1865; ∇·B = 0 ja ∇ × E = −∂B/∂t ovat kaksi neljästä yhtälöstä. Ampèren laissa on plusmerkki, ∇ × B = μ0J + μ0ε0 ∂E/∂t, ja Lorentzin voiman yhtälö kuului Maxwellin alkuperäiseen tutkielmaan.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.1_002"
+      },
+      {
+        "id": "q4.1_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about deriving the EM wave equation in vacuum from Maxwell's equations? (Select all that apply)",
+        "options": [
+          "Lagrange's formula ∇ × ∇ × E = ∇(∇·E) − ∇²E is used, together with ∇·E = 0 in vacuum",
+          "The wave equation for E obtained in vacuum is ∇²E = −μ0ε0 ∂²E/∂t²",
+          "The vacuum speed of light c0 depends on the frequency of the field",
+          "Comparing ∇²E = μ0ε0 ∂²E/∂t² with ∇²ψ = (1/v²)∂²ψ/∂t² gives v = 1/√(μ0ε0) ≡ c0 ≈ 3×10⁸ m/s",
+          "To derive the wave equations, the curl equations (3) and (4) are multiplied by the operator ∇×"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "Multiplying (3) and (4) by ∇× and using Lagrange's formula with ∇·E = ∇·B = 0 gives ∇²E = μ0ε0 ∂²E/∂t² (plus sign) and the same for B, so both propagate at c0 = 1/√(μ0ε0), a constant of nature independent of frequency.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.1_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa sähkömagneettisen aaltoyhtälön johtamisesta tyhjiössä Maxwellin yhtälöistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Johdossa käytetään Lagrangen kaavaa ∇ × ∇ × E = ∇(∇·E) − ∇²E sekä ehtoa ∇·E = 0 tyhjiössä",
+          "Tyhjiössä saatu E:n aaltoyhtälö on ∇²E = −μ0ε0 ∂²E/∂t²",
+          "Valon nopeus tyhjiössä c0 riippuu kentän taajuudesta",
+          "Vertaamalla yhtälöä ∇²E = μ0ε0 ∂²E/∂t² yhtälöön ∇²ψ = (1/v²)∂²ψ/∂t² saadaan v = 1/√(μ0ε0) ≡ c0 ≈ 3×10⁸ m/s",
+          "Aaltoyhtälöiden johtamiseksi roottoriyhtälöt (3) ja (4) kerrotaan operaattorilla ∇×"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "Kertomalla (3) ja (4) operaattorilla ∇× ja käyttämällä Lagrangen kaavaa ehdoilla ∇·E = ∇·B = 0 saadaan ∇²E = μ0ε0 ∂²E/∂t² (plusmerkki) ja sama B:lle, joten molemmat etenevät nopeudella c0 = 1/√(μ0ε0), joka on taajuudesta riippumaton luonnonvakio.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.1_003"
       }
     ],
     "4.2": [
@@ -2261,6 +2347,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.2_002"
+      },
+      {
+        "id": "q4.2_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the derivation of the properties of plane electromagnetic waves? (Select all that apply)",
+        "options": [
+          "∇·E = 0 for a plane wave in vacuum gives k·E0 = 0, i.e. E is a transverse field",
+          "For a plane wave in vacuum the amplitudes of the fields are equal, |B| = |E|",
+          "The condition k·E0 = 0 means that E is parallel to k",
+          "The Maxwell–Faraday equation leads to k̂ × E = cB, where k̂ is the unit vector along k",
+          "Arbitrary EM waves (e.g. ultrashort pulses, tightly focused beams) can be described as superpositions of time-harmonic plane waves (Fourier synthesis and analysis)"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "Any wave is a superposition of plane waves, ∇·E = 0 gives k·E0 = 0 (transverse field), and k̂ × E = cB. The amplitudes are related by |B| = |E|/c (not equal), and k·E0 = 0 means E is perpendicular — not parallel — to k.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.2_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tasomaisten sähkömagneettisten aaltojen ominaisuuksien johtamisesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Tyhjiössä etenevälle tasoaallolle ∇·E = 0 antaa k·E0 = 0, eli E on poikittainen kenttä",
+          "Tyhjiössä etenevälle tasoaallolle kenttien amplitudit ovat yhtä suuret, |B| = |E|",
+          "Ehto k·E0 = 0 tarkoittaa, että E on k:n suuntainen",
+          "Maxwellin–Faradayn yhtälöstä seuraa k̂ × E = cB, missä k̂ on k:n suuntainen yksikkövektori",
+          "Mielivaltaiset sähkömagneettiset aallot (esim. ultralyhyet pulssit, tiukasti fokusoidut säteet) voidaan kuvata ajan suhteen harmonisten tasoaaltojen superpositioina (Fourier-synteesi ja -analyysi)"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "Mikä tahansa aalto on tasoaaltojen superpositio, ∇·E = 0 antaa k·E0 = 0 (poikittainen kenttä), ja k̂ × E = cB. Amplitudit liittyvät toisiinsa yhtälöllä |B| = |E|/c (eivät ole yhtä suuret), ja k·E0 = 0 tarkoittaa, että E on kohtisuorassa k:ta vastaan — ei sen suuntainen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.2_003"
       }
     ],
     "4.3": [
@@ -2353,6 +2482,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.3_002"
+      },
+      {
+        "id": "q4.3_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about irradiance and the Poynting vector? (Select all that apply)",
+        "options": [
+          "For a time-harmonic plane wave the time-averaged irradiance is ⟨I⟩T = cε0E0², without a factor 1/2",
+          "In everyday language irradiance is often called intensity, although intensity technically has a different meaning",
+          "Irradiance is S = Utot/(At) = uc = cε0E²",
+          "The Poynting vector S = c²ε0 E × B is parallel to the E-field",
+          "The energy in the part of a plane wave filling the volume V = Act is Utot = uV = uAct"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "The volume/energy argument gives S = uc = cε0E², and 'intensity' is only colloquially used for irradiance. The Poynting vector is E × B (perpendicular to E), and the time average gives ⟨I⟩T = ½cε0E0² — with the factor 1/2.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.3_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa irradianssista ja Poyntingin vektorista? (Valitse kaikki oikeat)",
+        "options": [
+          "Ajan suhteen harmoniselle tasoaallolle aikakeskiarvoistettu irradianssi on ⟨I⟩T = cε0E0² ilman tekijää 1/2",
+          "Arkikielessä irradianssia kutsutaan usein intensiteetiksi, vaikka intensiteetillä on teknisesti eri merkitys",
+          "Irradianssi on S = Utot/(At) = uc = cε0E²",
+          "Poyntingin vektori S = c²ε0 E × B on E-kentän suuntainen",
+          "Tasoaallon osan, joka täyttää tilavuuden V = Act, energia on Utot = uV = uAct"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "Tilavuus-/energiapäättelystä saadaan S = uc = cε0E², ja 'intensiteettiä' käytetään irradianssista vain puhekielessä. Poyntingin vektori on E × B (kohtisuorassa E:tä vastaan), ja aikakeskiarvo antaa ⟨I⟩T = ½cε0E0² — tekijän 1/2 kanssa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.3_003"
       }
     ],
     "4.4": [
@@ -2445,6 +2617,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.4_002"
+      },
+      {
+        "id": "q4.4_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about radiation pressure and the derivation of the momentum density of light? (Select all that apply)",
+        "options": [
+          "The radiation pressure caused by an impinging EM field equals the energy density of the field, P = u = S/c",
+          "Because of the rapid oscillation of the field, radiation pressure is treated through its time average ⟨P⟩T = I/c",
+          "The momentum density of the field is pV = I/c",
+          "The derivation of the momentum density assumes a plane wave that is fully reflected, without any absorption",
+          "For a fully absorbing object the force is F = PA = p/t, where t = ℓ/c is the time the wave needs to propagate through the volume"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "P = u = S/c with ⟨P⟩T = I/c, and F = PA = p/t for a fully absorbing object give pV = I/c² — with two powers of c — and the plane wave is absorbed, not reflected.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.4_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa säteilypaineesta ja valon liikemäärätiheyden johtamisesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Sähkömagneettisen kentän aiheuttama säteilypaine on yhtä suuri kuin kentän energiatiheys, P = u = S/c",
+          "Kentän nopean värähtelyn vuoksi säteilypainetta käsitellään sen aikakeskiarvon ⟨P⟩T = I/c kautta",
+          "Kentän liikemäärätiheys on pV = I/c",
+          "Liikemäärätiheyden johdossa oletetaan täysin heijastuva tasoaalto ilman absorptiota",
+          "Täysin absorboivalle kappaleelle voima on F = PA = p/t, missä t = ℓ/c on aika, jonka aalto tarvitsee kulkeakseen tilavuuden läpi"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "P = u = S/c ja ⟨P⟩T = I/c sekä F = PA = p/t täysin absorboivalle kappaleelle antavat pV = I/c² — kaksi potenssia c:tä — ja tasoaalto absorboituu, ei heijastu.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.4_003"
       }
     ],
     "4.5": [
@@ -2537,6 +2752,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.5_002"
+      },
+      {
+        "id": "q4.5_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about sources of electromagnetic radiation and dipole emitters? (Select all that apply)",
+        "options": [
+          "Dipole emitters often have |d| < λ, in which case the emitter can be treated as point-like",
+          "UV, X-ray and γ radiation is created e.g. with accelerators, synchrotrons and X-ray tubes",
+          "Visible light sources include lasers, LEDs and incandescent light bulbs",
+          "A harmonically oscillating dipole p = p0e^{−iωt} does not radiate, because its charges are stationary on average",
+          "The near-field of a dipole is simple and contains only propagating fields"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Different wavelength ranges have different sources (accelerators/X-ray tubes; lasers/LEDs/bulbs), and dipole emitters with |d| < λ are point-like. The near-field is complicated and includes non-propagating fields, and an oscillating dipole acts as a source of radiation.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.5_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa sähkömagneettisen säteilyn lähteistä ja dipolisäteilijöistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Dipolisäteilijöillä |d| < λ, jolloin säteilijää voidaan käsitellä pistemäisenä",
+          "UV-, röntgen- ja γ-säteilyä tuotetaan esimerkiksi kiihdyttimillä, synkrotroneilla ja röntgenputkilla",
+          "Näkyvän valon lähteitä ovat mm. laserit, LEDit ja hehkulamput",
+          "Harmonisesti värähtelevä dipoli p = p0e^{−iωt} ei säteile, koska sen varaukset ovat keskimäärin paikallaan",
+          "Dipolin lähikenttä on yksinkertainen ja sisältää vain eteneviä kenttiä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Eri aallonpituusalueilla on eri lähteet (kiihdyttimet/röntgenputket; laserit/LEDit/hehkulamput), ja dipolisäteilijät, joilla |d| < λ, ovat pistemäisiä. Lähikenttä on monimutkainen ja sisältää ei-eteneviä kenttiä, ja värähtelevä dipoli toimii säteilyn lähteenä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.5_003"
       }
     ],
     "4.6": [
@@ -2629,6 +2887,51 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.6_002"
+      },
+      {
+        "id": "q4.6_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about polarization, permittivity and refraction in matter? (Select all that apply)",
+        "options": [
+          "The electric displacement can be written D = ε0E + P = εE = ε0εrE, with εr the relative permittivity",
+          "The bound charge density is ρb = +∇·P",
+          "Polarization P = pV = Np = Nε0αE = ε0χE relates the material polarization to the atomic dipole moment p = ε0αE and the particle density N",
+          "The optical path length is defined as OPL ≡ nz, the phase change in vacuum that corresponds to the propagation distance z in the medium",
+          "In a medium the wavevector is k = nk0 = nω/c, so the phase evolves faster than in vacuum"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "explanation": "P = Nε0αE = ε0χE, D = ε0E + P = εE, OPL = nz and k = nω/c are all correct. The bound charge density is ρb = −∇·P (a minus sign), with bound current Jb = ∇ × M + ∂P/∂t.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q4.6_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa polarisaatiosta, permittiivisyydestä ja taittumisesta aineessa? (Valitse kaikki oikeat)",
+        "options": [
+          "Sähkövuon tiheys voidaan kirjoittaa D = ε0E + P = εE = ε0εrE, missä εr on suhteellinen permittiivisyys",
+          "Sidottu varaustiheys on ρb = +∇·P",
+          "Polarisaatio P = pV = Np = Nε0αE = ε0χE yhdistää materiaalin polarisaation atomin dipolimomenttiin p = ε0αE ja hiukkastiheyteen N",
+          "Optinen matka määritellään OPL ≡ nz, eli tyhjiön vaihemuutos, joka vastaa etenemismatkaa z aineessa",
+          "Aineessa aaltovektorin pituus on k = nk0 = nω/c, joten vaihe kehittyy nopeammin kuin tyhjiössä"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "explanation": "P = Nε0αE = ε0χE, D = ε0E + P = εE, OPL = nz ja k = nω/c ovat kaikki oikein. Sidottu varaustiheys on ρb = −∇·P (miinusmerkki), ja sidottu virta Jb = ∇ × M + ∂P/∂t.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.6_003"
       }
     ]
   },
@@ -2723,6 +3026,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q5.3_002"
+      },
+      {
+        "id": "q5.3_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the equation of motion of the electron in the Lorentz model? (Select all that apply)",
+        "options": [
+          "With the trial function x(t) = x0e^{−iωt} one obtains x0 = qE0/[m(ω0² − ω²)]",
+          "The one-dimensional treatment of the model applies well to anisotropic media",
+          "The driving force qE0e^{−iωt} and the spring force −kx give the equation of motion m ẍ + kx = qE0e^{−iωt}",
+          "In the undamped model the refractive index remains finite at the resonance ω = ω0",
+          "The amplitude of the electron's displacement grows near the resonance and depends linearly on the amplitude E0 of the driving field"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "The equation m ẍ + kx = qE0e^{−iωt} and its solution x0 = qE0/[m(ω0² − ω²)] show that the displacement follows the field, grows near resonance and is linear in E0. The 1D treatment applies well to isotropic media, and without damping n → ∞ at ω = ω0, which is unphysical and motivates adding a damping term.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q5.3_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa elektronin liikeyhtälöstä Lorentzin mallissa? (Valitse kaikki oikeat)",
+        "options": [
+          "Kokeilufunktiolla x(t) = x0e^{−iωt} saadaan x0 = qE0/[m(ω0² − ω²)]",
+          "Mallin yksiulotteinen käsittely soveltuu hyvin anisotrooppisille aineille",
+          "Ajava voima qE0e^{−iωt} ja jousivoima −kx antavat liikeyhtälön m ẍ + kx = qE0e^{−iωt}",
+          "Vaimentamattomassa mallissa taitekerroin pysyy äärellisenä resonanssissa ω = ω0",
+          "Elektronin poikkeaman amplitudi kasvaa resonanssin lähellä ja riippuu lineaarisesti ajavan kentän amplitudista E0"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "Yhtälö m ẍ + kx = qE0e^{−iωt} ja sen ratkaisu x0 = qE0/[m(ω0² − ω²)] osoittavat, että poikkeama seuraa kenttää, kasvaa resonanssin lähellä ja on lineaarinen E0:n suhteen. Yksiulotteinen käsittely soveltuu hyvin isotrooppisille aineille, ja ilman vaimennusta n → ∞ kohdassa ω = ω0, mikä on epäfysikaalista ja motivoi vaimennustermin lisäämistä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.3_003"
       }
     ],
     "5.1": [
@@ -3132,6 +3478,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q5.4_002"
+      },
+      {
+        "id": "q5.4_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about absorption and stimulated emission in laser operation? (Select all that apply)",
+        "options": [
+          "The probabilities of absorption and stimulated emission are independent of the population densities Ni",
+          "Absorption gives rise to losses and makes it possible to store energy inside the laser crystal",
+          "In stimulated emission the incident and emitted photons have similar properties (phase coherence), so the medium acts as an optical amplifier",
+          "Stimulated emission enables the amplification of light",
+          "In thermal equilibrium a sufficiently high temperature makes N2 exceed N1"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "Absorption causes losses/energy storage, stimulated emission amplifies and produces phase-coherent photons. Both probabilities depend on the population densities, and in thermal equilibrium the Boltzmann distribution always gives N2 < N1 — inversion requires breaking the equilibrium by pumping.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q5.4_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa absorptiosta ja stimuloidusta emissiosta laserin toiminnassa? (Valitse kaikki oikeat)",
+        "options": [
+          "Absorption ja stimuloidun emission todennäköisyydet ovat riippumattomia miehitystiheyksistä Ni",
+          "Absorptio aiheuttaa häviöitä ja mahdollistaa energian varastoimisen laserkiteeseen",
+          "Stimuloidussa emissiossa tulevalla ja emittoituvalla fotonilla on samanlaiset ominaisuudet (vaihekoherenssi), joten aine toimii optisena vahvistimena",
+          "Stimuloitu emissio mahdollistaa valon vahvistamisen",
+          "Termisessä tasapainossa riittävän korkea lämpötila saa N2:n ylittämään N1:n"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "Absorptio aiheuttaa häviöitä/energian varastoitumista, ja stimuloitu emissio vahvistaa ja tuottaa vaihekoherentteja fotoneja. Molemmat todennäköisyydet riippuvat miehitystiheyksistä, ja termisessä tasapainossa Boltzmannin jakauma antaa aina N2 < N1 — inversio vaatii tasapainon rikkomista pumppaamalla.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.4_003"
       }
     ]
   },
@@ -3181,6 +3570,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q6.6_001"
+      },
+      {
+        "id": "q6.6_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the mathematical description of total internal reflection? (Select all that apply)",
+        "options": [
+          "TIR occurs when light travels from the optically less dense to the optically denser medium (ni < nt)",
+          "Snell's law can give sinθt > 1, which cannot be satisfied with a real-valued transmission angle",
+          "The numerator and denominator of r⊥ are then complex conjugates of each other, so R⊥ = |r⊥|² = 1",
+          "In TIR cosθt becomes purely imaginary, cosθt = ±i(sin²θt − 1)^{1/2}",
+          "In TIR the reflectance R⊥ is smaller than 1, because part of the energy is transmitted along z"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "TIR follows from sinθt > 1 (complex cosθt), which gives conjugate numerator/denominator and R⊥ = 1 — all ⊥-polarized light is reflected. It requires ni > nt (going from a denser to a less dense medium), and no energy is transferred along z.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.6_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kokonaisheijastuksen matemaattisesta kuvauksesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Kokonaisheijastus tapahtuu, kun valo etenee optisesti harvemmasta tiheämpään aineeseen (ni < nt)",
+          "Snellin laki voi antaa sinθt > 1, mitä ei voida toteuttaa reaaliarvoisella läpäisykulmalla",
+          "Tällöin r⊥:n osoittaja ja nimittäjä ovat toistensa kompleksikonjugaatteja, joten R⊥ = |r⊥|² = 1",
+          "Kokonaisheijastuksessa cosθt muuttuu puhtaasti imaginaariseksi, cosθt = ±i(sin²θt − 1)^{1/2}",
+          "Kokonaisheijastuksessa reflektanssi R⊥ on pienempi kuin 1, koska osa energiasta siirtyy z-suunnassa"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "Kokonaisheijastus seuraa ehdosta sinθt > 1 (kompleksinen cosθt), mikä antaa konjugaattiosoittajan/-nimittäjän ja R⊥ = 1 — kaikki ⊥-polarisoitunut valo heijastuu. Se edellyttää ehtoa ni > nt (siirtyminen tiheämmästä harvempaan aineeseen), eikä energiaa siirry z-suunnassa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.6_002"
+      },
+      {
+        "id": "q6.6_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the evanescent field and frustrated total internal reflection? (Select all that apply)",
+        "options": [
+          "Energy is not transferred along the z-direction by the evanescent field",
+          "During TIR the field beyond the interface is a wave that propagates away from the interface along z",
+          "If a third medium with a sufficiently large refractive index n3 (even a nm-sized dust grain) is present, the evanescent wave can turn into a propagating wave (frustrated TIR)",
+          "The field beyond the interface during TIR oscillates along the surface (x-direction) and decays exponentially along z (evanescent)",
+          "Frustrated total internal reflection improves the performance of optical fibers and waveguides"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "In TIR the transmitted field is evanescent — decaying exponentially in z, with no net energy flow along z — and a third medium (even a nanoscale grain) can turn it into a propagating wave (frustrated TIR), which degrades fibers and waveguides rather than improving them.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.6_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa evanescentista kentästä ja häirityssä kokonaisheijastuksessa? (Valitse kaikki oikeat)",
+        "options": [
+          "Evanescentti kenttä ei siirrä energiaa z-suunnassa",
+          "Kokonaisheijastuksessa rajapinnan takana oleva kenttä on aalto, joka etenee pois rajapinnasta z-suunnassa",
+          "Jos läsnä on kolmas aine, jonka taitekerroin n3 on riittävän suuri (vaikka nanometrin kokoinen pölyhiukkanen), evanescentti aalto voi muuttua etenevääksi aalloksi (häiritty kokonaisheijastus)",
+          "Rajapinnan takana oleva kenttä kokonaisheijastuksessa värähtelee pintaa pitkin (x-suunnassa) ja vaimenee eksponentiaalisesti z-suunnassa (evanescentti)",
+          "Häiritty kokonaisheijastus parantaa optisten kuitujen ja aaltoputkien suorituskykyä"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "Kokonaisheijastuksessa läpäissyt kenttä on evanescentti — vaimenee eksponentiaalisesti z-suunnassa, eikä energiaa virtaa z-suunnassa — ja kolmas aine (jopa nanokokoinen hiukkanen) voi muuttaa sen etenevä aalloksi (häiritty kokonaisheijastus), mikä heikentää kuituja ja aaltoputkia eikä paranna niitä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.6_003"
       }
     ],
     "6.1": [
@@ -3228,6 +3703,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q6.1_001"
+      },
+      {
+        "id": "q6.1_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about rays and wavefronts as introduced at the start of the chapter? (Select all that apply)",
+        "options": [
+          "The chapter uses two treatments of light propagation: rays and wavefronts",
+          "A wavefront propagates at velocity c/n, i.e. slower than in vacuum when n > 1",
+          "A ray is parallel to the wavefront surface",
+          "Rays are treated in more detail later, in Chapter 10",
+          "A wavefront is a line along which the energy of light propagates"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Both rays and wavefronts are used, rays are treated more in Chapter 10, and wavefronts move at c/n. A ray describes the direction of energy flow and is orthogonal to the wavefront (which is a surface of constant phase), not parallel to it.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.1_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa säteistä ja aaltorintamista luvun alussa esitetyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Luvussa käytetään kahta valon etenemisen käsittelytapaa: säteitä ja aaltorintamia",
+          "Aaltorintama etenee nopeudella c/n, eli hitaammin kuin tyhjiössä, kun n > 1",
+          "Säde on aaltorintaman pinnan suuntainen",
+          "Säteitä käsitellään tarkemmin myöhemmin, luvussa 10",
+          "Aaltorintama on viiva, jota pitkin valon energia etenee"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Sekä säteitä että aaltorintamia käytetään, säteitä käsitellään enemmän luvussa 10, ja aaltorintamat etenevät nopeudella c/n. Säde kuvaa energian kulkusuuntaa ja on kohtisuorassa aaltorintamaa vastaan (joka on vakiovaiheen pinta), ei sen suuntainen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.1_002"
+      },
+      {
+        "id": "q6.1_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the relation between rays, wavefronts and the wavevector? (Select all that apply)",
+        "options": [
+          "Both a ray and the wavevector k are perpendicular to the local wavefront, so they point along the same line",
+          "All points on one wavefront have the same phase",
+          "In a medium the wavefront velocity is nc",
+          "Rays and wavefronts are unrelated descriptions with no geometrical relation to each other",
+          "In a medium with n = 1.5 a wavefront propagates at about c/1.5 ≈ 2×10⁸ m/s"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "The ray and k are both orthogonal to the wavefront (a constant-phase surface), and the wavefront velocity is c/n (≈2×10⁸ m/s for n = 1.5). It is not nc, and the two pictures are directly related: rays are orthogonal to wavefronts.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.1_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa säteiden, aaltorintamien ja aaltovektorin välisestä yhteydestä? (Valitse kaikki oikeat)",
+        "options": [
+          "Sekä säde että aaltovektori k ovat kohtisuorassa paikalliseen aaltorintamaan nähden, joten ne osoittavat samaa suoraa pitkin",
+          "Kaikilla saman aaltorintaman pisteillä on sama vaihe",
+          "Aineessa aaltorintaman nopeus on nc",
+          "Säteet ja aaltorintamat ovat toisiinsa liittymättömiä kuvauksia, joilla ei ole keskinäistä geometrista yhteyttä",
+          "Aineessa, jonka n = 1,5, aaltorintama etenee nopeudella noin c/1,5 ≈ 2×10⁸ m/s"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Sekä säde että k ovat kohtisuorassa aaltorintamaa (vakiovaiheen pintaa) vastaan, ja aaltorintaman nopeus on c/n (≈2×10⁸ m/s, kun n = 1,5). Se ei ole nc, ja kuvaukset liittyvät suoraan toisiinsa: säteet ovat kohtisuorassa aaltorintamia vastaan.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.1_003"
       }
     ],
     "6.2": [
@@ -3318,6 +3879,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q6.2_002"
+      },
+      {
+        "id": "q6.2_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about reflection and refraction at an interface between two homogeneous media? (Select all that apply)",
+        "options": [
+          "The plane of incidence contains the vectors ki, kr and the surface normal n",
+          "When light enters an optically denser medium (nt > ni), the ray bends towards the surface normal, θi > θt, e.g. at an air–glass interface",
+          "If ni ≠ nt, part of the incident light is reflected at the interface",
+          "The angle θi is measured between the incident ray and the interface surface itself",
+          "In the wavefront derivation of the law of reflection, |BD| = |AD| cosθi and |AC| = |AD| cosθr"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "The plane of incidence contains ki, kr and n; part of the light is reflected when ni ≠ nt; and in a denser medium rays bend towards the normal. In the derivation |BD| = |AD| sinθi and |AC| = |AD| sinθr (sine, not cosine), and θi is measured from the surface normal.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.2_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa heijastuksesta ja taittumisesta kahden homogeenisen aineen rajapinnalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Tulotaso sisältää vektorit ki, kr ja pinnan normaalin n",
+          "Kun valo siirtyy optisesti tiheämpään aineeseen (nt > ni), säde taittuu kohti pinnan normaalia, θi > θt, esim. ilman ja lasin rajapinnalla",
+          "Jos ni ≠ nt, osa tulevasta valosta heijastuu rajapinnalla",
+          "Kulma θi mitataan tulevan säteen ja itse rajapinnan pinnan välillä",
+          "Aaltorintamapäättelyssä heijastuslain johtamiseksi |BD| = |AD| cosθi ja |AC| = |AD| cosθr"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Tulotaso sisältää ki:n, kr:n ja n:n; osa valosta heijastuu, kun ni ≠ nt; ja tiheämmässä aineessa säteet taittuvat kohti normaalia. Johdossa |BD| = |AD| sinθi ja |AC| = |AD| sinθr (sini, ei kosini), ja θi mitataan pinnan normaalista.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.2_003"
       }
     ],
     "6.3": [
@@ -3547,6 +4151,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q6.4_002"
+      },
+      {
+        "id": "q6.4_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about deriving the Fresnel coefficients? (Select all that apply)",
+        "options": [
+          "Two situations are treated separately: the incident E-field oscillating perpendicular to the plane of incidence (⊥) or along it (∥)",
+          "The Fresnel amplitude coefficient r∥ directly equals the fraction of the irradiance that is reflected",
+          "The tangential components of the E- and B-fields are continuous at the interface, which gives the conditions used in the derivation",
+          "For non-magnetic media the fields are related by B = (c/n)E",
+          "The Fresnel coefficient for ∥ polarization is r∥ = (nt cosθi − ni cosθt)/(nt cosθi + ni cosθt)"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "⊥ and ∥ polarizations are treated separately, r∥ has the stated form, and the tangential field components are continuous. The reflected irradiance fraction is R = |r|² (not r itself), and the relation is B = (n/c)E.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.4_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Fresnelin kertoimien johtamisesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Kaksi tilannetta käsitellään erikseen: tuleva E-kenttä värähtelee kohtisuoraan tulotasoa vastaan (⊥) tai tulotasossa (∥)",
+          "Fresnelin amplitudikerroin r∥ on suoraan yhtä suuri kuin heijastuvan irradianssin osuus",
+          "E- ja B-kenttien tangentiaalikomponentit ovat jatkuvia rajapinnalla, mistä saadaan johdossa käytetyt ehdot",
+          "Ei-magneettisille aineille kentät liittyvät toisiinsa yhtälöllä B = (c/n)E",
+          "∥-polarisaation Fresnelin kerroin on r∥ = (nt cosθi − ni cosθt)/(nt cosθi + ni cosθt)"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "⊥- ja ∥-polarisaatiot käsitellään erikseen, r∥:llä on esitetty muoto, ja kenttien tangentiaalikomponentit ovat jatkuvia. Heijastuneen irradianssin osuus on R = |r|² (ei r itse), ja yhteys on B = (n/c)E.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.4_003"
       }
     ],
     "6.5": [
@@ -3639,6 +4286,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q6.5_002"
+      },
+      {
+        "id": "q6.5_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the step from the Fresnel coefficients to reflectance and transmittance? (Select all that apply)",
+        "options": [
+          "Reflectance is R = Ir A cosθr / (Ii A cosθi) = Ir/Ii, because θr = θi",
+          "The irradiance of a field is I = ½ nε0|E0|², without a factor c",
+          "Transmittance is T = (nt cosθt)/(ni cosθi) · |t|²",
+          "For a glass–air interface R + T becomes smaller than 1 beyond the critical angle",
+          "The Fresnel coefficients apply to the field amplitudes and do not exactly describe how much optical energy is reflected or transmitted"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "Amplitude coefficients are converted to energy quantities using I = ½ncε0|E0|², giving R = |r|² and T = (nt cosθt/ni cosθi)|t|². Energy is conserved, R + T = 1, also beyond the critical angle (where R = 1 and T = 0).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q6.5_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa siirtymästä Fresnelin kertoimista reflektanssiin ja transmittanssiin? (Valitse kaikki oikeat)",
+        "options": [
+          "Reflektanssi on R = Ir A cosθr / (Ii A cosθi) = Ir/Ii, koska θr = θi",
+          "Kentän irradianssi on I = ½ nε0|E0|² ilman tekijää c",
+          "Transmittanssi on T = (nt cosθt)/(ni cosθi) · |t|²",
+          "Lasin ja ilman rajapinnalla R + T on pienempi kuin 1 kriittisen kulman jälkeen",
+          "Fresnelin kertoimet koskevat kenttien amplitudeja eivätkä kuvaa täsmälleen, kuinka paljon optista energiaa heijastuu tai läpäisee"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "Amplitudikertoimet muunnetaan energiasuureiksi kaavalla I = ½ncε0|E0|², jolloin R = |r|² ja T = (nt cosθt/ni cosθi)|t|². Energia säilyy, R + T = 1, myös kriittisen kulman jälkeen (jolloin R = 1 ja T = 0).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.5_003"
       }
     ]
   },
@@ -3688,6 +4378,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q7.3_001"
+      },
+      {
+        "id": "q7.3_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about deriving the standing wave from reflection at a mirror at z = 0? (Select all that apply)",
+        "options": [
+          "The reflected wave propagates along +z, like the incident wave",
+          "The superposition then becomes E(z,t) = 2iAI sin(kz) e^{−iωt}",
+          "The superposition reduces to E(z,t) = 2AI cos(kz) e^{−iωt}, with a field maximum at the mirror",
+          "A wave EI = AI e^{i(kz−ωt)} reflecting from the mirror gives a reflected wave ER = AR e^{i(−kz−ωt)} propagating along −z",
+          "For a perfectly reflecting metal mirror the boundary condition E(z = 0, t) = 0 gives AR = −AI"
+        ],
+        "correctIndices": [
+          1,
+          3,
+          4
+        ],
+        "explanation": "The reflected wave travels along −z, the mirror boundary condition E(0,t) = 0 gives AR = −AI, and the superposition is 2iAI sin(kz)e^{−iωt}. Because of the sine the field is zero (a node) at the mirror — not a maximum — and the reflected wave travels backwards.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.3_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa seisovan aallon johtamisesta heijastuksena peilistä kohdassa z = 0? (Valitse kaikki oikeat)",
+        "options": [
+          "Heijastunut aalto etenee +z-suuntaan kuten tuleva aalto",
+          "Superpositio on tällöin E(z,t) = 2iAI sin(kz) e^{−iωt}",
+          "Superpositio sievenee muotoon E(z,t) = 2AI cos(kz) e^{−iωt}, ja kentällä on maksimi peilin kohdalla",
+          "Aalto EI = AI e^{i(kz−ωt)} heijastuu peilistä, jolloin heijastunut aalto ER = AR e^{i(−kz−ωt)} etenee −z-suuntaan",
+          "Täydellisesti heijastavalle metallipeilille reunaehto E(z = 0, t) = 0 antaa AR = −AI"
+        ],
+        "correctIndices": [
+          1,
+          3,
+          4
+        ],
+        "explanation": "Heijastunut aalto etenee −z-suuntaan, peilin reunaehto E(0,t) = 0 antaa AR = −AI, ja superpositio on 2iAI sin(kz)e^{−iωt}. Sinin vuoksi kenttä on nolla (solmu) peilin kohdalla — ei maksimi — ja heijastunut aalto etenee taaksepäin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.3_002"
+      },
+      {
+        "id": "q7.3_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the properties of the standing wave and its generalizations? (Select all that apply)",
+        "options": [
+          "The total field of a standing wave propagates steadily along +z",
+          "Superposing plane waves propagating along several different directions k makes it possible to treat e.g. focusing or diverging light",
+          "In a standing wave the field amplitude is the same at every position z",
+          "The field at the mirror surface z = 0 is a node",
+          "The nodes occur where sin(kz) = 0, so the superposition field vanishes there"
+        ],
+        "correctIndices": [
+          1,
+          3,
+          4
+        ],
+        "explanation": "The nodes are at sin(kz) = 0 (including the mirror surface), and superpositions of plane waves with different directions describe focusing/diverging light. The amplitude varies with z (nodes and anti-nodes), and the total standing-wave field does not propagate.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.3_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa seisovan aallon ominaisuuksista ja sen yleistyksistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Seisovan aallon kokonaiskenttä etenee tasaisesti +z-suuntaan",
+          "Usean eri suuntaan k etenevän tasoaallon superponointi mahdollistaa esim. fokusoituvan tai hajaantuvan valon käsittelyn",
+          "Seisovassa aallossa kentän amplitudi on sama kaikissa paikoissa z",
+          "Kenttä peilin pinnalla z = 0 on solmu",
+          "Solmukohdat esiintyvät kohdissa, joissa sin(kz) = 0, joten superpositiokenttä häviää niissä"
+        ],
+        "correctIndices": [
+          1,
+          3,
+          4
+        ],
+        "explanation": "Solmut ovat kohdissa sin(kz) = 0 (peilin pinta mukaan lukien), ja eri suuntiin etenevien tasoaaltojen superpositiot kuvaavat fokusoituvaa/hajaantuvaa valoa. Amplitudi vaihtelee z:n mukana (solmut ja kupukohdat), eikä seisovan aallon kokonaiskenttä etene.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.3_003"
       }
     ],
     "7.5": [
@@ -3735,6 +4511,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q7.5_001"
+      },
+      {
+        "id": "q7.5_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the idealized time-harmonic wave and coherence? (Select all that apply)",
+        "options": [
+          "The coherence time is the time it takes light to travel through the optical system",
+          "The time-harmonic plane wave oscillates for t ∈ (−∞, ∞), so its phases at any two instants t1 and t2 are perfectly correlated",
+          "For a large enough |t1 − t2| such perfect correlation is unphysical",
+          "A real wave packet is mutually coherent with all other wave packets of the same light source",
+          "The phases at t1 and t2 are correlated when |t1 − t2| < τc, or equivalently when |ℓ1 − ℓ2| < ℓc = τc c"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "An ideal harmonic wave has perfectly correlated phases at all times (unphysical for large separations), and phases are correlated when |t1 − t2| < τc (|ℓ1 − ℓ2| < ℓc). Wave packets are internally coherent but not mutually coherent, and τc is a phase-correlation time, not a transit time.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.5_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa idealisoidusta ajan suhteen harmonisesta aallosta ja koherenssista? (Valitse kaikki oikeat)",
+        "options": [
+          "Koherenssiaika on aika, jonka valo tarvitsee kulkeakseen optisen systeemin läpi",
+          "Ajan suhteen harmoninen tasoaalto värähtelee ajalla t ∈ (−∞, ∞), joten sen vaiheet kahtena mielivaltaisena hetkenä t1 ja t2 ovat täysin korreloituneet",
+          "Riittävän suurella |t1 − t2|:lla tällainen täydellinen korrelaatio on epäfysikaalinen",
+          "Todellinen aaltopaketti on keskenään koherentti saman valonlähteen kaikkien muiden aaltopakettien kanssa",
+          "Vaiheet hetkinä t1 ja t2 ovat korreloituneet, kun |t1 − t2| < τc, tai vastaavasti kun |ℓ1 − ℓ2| < ℓc = τc c"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "Ideaalisella harmonisella aallolla on täysin korreloituneet vaiheet kaikkina hetkinä (epäfysikaalista suurilla erotuksilla), ja vaiheet ovat korreloituneet, kun |t1 − t2| < τc (|ℓ1 − ℓ2| < ℓc). Aaltopaketit ovat sisäisesti koherentteja mutta eivät keskenään koherentteja, ja τc on vaiheiden korrelaatioaika, ei kulkuaika.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.5_002"
+      },
+      {
+        "id": "q7.5_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the simplified coherence-time picture and coherence in reality? (Select all that apply)",
+        "options": [
+          "The treatment with a sharp coherence time is heavily simplified compared with a statistical description of light",
+          "In reality coherence is a strictly binary property that is lost abruptly at |t1 − t2| = τc",
+          "In reality coherence vanishes gradually as the time separation |t1 − t2| grows to about τc",
+          "The coherence distance ℓc does not depend on the coherence time τc",
+          "A longer coherence time τc corresponds to a longer coherence distance ℓc = τc c"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "The sharp-τc picture is heavily simplified, real coherence fades gradually around τc, and ℓc = τc c grows with τc. Coherence is not binary, and ℓc is directly determined by τc.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.5_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa yksinkertaistetusta koherenssiaikakuvasta ja todellisesta koherenssista? (Valitse kaikki oikeat)",
+        "options": [
+          "Terävään koherenssiaikaan perustuva käsittely on voimakkaasti yksinkertaistettu verrattuna valon tilastolliseen kuvaukseen",
+          "Todellisuudessa koherenssi on tiukasti binäärinen ominaisuus, joka menetetään äkillisesti kohdassa |t1 − t2| = τc",
+          "Todellisuudessa koherenssi häviää vähitellen, kun aikaero |t1 − t2| kasvaa noin arvoon τc",
+          "Koherenssipituus ℓc ei riipu koherenssiajasta τc",
+          "Pidempi koherenssiaika τc vastaa pidempää koherenssipituutta ℓc = τc c"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "Terävän τc:n kuva on voimakkaasti yksinkertaistettu, todellinen koherenssi häipyy vähitellen τc:n tienoilla, ja ℓc = τc c kasvaa τc:n mukana. Koherenssi ei ole binäärinen, ja ℓc määräytyy suoraan τc:stä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.5_003"
       }
     ],
     "7.1": [
@@ -3827,6 +4689,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q7.1_002"
+      },
+      {
+        "id": "q7.1_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the superposition principle introduced at the start of the chapter? (Select all that apply)",
+        "options": [
+          "The superposition principle follows from the nonlinearity of differential operations",
+          "Chapters 8 (interference) and 9 (diffraction) build on the superposition principle introduced here",
+          "Because the wave equation ∇²ψ = (1/v²)∂²ψ/∂t² is linear, a weighted sum Σ ci ψi of its solutions is again a wave",
+          "Waves can be superposed only if they all have exactly the same frequency",
+          "The superposition principle is of general importance in almost all branches of physics"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "Linearity of the wave equation (differential operations are linear) makes a weighted sum of solutions a solution, the principle is important throughout physics, and it underlies interference and diffraction. It does not require equal frequencies, and it follows from linearity, not nonlinearity.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q7.1_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa luvun alussa esitellystä superpositioperiaatteesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Superpositioperiaate seuraa differentiaalioperaatioiden epälineaarisuudesta",
+          "Luvut 8 (interferenssi) ja 9 (diffraktio) rakentuvat tässä esitellylle superpositioperiaatteelle",
+          "Koska aaltoyhtälö ∇²ψ = (1/v²)∂²ψ/∂t² on lineaarinen, sen ratkaisujen painotettu summa Σ ci ψi on jälleen aalto",
+          "Aaltoja voidaan superponoida vain, jos niillä kaikilla on täsmälleen sama taajuus",
+          "Superpositioperiaate on yleisesti tärkeä lähes kaikilla fysiikan aloilla"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "Aaltoyhtälön lineaarisuus (differentiaalioperaatiot ovat lineaarisia) tekee ratkaisujen painotetusta summasta ratkaisun, periaate on tärkeä koko fysiikassa, ja se on interferenssin ja diffraktion perusta. Se ei vaadi yhtä suuria taajuuksia, ja se seuraa lineaarisuudesta, ei epälineaarisuudesta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.1_003"
       }
     ],
     "7.2": [
@@ -4240,6 +5145,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.4_001"
+      },
+      {
+        "id": "q8.4_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the phase difference and mirror positions in a Michelson interferometer? (Select all that apply)",
+        "options": [
+          "A mirror displacement of one full wavelength λ0 is needed to go from a maximum to the next minimum",
+          "The distance between adjacent maxima is Δd = λ0/2, which tells the required precision of the mirror movement",
+          "A 50/50 beamsplitter makes 100 % of the incident light interfere on the detector",
+          "Interference maxima appear at d = (m + ½)λ0/2 and minima at d = mλ0/2",
+          "The phase difference is δ = kΛ ± π = (4π/λ0)d ± π, where the ±π comes from the beamsplitter"
+        ],
+        "correctIndices": [
+          1,
+          3,
+          4
+        ],
+        "explanation": "δ = (4π/λ0)d ± π, maxima at d = (m + ½)λ0/2, minima at d = mλ0/2 and Δd = λ0/2 between adjacent maxima. From a maximum to the next minimum only λ0/4 is needed, and a 50/50 beamsplitter lets 50 % of the light interfere.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.4_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Michelsonin interferometrin vaihe-erosta ja peilien asemista? (Valitse kaikki oikeat)",
+        "options": [
+          "Peilin siirtymä yhden täyden aallonpituuden λ0 verran tarvitaan siirtymiseen maksimista seuraavaan minimiin",
+          "Vierekkäisten maksimien etäisyys on Δd = λ0/2, mikä kertoo peilin liikkeeltä vaaditun tarkkuuden",
+          "50/50-säteenjakaja saa 100 % tulevasta valosta interferoimaan ilmaisimella",
+          "Interferenssimaksimit esiintyvät kohdissa d = (m + ½)λ0/2 ja minimit kohdissa d = mλ0/2",
+          "Vaihe-ero on δ = kΛ ± π = (4π/λ0)d ± π, missä ±π tulee säteenjakajasta"
+        ],
+        "correctIndices": [
+          1,
+          3,
+          4
+        ],
+        "explanation": "δ = (4π/λ0)d ± π, maksimit kohdissa d = (m + ½)λ0/2, minimit kohdissa d = mλ0/2 ja Δd = λ0/2 vierekkäisten maksimien välillä. Maksimista seuraavaan minimiin tarvitaan vain λ0/4, ja 50/50-säteenjakaja päästää 50 % valosta interferoimaan.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.4_002"
+      },
+      {
+        "id": "q8.4_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the Michelson interferometer as a spectrometer and about practical aspects? (Select all that apply)",
+        "options": [
+          "In the traditional configuration ray 1 transmits the beamsplitter once and ray 2 three times",
+          "For a monochromatic source the detected irradiance is I(δ) = 2I0 + 2I0 cosδ, with δ = 4πν0 d",
+          "By Fourier transforming the measured interferogram I(d), the sample's transmittance spectrum Ts(ν0) can be extracted",
+          "With incoherent broadband light the traditional configuration works ideally, because the two arms are identical",
+          "For a broadband source each frequency component contributes a term ∝ cos(4πν0 d) and the detector measures their sum, since the superposition principle applies"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "The interferogram of a monochromatic source is 2I0 + 2I0cosδ, a broadband source gives a sum over frequency components, and Fourier transforming I(d) gives the transmittance spectrum. In the traditional configuration the arms are not identical (ray 2 crosses the beamsplitter once, ray 1 three times), which is fixed by flipping the beamsplitter and adding a compensator.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.4_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Michelsonin interferometristä spektrometrinä ja käytännön näkökohdista? (Valitse kaikki oikeat)",
+        "options": [
+          "Perinteisessä rakenteessa säde 1 läpäisee säteenjakajan kerran ja säde 2 kolme kertaa",
+          "Monokromaattiselle lähteelle ilmaistu irradianssi on I(δ) = 2I0 + 2I0 cosδ, missä δ = 4πν0 d",
+          "Muuntamalla mitattu interferogrammi I(d) Fourier-muunnoksella voidaan näytteen transmittanssispektri Ts(ν0) selvittää",
+          "Epäkoherentilla laajakaistaisella valolla perinteinen rakenne toimii ihanteellisesti, koska kaksi haaraa ovat identtiset",
+          "Laajakaistaiselle lähteelle jokainen taajuuskomponentti tuo termin ∝ cos(4πν0 d), ja ilmaisin mittaa niiden summan, koska superpositioperiaate pätee"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "Monokromaattisen lähteen interferogrammi on 2I0 + 2I0cosδ, laajakaistainen lähde antaa summan taajuuskomponenttien yli, ja I(d):n Fourier-muunnos antaa transmittanssispektrin. Perinteisessä rakenteessa haarat eivät ole identtiset (säde 2 läpäisee säteenjakajan kerran, säde 1 kolme kertaa), mikä korjataan kääntämällä säteenjakaja ja lisäämällä kompensaattori.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.4_003"
       }
     ],
     "8.1": [
@@ -4332,6 +5323,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.1_002"
+      },
+      {
+        "id": "q8.1_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the superposition of two monochromatic plane waves and the resulting interference terms? (Select all that apply)",
+        "options": [
+          "For parallel polarizations the interference term is 2A1A2 sinδ",
+          "The interference terms vanish for orthogonal polarizations, e.g. A1 = x̂A0 and A2 = ŷA0, so no interference is visible",
+          "Interference maxima occur when δ = 2πn and minima when δ = 2πn + π",
+          "For two waves of equal irradiance I0 the maximum irradiance is 2I0",
+          "The irradiance of the superposition is I ∝ |E1|² + |E2|² + E1·E2* + E2·E1*, where the last two terms are the interference terms"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "The cross terms E1·E2* + E2·E1* are the interference terms, they vanish for orthogonal polarizations, and I = 4I0cos²(δ/2) has maxima at δ = 2πn and minima at δ = 2πn + π. For parallel polarizations the term is 2A1A2 cosδ (cosine), and the maximum is 4I0.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.1_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kahden monokromaattisen tasoaallon superpositiosta ja syntyvistä interferenssitermeistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Yhdensuuntaisille polarisaatioille interferenssitermi on 2A1A2 sinδ",
+          "Interferenssitermit häviävät kohtisuorille polarisaatioille, esim. A1 = x̂A0 ja A2 = ŷA0, joten näkyvää interferenssiä ei synny",
+          "Interferenssimaksimit esiintyvät, kun δ = 2πn, ja minimit, kun δ = 2πn + π",
+          "Kahdelle yhtä suuren irradianssin I0 aallolle suurin irradianssi on 2I0",
+          "Superposition irradianssi on I ∝ |E1|² + |E2|² + E1·E2* + E2·E1*, missä kaksi viimeistä termiä ovat interferenssitermit"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "Ristitermit E1·E2* + E2·E1* ovat interferenssitermit, ne häviävät kohtisuorilla polarisaatioilla, ja I = 4I0cos²(δ/2):lla on maksimit kohdissa δ = 2πn ja minimit kohdissa δ = 2πn + π. Yhdensuuntaisilla polarisaatioilla termi on 2A1A2 cosδ (kosini), ja maksimi on 4I0.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.1_003"
       }
     ],
     "8.2": [
@@ -4424,6 +5458,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.2_002"
+      },
+      {
+        "id": "q8.2_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the Young's double-slit pattern on a screen at distance s? (Select all that apply)",
+        "options": [
+          "The angular position of the m-th maximum is θm = mλ/a",
+          "The m-th interference maximum is at ym = m (s/a) λ",
+          "The fringe spacing on the screen does not depend on the wavelength λ",
+          "The pattern is analysed in the far-field limit y ≪ s, where θ ≈ y/s is small",
+          "The maxima move closer to the centre of the pattern when the slit separation a is decreased"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "ym = m sλ/a and θm = mλ/a in the small-angle far-field limit. Hence a smaller slit separation a spreads the fringes farther apart (not closer), and longer wavelengths give larger fringe spacing.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.2_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Youngin kaksoisrakokokeen kuviosta etäisyydellä s olevalla varjostimella? (Valitse kaikki oikeat)",
+        "options": [
+          "M:nnen maksimin kulmasijainti on θm = mλ/a",
+          "M:s interferenssimaksimi on kohdassa ym = m (s/a) λ",
+          "Interferenssijuovien väli varjostimella ei riipu aallonpituudesta λ",
+          "Kuviota tarkastellaan kaukokenttärajalla y ≪ s, jossa θ ≈ y/s on pieni",
+          "Maksimit siirtyvät lähemmäs kuvion keskustaa, kun rakojen etäisyyttä a pienennetään"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "ym = m sλ/a ja θm = mλ/a pienten kulmien kaukokenttärajalla. Siksi pienempi rakojen etäisyys a levittää juovat kauemmas toisistaan (ei lähemmäs), ja pidemmät aallonpituudet antavat suuremman juovavälin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.2_003"
       }
     ],
     "8.3": [
@@ -4516,6 +5593,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.3_002"
+      },
+      {
+        "id": "q8.3_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the geometry and optical paths in the thin-film derivation? (Select all that apply)",
+        "options": [
+          "The optical path lengths are OPL1 = 2nt d sin²θt/cosθt and OPL2 = 2nt d/cosθt",
+          "The colours seen in a soap bubble do not depend on the film thickness or on the viewing angle",
+          "If both media around the film are the same and differ from the film, the phase difference is simply δ = kΛ with no additional π shift",
+          "The geometry gives |AC| = 2d tanθt and |AD| = |AC| sinθi",
+          "For a weakly reflecting thin film only two rays (1 and 2) are important"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "Two rays matter, |AC| = 2d tanθt, |AD| = |AC| sinθi, and OPL2 − OPL1 = 2nt d cosθt. One of the two reflections adds a π shift (δ = kΛ ± π), and thin-film colours depend on both thickness and angle.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.3_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ohutkalvojohdon geometriasta ja optisista matkoista? (Valitse kaikki oikeat)",
+        "options": [
+          "Optiset matkat ovat OPL1 = 2nt d sin²θt/cosθt ja OPL2 = 2nt d/cosθt",
+          "Saippuakuplassa nähtävät värit eivät riipu kalvon paksuudesta tai katselukulmasta",
+          "Jos kalvon molemmilla puolilla on sama aine, joka eroaa kalvosta, vaihe-ero on yksinkertaisesti δ = kΛ ilman ylimääräistä π:n siirtoa",
+          "Geometriasta saadaan |AC| = 2d tanθt ja |AD| = |AC| sinθi",
+          "Heikosti heijastavalla ohutkalvolla vain kaksi sädettä (1 ja 2) on tärkeää"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "Kaksi sädettä on merkittävää, |AC| = 2d tanθt, |AD| = |AC| sinθi, ja OPL2 − OPL1 = 2nt d cosθt. Toinen kahdesta heijastuksesta lisää π:n siirron (δ = kΛ ± π), ja ohutkalvojen värit riippuvat sekä paksuudesta että kulmasta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.3_003"
       }
     ],
     "8.5": [
@@ -4563,6 +5683,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.5_001"
+      },
+      {
+        "id": "q8.5_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about summing the multiply reflected waves in a thin film with strongly reflecting surfaces? (Select all that apply)",
+        "options": [
+          "The repeated factor s ≡ (r')²e^{iδ} makes the sum a geometric series, 1 + s + s² + … = 1/(1 − s) for |s| < 1",
+          "The reflected waves are E1,r = rE0, E2,r = t'r't E0 e^{iδ}, E3,r = (r')² t'r't E0 e^{i2δ}, so the factor (r')²e^{iδ} repeats from wave to wave",
+          "Multiple reflections of this kind usually occur naturally in everyday thin films such as soap bubbles",
+          "All adjacent reflected waves have the same phase difference δ = kΛ = (4π/λ0)nt d cosθt",
+          "The path difference between E2,r and E3,r is twice the path difference between E1,r and E2,r"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "The path difference (and therefore δ) is the same for every adjacent pair, the factor (r')²e^{iδ} repeats, and the sum is a geometric series. Multiple-beam interference does not usually happen naturally (it needs strongly reflecting surfaces), and the path difference between adjacent pairs is equal, not doubling.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.5_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa monesti heijastuneiden aaltojen summaamisesta ohutkalvossa, jonka pinnat heijastavat voimakkaasti? (Valitse kaikki oikeat)",
+        "options": [
+          "Toistuva tekijä s ≡ (r')²e^{iδ} tekee summasta geometrisen sarjan, 1 + s + s² + … = 1/(1 − s), kun |s| < 1",
+          "Heijastuneet aallot ovat E1,r = rE0, E2,r = t'r't E0 e^{iδ}, E3,r = (r')² t'r't E0 e^{i2δ}, joten tekijä (r')²e^{iδ} toistuu aallosta toiseen",
+          "Tällaisia monikertaisia heijastuksia esiintyy yleensä luonnostaan arkipäivän ohutkalvoissa, kuten saippuakuplissa",
+          "Kaikilla vierekkäisillä heijastuneilla aalloilla on sama vaihe-ero δ = kΛ = (4π/λ0)nt d cosθt",
+          "Aaltojen E2,r ja E3,r välinen matkaero on kaksi kertaa aaltojen E1,r ja E2,r välinen matkaero"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Matkaero (ja siten δ) on sama jokaiselle vierekkäiselle parille, tekijä (r')²e^{iδ} toistuu, ja summa on geometrinen sarja. Monisädeinterferenssi ei yleensä synny luonnostaan (se vaatii voimakkaasti heijastavat pinnat), ja vierekkäisten parien matkaero on yhtä suuri eikä kaksinkertaistu.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.5_002"
+      },
+      {
+        "id": "q8.5_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the transmitted field and irradiance of a thin film with multiple reflections? (Select all that apply)",
+        "options": [
+          "The transmitted irradiance is It = I0(1 − r²)²/(1 + r⁴ − 2r²cosδ)",
+          "The Airy function is A = 1/(1 + F sin²(δ/2)) with the finesse coefficient F = (2r/(1 − r²))²",
+          "The transmitted irradiance is largest when cosδ = −1",
+          "A low reflection coefficient r results in narrow transmittance peaks",
+          "The transmitted field is Et = (1 − r²)E0 e^{iφ}/(1 − r²e^{iδ})"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Summing the geometric series gives Et and It, and It = I0/(1 + F sin²(δ/2)) with F = (2r/(1 − r²))². A high r (large F) gives narrow peaks, and the transmitted irradiance is largest (It = I0) when sin²(δ/2) = 0, i.e. δ = 2πm and cosδ = +1.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.5_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa moninkertaisia heijastuksia sisältävän ohutkalvon läpäisseestä kentästä ja irradianssista? (Valitse kaikki oikeat)",
+        "options": [
+          "Läpäissyt irradianssi on It = I0(1 − r²)²/(1 + r⁴ − 2r²cosδ)",
+          "Airyn funktio on A = 1/(1 + F sin²(δ/2)), missä finessitekijä F = (2r/(1 − r²))²",
+          "Läpäissyt irradianssi on suurimmillaan, kun cosδ = −1",
+          "Pieni heijastuskerroin r johtaa kapeisiin läpäisyhuippuihin",
+          "Läpäissyt kenttä on Et = (1 − r²)E0 e^{iφ}/(1 − r²e^{iδ})"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Geometrisen sarjan summaus antaa Et:n ja It:n, ja It = I0/(1 + F sin²(δ/2)), missä F = (2r/(1 − r²))². Suuri r (suuri F) antaa kapeat huiput, ja läpäissyt irradianssi on suurimmillaan (It = I0), kun sin²(δ/2) = 0 eli δ = 2πm ja cosδ = +1.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.5_003"
       }
     ],
     "8.6": [
@@ -4655,6 +5861,49 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.6_002"
+      },
+      {
+        "id": "q8.6_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the transmittance peaks and the finesse of Fabry–Pérot instruments? (Select all that apply)",
+        "options": [
+          "The finesse can be written as ℱ = 2π/γ = π√F/2",
+          "The FWHM of a peak is defined by A = 1/2, i.e. sin²(δ/2) = 1/F",
+          "A small finesse coefficient F gives narrow transmittance peaks",
+          "The finesse depends on the length of the cavity but not on its losses",
+          "The transmittance depends on the wavelength λ0, the refractive index nt of the intermediate medium, the thickness d and the angle θt, so many quantities can be measured or monitored"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "T depends on λ0, nt, d and θt; the FWHM condition is sin²(δ/2) = 1/F, and ℱ = 2π/γ = π√F/2. Finesse does not depend on the cavity length but on its losses (reflectivity), and a large F (not small) gives narrow peaks.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.6_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Fabryn–Perot-laitteiden läpäisyhuipuista ja finessistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Finessi voidaan kirjoittaa muodossa ℱ = 2π/γ = π√F/2",
+          "Huipun FWHM määritellään ehdolla A = 1/2, eli sin²(δ/2) = 1/F",
+          "Pieni finessitekijä F antaa kapeat läpäisyhuiput",
+          "Finessi riippuu resonaattorin pituudesta mutta ei sen häviöistä",
+          "Transmittanssi riippuu aallonpituudesta λ0, välissä olevan aineen taitekertoimesta nt, paksuudesta d ja kulmasta θt, joten monia suureita voidaan mitata tai seurata"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "T riippuu suureista λ0, nt, d ja θt; FWHM-ehto on sin²(δ/2) = 1/F, ja ℱ = 2π/γ = π√F/2. Finessi ei riipu resonaattorin pituudesta vaan sen häviöistä (heijastavuudesta), ja suuri F (ei pieni) antaa kapeat huiput.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.6_003"
       }
     ],
     "8.7": [
@@ -4702,6 +5951,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.7_001"
+      },
+      {
+        "id": "q8.7_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about Fabry–Pérot spectroscopy and the resonance frequencies? (Select all that apply)",
+        "options": [
+          "Etalons can be used to make sure that the operation wavelength of an instrument is the right one",
+          "The peak condition δ = 4πνL/c = 2πm gives νm = mc/(2L)",
+          "Adjacent transmittance peaks correspond to a change ΔL = c/ν of the effective length",
+          "The frequency difference between adjacent peaks is Δν = c/L",
+          "Because a Fabry–Pérot interferometer measures narrow transmittance peaks, it can be used to measure wavelength dependences such as n(λ0) and Ts(λ0)"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Fabry–Pérot devices measure spectral dependences and check operating wavelengths, and δ = 2πm gives νm = mc/(2L). Adjacent peaks are Δν = c/(2L) apart (not c/L), corresponding to ΔL = c/(2ν) (not c/ν).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.7_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Fabryn–Perot-spektroskopiasta ja resonanssitaajuuksista? (Valitse kaikki oikeat)",
+        "options": [
+          "Etaloneilla voidaan varmistaa, että laitteen toiminta-aallonpituus on oikea",
+          "Huippuehto δ = 4πνL/c = 2πm antaa νm = mc/(2L)",
+          "Vierekkäiset läpäisyhuiput vastaavat tehollisen pituuden muutosta ΔL = c/ν",
+          "Vierekkäisten huippujen taajuusero on Δν = c/L",
+          "Koska Fabryn–Perot-interferometri mittaa kapeita läpäisyhuippuja, sillä voidaan mitata aallonpituusriippuvuuksia, kuten n(λ0) ja Ts(λ0)"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Fabryn–Perot-laitteilla mitataan spektririippuvuuksia ja tarkistetaan toiminta-aallonpituuksia, ja δ = 2πm antaa νm = mc/(2L). Vierekkäiset huiput ovat Δν = c/(2L) päässä toisistaan (ei c/L), mikä vastaa muutosta ΔL = c/(2ν) (ei c/ν).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.7_002"
+      },
+      {
+        "id": "q8.7_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the free spectral range and the resolution of a Fabry–Pérot instrument? (Select all that apply)",
+        "options": [
+          "Two frequencies are defined here to be distinguishable if their peak maxima are more than a half-width γ apart",
+          "A smaller finesse corresponds to a greater resolving power",
+          "The spectral resolution is Δν ≈ c/(πL√F), so finer resolution needs a larger L or a larger F",
+          "If |ν2 − ν1| > νfsr = c/(2L), peaks of different orders can be mixed up, e.g. ν1,m and ν2,m+1",
+          "The spectral resolving power νm/Δν = mℱ is a dimensioned quantity with units of Hz"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "FSR = c/(2L) sets the mixing of orders, distinguishability requires a separation above the half-width γ, and Δν ≈ c/(πL√F) improves with larger L and F. The resolving power νm/Δν = mℱ is unitless, and a greater finesse (not smaller) gives greater resolving power.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q8.7_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Fabryn–Perot-laitteen vapaasta spektrialueesta ja erotuskyvystä? (Valitse kaikki oikeat)",
+        "options": [
+          "Kaksi taajuutta määritellään tässä erotettaviksi, jos niiden huippujen maksimit ovat yli puolileveyden γ päässä toisistaan",
+          "Pienempi finessi vastaa suurempaa erotuskykyä",
+          "Spektrinen resoluutio on Δν ≈ c/(πL√F), joten hienompi resoluutio vaatii suuremman L:n tai suuremman F:n",
+          "Jos |ν2 − ν1| > νfsr = c/(2L), eri kertalukujen huiput voivat sekoittua, esim. ν1,m ja ν2,m+1",
+          "Spektrinen erotuskyky νm/Δν = mℱ on dimensiollinen suure, jonka yksikkö on Hz"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "FSR = c/(2L) määrää kertalukujen sekoittumisen, erotettavuus vaatii yli puolileveyden γ:n erotuksen, ja Δν ≈ c/(πL√F) paranee suuremmalla L:llä ja F:llä. Erotuskyky νm/Δν = mℱ on dimensioton, ja suurempi finessi (ei pienempi) antaa suuremman erotuskyvyn.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.7_003"
       }
     ]
   },
@@ -4749,6 +6084,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q9.2_001"
+      },
+      {
+        "id": "q9.2_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the approximations made in deriving the Fraunhofer diffraction integral? (Select all that apply)",
+        "options": [
+          "A wave propagating along z meets an opaque screen at z = 0 with an aperture of dimensions of the order of a, and the observation point R = (X,Y,Z) lies in the plane z = Z",
+          "The phase term is approximated using (1 + a)^{1/2} ≈ 1 + a/2 for a ≪ 1, since x, y ≪ R",
+          "For a distant observation point the amplitude term 1/r can be replaced by the constant 1/R",
+          "The approximation r ≈ R is applied to the phase term as well as to the amplitude term, so that the phase is treated as constant",
+          "The aperture is assumed to be much larger than the distance R to the observation point"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "In the far field 1/r → 1/R, and the phase term is expanded with (1 + a)^{1/2} ≈ 1 + a/2 because x, y ≪ R. The phase cannot simply be set to a constant (k multiplies r), and the aperture must be much smaller than R.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q9.2_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Fraunhoferin diffraktiointegraalin johtamisessa tehdyistä approksimaatioista? (Valitse kaikki oikeat)",
+        "options": [
+          "Z-suuntaan etenevä aalto kohtaa läpinäkymättömän seinämän kohdassa z = 0, jossa on aukko, jonka mitat ovat suuruusluokkaa a, ja havaintopiste R = (X,Y,Z) on tasossa z = Z",
+          "Vaihetermi approksimoidaan käyttämällä (1 + a)^{1/2} ≈ 1 + a/2, kun a ≪ 1, koska x, y ≪ R",
+          "Kaukana olevalle havaintopisteelle amplitudia kuvaava termi 1/r voidaan korvata vakiolla 1/R",
+          "Approksimaatiota r ≈ R käytetään sekä vaihetermiin että amplitudia kuvaavaan termiin, joten vaihetta käsitellään vakiona",
+          "Aukon oletetaan olevan paljon suurempi kuin etäisyys R havaintopisteeseen"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Kaukokentässä 1/r → 1/R, ja vaihetermi kehitetään sarjaksi (1 + a)^{1/2} ≈ 1 + a/2, koska x, y ≪ R. Vaihetta ei voida yksinkertaisesti asettaa vakioksi (k kertoo r:n), ja aukon on oltava paljon pienempi kuin R.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.2_002"
+      },
+      {
+        "id": "q9.2_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the validity condition and the interpretation of the Fraunhofer diffraction integral? (Select all that apply)",
+        "options": [
+          "The quadratic phase term contributes a phase of the order of ka²/(2R) = πa²/(λR)",
+          "The condition R > a²/λ means that the observation point must be closer to the aperture than a²/λ",
+          "When X and Y are negligible compared to R ≈ Z, a screen or camera at z = Z directly measures the diffraction pattern, given by the Fourier transform of the aperture field",
+          "The Fraunhofer integral has the form of a one-dimensional Fourier transform of the aperture field along the z-axis",
+          "The observation-point variables X/R and Y/R can be interpreted as angles, sinθX = X/R and sinθY = Y/R"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "The quadratic term gives ~πa²/(λR), which is negligible when R > a²/λ (far field); X/R, Y/R act as angles, and a screen at z = Z shows the 2D Fourier transform of the aperture field in x and y. The integral is a 2D transform over x, y (not 1D along z), and R must be larger than a²/λ.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q9.2_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Fraunhoferin diffraktiointegraalin pätevyysehdosta ja tulkinnasta? (Valitse kaikki oikeat)",
+        "options": [
+          "Neliöllinen vaihetermi tuo vaiheen, jonka suuruusluokka on ka²/(2R) = πa²/(λR)",
+          "Ehto R > a²/λ tarkoittaa, että havaintopisteen on oltava lähempänä aukkoa kuin a²/λ",
+          "Kun X ja Y ovat mitättömiä R ≈ Z:hen verrattuna, tasossa z = Z oleva varjostin tai kamera mittaa suoraan diffraktiokuvion, joka on aukon kentän Fourier-muunnos",
+          "Fraunhoferin integraalilla on aukon kentän z-akselin suuntaisen yksiulotteisen Fourier-muunnoksen muoto",
+          "Havaintopisteen muuttujat X/R ja Y/R voidaan tulkita kulmiksi, sinθX = X/R ja sinθY = Y/R"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "Neliöllinen termi antaa ~πa²/(λR), mikä on mitätön, kun R > a²/λ (kaukokenttä); X/R ja Y/R toimivat kulmina, ja tasossa z = Z oleva varjostin näyttää aukon kentän kaksiulotteisen Fourier-muunnoksen x:n ja y:n suhteen. Integraali on 2D-muunnos x:n ja y:n yli (ei 1D z:n suuntaan), ja R:n on oltava suurempi kuin a²/λ.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.2_003"
       }
     ],
     "9.5": [
@@ -4796,6 +6217,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q9.5_001"
+      },
+      {
+        "id": "q9.5_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about deriving the grating equation for a transmission grating? (Select all that apply)",
+        "options": [
+          "The phase difference is δ = (2π/λ)a(sinθm − sinθi), and requiring δ = 2πm gives the grating equation",
+          "The optical path difference is OPL = AB − CD = a(sinθm − sinθi), where a is the period of the grating",
+          "The zeroth diffraction order (m = 0) of a transmission grating corresponds to θm = −θi",
+          "Waves passing through identical points of adjacent slits must have phases that differ by 2πm at the observation direction",
+          "The period a of the grating does not appear in the grating equation"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "The grating equation a(sinθm − sinθi) = mλ follows from OPL = a(sinθm − sinθi) and δ = 2πm. It contains the period a, and for m = 0 it gives θm = θi (straight through), not −θi.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q9.5_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa hilayhtälön johtamisesta läpäisyhilalle? (Valitse kaikki oikeat)",
+        "options": [
+          "Vaihe-ero on δ = (2π/λ)a(sinθm − sinθi), ja ehto δ = 2πm antaa hilayhtälön",
+          "Optinen matkaero on OPL = AB − CD = a(sinθm − sinθi), missä a on hilan jakso",
+          "Läpäisyhilan nollas diffraktion kertaluku (m = 0) vastaa kulmaa θm = −θi",
+          "Vierekkäisten rakojen identtisten pisteiden kautta kulkevien aaltojen vaiheiden on eroteltava 2πm havaintosuunnassa",
+          "Hilan jakso a ei esiinny hilayhtälössä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Hilayhtälö a(sinθm − sinθi) = mλ seuraa ehdoista OPL = a(sinθm − sinθi) ja δ = 2πm. Siinä on mukana jakso a, ja kun m = 0, saadaan θm = θi (suoraan läpi), ei −θi.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.5_002"
+      },
+      {
+        "id": "q9.5_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about using the grating equation and about diffraction orders? (Select all that apply)",
+        "options": [
+          "The equation a(sinθm − sinθi) = mλ is derived for the simple case of a transmission grating",
+          "For a given period a and incidence angle, a longer wavelength is diffracted to a larger angle θm in the same order m > 0",
+          "Changing the cross-sectional profile of a grating (blazing) changes the angles θm of the diffraction orders",
+          "At normal incidence (θi = 0) the grating equation becomes a sinθm = mλ",
+          "The m-th order is defined as the maximum where the phase equals 2π(m + ½)"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "The derivation is for a transmission grating, at θi = 0 it reduces to a sinθm = mλ, and sinθm = sinθi + mλ/a increases with λ. Blazing changes the intensities of orders (enhancing or reducing some), not their angles, and the m-th maximum has phase 2πm.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q9.5_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa hilayhtälön käytöstä ja diffraktion kertaluvuista? (Valitse kaikki oikeat)",
+        "options": [
+          "Yhtälö a(sinθm − sinθi) = mλ johdetaan yksinkertaiselle läpäisyhilan tapaukselle",
+          "Annetulla jaksolla a ja tulokulmalla pidempi aallonpituus diffraktoituu suurempaan kulmaan θm samassa kertaluvussa m > 0",
+          "Hilan poikkileikkausprofiilin muuttaminen (blazing) muuttaa diffraktion kertalukujen kulmia θm",
+          "Kohtisuoralla tulolla (θi = 0) hilayhtälö on a sinθm = mλ",
+          "M:s kertaluku määritellään maksimina, jossa vaihe on 2π(m + ½)"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Johto on läpäisyhilalle, kun θi = 0 se sievenee muotoon a sinθm = mλ, ja sinθm = sinθi + mλ/a kasvaa λ:n mukana. Blazing muuttaa kertalukujen intensiteettejä (vahvistaa tai heikentää joitakin), ei niiden kulmia, ja m:nnen maksimin vaihe on 2πm.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.5_003"
       }
     ],
     "9.1": [
