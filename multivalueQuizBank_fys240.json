@@ -573,6 +573,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.2_001"
+      },
+      {
+        "id": "q3.2_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following statements about how the wave equation is derived from ψ(z,t) = f(z ± vt) are correct? (Select all that apply)",
+        "options": [
+          "Differentiating once gives ∂ψ/∂t = ±v ∂ψ/∂z, which depends on the direction of propagation",
+          "A physical description should not depend on the choice of coordinate system, which motivates moving to a second-order equation",
+          "Differentiating twice with respect to time gives ∂²ψ/∂t² = (±v)² ∂²f/∂z'²",
+          "The first-order equation ∂ψ/∂t = ±v ∂ψ/∂z is independent of the propagation direction",
+          "Differentiating twice with respect to z gives ∂²ψ/∂z² = v² ∂²f/∂z'²"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "The first-order result ±v depends on direction, which is why a second-order equation is used; ∂²ψ/∂t² = (±v)² ∂²f/∂z'². In space, ∂²ψ/∂z² = ∂²f/∂z'² — there is no factor v² there.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.2_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista väittämistä siitä, miten aaltoyhtälö johdetaan muodosta ψ(z,t) = f(z ± vt), pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Kertaalleen derivoimalla saadaan ∂ψ/∂t = ±v ∂ψ/∂z, joka riippuu etenemissuunnasta",
+          "Fysikaalinen kuvaus ei saa riippua koordinaatiston valinnasta, mikä motivoi siirtymistä toisen kertaluvun yhtälöön",
+          "Kahdesti ajan suhteen derivoimalla saadaan ∂²ψ/∂t² = (±v)² ∂²f/∂z'²",
+          "Ensimmäisen kertaluvun yhtälö ∂ψ/∂t = ±v ∂ψ/∂z ei riipu etenemissuunnasta",
+          "Kahdesti z:n suhteen derivoimalla saadaan ∂²ψ/∂z² = v² ∂²f/∂z'²"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Ensimmäisen kertaluvun tulos ±v riippuu suunnasta, minkä vuoksi käytetään toisen kertaluvun yhtälöä; ∂²ψ/∂t² = (±v)² ∂²f/∂z'². Paikan suhteen ∂²ψ/∂z² = ∂²f/∂z'², eli siinä ei ole tekijää v².",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.2_002"
+      },
+      {
+        "id": "q3.2_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the one-dimensional wave equation ∂²ψ/∂z² = (1/v²)∂²ψ/∂t²? (Select all that apply)",
+        "options": [
+          "Both f(z − vt) and f(z + vt) are solutions of the equation",
+          "The chain rule with z' = z ± vt is used when differentiating ψ = f(z')",
+          "The wave equation is a first-order differential equation in both z and t",
+          "The sign of v in the equation decides whether it describes propagation towards +z or −z",
+          "Combining the two second derivatives eliminates the function f and leaves an equation for ψ alone"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Both f(z ± vt) solve the equation, the derivation uses the chain rule and eliminates f. The equation contains only v², so the sign of v drops out — it treats both directions — and it is second-order in both variables.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.2_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa yksiulotteisesta aaltoyhtälöstä ∂²ψ/∂z² = (1/v²)∂²ψ/∂t²? (Valitse kaikki oikeat)",
+        "options": [
+          "Sekä f(z − vt) että f(z + vt) ovat yhtälön ratkaisuja",
+          "Derivoitaessa ψ = f(z') käytetään ketjusääntöä muuttujalla z' = z ± vt",
+          "Aaltoyhtälö on ensimmäisen kertaluvun differentiaaliyhtälö sekä z:n että t:n suhteen",
+          "Yhtälössä v:n etumerkki ratkaisee, kuvaako se etenemistä +z- vai −z-suuntaan",
+          "Kahden toisen derivaatan yhdistäminen eliminoi funktion f ja jättää yhtälön pelkälle ψ:lle"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Sekä f(z ± vt) toteuttavat yhtälön, johdossa käytetään ketjusääntöä ja f eliminoidaan. Yhtälössä on vain v², joten v:n etumerkki putoaa pois — yhtälö kattaa molemmat suunnat — ja se on toisen kertaluvun yhtälö kummankin muuttujan suhteen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.2_003"
       }
     ],
     "3.7": [
@@ -620,6 +706,94 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.7_001"
+      },
+      {
+        "id": "q3.7_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the derivation of the plane wave ψ(r) = A e^{i k·r}? (Select all that apply)",
+        "options": [
+          "Requiring the wave to repeat after a distance λ along k gives kλ = 2πm, and m = 1 gives k = 2π/λ",
+          "The phase must depend linearly on position r so that the properties of the wave do not depend on the choice of coordinate system",
+          "Points r in a plane S perpendicular to k satisfy (r − r0)·k = 0",
+          "The magnitude of the wavevector is k = λ/(2π)",
+          "On the plane S perpendicular to k the phase of the wave changes linearly from point to point"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "In a plane S perpendicular to k, k·r is constant (so the phase is constant there — the phasefront), the phase depends linearly on r, and periodicity gives kλ = 2πm → k = 2π/λ (not λ/2π).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.7_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tasoaallon ψ(r) = A e^{i k·r} johtamisesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Vaatimus, että aalto toistuu matkan λ jälkeen k:n suunnassa, antaa kλ = 2πm, ja arvo m = 1 antaa k = 2π/λ",
+          "Vaiheen on riipputtava paikasta r lineaarisesti, jotta aallon ominaisuudet eivät riipu koordinaatiston valinnasta",
+          "Aaltovektoria k vastaan kohtisuoran tason S pisteet r toteuttavat ehdon (r − r0)·k = 0",
+          "Aaltovektorin pituus on k = λ/(2π)",
+          "Aaltovektoria k vastaan kohtisuoralla tasolla S aallon vaihe muuttuu lineaarisesti pisteestä toiseen"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Aaltovektoria k vastaan kohtisuoralla tasolla S tulo k·r on vakio (joten vaihe on siinä vakio — aaltorintama), vaihe riippuu lineaarisesti paikasta r, ja jaksollisuus antaa kλ = 2πm → k = 2π/λ (ei λ/2π).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.7_002"
+      },
+      {
+        "id": "q3.7_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the time-dependent plane wave ψ(r,t) = A e^{i(k·r − ωt)} and its phase velocity? (Select all that apply)",
+        "options": [
+          "The phasefront is a surface on which the phase is described by a single (complex) number",
+          "Adding time-harmonic time dependence to A e^{i k·r} gives the phase φ = k·r − ωt",
+          "For constant phase, dφ = k dr_k − ω dt = 0, which gives vp = dr_k/dt = ω/k",
+          "In φ = k·r − ωt = k r_k − ωt, r_k is the coordinate along the propagation direction k",
+          "For constant phase the same calculation gives vp = k/ω"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "The phase is φ = k·r − ωt = k r_k − ωt; requiring dφ = 0 gives vp = ω/k (not k/ω), and the phasefront is the surface of constant phase.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.7_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ajasta riippuvasta tasoaallosta ψ(r,t) = A e^{i(k·r − ωt)} ja sen vaihenopeudesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Aaltorintama on pinta, jolla vaihe kuvataan yhdellä (kompleksi)luvulla",
+          "Kun lausekkeeseen A e^{i k·r} lisätään ajan suhteen harmoninen aikariippuvuus, vaiheeksi tulee φ = k·r − ωt",
+          "Vakiovaiheelle dφ = k dr_k − ω dt = 0, mistä saadaan vp = dr_k/dt = ω/k",
+          "Lausekkeessa φ = k·r − ωt = k r_k − ωt suure r_k on koordinaatti etenemissuunnassa k",
+          "Vakiovaiheelle sama lasku antaa vp = k/ω"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Vaihe on φ = k·r − ωt = k r_k − ωt; ehto dφ = 0 antaa vp = ω/k (ei k/ω), ja aaltorintama on vakiovaiheen pinta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.7_003"
       }
     ],
     "3.1": [
@@ -665,6 +839,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.1_001"
+      },
+      {
+        "id": "q3.1_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following statements about the shifted function f(z − z0) and its use for describing propagation are correct? (Select all that apply)",
+        "options": [
+          "The shifted function f(z − z0) is a stretched version of the original function f",
+          "Setting z0 = vt with v > 0 makes the function move towards −z",
+          "The time dependence of ψ(z,t) = f(z − vt) enters only through the combination z − vt",
+          "Setting z0 = vt with v > 0 makes the shifted function move towards +z as time passes",
+          "Replacing z by z' = z − z0 shifts the function along the z-axis without changing its shape"
+        ],
+        "correctIndices": [
+          2,
+          3,
+          4
+        ],
+        "explanation": "Shifting the argument z → z − z0 moves f rigidly along z without changing its form; choosing z0 = vt with v > 0 makes it travel towards +z, and time enters only via z − vt. The shift does not stretch the function, and it moves towards +z, not −z.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.1_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista väittämistä siirretystä funktiosta f(z − z0) ja sen käytöstä etenemisen kuvaamiseen pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Siirretty funktio f(z − z0) on alkuperäisen funktion f venytetty versio",
+          "Kun z0 = vt ja v > 0, funktio liikkuu kohti −z-suuntaa",
+          "Funktion ψ(z,t) = f(z − vt) aikariippuvuus tulee mukaan vain yhdistelmän z − vt kautta",
+          "Kun z0 = vt ja v > 0, siirretty funktio liikkuu ajan kuluessa kohti +z-suuntaa",
+          "Korvaamalla z:n muuttujalla z' = z − z0 funktio siirtyy z-akselia pitkin muotoaan muuttamatta"
+        ],
+        "correctIndices": [
+          2,
+          3,
+          4
+        ],
+        "explanation": "Argumentin siirto z → z − z0 liikuttaa funktiota f jäykästi z-akselia pitkin muotoa muuttamatta; valinta z0 = vt (v > 0) saa sen etenemään kohti +z-suuntaa, ja aika tulee mukaan vain yhdistelmän z − vt kautta. Siirto ei venytä funktiota, ja liike on kohti +z-suuntaa, ei −z-suuntaa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.1_002"
+      },
+      {
+        "id": "q3.1_003",
+        "questionType": "multi_select",
+        "stem": "Consider a pulse-shaped disturbance ψ(z,t) = f(z − vt) that propagates along +z. Which of the following are correct? (Select all that apply)",
+        "options": [
+          "At t = 0 the disturbance has the shape ψ(z,0) = f(z)",
+          "The pulse moves towards negative z because of the minus sign in z − vt",
+          "The description holds for an arbitrary function f, not only for sine or cosine functions",
+          "The shape of the pulse becomes more and more distorted as z0 = vt increases",
+          "Because z0 = vt grows linearly in time, the pulse moves at constant velocity v"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "The pulse keeps its shape, starts as f(z) at t = 0, moves at constant v (z0 = vt), and f may be any function. The minus sign in z − vt corresponds to motion towards +z (for v > 0), not −z.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.1_003_fi",
+        "questionType": "multi_select",
+        "stem": "Tarkastellaan pulssin muotoista häiriötä ψ(z,t) = f(z − vt), joka etenee +z-suuntaan. Mitkä seuraavista pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Hetkellä t = 0 häiriön muoto on ψ(z,0) = f(z)",
+          "Pulssi liikkuu kohti negatiivista z:aa lausekkeen z − vt miinusmerkin vuoksi",
+          "Kuvaus pätee mielivaltaiselle funktiolle f, ei vain sini- tai kosinifunktioille",
+          "Pulssin muoto vääristyy sitä enemmän, mitä suuremmaksi z0 = vt kasvaa",
+          "Koska z0 = vt kasvaa lineaarisesti ajan funktiona, pulssi liikkuu vakionopeudella v"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "Pulssi säilyttää muotonsa, alkaa muodossa f(z) hetkellä t = 0, liikkuu vakionopeudella v (z0 = vt), ja f voi olla mikä tahansa funktio. Lausekkeen z − vt miinusmerkki vastaa etenemistä kohti +z-suuntaa (kun v > 0), ei −z-suuntaa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.1_003"
       }
     ],
     "3.3": [
@@ -712,6 +972,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.3_001"
+      },
+      {
+        "id": "q3.3_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following statements about the harmonic wave ψ(z,t) = A sin[k(z − vt)] are correct? (Select all that apply)",
+        "options": [
+          "A is the amplitude and k(z − vt) is the phase of the wave",
+          "The propagation constant is defined as k = λ/(2π)",
+          "The parameter k tells how quickly the wave oscillates as a function of time",
+          "At t = 0 the wave has the form ψ(z,0) = A sin(kz)",
+          "The wave repeats itself after a distance λ, which leads to the condition kλ = 2πm with integer m"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "A is the amplitude, k(z − vt) the phase, and periodicity in z gives kλ = 2πm, i.e. k = 2π/λ for m = 1. k describes the oscillation as a function of the propagation direction z, not of time.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.3_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista väittämistä harmonisesta aallosta ψ(z,t) = A sin[k(z − vt)] pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "A on aallon amplitudi ja k(z − vt) on aallon vaihe",
+          "Etenemisvakio määritellään yhtälöllä k = λ/(2π)",
+          "Parametri k kertoo, kuinka nopeasti aalto värähtelee ajan funktiona",
+          "Hetkellä t = 0 aallon muoto on ψ(z,0) = A sin(kz)",
+          "Aalto toistaa itsensä matkan λ jälkeen, mistä seuraa ehto kλ = 2πm kokonaisluvulle m"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "A on amplitudi, k(z − vt) vaihe, ja jaksollisuus z:n suhteen antaa kλ = 2πm eli k = 2π/λ kun m = 1. Parametri k kuvaa värähtelyä etenemissuunnan z funktiona, ei ajan funktiona.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.3_002"
+      },
+      {
+        "id": "q3.3_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the quantities used to describe a harmonic wave in this section? (Select all that apply)",
+        "options": [
+          "The angular frequency is ω = 2πν",
+          "A sine wave and the equivalent cosine wave must always have the same initial phase, ε' = ε",
+          "The phase can be written kz − ωt because kv = ω",
+          "The spatial frequency κ = 1/λ is in some fields of optics (e.g. spectroscopy) also called the wavenumber",
+          "The wavenumber k = 2π/λ and the spatial frequency κ = 1/λ are exactly the same quantity"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "ω = 2πν, kz − ωt follows from kv = ω, and κ = 1/λ is sometimes also called the wavenumber. But k = 2π/λ differs from κ = 1/λ by the factor 2π, and the cosine form of the same wave needs a different initial phase (ε' ≠ ε).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.3_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa suureista, joilla harmonista aaltoa tässä osiossa kuvataan? (Valitse kaikki oikeat)",
+        "options": [
+          "Kulmataajuus on ω = 2πν",
+          "Sinimuotoisella ja vastaavalla kosinimuotoisella aallolla on aina oltava sama alkuvaihe, ε' = ε",
+          "Vaihe voidaan kirjoittaa muodossa kz − ωt, koska kv = ω",
+          "Paikkataajuutta κ = 1/λ kutsutaan joillakin optiikan aloilla (esim. spektroskopiassa) myös aaltoluvuksi",
+          "Aaltoluku k = 2π/λ ja paikkataajuus κ = 1/λ ovat täsmälleen sama suure"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "ω = 2πν, kz − ωt seuraa ehdosta kv = ω, ja κ = 1/λ:ta kutsutaan joskus myös aaltoluvuksi. Kuitenkin k = 2π/λ eroaa κ = 1/λ:sta tekijällä 2π, ja saman aallon kosinimuotoinen esitys vaatii eri alkuvaiheen (ε' ≠ ε).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.3_003"
       }
     ],
     "3.4": [
@@ -759,6 +1105,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.4_001"
+      },
+      {
+        "id": "q3.4_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following statements about the derivation of the phase velocity are correct? (Select all that apply)",
+        "options": [
+          "For φ = kz − ωt + ε one finds ∂φ/∂t = −ω and ∂φ/∂z = k",
+          "The chain rule gives the total derivative dφ/dt = (∂φ/∂z)(∂z/∂t) + ∂φ/∂t",
+          "Requiring the phase to stay constant, φ(z,t) = const, makes it possible to follow the propagation of a chosen point of the wave",
+          "The result of the derivation is the phase velocity vp = k/ω",
+          "In the derivation the coordinate z is treated as independent of time"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Constant phase, the chain rule, ∂φ/∂t = −ω and ∂φ/∂z = k lead to vp = ω/k (not k/ω). The point being followed has a time-dependent position z(t), which is exactly why the total derivative is needed.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.4_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista väittämistä vaihenopeuden johtamisesta pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Kun φ = kz − ωt + ε, saadaan ∂φ/∂t = −ω ja ∂φ/∂z = k",
+          "Ketjusäännöstä saadaan kokonaisderivaatta dφ/dt = (∂φ/∂z)(∂z/∂t) + ∂φ/∂t",
+          "Vaatimalla vaiheen pysyvän vakiona, φ(z,t) = vakio, voidaan seurata aallon valitun pisteen etenemistä",
+          "Johdon tulos on vaihenopeus vp = k/ω",
+          "Johdossa koordinaattia z käsitellään ajasta riippumattomana"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Vakiovaihe, ketjusääntö sekä ∂φ/∂t = −ω ja ∂φ/∂z = k johtavat tulokseen vp = ω/k (ei k/ω). Seurattavan pisteen paikka z(t) riippuu ajasta, ja juuri siksi tarvitaan kokonaisderivaattaa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.4_002"
+      },
+      {
+        "id": "q3.4_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about phase velocity and related ideas in this section? (Select all that apply)",
+        "options": [
+          "The negative sign in vp = −(∂φ/∂t)/(∂φ/∂z) means that the wave must propagate towards −z",
+          "The (phase) velocity is the velocity of a harmonic wave",
+          "Generalizing the phase is helpful when anharmonic waves are treated later",
+          "The initial phase ε changes the phase velocity vp = ω/k",
+          "An arbitrary disturbance, being a sum of many harmonic waves, can propagate at a different velocity, the group velocity vg"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "vp = ω/k is the velocity of a harmonic wave, while a sum of harmonic waves can travel with the group velocity vg; generalizing the phase prepares for anharmonic waves. With ∂φ/∂t = −ω the two minus signs cancel and vp = +ω/k > 0 (propagation towards +z), and ε does not appear in vp.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.4_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa vaihenopeudesta ja siihen liittyvistä asioista tässä osiossa? (Valitse kaikki oikeat)",
+        "options": [
+          "Lausekkeen vp = −(∂φ/∂t)/(∂φ/∂z) miinusmerkki tarkoittaa, että aallon on edettävä −z-suuntaan",
+          "(Vaihe)nopeus on harmonisen aallon nopeus",
+          "Vaiheen yleistäminen auttaa, kun myöhemmin käsitellään ei-harmonisia aaltoja",
+          "Alkuvaihe ε muuttaa vaihenopeutta vp = ω/k",
+          "Mielivaltainen häiriö, joka on monen harmonisen aallon summa, voi edetä eri nopeudella, ryhmänopeudella vg"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "vp = ω/k on harmonisen aallon nopeus, kun taas harmonisten aaltojen summa voi edetä ryhmänopeudella vg; vaiheen yleistys valmistelee ei-harmonisten aaltojen käsittelyä. Koska ∂φ/∂t = −ω, kaksi miinusmerkkiä kumoaa toisensa ja vp = +ω/k > 0 (eteneminen +z-suuntaan), eikä ε esiinny lausekkeessa vp.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.4_003"
       }
     ],
     "3.5": [
@@ -806,6 +1238,90 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.5_001"
+      },
+      {
+        "id": "q3.5_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the superposition of two solutions of the wave equation? (Select all that apply)",
+        "options": [
+          "Because differentiation is a linear operation, ψ1 and ψ2 can be multiplied by constants α and β before they are summed",
+          "Two waves with a 180° phase difference always give a total field of exactly zero, whatever their amplitudes",
+          "Waves with a relative phase difference of 180° are out of phase and weaken each other (destructive interference)",
+          "In a linear system two light waves scatter off each other when they overlap",
+          "The sum αψ1 + βψ2 also satisfies the wave equation"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "Linearity of differentiation makes αψ1 + βψ2 a solution, and 180° out-of-phase waves interfere destructively. Complete cancellation needs equal amplitudes, and in a linear system light does not interact with light, so waves do not scatter off each other.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.5_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa aaltoyhtälön kahden ratkaisun superpositiosta? (Valitse kaikki oikeat)",
+        "options": [
+          "Koska derivointi on lineaarinen operaatio, ψ1 ja ψ2 voidaan kertoa vakioilla α ja β ennen summaamista",
+          "Kaksi aaltoa, joiden vaihe-ero on 180°, antavat aina täsmälleen nollakentän amplitudeista riippumatta",
+          "Aallot, joiden suhteellinen vaihe-ero on 180°, ovat vastavaiheessa ja heikentävät toisiaan (destruktiivinen interferenssi)",
+          "Lineaarisessa systeemissä kaksi valoaaltoa sirottuu toisistaan päällekkäin mennessään",
+          "Summa αψ1 + βψ2 toteuttaa myös aaltoyhtälön"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "Derivoinnin lineaarisuus tekee summasta αψ1 + βψ2 ratkaisun, ja 180° vastavaiheessa olevat aallot interferoivat destruktiivisesti. Täydellinen kumoutuminen vaatii yhtä suuret amplitudit, ja lineaarisessa systeemissä valo ei vuorovaikuta valon kanssa, joten aallot eivät sirotu toisistaan.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.5_002"
+      },
+      {
+        "id": "q3.5_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following statements about superposed waves are correct? (Select all that apply)",
+        "options": [
+          "When waves are superposed, their relative phases dictate the outcome",
+          "The total disturbance at position z and time t can be calculated as the superposition αψ1 + βψ2",
+          "After two waves have overlapped, each of them is permanently changed by the other",
+          "The superposition αψ1 + βψ2 satisfies a wave equation with a different velocity",
+          "Constructive interference occurs when the relative phase difference is 180°"
+        ],
+        "correctIndices": [
+          0,
+          1
+        ],
+        "explanation": "The total wave is the superposition αψ1 + βψ2 and the relative phases decide the result. Constructive interference needs a 0° phase difference (180° gives destructive), waves keep their individual properties and are not permanently changed, and the superposition satisfies the same wave equation with the same v.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.5_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista väittämistä superponoituvista aalloista pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Aaltoja superponoitaessa niiden suhteelliset vaiheet määräävät lopputuloksen",
+          "Kokonaishäiriö paikassa z ja hetkellä t voidaan laskea superpositiona αψ1 + βψ2",
+          "Kun kaksi aaltoa on ollut päällekkäin, kumpikin on pysyvästi muuttunut toisen vaikutuksesta",
+          "Superpositio αψ1 + βψ2 toteuttaa aaltoyhtälön, jossa on eri nopeus",
+          "Konstruktiivinen interferenssi tapahtuu, kun suhteellinen vaihe-ero on 180°"
+        ],
+        "correctIndices": [
+          0,
+          1
+        ],
+        "explanation": "Kokonaisaalto on superpositio αψ1 + βψ2, ja suhteelliset vaiheet ratkaisevat tuloksen. Konstruktiivinen interferenssi vaatii 0°:n vaihe-eron (180° antaa destruktiivisen), aallot säilyttävät omat ominaisuutensa eivätkä muutu pysyvästi, ja superpositio toteuttaa saman aaltoyhtälön samalla nopeudella v.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.5_003"
       }
     ],
     "3.6": [
@@ -853,6 +1369,94 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.6_001"
+      },
+      {
+        "id": "q3.6_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about calculating with complex numbers z1 = r1e^{iθ1} and z2 = r2e^{iθ2}? (Select all that apply)",
+        "options": [
+          "Sums and differences are easily calculated in Cartesian form: z1 ± z2 = (x1 ± x2) + i(y1 ± y2)",
+          "In polar form, division subtracts the phase angles: z1/z2 = (r1/r2)e^{i(θ1−θ2)}",
+          "In polar form, the product z1z2 has magnitude r1 + r2",
+          "The complex conjugate of z = re^{iθ} is z* = re^{−iθ}",
+          "The imaginary part of z is Im(z) = (z + z*)/(2i)"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "The conjugate, Cartesian sums/differences and polar-form division are correct. In a product the magnitudes multiply (r1r2, not r1 + r2), and Im(z) = (z − z*)/(2i); (z + z*)/2 is the real part.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.6_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kompleksilukujen z1 = r1e^{iθ1} ja z2 = r2e^{iθ2} laskennasta? (Valitse kaikki oikeat)",
+        "options": [
+          "Summat ja erotukset lasketaan helposti karteesisessa muodossa: z1 ± z2 = (x1 ± x2) + i(y1 ± y2)",
+          "Napamuodossa jakolasku vähentää vaihekulmat: z1/z2 = (r1/r2)e^{i(θ1−θ2)}",
+          "Napamuodossa tulon z1z2 itseisarvo on r1 + r2",
+          "Luvun z = re^{iθ} kompleksikonjugaatti on z* = re^{−iθ}",
+          "Luvun z imaginaariosa on Im(z) = (z + z*)/(2i)"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Konjugaatti, karteesiset summat ja erotukset sekä napamuotoinen jakolasku on esitetty oikein. Tulossa itseisarvot kerrotaan (r1r2, ei r1 + r2), ja Im(z) = (z − z*)/(2i); (z + z*)/2 on reaaliosa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.6_002"
+      },
+      {
+        "id": "q3.6_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the complex representation of a harmonic wave? (Select all that apply)",
+        "options": [
+          "In the complex amplitude Ã = A e^{iε} the initial phase ε has been dropped",
+          "Using Re(z) = (z + z*)/2, the wave equals ½A e^{i(kz−ωt+ε)} + ½A e^{−i(kz−ωt+ε)}",
+          "The complex amplitude Ã = A e^{iε} includes the initial phase ε",
+          "A harmonic wave A cos(kz − ωt + ε) can be written as Re[A e^{i(kz−ωt+ε)}]",
+          "A wave is often written in the simplified form ψ = A e^{i(kz−ωt+ε)}"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "explanation": "The cosine wave is the real part of the complex exponential, equals the sum of the exponential and its conjugate (each with weight ½), and is often written as A e^{i(kz−ωt+ε)}. The complex amplitude Ã = A e^{iε} contains — not drops — the initial phase.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.6_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa harmonisen aallon kompleksiesityksestä? (Valitse kaikki oikeat)",
+        "options": [
+          "Kompleksiamplitudissa Ã = A e^{iε} alkuvaihe ε on jätetty pois",
+          "Käyttämällä Re(z) = (z + z*)/2 aalto on ½A e^{i(kz−ωt+ε)} + ½A e^{−i(kz−ωt+ε)}",
+          "Kompleksiamplitudi Ã = A e^{iε} sisältää alkuvaiheen ε",
+          "Harmoninen aalto A cos(kz − ωt + ε) voidaan kirjoittaa muodossa Re[A e^{i(kz−ωt+ε)}]",
+          "Aalto kirjoitetaan usein yksinkertaistettuun muotoon ψ = A e^{i(kz−ωt+ε)}"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "explanation": "Kosiniaalto on kompleksieksponentin reaaliosa, yhtä kuin eksponentin ja sen konjugaatin summa (kummallakin paino ½), ja se kirjoitetaan usein muodossa A e^{i(kz−ωt+ε)}. Kompleksiamplitudi Ã = A e^{iε} sisältää alkuvaiheen eikä jätä sitä pois.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.6_003"
       }
     ],
     "3.8": [
@@ -898,6 +1502,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.8_001"
+      },
+      {
+        "id": "q3.8_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following statements about deriving the three-dimensional wave equation from ψ = A e^{i(k·r − ωt)} are correct? (Select all that apply)",
+        "options": [
+          "Differentiating twice with respect to x gives ∂²ψ/∂x² = −kx²ψ",
+          "Differentiating twice with respect to time gives ∂²ψ/∂t² = −ω²ψ = −k²v²ψ, using ω = vk",
+          "Differentiating twice with respect to time gives ∂²ψ/∂t² = +ω²ψ",
+          "Combining the spatial and time parts gives ∂²ψ/∂x² + ∂²ψ/∂y² + ∂²ψ/∂z² = v² ∂²ψ/∂t²",
+          "Summing the second derivatives with respect to x, y and z gives −(kx² + ky² + kz²)ψ = −k²ψ"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Spatial second derivatives give −k²ψ and the time second derivative gives −ω²ψ = −k²v²ψ; combining them gives ∇²ψ = (1/v²)∂²ψ/∂t². The time derivative carries −ω² (not +ω²), and the factor is 1/v², not v².",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.8_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista väittämistä kolmiulotteisen aaltoyhtälön johtamisesta muodosta ψ = A e^{i(k·r − ωt)} pitävät paikkansa? (Valitse kaikki oikeat)",
+        "options": [
+          "Kahdesti x:n suhteen derivoimalla saadaan ∂²ψ/∂x² = −kx²ψ",
+          "Kahdesti ajan suhteen derivoimalla saadaan ∂²ψ/∂t² = −ω²ψ = −k²v²ψ, kun käytetään ehtoa ω = vk",
+          "Kahdesti ajan suhteen derivoimalla saadaan ∂²ψ/∂t² = +ω²ψ",
+          "Paikka- ja aikaosien yhdistäminen antaa ∂²ψ/∂x² + ∂²ψ/∂y² + ∂²ψ/∂z² = v² ∂²ψ/∂t²",
+          "Toisten derivaattojen summa x:n, y:n ja z:n suhteen on −(kx² + ky² + kz²)ψ = −k²ψ"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Paikan toiset derivaatat antavat −k²ψ ja ajan toinen derivaatta −ω²ψ = −k²v²ψ; yhdistämällä saadaan ∇²ψ = (1/v²)∂²ψ/∂t². Aikaderivaatassa on −ω² (ei +ω²), ja kerroin on 1/v², ei v².",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.8_002"
+      },
+      {
+        "id": "q3.8_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the vector operators used to write the wave equation compactly? (Select all that apply)",
+        "options": [
+          "The gradient is ∇ ≡ x̂ ∂/∂x + ŷ ∂/∂y + ẑ ∂/∂z",
+          "The Laplace operator ∇² is a first-order differential operator",
+          "Because the Laplace operator can be written in other coordinate systems, the wave equation is no longer valid in Cartesian coordinates",
+          "The course focuses on fundamentals where Cartesian coordinates are adequate and most of the time even the smartest choice",
+          "The Laplace operator is ∇² = ∇·∇ = ∂²/∂x² + ∂²/∂y² + ∂²/∂z²"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "∇ is the gradient and ∇² = ∇·∇ the Laplace operator, and the course mostly uses Cartesian coordinates. Writing the equation with ∇² lets one transform it to other coordinate systems without invalidating the Cartesian form, and ∇² is second-order.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.8_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa vektorioperaattoreista, joilla aaltoyhtälö kirjoitetaan tiiviisti? (Valitse kaikki oikeat)",
+        "options": [
+          "Gradientti on ∇ ≡ x̂ ∂/∂x + ŷ ∂/∂y + ẑ ∂/∂z",
+          "Laplacen operaattori ∇² on ensimmäisen kertaluvun differentiaalioperaattori",
+          "Koska Laplacen operaattori voidaan kirjoittaa muissa koordinaatistoissa, aaltoyhtälö ei enää päde karteesisessa koordinaatistossa",
+          "Kurssilla keskitytään perusasioihin, joissa karteesiset koordinaatit riittävät ja ovat useimmiten jopa älykkäin valinta",
+          "Laplacen operaattori on ∇² = ∇·∇ = ∂²/∂x² + ∂²/∂y² + ∂²/∂z²"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "∇ on gradientti ja ∇² = ∇·∇ Laplacen operaattori, ja kurssilla käytetään enimmäkseen karteesisia koordinaatteja. Yhtälön kirjoittaminen ∇²:n avulla mahdollistaa muuntamisen muihin koordinaatistoihin mitätöimättä karteesista muotoa, ja ∇² on toisen kertaluvun operaattori.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.8_003"
       }
     ],
     "3.9": [
@@ -945,6 +1635,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.9_001"
+      },
+      {
+        "id": "q3.9_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about spherical coordinates and spherical waves as described in this section? (Select all that apply)",
+        "options": [
+          "In spherical coordinates x = r sinθ cosφ, y = r sinθ sinφ and z = r cosθ",
+          "θ is the polar angle, φ the azimuthal angle and r the distance from the origin",
+          "The (−) sign in the exponent of a spherical wave describes an outgoing (diverging) wave",
+          "The wave equation of a spherical wave is not derived in the course because the Laplace operator is non-trivial in spherical coordinates",
+          "A spherical wave ψ(r,t) = (A0/r) e^{i(±kr − ωt)} depends on all three coordinates r, θ and φ"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "The coordinate relations and angle definitions are correct, and the spherical-wave equation is not derived because ∇² is non-trivial. A spherical wave depends only on r (hence its spherical symmetry), and the (−) sign is the incoming/converging wave — (+) is outgoing.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.9_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa pallokoordinaateista ja palloaalloista tässä osiossa kuvatulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Pallokoordinaateissa x = r sinθ cosφ, y = r sinθ sinφ ja z = r cosθ",
+          "θ on napakulma, φ atsimuuttikulma ja r etäisyys origosta",
+          "Palloaallon eksponentin (−)-merkki kuvaa ulospäin etenevää (hajaantuvaa) aaltoa",
+          "Palloaallon yhtälöä ei johdeta kurssilla, koska Laplacen operaattori on pallokoordinaateissa monimutkainen",
+          "Palloaalto ψ(r,t) = (A0/r) e^{i(±kr − ωt)} riippuu kaikista kolmesta koordinaatista r, θ ja φ"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Koordinaattiyhtälöt ja kulmien määritelmät ovat oikein, eikä palloaallon yhtälöä johdeta, koska ∇² on monimutkainen. Palloaalto riippuu vain r:stä (siksi se on pallosymmetrinen), ja (−)-merkki on sisäänpäin etenevä/suppeneva aalto — (+) on ulospäin etenevä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.9_002"
+      },
+      {
+        "id": "q3.9_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about cylindrical coordinates and cylindrical waves as described in this section? (Select all that apply)",
+        "options": [
+          "In cylindrical coordinates x = ρ cosθ, y = ρ sinθ and z = z",
+          "In cylindrical coordinates ρ is the azimuthal angle",
+          "Both spherical and cylindrical waves keep their curved appearance and never resemble plane waves",
+          "ρ is the distance of the point from the z-axis",
+          "Far from the z-axis a cylindrical wave is approximately ψ ≈ (A0/√ρ) e^{i(±kρ − ωt)}"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "x = ρ cosθ, y = ρ sinθ, z = z with ρ the distance from the z-axis, and far from the axis the cylindrical wave has amplitude ∝ 1/√ρ. Both wave types resemble plane waves far from the source, and the azimuthal angle is θ, not ρ.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.9_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa sylinterikoordinaateista ja sylinteriaalloista tässä osiossa kuvatulla tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Sylinterikoordinaateissa x = ρ cosθ, y = ρ sinθ ja z = z",
+          "Sylinterikoordinaateissa ρ on atsimuuttikulma",
+          "Sekä pallo- että sylinteriaallot säilyttävät kaarevan ulkonäkönsä eivätkä koskaan muistuta tasoaaltoja",
+          "ρ on pisteen etäisyys z-akselista",
+          "Kaukana z-akselista sylinteriaalto on likimain ψ ≈ (A0/√ρ) e^{i(±kρ − ωt)}"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "x = ρ cosθ, y = ρ sinθ, z = z, missä ρ on etäisyys z-akselista, ja kaukana akselista sylinteriaallon amplitudi on ∝ 1/√ρ. Molemmat aaltotyypit muistuttavat tasoaaltoja kaukana lähteestä, ja atsimuuttikulma on θ, ei ρ.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.9_003"
       }
     ],
     "3.10": [
@@ -992,6 +1768,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.10_001"
+      },
+      {
+        "id": "q3.10_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about vector waves and the polarization vector? (Select all that apply)",
+        "options": [
+          "Generalizing to vector fields gives a plane wave ψ(r,t) = A0 e^{i(k·r − ωt)} with a vector-valued amplitude A0",
+          "The amplitude vector of the E-field is called the polarization of light",
+          "The scalar amplitude of the field is E0 = |Ex| + |Ey|",
+          "The normalized polarization vector p has a length that grows with the field strength",
+          "Each Cartesian component of the vector amplitude can be treated as a scalar field"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Vector waves have a vector amplitude whose components are scalar fields, and the E-field's amplitude vector is the polarization. The scalar amplitude is E0 = √(|Ex|² + |Ey|²) — not |Ex| + |Ey| — and p is normalized (length 1), independent of field strength.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.10_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa vektoriaalloista ja polarisaatiovektorista? (Valitse kaikki oikeat)",
+        "options": [
+          "Yleistys vektorikentille antaa tasoaallon ψ(r,t) = A0 e^{i(k·r − ωt)}, jonka amplitudi on vektoriarvoinen A0",
+          "E-kentän amplitudivektoria kutsutaan valon polarisaatioksi",
+          "Kentän skalaariamplitudi on E0 = |Ex| + |Ey|",
+          "Normitetun polarisaatiovektorin p pituus kasvaa kentän voimakkuuden mukana",
+          "Vektoriamplitudin jokaista karteesista komponenttia voidaan käsitellä skalaarikenttänä"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Vektoriaalloilla on vektoriamplitudi, jonka komponentit ovat skalaarikenttiä, ja E-kentän amplitudivektori on polarisaatio. Skalaariamplitudi on E0 = √(|Ex|² + |Ey|²) — ei |Ex| + |Ey| — ja p on normitettu (pituus 1) kentän voimakkuudesta riippumatta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.10_002"
+      },
+      {
+        "id": "q3.10_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about linear and circular polarization? (Select all that apply)",
+        "options": [
+          "Left-handed circular polarization is p_L = (x̂ + iŷ)/√2",
+          "Right-handed circular polarization is p_R = (x̂ − iŷ)/√2",
+          "In linear polarization there is a phase difference of ±π/2 between Ex and Ey",
+          "In circular polarization Ey = e^{±iπ/2} Ex = ±i Ex",
+          "Circular polarization requires Ex and Ey to have clearly different magnitudes"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Circular polarization has Ey = ±iEx, giving p = (x̂ ± iŷ)/√2 (equal magnitudes, ±π/2 phase shift), with p_R and p_L as stated. Linear polarization has real components (no π/2 phase shift).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.10_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa lineaarisesta ja ympyräpolarisaatiosta? (Valitse kaikki oikeat)",
+        "options": [
+          "Vasenkätinen ympyräpolarisaatio on p_L = (x̂ + iŷ)/√2",
+          "Oikeakätinen ympyräpolarisaatio on p_R = (x̂ − iŷ)/√2",
+          "Lineaarisessa polarisaatiossa Ex:n ja Ey:n välillä on ±π/2:n vaihe-ero",
+          "Ympyräpolarisaatiossa Ey = e^{±iπ/2} Ex = ±i Ex",
+          "Ympyräpolarisaatio edellyttää, että Ex:llä ja Ey:llä on selvästi eri suuruudet"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "Ympyräpolarisaatiossa Ey = ±iEx, jolloin p = (x̂ ± iŷ)/√2 (yhtä suuret suuruudet, ±π/2:n vaihesiirto), ja p_R ja p_L ovat kuten esitetty. Lineaarisessa polarisaatiossa komponentit ovat reaalisia (ei π/2:n vaihesiirtoa).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.10_003"
       }
     ],
     "3.11": [
@@ -1039,6 +1901,94 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.11_001"
+      },
+      {
+        "id": "q3.11_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about vector algebra and index notation? (Select all that apply)",
+        "options": [
+          "The cross product u × v is a scalar with the value |u||v| cosθ",
+          "The scalar triple product equals a determinant: u1·(u2 × u3) = det(u1, u2, u3)",
+          "The vector triple product is v1 × (v2 × v3) = (v1·v3) v2 − (v1·v2) v3",
+          "In Einstein's summation convention a repeated index implies a summation, so u·v = u_i v_i",
+          "The Levi-Civita symbol ε_ijk is +1 for (1,3,2) and −1 for (1,2,3)"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "The scalar triple product is a determinant, the vector triple product follows the given form, and repeated indices imply summation. The cross product is a vector with magnitude |u||v| sinθ, and ε_ijk is +1 for cyclic permutations such as (1,2,3), −1 for (1,3,2).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.11_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa vektorialgebrasta ja indeksimerkinnöistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Ristitulo u × v on skalaari, jonka arvo on |u||v| cosθ",
+          "Skalaarikolmitulo on determinantti: u1·(u2 × u3) = det(u1, u2, u3)",
+          "Vektorikolmitulo on v1 × (v2 × v3) = (v1·v3) v2 − (v1·v2) v3",
+          "Einsteinin summaussopimuksessa toistuva indeksi tarkoittaa summausta, joten u·v = u_i v_i",
+          "Levi-Civitan symboli ε_ijk on +1 kolmikolle (1,3,2) ja −1 kolmikolle (1,2,3)"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "Skalaarikolmitulo on determinantti, vektorikolmitulo noudattaa annettua muotoa, ja toistuvat indeksit tarkoittavat summausta. Ristitulo on vektori, jonka suuruus on |u||v| sinθ, ja ε_ijk on +1 syklisille permutaatioille kuten (1,2,3) ja −1 kolmikolle (1,3,2).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.11_002"
+      },
+      {
+        "id": "q3.11_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the first-order differential operators of vector calculus? (Select all that apply)",
+        "options": [
+          "The gradient of a vector function is the Jacobian, a 3 × 3 matrix",
+          "The curl ∇ × E of a vector function is a scalar quantity",
+          "The divergence of a vector function is a scalar: ∇·E = ∂Ex/∂x + ∂Ey/∂y + ∂Ez/∂z",
+          "The gradient of a scalar function φ is a vector",
+          "The Laplacian of a scalar function is Δφ = ∂²φ/∂x² + ∂²φ/∂y² + ∂²φ/∂z²"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "explanation": "The gradient of a scalar is a vector, the divergence of a vector is a scalar, the gradient of a vector is the 3×3 Jacobian, and Δφ is the sum of second derivatives. The curl of a vector function is again a vector (∇ × E = ε^{ijk} ∂Ek/∂xj e_i), not a scalar.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.11_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa vektorianalyysin ensimmäisen kertaluvun differentiaalioperaattoreista? (Valitse kaikki oikeat)",
+        "options": [
+          "Vektorifunktion gradientti on Jacobin matriisi, 3 × 3 -matriisi",
+          "Vektorifunktion roottori ∇ × E on skalaarisuure",
+          "Vektorifunktion divergenssi on skalaari: ∇·E = ∂Ex/∂x + ∂Ey/∂y + ∂Ez/∂z",
+          "Skalaarifunktion φ gradientti on vektori",
+          "Skalaarifunktion Laplacen operaattori on Δφ = ∂²φ/∂x² + ∂²φ/∂y² + ∂²φ/∂z²"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "explanation": "Skalaarin gradientti on vektori, vektorin divergenssi on skalaari, vektorin gradientti on 3×3-Jacobin matriisi, ja Δφ on toisten derivaattojen summa. Vektorifunktion roottori on jälleen vektori (∇ × E = ε^{ijk} ∂Ek/∂xj e_i), ei skalaari.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.11_003"
       }
     ],
     "3.12": [
@@ -1086,6 +2036,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.12_001"
+      },
+      {
+        "id": "q3.12_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the forms of Gauss's law in the electrostatic approximation? (Select all that apply)",
+        "options": [
+          "The integral and differential forms are mathematically equivalent, but the course focuses on the differential forms",
+          "In the integral form both integrals are taken over the same closed surface S",
+          "For stationary charges the current density J is nonzero and produces a time-dependent B-field",
+          "The differential form ∇·E = ρ/ε0 follows from the integral form by the divergence theorem",
+          "The integral form relates the flux of E through a closed surface S = ∂V to the charge inside V: ∮E·dA = ∫(ρ/ε0) dV"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "The integral form (flux over a closed surface = enclosed charge/ε0), its differential form via the divergence theorem, and their equivalence are correct. For stationary charges J = 0, so there is no time-dependent B-field, and the right-hand integral is over the volume V, not the surface S.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.12_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Gaussin lain muodoista sähköstaattisessa approksimaatiossa? (Valitse kaikki oikeat)",
+        "options": [
+          "Integraali- ja differentiaalimuoto ovat matemaattisesti yhtäpitäviä, mutta kurssilla keskitytään differentiaalimuotoihin",
+          "Integraalimuodossa molemmat integraalit lasketaan saman suljetun pinnan S yli",
+          "Paikallaan olevilla varauksilla virrantiheys J on nollasta poikkeava ja synnyttää ajasta riippuvan B-kentän",
+          "Differentiaalimuoto ∇·E = ρ/ε0 seuraa integraalimuodosta divergenssiteoreemalla",
+          "Integraalimuoto yhdistää E:n vuon suljetun pinnan S = ∂V läpi tilavuuden V sisällä olevaan varaukseen: ∮E·dA = ∫(ρ/ε0) dV"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "Integraalimuoto (vuo suljetun pinnan läpi = suljettu varaus/ε0), sen differentiaalimuoto divergenssiteoreemalla ja muotojen yhtäpitävyys on kuvattu oikein. Paikallaan olevilla varauksilla J = 0, joten ajasta riippuvaa B-kenttää ei synny, ja oikean puolen integraali on tilavuuden V yli, ei pinnan S.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.12_002"
+      },
+      {
+        "id": "q3.12_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the potentials used to describe electric and magnetic fields? (Select all that apply)",
+        "options": [
+          "In the magnetostatic approximation a vector potential A is introduced, with B = ∇ × A",
+          "For stationary charges ∇ × E = −∂B/∂t = 0, so the E-field is irrotational (curl-free)",
+          "Once φ has been solved from the Poisson equation, the E-field follows as E = −∇²φ",
+          "In the potential form the fields are B = −∇φ and E = ∇ × A",
+          "The Poisson equation is Δφ = −ρ/ε0"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Stationary charges give a curl-free E, the Poisson equation is Δφ = −ρ/ε0, and the magnetostatic description uses a vector potential with B = ∇ × A. In potential form B = ∇ × A and E = −∇φ − ∂A/∂t (not the swapped version), and E follows from the gradient E = −∇φ, not from ∇²φ.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q3.12_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa sähkö- ja magneettikenttien kuvaamiseen käytetyistä potentiaaleista? (Valitse kaikki oikeat)",
+        "options": [
+          "Magnetostaattisessa approksimaatiossa otetaan käyttöön vektoripotentiaali A, jolle B = ∇ × A",
+          "Paikallaan olevilla varauksilla ∇ × E = −∂B/∂t = 0, joten E-kenttä on pyörteetön (roottorivapaa)",
+          "Kun φ on ratkaistu Poissonin yhtälöstä, E-kenttä saadaan lausekkeesta E = −∇²φ",
+          "Potentiaalimuodossa kentät ovat B = −∇φ ja E = ∇ × A",
+          "Poissonin yhtälö on Δφ = −ρ/ε0"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Paikallaan olevat varaukset antavat roottorivapaan E:n, Poissonin yhtälö on Δφ = −ρ/ε0, ja magnetostaattisessa kuvauksessa käytetään vektoripotentiaalia, jolle B = ∇ × A. Potentiaalimuodossa B = ∇ × A ja E = −∇φ − ∂A/∂t (ei vaihdettuna), ja E saadaan gradientista E = −∇φ, ei ∇²φ:sta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.12_003"
       }
     ]
   },
@@ -4263,6 +5299,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.3_001"
+      },
+      {
+        "id": "q10.3_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the thin-lens treatment in this section? (Select all that apply)",
+        "options": [
+          "For a lens surrounded by air the front and back focal lengths turn out equal, 1/fo = 1/fi ≡ 1/f, although this is not true in general",
+          "The lens is assumed thin: its thickness d is negligible compared with the other distances",
+          "The Gaussian thin-lens equation is 1/so + 1/si = f",
+          "A convex lens focuses rays parallel to the optical axis into the front focal point Fo",
+          "The refractive index of the lens material affects the power of the lens"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "The thin-lens assumption, the role of the lens index, and f = fo = fi for a lens in air (not generally true) are correct. The thin-lens equation is 1/so + 1/si = 1/f (not = f), and a convex lens focuses parallel rays into the back focal point Fi.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.3_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ohuen linssin käsittelystä tässä osiossa? (Valitse kaikki oikeat)",
+        "options": [
+          "Ilman ympäröimälle linssille etu- ja takapolttovälit ovat yhtä suuret, 1/fo = 1/fi ≡ 1/f, vaikka tämä ei päde yleisesti",
+          "Linssin oletetaan olevan ohut: sen paksuus d on mitätön muihin etäisyyksiin verrattuna",
+          "Gaussin ohuen linssin yhtälö on 1/so + 1/si = f",
+          "Kupera linssi kokoaa optisen akselin suuntaiset säteet etupolttopisteeseen Fo",
+          "Linssimateriaalin taitekerroin vaikuttaa linssin voimakkuuteen"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Ohuen linssin oletus, linssin taitekertoimen rooli ja f = fo = fi ilmassa olevalle linssille (ei yleisesti totta) ovat oikein. Ohuen linssin yhtälö on 1/so + 1/si = 1/f (ei = f), ja kupera linssi kokoaa yhdensuuntaiset säteet takapolttopisteeseen Fi.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.3_002"
+      },
+      {
+        "id": "q10.3_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about lens types and focal planes of an ideal thin lens? (Select all that apply)",
+        "options": [
+          "For a concave lens, rays parallel to the axis diverge and seem to originate from the front focal point, where a virtual image forms",
+          "A convex lens focuses incident rays parallel to the optical axis into the back focal point Fi",
+          "For an ideal lens the position of the focal points depends on the angle at which the rays hit the lens",
+          "The lens power D = 1/f is measured in metres",
+          "For an ideal lens the back focal points Fi form a back focal plane and the front focal points Fo a front focal plane"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Convex lenses (f > 0) focus parallel rays to Fi, concave lenses (f < 0) make them diverge from a virtual focus, and for an ideal lens the focal points form focal planes. The incident angle does not matter for an ideal lens, and D = 1/f has units of inverse metres (dioptres), not metres.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.3_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ihanteellisen ohuen linssin linssityypeistä ja polttotasoista? (Valitse kaikki oikeat)",
+        "options": [
+          "Koverassa linssissä optisen akselin suuntaiset säteet hajaantuvat ja näyttävät lähtevän etupolttopisteestä, johon muodostuu virtuaalinen kuva",
+          "Kupera linssi kokoaa optisen akselin suuntaiset säteet takapolttopisteeseen Fi",
+          "Ihanteelliselle linssille polttopisteiden paikka riippuu kulmasta, jolla säteet osuvat linssiin",
+          "Linssin voimakkuus D = 1/f mitataan metreinä",
+          "Ihanteelliselle linssille takapolttopisteet Fi muodostavat takapolttotason ja etupolttopisteet Fo etupolttotason"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Kuperat linssit (f > 0) kokoavat yhdensuuntaiset säteet pisteeseen Fi, koverat linssit (f < 0) hajottavat ne näennäisestä polttopisteestä, ja ihanteelliselle linssille polttopisteet muodostavat polttotasot. Tulokulmalla ei ole merkitystä ihanteelliselle linssille, ja D = 1/f mitataan käänteismetreinä (dioptreina), ei metreinä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.3_003"
       }
     ],
     "10.13": [
@@ -4310,6 +5432,94 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.13_001"
+      },
+      {
+        "id": "q10.13_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about how the simplest two-lens telescope forms an image? (Select all that apply)",
+        "options": [
+          "The final image of the telescope forms at the back focal point of the eyepiece",
+          "Lens systems without front or back focal planes are called afocal",
+          "The objective forms a demagnified intermediate image, located in the front focal plane of the eyepiece, so the final image forms at infinity",
+          "The objective forms a magnified intermediate image close to its focal point",
+          "The simplest telescopes have two lenses separated by d = fo + fe"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "The two lenses are separated by d = fo + fe, the objective forms a demagnified intermediate image at the eyepiece's front focal plane, the final image is at infinity, and such a system is afocal. The intermediate image is demagnified (not magnified) and the final image is at infinity (not at the back focal point).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.13_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa siitä, miten yksinkertaisin kahden linssin kaukoputki muodostaa kuvan? (Valitse kaikki oikeat)",
+        "options": [
+          "Kaukoputken lopullinen kuva muodostuu okulaarin takapolttopisteeseen",
+          "Linssisysteemejä, joilla ei ole etu- tai takapolttotasoja, kutsutaan afokaalisiksi",
+          "Objektiivi muodostaa pienennetyn välikuvan, joka on okulaarin etupolttotasossa, joten lopullinen kuva muodostuu äärettömyyteen",
+          "Objektiivi muodostaa suurennetun välikuvan lähelle polttopistettään",
+          "Yksinkertaisimmissa kaukoputkissa on kaksi linssiä, joiden etäisyys on d = fo + fe"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "Linssien etäisyys on d = fo + fe, objektiivi muodostaa pienennetyn välikuvan okulaarin etupolttotasoon, lopullinen kuva on äärettömyydessä, ja tällainen systeemi on afokaalinen. Välikuva on pienennetty (ei suurennettu) ja lopullinen kuva on äärettömyydessä (ei takapolttopisteessä).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.13_002"
+      },
+      {
+        "id": "q10.13_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the Galilean and Keplerian telescope configurations? (Select all that apply)",
+        "options": [
+          "The Galilean telescope is compact, d = fo − |fe|, but its exit pupil is inside the instrument, which makes use cumbersome",
+          "The Galilean telescope has a negative eyepiece (fe < 0) and produces an upright image",
+          "Binoculars are based on the Keplerian configuration, with prisms turning the images upright",
+          "The Keplerian telescope is longer, d = fo + fe, and its exit pupil is outside the instrument, making it easier to use",
+          "The inverted image of a Keplerian telescope makes it unusable for observing stars"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Galilean: negative eyepiece, upright image, compact but with the exit pupil inside; Keplerian: longer, exit pupil outside, image inverted (which is fine when observing stars), and binoculars are Keplerian with prisms to make the images upright.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.13_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa Galilein ja Keplerin kaukoputkirakenteista? (Valitse kaikki oikeat)",
+        "options": [
+          "Galilein kaukoputki on kompakti, d = fo − |fe|, mutta sen ulostulopupilli on laitteen sisällä, mikä tekee käytöstä hankalaa",
+          "Galilein kaukoputkessa on negatiivinen okulaari (fe < 0) ja se tuottaa pystyn kuvan",
+          "Kiikarit perustuvat Keplerin rakenteeseen, ja prismat kääntävät kuvat pystyiksi",
+          "Keplerin kaukoputki on pidempi, d = fo + fe, ja sen ulostulopupilli on laitteen ulkopuolella, mikä tekee siitä helpomman käyttää",
+          "Keplerin kaukoputken ylösalainen kuva tekee siitä käyttökelvottoman tähtien havaitsemiseen"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Galilei: negatiivinen okulaari, pysty kuva, kompakti mutta ulostulopupilli sisällä; Kepler: pidempi, ulostulopupilli ulkopuolella, kuva ylösalainen (mikä sopii tähtien havaitsemiseen), ja kiikarit ovat Keplerin rakenteeseen perustuvia prismoin pystyiksi käännettyine kuvineen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.13_003"
       }
     ],
     "10.1": [
@@ -4357,6 +5567,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.1_001"
+      },
+      {
+        "id": "q10.1_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the basic concepts of imaging optics in this section? (Select all that apply)",
+        "options": [
+          "In a stigmatic system the imaging direction could be reversed, so that P would be imaged into S — S and P are conjugate points",
+          "In geometrical optics the wavelength is assumed to be very large compared with the size of the instrument",
+          "The object resides in the object space and the image in the image space",
+          "A perfectly stigmatic system can be realized in practice if the surfaces are manufactured accurately enough",
+          "In geometrical optics the wave nature of light is neglected by assuming the wavelength λ = 0"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "Object/image spaces, conjugate points and the λ = 0 assumption of geometrical optics are correct. Perfect stigmatism cannot be realized because of diffraction (however precise the manufacturing), and geometrical optics assumes λ → 0, not a large wavelength.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.1_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kuvantavan optiikan peruskäsitteistä tässä osiossa? (Valitse kaikki oikeat)",
+        "options": [
+          "Stigmaattisessa systeemissä kuvaussuunta voitaisiin kääntää, jolloin P kuvautuisi pisteeksi S — S ja P ovat konjugaattipisteitä",
+          "Geometrisessa optiikassa aallonpituuden oletetaan olevan hyvin suuri laitteen kokoon verrattuna",
+          "Kohde sijaitsee kohdeavaruudessa ja kuva kuva-avaruudessa",
+          "Täydellisesti stigmaattinen systeemi voidaan toteuttaa käytännössä, jos pinnat valmistetaan riittävän tarkasti",
+          "Geometrisessa optiikassa valon aaltoluonne jätetään huomiotta olettamalla aallonpituus λ = 0"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "Kohde-/kuva-avaruus, konjugaattipisteet ja geometrisen optiikan oletus λ = 0 ovat oikein. Täydellistä stigmaattisuutta ei voida toteuttaa diffraktion vuoksi (valmistustarkkuudesta riippumatta), ja geometrinen optiikka olettaa λ → 0, ei suurta aallonpituutta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.1_002"
+      },
+      {
+        "id": "q10.1_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the performance of imaging systems and image types? (Select all that apply)",
+        "options": [
+          "A real image forms at a point where the rays only seem to originate from",
+          "A virtual image often seems to be located in the object space",
+          "The performance of a real imaging system is limited by aberrations, which make the image blurry and/or distorted",
+          "In geometrical optics a stigmatic system corresponds to a diffraction-limited system",
+          "This chapter focuses mainly on non-imaging optics such as lighting"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "Stigmatic ≙ diffraction-limited in geometrical optics, aberrations limit real systems, and virtual images often appear in the object space. A real image forms where rays actually cross (not where they only seem to originate), and this chapter focuses on imaging optics, not non-imaging optics.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.1_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kuvantamisjärjestelmien suorituskyvystä ja kuvatyypeistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Todellinen kuva muodostuu pisteeseen, josta säteet vain näyttävät lähtevän",
+          "Virtuaalinen kuva näyttää usein sijaitsevan kohdeavaruudessa",
+          "Todellisen kuvantamisjärjestelmän suorituskykyä rajoittavat aberraatiot, jotka tekevät kuvasta sumean ja/tai vääristyneen",
+          "Geometrisessa optiikassa stigmaattinen systeemi vastaa diffraktiorajoitettua systeemiä",
+          "Tämä luku keskittyy pääasiassa kuvantamattomaan optiikkaan, kuten valaistukseen"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "Stigmaattinen vastaa diffraktiorajoitettua geometrisessa optiikassa, aberraatiot rajoittavat todellisia systeemejä, ja virtuaaliset kuvat näyttävät usein sijaitsevan kohdeavaruudessa. Todellinen kuva muodostuu, missä säteet todella leikkaavat (ei missä ne vain näyttävät lähtevän), ja tämä luku keskittyy kuvantavaan optiikkaan, ei kuvantamattomaan.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.1_003"
       }
     ],
     "10.2": [
@@ -4404,6 +5700,94 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.2_001"
+      },
+      {
+        "id": "q10.2_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about spherical lenses, as discussed in this section? (Select all that apply)",
+        "options": [
+          "A single spherical lens is an ideal, aberration-free imaging system",
+          "The course focuses on understanding spherical lenses; other lens types are left to follow-up courses",
+          "Aspherical lenses have been developed because a single spherical lens is not ideal due to aberrations",
+          "Freeform lenses cannot be manufactured",
+          "From a manufacturing point of view, spherical lenses are by far the easiest to form"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "Spherical lenses are easiest to make, aspherics exist because spherical lenses have aberrations, and the course focuses on spherical lenses. A single spherical lens is not ideal, and freeform lenses can even be 3D printed.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.2_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa pallolinsseistä tässä osiossa käsitellyllä tavalla? (Valitse kaikki oikeat)",
+        "options": [
+          "Yksittäinen pallolinssi on ideaalinen, aberraatioista vapaa kuvantamisjärjestelmä",
+          "Kurssilla keskitytään pallolinssien ymmärtämiseen; muut linssityypit jätetään jatkokursseille",
+          "Asfäärisiä linssejä on kehitetty, koska yksittäinen pallolinssi ei ole ihanteellinen aberraatioiden vuoksi",
+          "Vapaamuotolinssejä ei voida valmistaa",
+          "Valmistuksen kannalta pallolinssit ovat ylivoimaisesti helpoimpia muotoilla"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "Pallolinssit ovat helpoimpia valmistaa, asfäärisiä linssejä on olemassa, koska pallolinsseillä on aberraatioita, ja kurssilla keskitytään pallolinsseihin. Yksittäinen pallolinssi ei ole ideaalinen, ja vapaamuotolinssejä voidaan jopa 3D-tulostaa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.2_002"
+      },
+      {
+        "id": "q10.2_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the paraxial refraction result for a single spherical surface? (Select all that apply)",
+        "options": [
+          "The front and back focal lengths of a single interface differ, fo ≠ fi",
+          "For an image at infinity (si = ∞) the object lies in the front focal plane, at so = fo = n1R/(n2 − n1)",
+          "Snell's law for the ray gives n1 sin(α + φ) = n2 sin(φ − β)",
+          "For an object infinitely far away (so = ∞) the image forms in the back focal plane, at si = fi = n2R/(n2 − n1)",
+          "The image distance found in the paraxial approximation depends on the height h at which the ray hits the surface"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Snell's law, the two special cases (so = ∞ giving fi = n2R/(n2 − n1); si = ∞ giving fo = n1R/(n2 − n1)) and fo ≠ fi are correct. In the paraxial approximation the result n1/so + n2/si = (n2 − n1)/R does not depend on the height h.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.2_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa paraksiaalisesta taittumistuloksesta yhdelle pallopinnalle? (Valitse kaikki oikeat)",
+        "options": [
+          "Yksittäisen rajapinnan etu- ja takapolttovälit eroavat toisistaan, fo ≠ fi",
+          "Äärettömässä olevalle kuvalle (si = ∞) kohde on etupolttotasossa, kohdassa so = fo = n1R/(n2 − n1)",
+          "Säteen Snellin laki antaa n1 sin(α + φ) = n2 sin(φ − β)",
+          "Äärettömän kaukana olevalle kohteelle (so = ∞) kuva muodostuu takapolttotasoon, kohtaan si = fi = n2R/(n2 − n1)",
+          "Paraksiaaliapproksimaatiossa saatu kuvaetäisyys riippuu korkeudesta h, jolla säde osuu pintaan"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "explanation": "Snellin laki, kaksi erikoistapausta (so = ∞ antaa fi = n2R/(n2 − n1); si = ∞ antaa fo = n1R/(n2 − n1)) ja fo ≠ fi ovat oikein. Paraksiaaliapproksimaatiossa tulos n1/so + n2/si = (n2 − n1)/R ei riipu korkeudesta h.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.2_003"
       }
     ],
     "10.4": [
@@ -4451,6 +5835,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.4_001"
+      },
+      {
+        "id": "q10.4_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the three chief rays used to trace image formation through an ideal lens? (Select all that apply)",
+        "options": [
+          "A ray passing through the optical centre O of the lens is also a chief ray",
+          "A ray passing through the front focal point propagates parallel to the axis after the lens",
+          "The paraxial approximation stays exact for real lenses, so no aberrations occur",
+          "Three chief rays are needed because the incident angle strongly changes the behaviour of a ray in an ideal lens",
+          "A ray propagating parallel to the optical axis passes through the back focal point after the lens"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "The three chief rays are: parallel to the axis (through Fi), through Fo (parallel to the axis afterwards), and through the optical centre O. For an ideal lens the incident angle does not matter — which is why three rays suffice — and in real lenses the paraxial approximation fails, giving aberrations.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.4_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kolmesta pääsäteestä, joilla kuvanmuodostus jäljitetään ihanteellisen linssin läpi? (Valitse kaikki oikeat)",
+        "options": [
+          "Linssin optisen keskipisteen O kautta kulkeva säde on myös pääsäde",
+          "Etupolttopisteen kautta kulkeva säde etenee linssin jälkeen akselin suuntaisesti",
+          "Paraksiaaliapproksimaatio pysyy täsmällisenä todellisille linsseille, joten aberraatioita ei esiinny",
+          "Kolmea pääsädettä tarvitaan, koska tulokulma muuttaa voimakkaasti säteen käyttäytymistä ihanteellisessa linssissä",
+          "Optisen akselin suuntainen säde kulkee linssin jälkeen takapolttopisteen kautta"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Kolme pääsädettä ovat: akselin suuntainen (kulkee pisteen Fi kautta), pisteen Fo kautta kulkeva (akselin suuntainen linssin jälkeen) ja optisen keskipisteen O kautta kulkeva. Ihanteelliselle linssille tulokulmalla ei ole merkitystä — siksi kolme sädettä riittää — ja todellisilla linsseillä paraksiaaliapproksimaatio ei päde, mikä aiheuttaa aberraatioita.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.4_002"
+      },
+      {
+        "id": "q10.4_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about magnification in image formation? (Select all that apply)",
+        "options": [
+          "A negative transverse magnification (e.g. so > 0 and si > 0) corresponds to an inverted image",
+          "Newton's formula is xo·xi = f",
+          "The longitudinal magnification equals +MT²",
+          "The longitudinal magnification is defined as ML ≡ dxi/dxo",
+          "The transverse magnification can be written MT = yi/yo = −si/so = −xi/f = −f/xo"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "MT = −si/so = −xi/f = −f/xo, a negative MT means an inverted image, and ML = dxi/dxo. Differentiating xi = f²/xo gives ML = −f²/xo² = −MT² (a minus sign), and Newton's formula is xo·xi = f² (not f).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.4_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kuvanmuodostuksen suurennuksesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Negatiivinen poikittaissuurennus (esim. so > 0 ja si > 0) vastaa ylösalaisin olevaa kuvaa",
+          "Newtonin kaava on xo·xi = f",
+          "Pitkittäissuurennus on +MT²",
+          "Pitkittäissuurennus määritellään ML ≡ dxi/dxo",
+          "Poikittaissuurennus voidaan kirjoittaa muodossa MT = yi/yo = −si/so = −xi/f = −f/xo"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "MT = −si/so = −xi/f = −f/xo, negatiivinen MT tarkoittaa ylösalaista kuvaa, ja ML = dxi/dxo. Derivoimalla xi = f²/xo saadaan ML = −f²/xo² = −MT² (miinusmerkki), ja Newtonin kaava on xo·xi = f² (ei f).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.4_003"
       }
     ],
     "10.5": [
@@ -4498,6 +5968,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.5_001"
+      },
+      {
+        "id": "q10.5_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about how a system of two thin lenses is treated? (Select all that apply)",
+        "options": [
+          "The overall magnification of the two-lens system is the sum MT1 + MT2",
+          "The image formed by the first lens acts as the object of the second lens, so yi1 = yo2",
+          "A multi-lens system is treated one lens at a time, starting from the lens first illuminated by the incident light",
+          "For two thin lenses separated by d, the first image is located at si1 = d − so2",
+          "Complicated lens systems are normally analysed with pen and paper, since ray-tracing software is not needed"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "The system is treated lens by lens starting from the first one, the first image is the second lens's object (yi1 = yo2) at si1 = d − so2. The total magnification is the product MT1·MT2, not the sum, and complicated systems are analysed with dedicated ray-tracing software (e.g. Zemax), not with pen and paper.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.5_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa kahden ohuen linssin systeemin käsittelystä? (Valitse kaikki oikeat)",
+        "options": [
+          "Kahden linssin systeemin kokonaissuurennus on summa MT1 + MT2",
+          "Ensimmäisen linssin muodostama kuva toimii toisen linssin kohteena, joten yi1 = yo2",
+          "Monilinssisysteemiä käsitellään yksi linssi kerrallaan alkaen linssistä, jonka tuleva valo osuu ensin",
+          "Kahdelle ohuelle linssille, joiden etäisyys on d, ensimmäinen kuva on kohdassa si1 = d − so2",
+          "Monimutkaisia linssisysteemejä analysoidaan yleensä kynällä ja paperilla, koska säteenseurantaohjelmistoja ei tarvita"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "Systeemiä käsitellään linssi kerrallaan ensimmäisestä alkaen, ja ensimmäinen kuva on toisen linssin kohde (yi1 = yo2) kohdassa si1 = d − so2. Kokonaissuurennus on tulo MT1·MT2, ei summa, ja monimutkaisia systeemejä analysoidaan erityisillä säteenseurantaohjelmistoilla (esim. Zemax), ei kynällä ja paperilla.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.5_002"
+      },
+      {
+        "id": "q10.5_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the purposes and properties of lens systems? (Select all that apply)",
+        "options": [
+          "For two lenses in contact the powers combine as 1/D = 1/D1 + 1/D2",
+          "Using two optically different materials with different dispersions, n1(λ) ≠ n2(λ), doublets/triplets can be designed to minimize chromatic aberrations",
+          "The need for materials with different dispersions helps explain the huge variety of optical glasses",
+          "Lens systems are used, e.g., to reduce aberrations (including chromatic aberrations) and to improve performance",
+          "The back focal length (bfl) is the distance between the first lens and the focal point"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "Lens systems reduce aberrations, and doublets/triplets from materials with different dispersions minimize chromatic aberrations (explaining the many optical glasses). The back focal length is measured from the last lens, and for lenses in contact the powers simply add, D = D1 + D2 (equivalently 1/f = 1/f1 + 1/f2).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.5_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa linssisysteemien tarkoituksista ja ominaisuuksista? (Valitse kaikki oikeat)",
+        "options": [
+          "Kahden toisiinsa kosketuksissa olevan linssin voimakkuudet yhdistyvät kaavalla 1/D = 1/D1 + 1/D2",
+          "Käyttämällä kahta optisesti erilaista materiaalia, joilla on eri dispersiot, n1(λ) ≠ n2(λ), voidaan suunnitella dubletteja/tripletteja kromaattisten aberraatioiden minimoimiseksi",
+          "Tarve materiaaleille, joilla on erilaiset dispersiot, auttaa selittämään optisten lasien valtavan kirjon",
+          "Linssisysteemejä käytetään mm. aberraatioiden (kromaattiset mukaan lukien) vähentämiseen ja suorituskyvyn parantamiseen",
+          "Takapolttoväli (bfl) on ensimmäisen linssin ja polttopisteen välinen etäisyys"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3
+        ],
+        "explanation": "Linssisysteemit vähentävät aberraatioita, ja eri dispersioisista materiaaleista tehdyt dubletit/tripletit minimoivat kromaattisia aberraatioita (mikä selittää monet optiset lasit). Takapolttoväli mitataan viimeisestä linssistä, ja toisiinsa kosketuksissa olevien linssien voimakkuudet vain summautuvat, D = D1 + D2 (vastaavasti 1/f = 1/f1 + 1/f2).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.5_003"
       }
     ],
     "10.6": [
@@ -4545,6 +6101,94 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.6_001"
+      },
+      {
+        "id": "q10.6_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about apertures, stops and pupils? (Select all that apply)",
+        "options": [
+          "Apertures and stops are used to adjust or restrict the amount of light propagating through the imaging system",
+          "Strong luminous intensity improves the signal-to-noise ratio and requires only a small numerical aperture",
+          "The size of the detector, or another component such as a lens, can also act as a stop",
+          "If an instrument is used directly by the human eye, the cornea of the eye should be placed into the exit pupil",
+          "The entrance pupil is the image of the component that restricts the rays of light the least"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "Stops restrict the light, the detector or a lens can act as a stop, and the eye's cornea should be at the exit pupil. High luminous intensity (better signal-to-noise) needs a large numerical aperture, and the entrance pupil is the image of the component that restricts the rays the most.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.6_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa aukoista, rajoittimista ja pupilleista? (Valitse kaikki oikeat)",
+        "options": [
+          "Aukkoja ja rajoittimia käytetään säätämään tai rajoittamaan kuvantamisjärjestelmän läpi etenevän valon määrää",
+          "Voimakas valovoima parantaa signaali–kohinasuhdetta ja vaatii vain pienen numeerisen aukon",
+          "Myös ilmaisimen koko tai jokin muu komponentti, kuten linssi, voi toimia rajoittimena",
+          "Jos laitetta käytetään suoraan ihmissilmällä, silmän sarveiskalvo tulee asettaa ulostulopupilliin",
+          "Sisääntulopupilli on sen komponentin kuva, joka rajoittaa valonsäteitä vähiten"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3
+        ],
+        "explanation": "Rajoittimet rajoittavat valon määrää, ilmaisin tai linssi voi toimia rajoittimena, ja silmän sarveiskalvon tulee olla ulostulopupillissa. Suuri valovoima (parempi signaali–kohinasuhde) vaatii suuren numeerisen aukon, ja sisääntulopupilli on sen komponentin kuva, joka rajoittaa säteitä eniten.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.6_002"
+      },
+      {
+        "id": "q10.6_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the relative aperture and the f-number? (Select all that apply)",
+        "options": [
+          "The f-number is the inverse of the relative aperture: f/# = f/D",
+          "Image brightness is proportional to the f-number itself, ∝ f/#",
+          "Luminous intensity is proportional to the area of the entrance pupil, scaling as ∝ D²",
+          "The image area is proportional to f², so image brightness scales as (D/f)²",
+          "Because brightness ∝ 1/(f/#)², going from f/2 to f/2.8 halves the image brightness"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "explanation": "Intensity scales as D², the image area as f², so brightness ∝ (D/f)² = 1/(f/#)²; consequently one step up the f-number scale (2 → 2.8) halves the brightness. Brightness decreases (quadratically) with increasing f-number — it is not proportional to f/#.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.6_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa suhteellisesta aukosta ja f-luvusta? (Valitse kaikki oikeat)",
+        "options": [
+          "F-luku on suhteellisen aukon käänteisluku: f/# = f/D",
+          "Kuvan kirkkaus on verrannollinen itse f-lukuun, ∝ f/#",
+          "Valovoima on verrannollinen sisääntulopupillin pinta-alaan, skaalautuen ∝ D²",
+          "Kuvan pinta-ala on verrannollinen f²:een, joten kuvan kirkkaus skaalautuu kuten (D/f)²",
+          "Koska kirkkaus ∝ 1/(f/#)², siirtyminen arvosta f/2 arvoon f/2,8 puolittaa kuvan kirkkauden"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "explanation": "Valovoima skaalautuu kuten D², kuvan pinta-ala kuten f², joten kirkkaus ∝ (D/f)² = 1/(f/#)²; siksi yksi askel f-lukuasteikolla ylöspäin (2 → 2,8) puolittaa kirkkauden. Kirkkaus pienenee (neliöllisesti) f-luvun kasvaessa — se ei ole verrannollinen f/#:ään.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.6_003"
       }
     ],
     "10.7": [
@@ -4592,6 +6236,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.7_001"
+      },
+      {
+        "id": "q10.7_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about flat and spherical mirrors? (Select all that apply)",
+        "options": [
+          "For a spherical mirror the reflection angle of a ray depends on the location where the ray hits the mirror",
+          "For mirrors the sign conventions are the same as for thin lenses and need no special care",
+          "The focal length of a spherical mirror is f = +R",
+          "A flat mirror forms a virtual image that seems to lie behind the mirror, at distance si from the mirror's other side",
+          "Looking at your left hand in a mirror, the mirror image looks like a right hand, i.e. the handedness changes"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "A flat mirror gives a virtual mirror image with reversed handedness, and for a spherical mirror the reflection angle depends on where the ray hits. One must be very careful with the sign conventions for mirrors, and f = −R/2 (not +R).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.7_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa tasopeileistä ja pallopeileistä? (Valitse kaikki oikeat)",
+        "options": [
+          "Pallopeilillä säteen heijastuskulma riippuu siitä, mihin kohtaan peiliä säde osuu",
+          "Peileillä etumerkkikonventiot ovat samat kuin ohuilla linsseillä eivätkä vaadi erityistä huolellisuutta",
+          "Pallopeilin polttoväli on f = +R",
+          "Tasopeili muodostaa virtuaalisen kuvan, joka näyttää sijaitsevan peilin takana etäisyydellä si peilin toisella puolella",
+          "Kun katsot vasenta kättäsi peilistä, peilikuva näyttää oikealta kädeltä eli kätisyys muuttuu"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "Tasopeili antaa virtuaalisen peilikuvan, jonka kätisyys on kääntynyt, ja pallopeilillä heijastuskulma riippuu osumakohdasta. Peilien etumerkkikonventioissa on oltava hyvin huolellinen, ja f = −R/2 (ei +R).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.7_002"
+      },
+      {
+        "id": "q10.7_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the advantages of mirrors compared with lenses? (Select all that apply)",
+        "options": [
+          "Mirrors suffer more from chromatic aberration than lenses because reflection depends strongly on wavelength",
+          "The greatest advantage of mirrors is that their behaviour usually does not depend much on the wavelength of the light",
+          "Using mirrors one can often miniaturize instruments and reduce their weight",
+          "For space telescopes it is easier to manufacture very large lenses than very large mirrors",
+          "The use of lenses for imaging is often restricted by chromatic aberrations"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "Mirrors mostly do not depend on wavelength (so they avoid the chromatic aberrations that limit lenses), and they allow miniaturized, lighter instruments. The opposite claims are wrong: mirrors have little chromatic aberration, and really large mirrors (e.g. for space telescopes) are easier to make than large lenses.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.7_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa peilien eduista linsseihin verrattuna? (Valitse kaikki oikeat)",
+        "options": [
+          "Peileillä on enemmän kromaattista aberraatiota kuin linsseillä, koska heijastus riippuu voimakkaasti aallonpituudesta",
+          "Peilien suurin etu on, että niiden käyttäytyminen ei yleensä riipu paljon valon aallonpituudesta",
+          "Peilien avulla laitteita voidaan usein pienentää ja keventää",
+          "Avaruusteleskooppeja varten on helpompi valmistaa erittäin suuria linssejä kuin erittäin suuria peilejä",
+          "Linssien käyttöä kuvantamiseen rajoittavat usein kromaattiset aberraatiot"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          4
+        ],
+        "explanation": "Peilit eivät juuri riipu aallonpituudesta (joten niillä ei ole linssejä rajoittavia kromaattisia aberraatioita), ja ne mahdollistavat pienemmät ja kevyemmät laitteet. Vastakkaiset väitteet ovat vääriä: peileillä on vähän kromaattista aberraatiota, ja todella suuria peilejä (esim. avaruusteleskoopeille) on helpompi valmistaa kuin suuria linssejä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.7_003"
       }
     ],
     "10.8": [
@@ -4639,6 +6369,90 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.8_001"
+      },
+      {
+        "id": "q10.8_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about applications of prisms? (Select all that apply)",
+        "options": [
+          "In spectrometers and monochromators, prisms can separate different frequency components of light",
+          "Prisms can guide or reflect polychromatic (broadband) light with negligible losses",
+          "Many binoculars use prisms to flip the image",
+          "A prism that separates colours by refraction relies on total internal reflection at the prism–air interface",
+          "Prisms can only be used with strictly monochromatic light"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Prisms separate frequency components (spectrometers, monochromators), flip images (binoculars) and guide broadband light with low losses. They work with broadband light, and colour separation by refraction relies on dispersion at the interfaces, not on total internal reflection.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.8_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa prismojen sovelluksista? (Valitse kaikki oikeat)",
+        "options": [
+          "Spektrometreissä ja monokromaattoreissa prismat voivat erottaa valon eri taajuuskomponentit toisistaan",
+          "Prismat voivat ohjata tai heijastaa monivärisen (laajakaistaisen) valon mitättömin häviöin",
+          "Monet kiikarit käyttävät prismoja kuvan kääntämiseen",
+          "Värejä taittumalla erottava prisma perustuu kokonaisheijastukseen prisman ja ilman rajapinnalla",
+          "Prismoja voidaan käyttää vain tiukasti monokromaattisen valon kanssa"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Prismat erottavat taajuuskomponentteja (spektrometrit, monokromaattorit), kääntävät kuvia (kiikarit) ja ohjaavat laajakaistaista valoa pienin häviöin. Ne toimivat laajakaistaisella valolla, ja värien erottaminen taittumalla perustuu rajapintojen dispersioon, ei kokonaisheijastukseen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.8_002"
+      },
+      {
+        "id": "q10.8_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following pair a prism's operating principle correctly with what it can be used for? (Select all that apply)",
+        "options": [
+          "Refraction at the interfaces of a dispersive medium: separating frequency components of light",
+          "Prisms used for guiding light have large losses, which is why binoculars do not use them",
+          "Both prism operating principles require the light to be monochromatic",
+          "A dispersive prism separates frequencies by diffraction from a periodic structure",
+          "Total internal reflection at the prism–air interface: guiding or reflecting broadband light with negligible losses"
+        ],
+        "correctIndices": [
+          0,
+          4
+        ],
+        "explanation": "Only two prism principles are described: refraction at a dispersive medium's interfaces (spectral separation) and total internal reflection (low-loss guiding/image flipping, e.g. binoculars). Prisms do not diffract from a periodic structure (that is a grating), TIR guiding has negligible losses, and neither principle requires monochromatic light.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.8_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista yhdistävät prisman toimintaperiaatteen oikein siihen, mihin sitä voidaan käyttää? (Valitse kaikki oikeat)",
+        "options": [
+          "Taittuminen dispersiivisen aineen rajapinnoilla: valon taajuuskomponenttien erottaminen",
+          "Valon ohjaamiseen käytetyillä prismoilla on suuret häviöt, minkä vuoksi kiikareissa ei käytetä niitä",
+          "Molemmat prisman toimintaperiaatteet edellyttävät valon olevan monokromaattista",
+          "Dispersiivinen prisma erottaa taajuudet jaksollisen rakenteen diffraktiolla",
+          "Kokonaisheijastus prisman ja ilman rajapinnalla: laajakaistaisen valon ohjaaminen tai heijastaminen mitättömin häviöin"
+        ],
+        "correctIndices": [
+          0,
+          4
+        ],
+        "explanation": "Kuvattuja prisman periaatteita on vain kaksi: taittuminen dispersiivisen aineen rajapinnoilla (spektrin erottaminen) ja kokonaisheijastus (häviötön ohjaus/kuvan kääntö, esim. kiikarit). Prisma ei diffraktoi jaksollisesta rakenteesta (se on hila), kokonaisheijastukseen perustuvan ohjauksen häviöt ovat mitättömiä, eikä kumpikaan periaate vaadi monokromaattista valoa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.8_003"
       }
     ],
     "10.9": [
@@ -4686,6 +6500,94 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.9_001"
+      },
+      {
+        "id": "q10.9_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the structure of the human eye and its photoreceptors? (Select all that apply)",
+        "options": [
+          "The lens of the eye is where light is most strongly refracted",
+          "The images formed by the human eye on the retina are upright",
+          "The three types of cone cells sense both the intensity and the colour of light through (photo)opsins",
+          "Light propagates first through the cornea and the pupil, which is surrounded by the iris",
+          "Rod cells sense the intensity of light but not its colour, and enable night vision"
+        ],
+        "correctIndices": [
+          2,
+          3,
+          4
+        ],
+        "explanation": "Light passes the cornea and pupil (surrounded by the iris); rods sense intensity (night vision) and the three cone types sense intensity and colour. The image on the retina is inverted (the brain handles this), and light is refracted most strongly at the air–cornea interface, not in the lens.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.9_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ihmissilmän rakenteesta ja valoreseptoreista? (Valitse kaikki oikeat)",
+        "options": [
+          "Silmän mykiö on kohta, jossa valo taittuu voimakkaimmin",
+          "Ihmissilmän verkkokalvolle muodostamat kuvat ovat pystyjä",
+          "Kolmen tyyppiset tappisolut aistivat sekä valon voimakkuutta että väriä (foto)opsiinien avulla",
+          "Valo etenee ensin sarveiskalvon ja pupillin läpi, ja pupillia ympäröi värikalvo",
+          "Sauvasolut aistivat valon voimakkuutta mutta eivät väriä, ja ne mahdollistavat yönäön"
+        ],
+        "correctIndices": [
+          2,
+          3,
+          4
+        ],
+        "explanation": "Valo kulkee sarveiskalvon ja pupillin (jota värikalvo ympäröi) läpi; sauvasolut aistivat voimakkuutta (yönäkö) ja kolme tappisolutyyppiä voimakkuutta ja väriä. Kuva verkkokalvolla on ylösalaisin (aivot hoitavat tämän), ja valo taittuu voimakkaimmin ilman ja sarveiskalvon rajapinnalla, ei mykiössä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.9_002"
+      },
+      {
+        "id": "q10.9_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about common vision problems and their corrections? (Select all that apply)",
+        "options": [
+          "Astigmatism means that rays propagating through different parts of the eye focus differently",
+          "Myopia (nearsightedness) is the inability to focus on far-away objects and can be corrected with concave lenses (f < 0)",
+          "In hyperopia (farsightedness) the eye forms an image of a nearby object behind the retina; it is corrected with convex lenses (f > 0)",
+          "Cataract is a clouding of the cornea and a rare cause of blindness worldwide",
+          "The near point moves farther away with age: about 5 cm for children, but possibly about 1 m for older people"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Presbyopic near-point shift, myopia (concave, f < 0), hyperopia (convex, f > 0) and astigmatism are described correctly. Cataract is clouding of the eye's lens (not the cornea) and is the most common cause of blindness globally.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.9_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa yleisistä näköongelmista ja niiden korjaamisesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Astigmatismissa silmän eri osien läpi kulkevat säteet tarkentuvat eri tavoin",
+          "Likinäköisyys (myopia) on kyvyttömyyttä tarkentaa kaukana oleviin kohteisiin, ja se voidaan korjata koverilla linsseillä (f < 0)",
+          "Kaukonäköisyydessä (hyperopia) silmä muodostaa lähellä olevasta kohteesta kuvan verkkokalvon taakse; se korjataan kuperilla linsseillä (f > 0)",
+          "Kaihi on sarveiskalvon samentuma ja harvinainen sokeuden syy maailmanlaajuisesti",
+          "Lähipiste siirtyy kauemmas iän myötä: lapsilla noin 5 cm, mutta vanhemmilla ihmisillä mahdollisesti noin 1 m"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "explanation": "Ikään liittyvä lähipisteen siirtyminen, likinäköisyys (kovera, f < 0), kaukonäköisyys (kupera, f > 0) ja astigmatismi on kuvattu oikein. Kaihi on silmän mykiön (ei sarveiskalvon) samentumista, ja se on yleisin sokeuden syy maailmanlaajuisesti.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.9_003"
       }
     ],
     "10.10": [
@@ -4733,6 +6635,92 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.10_001"
+      },
+      {
+        "id": "q10.10_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about viewing angle and the simple magnifier? (Select all that apply)",
+        "options": [
+          "For an ideal magnifier forming the virtual image infinitely far away, the viewing angle is αa ≈ yo/f",
+          "The size of an object's image on the retina depends on the viewing angle, which increases when the object is brought closer to the eye",
+          "Without a magnifier, the near point do limits how close the object can be brought, giving approximately αu ≈ yo/do",
+          "The angular magnification is defined as MP ≡ αu/αa",
+          "The near point of the eye allows the object to be brought arbitrarily close to the eye while still seen sharply"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "The viewing angle grows when the object is closer, the near point limits this (αu ≈ yo/do), and an ideal magnifier gives αa ≈ yo/f. The near point does limit how close the object can be brought, and MP ≡ αa/αu (magnified over unaided angle), not the inverse.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.10_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa katselukulmasta ja yksinkertaisesta suurentimesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Ihanteelliselle suurentimelle, joka muodostaa virtuaalikuvan äärettömän kauas, katselukulma on αa ≈ yo/f",
+          "Kohteen kuvan koko verkkokalvolla riippuu katselukulmasta, joka kasvaa, kun kohde tuodaan lähemmäs silmää",
+          "Ilman suurennuslasia lähipiste do rajoittaa, kuinka lähelle kohde voidaan tuoda, jolloin likimain αu ≈ yo/do",
+          "Kulmasuurennus määritellään MP ≡ αu/αa",
+          "Silmän lähipiste sallii kohteen tuomisen mielivaltaisen lähelle silmää nähden se silti tarkkana"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          2
+        ],
+        "explanation": "Katselukulma kasvaa kohteen lähestyessä, lähipiste rajoittaa tätä (αu ≈ yo/do), ja ihanteellinen suurennuslasi antaa αa ≈ yo/f. Lähipiste rajoittaa, kuinka lähelle kohde voidaan tuoda, ja MP ≡ αa/αu (suurennettu kulma jaettuna paljaan silmän kulmalla), ei käänteinen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.10_002"
+      },
+      {
+        "id": "q10.10_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the magnification of a magnifying glass? (Select all that apply)",
+        "options": [
+          "The magnification can be written MP = do/f = do·D",
+          "Simple magnifying glasses with considerably larger magnification are rare because lens aberrations start to limit their performance",
+          "A negative (concave) lens can equally well act as a magnifying glass",
+          "A magnifying glass with f = 10 cm (+10 dioptres) gives a 2.5× magnification when do = 25 cm",
+          "A magnifier with f = 5 cm gives a 2.5× magnification when do = 25 cm"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "MP = do/f = do·D: f = 10 cm (+10 D) gives 25/10 = 2.5×, and lens aberrations limit larger magnifications. With f = 5 cm one would get 25/5 = 5×, not 2.5×, and essentially any positive (converging) lens acts as a magnifier — not a concave one.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.10_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa suurennuslasin suurennuksesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Suurennus voidaan kirjoittaa MP = do/f = do·D",
+          "Yksinkertaisia suurennuslaseja, joiden suurennus on selvästi suurempi, on harvassa, koska linssien aberraatiot alkavat rajoittaa niiden suorituskykyä",
+          "Negatiivinen (kovera) linssi voi yhtä hyvin toimia suurennuslasina",
+          "Suurennuslasi, jonka f = 10 cm (+10 dioptria), antaa 2,5-kertaisen suurennuksen, kun do = 25 cm",
+          "Suurennuslasi, jonka f = 5 cm, antaa 2,5-kertaisen suurennuksen, kun do = 25 cm"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          3
+        ],
+        "explanation": "MP = do/f = do·D: f = 10 cm (+10 D) antaa 25/10 = 2,5×, ja linssien aberraatiot rajoittavat suurempia suurennuksia. Kun f = 5 cm, saadaan 25/5 = 5×, ei 2,5×, ja käytännössä mikä tahansa positiivinen (kokoava) linssi toimii suurentimena — ei kovera.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.10_003"
       }
     ],
     "10.11": [
@@ -4780,6 +6768,223 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.11_001"
+      },
+      {
+        "id": "q10.11_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the objective and the eyepiece of an instrument used directly by the human eye? (Select all that apply)",
+        "options": [
+          "The objective lens is located close to the object",
+          "The second lens is called the ocular lens or eyepiece",
+          "The eyepiece is placed two focal lengths from the intermediate image",
+          "In the simplest case the instrument consists of a single lens",
+          "The objective forms an intermediate image between the two lenses"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "In the simplest case there are two lenses: the objective (close to the object) forms an intermediate image between the lenses, and the ocular/eyepiece is the second lens. The eyepiece is placed one — not two — focal lengths from the intermediate image.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.11_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa suoraan ihmissilmällä käytettävän laitteen objektiivista ja okulaarista? (Valitse kaikki oikeat)",
+        "options": [
+          "Objektiivilinssi sijaitsee lähellä kohdetta",
+          "Toista linssiä kutsutaan okulaarilinssiksi eli okulaariksi",
+          "Okulaari asetetaan kahden polttovälin päähän välikuvasta",
+          "Yksinkertaisimmassa tapauksessa laite koostuu yhdestä linssistä",
+          "Objektiivi muodostaa välikuvan kahden linssin väliin"
+        ],
+        "correctIndices": [
+          0,
+          1,
+          4
+        ],
+        "explanation": "Yksinkertaisimmassa tapauksessa linssejä on kaksi: objektiivi (lähellä kohdetta) muodostaa välikuvan linssien väliin, ja okulaari on toinen linssi. Okulaari asetetaan yhden — ei kahden — polttovälin päähän välikuvasta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.11_002"
+      },
+      {
+        "id": "q10.11_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the layout of the eyepiece (ocular) section? (Select all that apply)",
+        "options": [
+          "The intermediate image is formed behind the eyepiece, on the eye's side",
+          "Optical instruments used directly by the human eye consist in the simplest case of two lenses",
+          "The eyepiece is placed one focal length fe away from the intermediate image",
+          "The eyepiece is placed at the position of the object",
+          "The objective lens is the lens closest to the eye"
+        ],
+        "correctIndices": [
+          1,
+          2
+        ],
+        "explanation": "The eyepiece sits one focal length fe from the intermediate image (which lies between the two lenses), and the simplest direct-viewing instrument has two lenses. The objective is close to the object (the eyepiece is nearest to the eye), so the other statements are wrong.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.11_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa okulaariosion asettelusta? (Valitse kaikki oikeat)",
+        "options": [
+          "Välikuva muodostuu okulaarin taakse, silmän puolelle",
+          "Suoraan ihmissilmällä käytettävät optiset laitteet koostuvat yksinkertaisimmillaan kahdesta linssistä",
+          "Okulaari asetetaan yhden polttovälin fe päähän välikuvasta",
+          "Okulaari asetetaan kohteen paikalle",
+          "Objektiivilinssi on silmää lähimpänä oleva linssi"
+        ],
+        "correctIndices": [
+          1,
+          2
+        ],
+        "explanation": "Okulaari sijaitsee yhden polttovälin fe päässä välikuvasta (joka on kahden linssin välissä), ja yksinkertaisimmassa suoraan katsottavassa laitteessa on kaksi linssiä. Objektiivi on lähellä kohdetta (okulaari on lähinnä silmää), joten muut väitteet ovat vääriä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.11_003"
+      }
+    ],
+    "10.12": [
+      {
+        "id": "q10.12_001",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about microscopes and their magnification? (Select all that apply)",
+        "options": [
+          "The magnification of the eyepiece is in practice restricted to about 10×–20×, so the objective's focal length has to be short (around 1 mm)",
+          "Electron microscopes reach a resolution of only about 200 nm",
+          "Conventional optical microscopes reach a resolution of about 0.3 nm",
+          "Microscopes can be understood as powerful magnifying glasses, capable of roughly 10×–2000× magnification",
+          "The simplest microscope consists of two lenses: an objective lens and an eyepiece"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "Microscopes act as powerful magnifiers (about 10×–2000×), the simplest has an objective and an eyepiece, and the eyepiece magnification is limited to about 10×–20×, so f_o ≈ 1 mm. Conventional optical microscopes reach ≈200 nm; ≈0.3 nm belongs to electron microscopes (up to 1 000 000×).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.12_001_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa mikroskoopeista ja niiden suurennuksesta? (Valitse kaikki oikeat)",
+        "options": [
+          "Okulaarin suurennus on käytännössä rajoitettu noin 10×–20×:ään, joten objektiivin polttovälin on oltava lyhyt (noin 1 mm)",
+          "Elektronimikroskoopit saavuttavat vain noin 200 nm:n erotuskyvyn",
+          "Tavanomaiset optiset mikroskoopit saavuttavat noin 0,3 nm:n erotuskyvyn",
+          "Mikroskooppeja voidaan ajatella tehokkaina suurennuslaseina, joiden suurennus on likimain 10×–2000×",
+          "Yksinkertaisin mikroskooppi koostuu kahdesta linssistä: objektiivilinssistä ja okulaarista"
+        ],
+        "correctIndices": [
+          0,
+          3,
+          4
+        ],
+        "explanation": "Mikroskoopit toimivat tehokkaina suurentimina (noin 10×–2000×), yksinkertaisimmassa on objektiivi ja okulaari, ja okulaarin suurennus rajoittuu noin 10×–20×:ään, joten f_o ≈ 1 mm. Tavanomaiset optiset mikroskoopit saavuttavat ≈200 nm; ≈0,3 nm kuuluu elektronimikroskoopeille (jopa 1 000 000×).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.12_001"
+      },
+      {
+        "id": "q10.12_002",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about the tube length, the objective magnification and the field of view of a microscope? (Select all that apply)",
+        "options": [
+          "A larger tube length L reduces the transverse magnification of the objective",
+          "With L = 160 mm, an objective with fo = 32 mm gives |MT| = 5, and with a 10× eyepiece the total magnification is 50×",
+          "The field of view of the objective is FOV = FN/MT, where the field number FN is the diameter of the intermediate image",
+          "The transverse magnification of the objective is MT = −xi/fo = −L/fo",
+          "The tube length L ≡ xi is the standardized distance between the image plane and the focal point Fo, typically 160–200 mm depending on the manufacturer"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "explanation": "The tube length is standardized (160–200 mm), MT = −L/fo (e.g. L = 160 mm and fo = 32 mm give 5, and 5 × 10 = 50× with a 10× eyepiece), and FOV = FN/MT. A larger L increases |MT| = L/fo; it does not reduce it.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.12_002_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa mikroskoopin tubuspituudesta, objektiivin suurennuksesta ja näkökentästä? (Valitse kaikki oikeat)",
+        "options": [
+          "Suurempi tubuspituus L pienentää objektiivin poikittaissuurennusta",
+          "Kun L = 160 mm, objektiivi, jonka fo = 32 mm, antaa |MT| = 5, ja 10×-okulaarilla kokonaissuurennus on 50×",
+          "Objektiivin näkökenttä on FOV = FN/MT, missä kenttäluku FN on välikuvan halkaisija",
+          "Objektiivin poikittaissuurennus on MT = −xi/fo = −L/fo",
+          "Tubuspituus L ≡ xi on kuvatason ja polttopisteen Fo standardoitu etäisyys, tyypillisesti 160–200 mm valmistajasta riippuen"
+        ],
+        "correctIndices": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "explanation": "Tubuspituus on standardoitu (160–200 mm), MT = −L/fo (esim. L = 160 mm ja fo = 32 mm antavat 5, ja 5 × 10 = 50× 10×-okulaarilla), ja FOV = FN/MT. Suurempi L kasvattaa |MT| = L/fo:ta; se ei pienennä sitä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.12_002"
+      },
+      {
+        "id": "q10.12_003",
+        "questionType": "multi_select",
+        "stem": "Which of the following are correct about infinity-corrected microscopes and the numerical aperture? (Select all that apply)",
+        "options": [
+          "Flat components such as colour filters or polarizers can be added between the objective and the tube lens without readjusting the distances between the lenses",
+          "Immersing the object in microscope oil (n = 1.515) reduces the numerical aperture compared with air",
+          "In an infinity-corrected microscope the objective forms an image at infinity, and a third lens, the tube lens, forms the intermediate image in the focal plane of the eyepiece",
+          "The f-number (relative aperture) is the most meaningful parameter for describing the light-collection efficiency of microscope objectives",
+          "The numerical aperture is NA = ni sinθmax, where ni is the refractive index of the medium surrounding the object, and it defines the diffraction-limited resolution"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "The infinity-corrected three-lens layout (tube lens, room for filters/polarizers between objective and tube lens) and NA = ni sinθmax (which defines the diffraction-limited resolution) are correct. The f-number is not meaningful for objectives (NA is used), and immersion in oil raises ni and therefore increases NA.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored",
+        "lang": "en"
+      },
+      {
+        "id": "q10.12_003_fi",
+        "questionType": "multi_select",
+        "stem": "Mitkä seuraavista pitävät paikkansa ääretön-korjatuista mikroskoopeista ja numeerisesta aukosta? (Valitse kaikki oikeat)",
+        "options": [
+          "Litteitä komponentteja, kuten värisuodattimia tai polarisaattoreita, voidaan lisätä objektiivin ja tubuslinssin väliin ilman linssien välisten etäisyyksien uudelleensäätöä",
+          "Kohteen upottaminen mikroskoopin öljyyn (n = 1,515) pienentää numeerista aukkoa ilmaan verrattuna",
+          "Ääretön-korjatussa mikroskoopissa objektiivi muodostaa kuvan äärettömyyteen, ja kolmas linssi, tubuslinssi, muodostaa välikuvan okulaarin polttotasoon",
+          "F-luku (suhteellinen aukko) on mielekkäin parametri kuvaamaan mikroskooppiobjektiivien valonkeruutehokkuutta",
+          "Numeerinen aukko on NA = ni sinθmax, missä ni on kohdetta ympäröivän aineen taitekerroin, ja se määrää diffraktiorajoitetun erotuskyvyn"
+        ],
+        "correctIndices": [
+          0,
+          2,
+          4
+        ],
+        "explanation": "Ääretön-korjattu kolmen linssin asettelu (tubuslinssi, tilaa suodattimille/polarisaattoreille objektiivin ja tubuslinssin välissä) ja NA = ni sinθmax (joka määrää diffraktiorajoitetun erotuskyvyn) ovat oikein. F-luku ei ole mielekäs objektiiveille (käytetään NA:ta), ja öljyupotus nostaa ni:tä ja siten kasvattaa NA:ta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.12_003"
       }
     ]
   }

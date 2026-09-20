@@ -89,9 +89,12 @@
  *     every chapter 2-10 in both EN and FI (221 each), so /quiz is normally
  *     served free from the bank; live generation (1 credit) only happens when a
  *     request asks for more than the bank has left. multivalueQuizBank_fys240.json
- *     holds 104 questions in EN and 104 in FI (since v2.7.2), so /mvquiz and
- *     /moquiz are normally served free from the bank too; sections with fewer
- *     than 3 banked questions top up via live generation (1 credit).
+ *     holds 155 questions in EN and 155 in FI (v2.7.3), so /mvquiz and
+ *     /moquiz are normally served free from the bank too; every section of
+ *     chapters 3 and 10 now has 3 banked questions, while 25 sections in
+ *     chapters 4-9 (4.1-4.6, 5.3, 5.4, 6.1, 6.2, 6.4-6.6, 7.1, 7.3, 7.5,
+ *     8.1-8.7, 9.2, 9.5) still have 1-2 and top up via
+ *     live generation (1 credit).
  *     /source_quizzes shows the live picture.
  *   - homework_solutions.json (new in v2.3.0) is instructor-reference only —
  *     nothing in this bot loads or serves it; see the file's own header
@@ -105,6 +108,17 @@
 
  *
  * CHANGELOG:
+ *   v2.7.3 — Content-only update (no code changes): multivalueQuizBank_fys240.json
+ *            grew from 104 to 155 questions per language (EN + FI, 310 entries).
+ *            51 new "select all that apply" questions were added, 2 per section
+ *            for sections 3.1-3.12 and 10.1-10.11, 10.13 (24 + 24) and 3 for 10.12
+ *            (which had none), so every section of chapters 3 and 10 now has 3
+ *            banked questions and "/mvquiz 3.3" / "/moquiz 10.9" etc. are served
+ *            entirely from the bank (no live generation, no credit). New ids
+ *            continue each section's numbering (q3.1_002, q3.1_003, ...), Finnish
+ *            copies carry the "_fi" suffix and translationOf like the earlier
+ *            ones; source "claude-authored" (EN) / "claude-translated" (FI),
+ *            addedAt 2026-09-20. No existing question was changed.
  *   v2.7.2 — Finnish multi-answer quiz + numeric scope for the multi-answer
  *            commands. Three things, all in the multivalue quiz add-on:
  *            (1) Finnish bank. All 104 English questions in
@@ -429,7 +443,7 @@
  *   (earlier history predates version tracking)
  */
 
-const BOT_VERSION = "2.7.2";
+const BOT_VERSION = "2.7.3";
 
 const fs = require("fs");
 const path = require("path");
