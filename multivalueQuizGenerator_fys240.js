@@ -78,6 +78,15 @@ const QUIZ_BANK_PENDING_PATH = path.join(__dirname, 'multivalueQuizBankPending_f
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
+// Question text goes out with parse_mode: 'HTML', and bank/generated text
+// legitimately contains <, > and & (e.g. "λ < 10 nm", "<P>_T = I/c",
+// "<cosωt>=0", "f<0"). Unescaped, Telegram rejects the whole message
+// ("Unsupported start tag") and the quiz stalls. Escape every piece of
+// question/option/explanation text before it is embedded in an HTML message.
+function escapeHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 // ---------- Stage 1: local trigger gate (no API call) ----------
 // Deliberately NOT matching bare "quiz"/"kysele" — those stay reserved for
 // quizGenerator_fys240.js's single-select flow. A student who wants this
@@ -89,6 +98,9 @@ const SECTION_HINT = /\b(?:section\s+|osio\w*\s+)?(\d{1,2})\.(\d{1,2})\b/i;
 const COUNT_HINT = /\b(\d{1,2})\s*(?:questions?|kysymys(?:tä|iä)?)?\s*$/i;
 
 const DEFAULT_COUNT = 5;
+// A single section only has 1-4 curated questions, so a section-scoped quiz
+// is kept short (bank-first, any shortfall topped up by live generation).
+const SECTION_DEFAULT_COUNT = 3;
 const MAX_COUNT = 15;
 
 function isMultivalueQuizRequest(text) {
@@ -126,7 +138,7 @@ const UI = {
   en: {
     askChapter: 'Which chapter would you like the multi-select quiz on? Try "multiquiz chapter 2" or "multiquiz section 2.3".',
     noSection: (section, chapter) =>
-      `I don't have section ${section} for chapter ${chapter} — try "multiquiz chapter ${chapter}" instead.`,
+      `I don't have section ${section} for chapter ${chapter} — try "/mvquiz ${chapter}" instead.`,
     countCapped: (max) => `Let's start with ${max}, you can always ask for another round.`,
     startFailed: "Sorry, I couldn't put together a multi-select quiz for that right now — try again in a bit.",
     noQuestions: "I couldn't find or generate any multi-select questions for that section — try a different chapter/section.",
@@ -145,11 +157,13 @@ const UI = {
       `AI-generated extra questions aren't available right now (daily AI limit reached), so this round has ${n} of the ${wanted} you asked for.`,
     limitedPartialMember: (n, wanted) =>
       `AI-generated extra questions are for FYS.240 course members (join the course channel to get them), so this round has ${n} of the ${wanted} you asked for.`,
+    noChapter: (cmd, valid) =>
+      `The course has chapters ${valid[0]}–${valid[valid.length - 1]}. Try e.g. "${cmd} 2" (chapter), "${cmd} 3.3" (section) or "${cmd} 3-4" (chapter range).`,
   },
   fi: {
     askChapter: 'Mistä luvusta haluaisit monivalintavisan (valitse kaikki oikeat)? Kokeile esim. "monivalintavisa luvusta 2" tai "monivalintavisa osiosta 2.3".',
     noSection: (section, chapter) =>
-      `Minulla ei ole osiota ${section} luvulle ${chapter} — kokeile "monivalintavisa luvusta ${chapter}".`,
+      `Minulla ei ole osiota ${section} luvulle ${chapter} — kokeile "/moquiz ${chapter}".`,
     countCapped: (max) => `Aloitetaan ${max} kysymyksellä — voit aina pyytää lisää toisella kierroksella.`,
     startFailed: "Pahoittelut, en juuri nyt saanut koottua monivalintavisaa — yritä hetken kuluttua uudelleen.",
     noQuestions: "En löytänyt tai osannut luoda monivalintakysymyksiä tälle osiolle — kokeile toista lukua tai osiota.",
@@ -168,6 +182,8 @@ const UI = {
       `Tekoälyn luomia lisäkysymyksiä ei ole nyt saatavilla (päivittäinen tekoälyraja täynnä), joten tällä kierroksella on ${n}/${wanted} pyytämääsi kysymystä.`,
     limitedPartialMember: (n, wanted) =>
       `Tekoälyn luomat lisäkysymykset ovat FYS.240-kurssin jäsenille (liity kurssin kanavalle saadaksesi ne), joten tällä kierroksella on ${n}/${wanted} pyytämääsi kysymystä.`,
+    noChapter: (cmd, valid) =>
+      `Kurssilla on luvut ${valid[0]}–${valid[valid.length - 1]}. Kokeile esim. "${cmd} 2" (luku), "${cmd} 3.3" (osio) tai "${cmd} 3-4" (lukuväli).`,
   },
 };
 
@@ -275,6 +291,34 @@ function sampleFromBank(chapter, section, count, excludeIds = [], lang = "en") {
     questions: picked,
     shortfall: Math.max(0, count - picked.length),
   };
+}
+
+// Draws `count` questions spread across several chapters (used for a chapter
+// range such as "3-4"): pools are shuffled per chapter and taken round-robin
+// so every chapter in the range is represented, then the pick is shuffled.
+function sampleFromBankChapters(chapters, count, excludeIds = [], lang = "en") {
+  const bank = loadQuizBank();
+  const exclude = new Set(excludeIds);
+  const pools = shuffle(chapters.map(String)).map((ch) =>
+    shuffle(
+      Object.values(bank[ch] || {})
+        .flat()
+        .filter((q) => !exclude.has(q.id) && (q.lang || "en") === lang)
+    )
+  );
+  const picked = [];
+  let progressed = true;
+  while (picked.length < count && progressed) {
+    progressed = false;
+    for (const pool of pools) {
+      if (picked.length >= count) break;
+      if (pool.length) {
+        picked.push(pool.pop());
+        progressed = true;
+      }
+    }
+  }
+  return { questions: shuffle(picked), shortfall: Math.max(0, count - picked.length) };
 }
 
 // ---------- self-expansion capture ----------
@@ -451,9 +495,9 @@ function buildQuestionKeyboard(sessionIndex, question, selected, lang) {
 // truncation/concatenation problem for long option wording.
 function formatQuestionMessage(question, qNumber, total, lang) {
   const optionLines = question.options
-    .map((opt, i) => `${LETTERS[i]}) ${opt}`)
+    .map((opt, i) => `${LETTERS[i]}) ${escapeHtml(opt)}`)
     .join('\n');
-  return `<b>${ui(lang).question(qNumber, total)}</b>\n\n${question.stem}\n\n${optionLines}\n\n<i>${ui(lang).selectAllNote}</i>`;
+  return `<b>${ui(lang).question(qNumber, total)}</b>\n\n${escapeHtml(question.stem)}\n\n${optionLines}\n\n<i>${ui(lang).selectAllNote}</i>`;
 }
 
 async function defaultAskWhichChapter(bot, chatId, lang = "en") {
@@ -495,7 +539,7 @@ async function startMultivalueQuiz(bot, chatId, text, askWhichChapter = defaultA
   }
 
   const rawCount = extractRawCountHint(text);
-  const requestedCount = rawCount === null ? DEFAULT_COUNT : Math.min(rawCount, MAX_COUNT);
+  const requestedCount = rawCount === null ? (section ? SECTION_DEFAULT_COUNT : DEFAULT_COUNT) : Math.min(rawCount, MAX_COUNT);
   if (rawCount !== null && rawCount > MAX_COUNT) {
     await bot.sendMessage(chatId, t.countCapped(MAX_COUNT));
   }
@@ -525,6 +569,96 @@ async function startMultivalueQuiz(bot, chatId, text, askWhichChapter = defaultA
   const session = createSession(chatId, questions, lang);
   await sendQuestion(bot, chatId, session);
 
+  if (reservation && typeof hooks.onCharged === 'function') {
+    await hooks.onCharged(reservation);
+  }
+}
+
+// ---------- numeric scope argument for the slash commands ----------
+// "2" = chapter 2, "3.3" = section 3.3, "3-4" = chapters 3 to 4. A leading
+// word is tolerated (chapter/luku/luvusta/osio/...) so older habits such as
+// "/mvquiz chapter 2" keep working; anything after the scope is ignored (the
+// question count is fixed: 5, or 3 for a single section).
+const SCOPE_PREFIX_RE = /^(?:chapters?|ch\.?|sections?|luvut|luvusta|luvuista|luvun|luku|osio\w*)\s*/i;
+function parseScope(arg) {
+  const s = String(arg || '').trim().replace(SCOPE_PREFIX_RE, '');
+  let m = s.match(/^(\d{1,2})\.(\d{1,2})\b/);
+  if (m) return { kind: 'section', chapter: m[1], section: `${m[1]}.${m[2]}` };
+  m = s.match(/^(\d{1,2})\s*[-\u2013\u2014]\s*(\d{1,2})\b(?!\.)/);
+  if (m) {
+    let a = parseInt(m[1], 10);
+    let b = parseInt(m[2], 10);
+    if (a > b) [a, b] = [b, a];
+    const chapters = [];
+    for (let c = a; c <= b; c++) chapters.push(String(c));
+    return { kind: 'chapters', chapters };
+  }
+  m = s.match(/^(\d{1,2})\b(?!\.)/);
+  if (m) return { kind: 'chapters', chapters: [String(parseInt(m[1], 10))] };
+  return null;
+}
+
+// Entry point for /mvquiz, /moquiz and /mvquizFI. `arg` is everything after
+// the command. No argument -> chapter picker; unparseable argument -> falls
+// back to the older free-text hint parsing (which ends in the picker if it
+// finds no chapter either). `hooks` is the same optional reserve / refund /
+// onDenied / onCharged contract as startMultivalueQuiz() — live generation
+// (only ever a section top-up here) is members-only and costs a credit.
+async function startMultivalueQuizByScope(bot, chatId, arg, askWhichChapter = defaultAskWhichChapter, lang = "en", cmdLabel = "/mvquiz", hooks = {}) {
+  const t = ui(lang);
+  const legacyText = `${lang === "fi" ? "monivalintavisa" : "multiquiz"} ${arg || ""}`.trim();
+  const scope = parseScope(arg);
+  if (!scope) {
+    return startMultivalueQuiz(bot, chatId, legacyText, askWhichChapter, lang, hooks);
+  }
+
+  const validChapters = corpusLoader.listChapters().map(String);
+  let questions, reservation = null, limited = null;
+  try {
+    if (scope.kind === 'section') {
+      if (!validChapters.includes(scope.chapter)) {
+        await bot.sendMessage(chatId, t.noChapter(cmdLabel, validChapters));
+        return;
+      }
+      if (!corpusLoader.isValidSection(scope.chapter, scope.section)) {
+        await bot.sendMessage(chatId, t.noSection(scope.section, scope.chapter));
+        return;
+      }
+      ({ questions, reservation, limited } = await getQuizQuestionsDetailed(chatId, scope.chapter, scope.section, SECTION_DEFAULT_COUNT, lang, hooks));
+    } else {
+      const chapters = scope.chapters.filter((c) => validChapters.includes(c));
+      if (!chapters.length) {
+        await bot.sendMessage(chatId, t.noChapter(cmdLabel, validChapters));
+        return;
+      }
+      if (chapters.length === 1) {
+        ({ questions, reservation, limited } = await getQuizQuestionsDetailed(chatId, chapters[0], null, DEFAULT_COUNT, lang, hooks));
+      } else {
+        const { questions: picked } = sampleFromBankChapters(chapters, DEFAULT_COUNT, getRecentlyServed(chatId), lang);
+        markServed(chatId, picked.map((q) => q.id));
+        questions = picked;
+      }
+    }
+  } catch (err) {
+    console.error(`multivalueQuizGenerator_fys240: startMultivalueQuizByScope failed for "${arg}": ${err.message}`);
+    await bot.sendMessage(chatId, t.startFailed);
+    return;
+  }
+
+  const requestedCount = scope.kind === 'section' ? SECTION_DEFAULT_COUNT : DEFAULT_COUNT;
+  if (!questions.length) {
+    if (limited && typeof hooks.onDenied === 'function') {
+      await hooks.onDenied(limited);
+    } else {
+      await bot.sendMessage(chatId, t.noQuestions);
+    }
+    return;
+  }
+  if (limited) {
+    await bot.sendMessage(chatId, (limited.reason === 'not_member' ? t.limitedPartialMember : t.limitedPartial)(questions.length, requestedCount));
+  }
+  const session = createSession(chatId, questions, lang);
+  await sendQuestion(bot, chatId, session);
   if (reservation && typeof hooks.onCharged === 'function') {
     await hooks.onCharged(reservation);
   }
@@ -606,7 +740,7 @@ async function handleMultivalueQuizAnswer(bot, callbackQuery) {
     session.score += score;
 
     const correctLetters = lettersFromIndices(question.correctIndices);
-    const feedback = t.feedback(score, correctLetters, question.explanation);
+    const feedback = t.feedback(score, correctLetters, escapeHtml(question.explanation));
 
     await bot.editMessageText(`${session.currentText}\n\n${feedback}`, {
       chat_id: chatId,
@@ -633,6 +767,9 @@ async function handleMultivalueQuizAnswer(bot, callbackQuery) {
 module.exports = {
   isMultivalueQuizRequest,
   startMultivalueQuiz,
+  startMultivalueQuizByScope,
+  parseScope,
+  sampleFromBankChapters,
   handleMultivalueQuizAnswer,
   // exported for a future buildMultivalueQuizBank.js and tests
   generateQuiz,
