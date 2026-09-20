@@ -6,7 +6,7 @@ or `quizBank_fys240.json` at all. It ships as two new files:
 | File | Role |
 |---|---|
 | `multivalueQuizGenerator_fys240.js` | Generator + session + grading logic for "select all that apply" quizzes |
-| `multivalueQuizBank_fys240.json` | Curated multi-answer question bank, chapters 2–10 (190 English + 190 Finnish counterparts, see below) |
+| `multivalueQuizBank_fys240.json` | Curated multi-answer question bank, chapters 2–10 (247 English + 247 Finnish counterparts, see below) |
 
 At runtime it will also create (self-expanding, same pattern as the existing
 quiz module):
@@ -140,7 +140,9 @@ unaffected since it never calls `getCorpusSection`.
 - The count is fixed; anything after the scope (e.g. the `8` in `/mvquiz 2.3 8`)
   is ignored. Old forms (`/mvquiz chapter 2`, `/moquiz luku 2`) still work.
 - Since v2.7.4 every one of the 61 sections holds at least 3 curated
-  questions per language (55 have 3, five have 4, one has 5). Section quizzes are
+  questions per language (v2.7.5: 30 have 3, 17 have 4, and the rest 5 or more).
+  Chapter pools are 22 (chapter 2), 25 (chapters 4-9), 36 (chapter 3) and 39
+  (chapter 10) per language. Section quizzes are
   therefore served from the bank; any shortfall is topped up by the existing
   live-generation fallback (saved to `multivalueQuizBankPending_fys240.json`).
   That top-up goes through the v2.7 usage hooks: members-only when

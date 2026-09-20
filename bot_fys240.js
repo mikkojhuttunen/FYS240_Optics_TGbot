@@ -89,11 +89,13 @@
  *     every chapter 2-10 in both EN and FI (221 each), so /quiz is normally
  *     served free from the bank; live generation (1 credit) only happens when a
  *     request asks for more than the bank has left. multivalueQuizBank_fys240.json
- *     holds 190 questions in EN and 190 in FI (v2.7.4), and every one of the 61
- *     sections has at least 3 (55 have 3, five have 4, one has 5), so /mvquiz
- *     and /moquiz are normally served free from the bank too, including
- *     section quizzes (3 questions); live generation (1 credit) is only needed
- *     when a request asks for more than the bank has left.
+ *     holds 247 questions in EN and 247 in FI (v2.7.5): every one of the 61
+ *     sections has at least 3 and every chapter has a pool of at least 22
+ *     (chapter 2: 22; chapters 4-9: 25; chapter 3: 36; chapter 10: 39), so
+ *     /mvquiz and /moquiz are normally served free from the bank too — section
+ *     quizzes (3 questions) and 4-5 consecutive chapter quizzes (5 questions)
+ *     without repeats; live generation (1 credit) is only needed when a request
+ *     asks for more than the bank has left.
  *     /source_quizzes shows the live picture.
  *   - homework_solutions.json (new in v2.3.0) is instructor-reference only —
  *     nothing in this bot loads or serves it; see the file's own header
@@ -107,6 +109,21 @@
 
  *
  * CHANGELOG:
+ *   v2.7.5 — Content-only update (no code changes): multivalueQuizBank_fys240.json
+ *            grew from 190 to 247 questions per language (EN + FI, 494 entries).
+ *            57 new "select all that apply" questions enlarge the chapter pools
+ *            for /mvquiz N, /moquiz N: chapter 2 +10 (12 -> 22), chapter 4 +7
+ *            (18 -> 25), chapter 5 +12 (13 -> 25), chapter 6 +7 (18 -> 25),
+ *            chapter 7 +8 (17 -> 25), chapter 8 +4 (21 -> 25), chapter 9 +9
+ *            (16 -> 25); chapters 3 and 10 (36 / 39) needed no additions. A
+ *            student can now take 4-7 consecutive five-question chapter quizzes
+ *            without a repeat (previously 2-4 for chapters 2, 4, 5, 6, 7, 9).
+ *            The new questions favour derivation details, sign/factor traps and
+ *            short numerical applications (e.g. photon energy, critical angles,
+ *            Fraunhofer distance, Fabry-Perot FSR) on top of the concept
+ *            questions. Same conventions as v2.7.3/4 (ids continue each section's
+ *            numbering, Finnish "_fi" copies with translationOf, addedAt
+ *            2026-09-20); no existing question changed.
  *   v2.7.4 — Content-only update (no code changes): multivalueQuizBank_fys240.json
  *            grew from 155 to 190 questions per language (EN + FI, 380 entries).
  *            35 new "select all that apply" questions fill every remaining thin
@@ -453,7 +470,7 @@
  *   (earlier history predates version tracking)
  */
 
-const BOT_VERSION = "2.7.4";
+const BOT_VERSION = "2.7.5";
 
 const fs = require("fs");
 const path = require("path");
