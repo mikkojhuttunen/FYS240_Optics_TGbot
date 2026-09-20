@@ -65,6 +65,11 @@
  *     membership.js; unset = everyone is a member) and then cost a per-student
  *     daily credit (usageLimiter.js) under a shared daily spend backstop.
  *     Student-facing texts live in accessGuard.js.
+ *   - /mvquiz N | N.M | N-M — multi-answer ("select all that apply") quiz on
+ *     chapter N, section N.M or chapters N to M (5 questions; 3 for a section)
+ *   - /moquiz (= /mvquizFI) — the same multi-answer quiz, but ALWAYS in
+ *     Finnish regardless of the student's client language (Finnish
+ *     counterpart of the English question bank; see CHANGELOG v2.7.2)
  *   - /reset — clear conversation history
  *   - /source_materials, /source_HW, /source_quizzes — dev-only data-source
  *     introspection commands (see CHANGELOG v2.6.1). NOT listed in /help or
@@ -84,8 +89,10 @@
  *     every chapter 2-10 in both EN and FI (221 each), so /quiz is normally
  *     served free from the bank; live generation (1 credit) only happens when a
  *     request asks for more than the bank has left. multivalueQuizBank_fys240.json
- *     (104 questions) is EN-only, so every Finnish /mvquiz is live-generated and
- *     costs a credit. /source_quizzes shows the live picture.
+ *     holds 104 questions in EN and 104 in FI (since v2.7.2), so /mvquiz and
+ *     /moquiz are normally served free from the bank too; sections with fewer
+ *     than 3 banked questions top up via live generation (1 credit).
+ *     /source_quizzes shows the live picture.
  *   - homework_solutions.json (new in v2.3.0) is instructor-reference only —
  *     nothing in this bot loads or serves it; see the file's own header
  *     comment and the redeploy-package README before wiring it to anything
@@ -98,6 +105,39 @@
 
  *
  * CHANGELOG:
+ *   v2.7.2 — Finnish multi-answer quiz + numeric scope for the multi-answer
+ *            commands. Three things, all in the multivalue quiz add-on:
+ *            (1) Finnish bank. All 104 English questions in
+ *            multivalueQuizBank_fys240.json now have a Finnish counterpart in
+ *            the SAME file and the same chapter/section arrays (id
+ *            "<enId>_fi", lang "fi", source "claude-translated",
+ *            translationOf "<enId>", same correctIndices/option order as the
+ *            original), so the bank is now 208 entries and Finnish quizzes are
+ *            served from the bank like English ones (free, no credit) instead
+ *            of being live-generated. The generator already filtered draws by
+ *            lang; no logic change was needed for that.
+ *            (2) New commands /moquiz ("monta oikein") and /mvquizFI — exact
+ *            aliases of each other that ALWAYS start the Finnish multi-answer
+ *            quiz, whatever the student's Telegram client language. /mvquiz
+ *            itself is unchanged in that respect (follows the client language).
+ *            (3) Numeric scope argument for /mvquiz, /moquiz and /mvquizFI:
+ *            "2" = chapter 2, "3.3" = section 3.3, "3-4" = chapters 3 to 4
+ *            (drawn round-robin so every chapter in the range is represented;
+ *            a range never live-generates). The count is fixed: 5, or 3 for a
+ *            single section (sections hold only 1-4 curated questions; a
+ *            section shortfall is topped up by live generation, metered through
+ *            the same reserve/refund hooks as every other quiz). This replaces
+ *            v2.7.0's normalizeQuizArgs() for the multi-answer commands only:
+ *            anything after the scope, including a count ("/mvquiz 2 8"), is
+ *            ignored; "/mvquiz chapter 2" / "/moquiz luku 2" still work;
+ *            unparseable input falls back to the free-text parser / chapter
+ *            picker. Free-text requests ("multiquiz section 2.3") also default
+ *            to 3 questions for a section unless a count is given. /quiz and
+ *            normalizeQuizArgs() are untouched.
+ *            Also fixed: multivalueQuizGenerator_fys240.js sent question,
+ *            option and explanation text with parse_mode HTML unescaped, so bank
+ *            text such as "<P>_T = I/c", "<cosωt>=0" or "λ < 10 nm" made
+ *            Telegram reject the message; it is now HTML-escaped.
  *   v2.7.1 — Membership gate narrowed to the AI features only. In v2.7.0 the
  *            course-channel check sat at the top of every handler, so a
  *            non-member couldn't even use /help or /topics. Now the bot is open
@@ -389,7 +429,7 @@
  *   (earlier history predates version tracking)
  */
 
-const BOT_VERSION = "2.7.1";
+const BOT_VERSION = "2.7.2";
 
 const fs = require("fs");
 const path = require("path");
@@ -794,8 +834,8 @@ async function askWhichChapter(bot, chatId, lang = "en") {
 async function askWhichChapterMv(bot, chatId, lang = "en") {
   const text =
     lang === "fi"
-      ? "Mistä luvusta haluaisit monivalintavisan (valitse kaikki oikeat)?"
-      : "Which chapter would you like the multi-select quiz on?";
+      ? "Mistä luvusta haluaisit monivalintavisan (valitse kaikki oikeat)? Voit myös kirjoittaa esim. /moquiz 3.3 (osio) tai /moquiz 3-4 (lukuväli)."
+      : "Which chapter would you like the multi-select quiz on? You can also type e.g. /mvquiz 3.3 (section) or /mvquiz 3-4 (chapter range).";
   await bot.sendMessage(chatId, text, {
     reply_markup: {
       inline_keyboard: corpusLoader.listChapters().map((ch) => {
@@ -1401,14 +1441,18 @@ function buildSourceQuizzesReport() {
   const mvPendingInfo = fileInfo(MV_QUIZ_BANK_PENDING_PATH);
   const mvChapters = Object.keys(mvBank).sort((a, b) => Number(a) - Number(b));
   let mvTotalQuestions = 0;
+  let mvTotalFi = 0;
   const mvChapterLines = mvChapters.map((ch) => {
     const secs = mvBank[ch] || {};
     const secCounts = Object.keys(secs)
       .sort()
       .map((s) => {
-        const n = Array.isArray(secs[s]) ? secs[s].length : 0;
-        mvTotalQuestions += n;
-        return `${s} (${n})`;
+        const arr = Array.isArray(secs[s]) ? secs[s] : [];
+        const nFi = arr.filter((q) => q.lang === "fi").length;
+        const nEn = arr.length - nFi;
+        mvTotalQuestions += arr.length;
+        mvTotalFi += nFi;
+        return `${s} (${nEn} en / ${nFi} fi)`;
       });
     return `   Chapter ${ch}: ${secCounts.join(", ") || "no sections"}`;
   });
@@ -1424,7 +1468,7 @@ function buildSourceQuizzesReport() {
   }
   lines.push(`- Status: ${mvBankInfo.exists ? "loaded" : "NOT FOUND — every multivalue quiz live-generates via the Claude API"}`);
   lines.push(`- Health check (multivalueQuizBankLooksHealthy): ${mvQuizGenerator.quizBankLooksHealthy() ? "ok" : "FAILED"}`);
-  lines.push(`- Coverage: ${mvChapters.length ? `chapters ${mvChapters.join(", ")} — ${mvTotalQuestions} questions total` : "none"}`);
+  lines.push(`- Coverage: ${mvChapters.length ? `chapters ${mvChapters.join(", ")} — ${mvTotalQuestions} questions total (${mvTotalQuestions - mvTotalFi} en, ${mvTotalFi} fi)` : "none"}`);
   mvChapterLines.forEach((l) => lines.push(l));
   lines.push(`- Missing chapters (live-generate every time): ${mvMissingChapters.length ? mvMissingChapters.join(", ") : "none"}`);
   lines.push(`- On disk: ${mvBankInfo.exists ? `modified ${mvBankInfo.modified}` : "file not found"}`);
@@ -1572,7 +1616,7 @@ const HELP_TEXT_EN =
   "- I'm stuck on problem 5.2, where should I start?\n" +
   "- Explain how a microscope works\n" +
   "- Quiz me on chapter 2 (or a specific section, e.g. \"quiz me on section 2.3\") for a multiple-choice quiz, or just use /quiz\n" +
-  "- /mvquiz chapter 2 for a \"select all that apply\" multi-answer quiz\n\n" +
+  "- /mvquiz 2 for a \"select all that apply\" multi-answer quiz on chapter 2\n\n" +
   "I'll explain concepts, point you to relevant videos or sections, and give hints on homework (but not solutions).\n\n" +
   "Commands:\n" +
   "/topics — see all video lecture topics\n" +
@@ -1584,7 +1628,8 @@ const HELP_TEXT_EN =
   "/HWQ3.2 — see the exact question text for a problem, verbatim\n" +
   "/define <term> — look up a term in the course glossary\n" +
   "/quiz — multiple-choice quiz (e.g. \"/quiz 2\", \"/quiz 2.3\" or \"/quiz 2.3 8\" for 8 questions; \"/quiz\" alone lets you pick a chapter)\n" +
-  "/mvquiz — \"select all that apply\" multi-answer quiz (e.g. \"/mvquiz chapter 2\" or \"/mvquiz 2.3\")\n" +
+  "/mvquiz — \"select all that apply\" multi-answer quiz: /mvquiz 2 (chapter 2), /mvquiz 3.3 (section 3.3), /mvquiz 3-4 (chapters 3–4)\n" +
+  "/moquiz or /mvquizFI — the same multi-answer quiz, always in Finnish (e.g. \"/moquiz 2\")\n" +
   "/usage — see how many AI credits you have used today\n" +
   "/reset — clear our conversation history";
 
@@ -1596,7 +1641,7 @@ const HELP_TEXT_FI =
   "- Jumitin tehtävässä 5.2, mistä kannattaisi aloittaa?\n" +
   "- Selitä, miten mikroskooppi toimii\n" +
   "- \"Kysele minulta luvusta 2\" (tai tietystä osiosta, esim. \"kysele minulta osiosta 2.3\") monivalintavisaa varten, tai käytä komentoa /quiz\n" +
-  "- /mvquiz luvusta 2 saadaksesi \"valitse kaikki oikeat\" -tyyppisen visan\n\n" +
+  "- /moquiz 2 saadaksesi \"valitse kaikki oikeat\" -tyyppisen visan luvusta 2\n\n" +
   "Selitän käsitteitä, ohjaan sinut oikeiden videoiden tai lukujen pariin ja annan vinkkejä kotitehtäviin (mutten valmiita ratkaisuja).\n\n" +
   "Komennot:\n" +
   "/topics — kaikki luentovideoiden aiheet\n" +
@@ -1608,7 +1653,8 @@ const HELP_TEXT_FI =
   "/HWQ3.2 — näytä tehtävän tarkka kysymysteksti\n" +
   "/define <termi> — hae termi kurssin sanastosta\n" +
   "/quiz — monivalintavisa (esim. \"/quiz 2\", \"/quiz 2.3\" tai \"/quiz 2.3 8\" = 8 kysymystä; pelkällä \"/quiz\":lla valitset luvun)\n" +
-  "/mvquiz — \"valitse kaikki oikeat\" -monivalintavisa (esim. \"/mvquiz luku 2\" tai \"/mvquiz 2.3\")\n" +
+  "/mvquiz — \"valitse kaikki oikeat\" -monivalintavisa: /mvquiz 2 (luku 2), /mvquiz 3.3 (osio 3.3), /mvquiz 3-4 (luvut 3–4)\n" +
+  "/moquiz tai /mvquizFI — sama \"monta oikein\" -visa, aina suomeksi (esim. /moquiz 2, /moquiz 3.3 tai /moquiz 3-4)\n" +
   "/usage — katso kuinka monta tekoälykrediittiä olet käyttänyt tänään\n" +
   "/reset — tyhjennä keskusteluhistoriamme";
 
@@ -1910,24 +1956,32 @@ async function handleUpdate(update) {
       .catch((e) => console.error("quizGenerator.startQuiz (/quiz) crashed:", e.message));
   }
 
-  // ---- /mvquiz — explicit command for the multivalue ("select all that
-  // apply") quiz add-on. "/mvquiz", "/mvquiz chapter 2", "/mvquiz 2.3",
-  // "/mvquiz 2.3 8" (chapter/section + optional question count, same
-  // hint-parsing as the free-text trigger below) are all accepted.
-  const mvQuizMatch = text.match(/^\/mvquiz(@\S+)?\b\s*(.*)$/i);
+  // ---- /mvquiz, /moquiz, /mvquizFI — explicit commands for the multivalue
+  // ("select all that apply") quiz add-on. "/mvquiz", "/mvquiz chapter 2",
+  // "/mvquiz 2.3", "/mvquiz 3-4" are accepted (scope = chapter, section or
+  // chapter range; see CHANGELOG v2.7.2). /mvquiz follows the student's
+  // client language (getLang);
+  // /moquiz ("monta oikein") and /mvquizFI are exact aliases of each other
+  // that ALWAYS start the Finnish quiz. Alternation order matters: the
+  // longer "mvquizFI" is tried before "mvquiz" (the trailing \b would
+  // reject "/mvquizFI" for the plain /mvquiz branch anyway).
+  const mvQuizMatch = text.match(/^\/(mvquizFI|moquiz|mvquiz)(@\S+)?\b\s*(.*)$/i);
   if (mvQuizMatch) {
-    const rest = normalizeQuizArgs(mvQuizMatch[2]);
-    const mvQuizText = rest ? `multiquiz ${rest}` : "multiquiz";
+    const mvCmd = mvQuizMatch[1].toLowerCase();
+    const forceFi = mvCmd === "moquiz" || mvCmd === "mvquizfi";
+    const mvLang = forceFi ? "fi" : lang;
+    const rest = (mvQuizMatch[3] || "").trim();
 
     const nowMv = Date.now();
     if (nowMv - (lastCall.get(userId) || 0) < MIN_INTERVAL_MS) return;
     lastCall.set(userId, nowMv);
 
-    console.log(`[${message.chat.type}:${chatId}] /mvquiz command: ${text.slice(0, 60)}`);
+    console.log(`[${message.chat.type}:${chatId}] /${mvQuizMatch[1]} command (${mvLang}): ${text.slice(0, 60)}`);
 
+    // rest is a numeric scope: "2" (chapter), "3.3" (section), "3-4" (range).
     return mvQuizGenerator
-      .startMultivalueQuiz(quizBot, chatId, mvQuizText, askWhichChapterMv, lang, makeQuizHooks(chatId, userId, lang))
-      .catch((e) => console.error("mvQuizGenerator.startMultivalueQuiz (/mvquiz) crashed:", e.message));
+      .startMultivalueQuizByScope(quizBot, chatId, rest, askWhichChapterMv, mvLang, `/${mvCmd === "mvquizfi" ? "mvquizFI" : mvCmd}`, makeQuizHooks(chatId, userId, mvLang))
+      .catch((e) => console.error(`mvQuizGenerator.startMultivalueQuizByScope (/${mvQuizMatch[1]}) crashed:`, e.message));
   }
 
   if (/^\/topics?/i.test(text)) {
