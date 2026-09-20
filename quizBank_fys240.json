@@ -120,6 +120,156 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q2.1_004"
+      },
+      {
+        "id": "q2.1_005",
+        "stem": "Which of Maxwell's equations is ∇·B⃗ = 0?",
+        "options": [
+          "Gauss's law for magnetism",
+          "Gauss's law",
+          "Ampère's circuital law",
+          "The Maxwell–Faraday equation"
+        ],
+        "correctIndex": 0,
+        "explanation": "∇·B⃗ = 0 is Gauss's law for magnetism (equation II). Gauss's law is ∇·E⃗ = ρ/ε₀, the Maxwell–Faraday equation is ∇ × E⃗ = −∂B⃗/∂t, and Ampère's law contains the current density.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.1_005_fi",
+        "stem": "Mikä Maxwellin yhtälöistä on ∇·B⃗ = 0?",
+        "options": [
+          "Magnetismin Gaussin laki",
+          "Gaussin laki",
+          "Ampèren kiertolaki",
+          "Maxwellin–Faradayn yhtälö"
+        ],
+        "correctIndex": 0,
+        "explanation": "∇·B⃗ = 0 on magnetismin Gaussin laki (yhtälö II). Gaussin laki on ∇·E⃗ = ρ/ε₀, Maxwellin–Faradayn yhtälö on ∇ × E⃗ = −∂B⃗/∂t, ja Ampèren laissa esiintyy virrantiheys.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.1_005"
+      },
+      {
+        "id": "q2.1_006",
+        "stem": "In the harmonic wave solution ψ(z,t) = A sin[k(z − vt)], what does v represent?",
+        "options": [
+          "The wavelength of the wave",
+          "The propagation velocity of the wave",
+          "The initial phase of the wave",
+          "The amplitude of the wave"
+        ],
+        "correctIndex": 1,
+        "explanation": "In ψ = A sin[k(z − vt)], A is the amplitude, k the wavevector and v the velocity with which the wave propagates.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.1_006_fi",
+        "stem": "Harmonisessa aaltoratkaisussa ψ(z,t) = A sin[k(z − vt)] mitä v kuvaa?",
+        "options": [
+          "Aallonpituutta",
+          "Aallon etenemisnopeutta",
+          "Aallon alkuvaihetta",
+          "Aallon amplitudia"
+        ],
+        "correctIndex": 1,
+        "explanation": "Lausekkeessa ψ = A sin[k(z − vt)] A on amplitudi, k aaltovektori ja v nopeus, jolla aalto etenee.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.1_006"
+      },
+      {
+        "id": "q2.1_007",
+        "stem": "What is a time-harmonic field that oscillates at only a single frequency called?",
+        "options": [
+          "Incoherent",
+          "Anharmonic",
+          "Monochromatic",
+          "Polychromatic"
+        ],
+        "correctIndex": 2,
+        "explanation": "A field that oscillates harmonically in time at a single frequency is monochromatic.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.1_007_fi",
+        "stem": "Miksi kutsutaan ajan suhteen harmonista kenttää, joka värähtelee vain yhdellä taajuudella?",
+        "options": [
+          "Epäkoherentiksi",
+          "Anharmoniseksi",
+          "Monokromaattiseksi",
+          "Polykromaattiseksi"
+        ],
+        "correctIndex": 2,
+        "explanation": "Kenttä, joka värähtelee harmonisesti ajan suhteen yhdellä taajuudella, on monokromaattinen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.1_007"
+      },
+      {
+        "id": "q2.1_008",
+        "stem": "A harmonic wave repeats itself after a distance λ, which gives kλ = 2πm. Choosing m = 1, what is the wavevector amplitude k?",
+        "options": [
+          "k = λ/2π",
+          "k = π/λ",
+          "k = 2πλ",
+          "k = 2π/λ"
+        ],
+        "correctIndex": 3,
+        "explanation": "kλ = 2π (m = 1) gives k = 2π/λ. The other expressions have wrong dependence on λ or a wrong factor.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.1_008_fi",
+        "stem": "Harmoninen aalto toistaa itsensä matkan λ jälkeen, mistä saadaan kλ = 2πm. Kun valitaan m = 1, mikä on aaltovektorin pituus k?",
+        "options": [
+          "k = λ/2π",
+          "k = π/λ",
+          "k = 2πλ",
+          "k = 2π/λ"
+        ],
+        "correctIndex": 3,
+        "explanation": "kλ = 2π (m = 1) antaa k = 2π/λ. Muissa lausekkeissa λ:n riippuvuus tai kerroin on väärä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.1_008"
+      },
+      {
+        "id": "q2.1_009",
+        "stem": "What is the frequency of green light of wavelength 500 nm in vacuum (c ≈ 3×10⁸ m/s)?",
+        "options": [
+          "6×10¹⁴ Hz",
+          "1.7×10⁻¹⁵ Hz",
+          "1.5×10¹⁴ Hz",
+          "3.8×10¹⁵ Hz"
+        ],
+        "correctIndex": 0,
+        "explanation": "ν = c/λ = 3×10⁸/(5×10⁻⁷) = 6×10¹⁴ Hz. The value 3.8×10¹⁵ is the angular frequency ω = 2πν (in rad/s), and 1.7 fs is the period τ = 1/ν, not a frequency.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.1_009_fi",
+        "stem": "Mikä on tyhjiössä etenevän 500 nm:n aallonpituisen vihreän valon taajuus (c ≈ 3×10⁸ m/s)?",
+        "options": [
+          "6×10¹⁴ Hz",
+          "1,7×10⁻¹⁵ Hz",
+          "1,5×10¹⁴ Hz",
+          "3,8×10¹⁵ Hz"
+        ],
+        "correctIndex": 0,
+        "explanation": "ν = c/λ = 3×10⁸/(5×10⁻⁷) = 6×10¹⁴ Hz. Arvo 3,8×10¹⁵ on kulmataajuus ω = 2πν (yksikkö rad/s), ja 1,7 fs on jakso τ = 1/ν, ei taajuus.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.1_009"
       }
     ],
     "2.2": [
@@ -212,6 +362,96 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q2.2_003"
+      },
+      {
+        "id": "q2.2_004",
+        "stem": "How do rays propagate in a homogeneous medium?",
+        "options": [
+          "In random directions",
+          "In straight lines",
+          "Along curved paths",
+          "Along the direction in which the E-field oscillates"
+        ],
+        "correctIndex": 1,
+        "explanation": "In a homogeneous medium rays propagate straight; the ray shows the direction of energy flow, not the field oscillation direction.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.2_004_fi",
+        "stem": "Miten säteet etenevät homogeenisessa aineessa?",
+        "options": [
+          "Satunnaisiin suuntiin",
+          "Suoraviivaisesti",
+          "Kaarevia ratoja pitkin",
+          "E-kentän värähtelysuunnassa"
+        ],
+        "correctIndex": 1,
+        "explanation": "Homogeenisessa aineessa säteet etenevät suoraan; säde osoittaa energian virtaussuunnan, ei kentän värähtelysuuntaa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.2_004"
+      },
+      {
+        "id": "q2.2_005",
+        "stem": "In geometrical optics, which quantities are enough to describe what happens to a ray at the interface of two media?",
+        "options": [
+          "The thicknesses of the two media",
+          "The temperature of the interface",
+          "The refractive indices n₁ and n₂ of the two media",
+          "The intensity of the incident ray"
+        ],
+        "correctIndex": 2,
+        "explanation": "The refractive indices n₁ and n₂ are enough to describe the reflection and refraction of a ray at an interface (via θᵢ = θᵣ and Snell's law).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.2_005_fi",
+        "stem": "Mitkä suureet riittävät geometrisessa optiikassa kuvaamaan, mitä säteelle tapahtuu kahden aineen rajapinnalla?",
+        "options": [
+          "Aineiden paksuudet",
+          "Rajapinnan lämpötila",
+          "Aineiden taitekertoimet n₁ ja n₂",
+          "Tulevan säteen intensiteetti"
+        ],
+        "correctIndex": 2,
+        "explanation": "Taitekertoimet n₁ ja n₂ riittävät kuvaamaan säteen heijastumisen ja taittumisen rajapinnalla (ehdot θᵢ = θᵣ ja Snellin laki).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.2_005"
+      },
+      {
+        "id": "q2.2_006",
+        "stem": "A ray passes from air into glass. Which statement is correct?",
+        "options": [
+          "The ray is always totally reflected",
+          "The ray continues in exactly the same direction",
+          "The refracted ray bends away from the surface normal",
+          "The refracted ray bends towards the surface normal"
+        ],
+        "correctIndex": 3,
+        "explanation": "Glass is optically denser (n_t > n_i), so by Snell's law sinθ_t < sinθ_i and the ray bends towards the normal. Total reflection cannot occur when entering the denser medium.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.2_006_fi",
+        "stem": "Säde siirtyy ilmasta lasiin. Mikä väittämistä on oikein?",
+        "options": [
+          "Säde heijastuu aina kokonaan",
+          "Säde jatkaa täsmälleen samaan suuntaan",
+          "Taittunut säde taipuu poispäin pinnan normaalista",
+          "Taittunut säde taipuu kohti pinnan normaalia"
+        ],
+        "correctIndex": 3,
+        "explanation": "Lasi on optisesti tiheämpi (n_t > n_i), joten Snellin lain mukaan sinθ_t < sinθ_i ja säde taipuu kohti normaalia. Kokonaisheijastusta ei tapahdu siirryttäessä tiheämpään aineeseen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.2_006"
       }
     ],
     "2.3": [
@@ -304,6 +544,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q2.3_003"
+      },
+      {
+        "id": "q2.3_004",
+        "stem": "What is the reduced Planck's constant ħ?",
+        "options": [
+          "ħ = h/2π",
+          "ħ = h²",
+          "ħ = 2πh",
+          "ħ = h/π"
+        ],
+        "correctIndex": 0,
+        "explanation": "The reduced Planck's constant is ħ = h/(2π), so that E = hν = ħω with ω = 2πν.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.3_004_fi",
+        "stem": "Mikä on redusoitu Planckin vakio ħ?",
+        "options": [
+          "ħ = h/2π",
+          "ħ = h²",
+          "ħ = 2πh",
+          "ħ = h/π"
+        ],
+        "correctIndex": 0,
+        "explanation": "Redusoitu Planckin vakio on ħ = h/(2π), joten E = hν = ħω, kun ω = 2πν.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.3_004"
+      },
+      {
+        "id": "q2.3_005",
+        "stem": "What is the approximate energy of a photon of frequency 5×10¹⁴ Hz (h ≈ 6.63×10⁻³⁴ J·s)?",
+        "options": [
+          "3.3×10⁻¹⁴ J",
+          "3.3×10⁻¹⁹ J",
+          "1.3×10⁻⁴⁸ J",
+          "2.1×10⁻¹⁹ J"
+        ],
+        "correctIndex": 1,
+        "explanation": "E = hν = 6.63×10⁻³⁴ × 5×10¹⁴ ≈ 3.3×10⁻¹⁹ J (≈ 2.1 eV). The 2.1 belongs to electronvolts, and 1.3×10⁻⁴⁸ would be h/ν.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q2.3_005_fi",
+        "stem": "Mikä on likimain fotonin, jonka taajuus on 5×10¹⁴ Hz, energia (h ≈ 6,63×10⁻³⁴ J·s)?",
+        "options": [
+          "3,3×10⁻¹⁴ J",
+          "3,3×10⁻¹⁹ J",
+          "1,3×10⁻⁴⁸ J",
+          "2,1×10⁻¹⁹ J"
+        ],
+        "correctIndex": 1,
+        "explanation": "E = hν = 6,63×10⁻³⁴ × 5×10¹⁴ ≈ 3,3×10⁻¹⁹ J (≈ 2,1 eV). Luku 2,1 kuuluu elektronivoltteihin, ja 1,3×10⁻⁴⁸ olisi h/ν.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q2.3_005"
       }
     ]
   },
@@ -1714,6 +2014,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.1_003"
+      },
+      {
+        "id": "q4.1_004",
+        "stem": "Which of Maxwell's equations contains the term μ₀ε₀ ∂E⃗/∂t?",
+        "options": [
+          "The Maxwell–Faraday equation",
+          "Gauss's law for magnetism",
+          "Ampère's circuital law (with Maxwell's correction)",
+          "Gauss's law"
+        ],
+        "correctIndex": 2,
+        "explanation": "Ampère's circuital law in vacuum reads ∇ × B⃗ = μ₀J⃗ + μ₀ε₀ ∂E⃗/∂t; the displacement-current term μ₀ε₀ ∂E⃗/∂t is Maxwell's correction.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.1_004_fi",
+        "stem": "Mikä Maxwellin yhtälöistä sisältää termin μ₀ε₀ ∂E⃗/∂t?",
+        "options": [
+          "Maxwellin–Faradayn yhtälö",
+          "Magnetismin Gaussin laki",
+          "Ampèren kiertolaki (Maxwellin korjauksella)",
+          "Gaussin laki"
+        ],
+        "correctIndex": 2,
+        "explanation": "Ampèren kiertolaki tyhjiössä on ∇ × B⃗ = μ₀J⃗ + μ₀ε₀ ∂E⃗/∂t; siirtymävirtatermi μ₀ε₀ ∂E⃗/∂t on Maxwellin korjaus.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.1_004"
       }
     ],
     "4.2": [
@@ -1806,6 +2136,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.2_003"
+      },
+      {
+        "id": "q4.2_004",
+        "stem": "Which statement about k⃗, E⃗ and B⃗ of a plane wave in vacuum is correct?",
+        "options": [
+          "B⃗ is parallel to k⃗ while E⃗ is perpendicular to it",
+          "E⃗ is parallel to k⃗ while B⃗ is perpendicular to it",
+          "E⃗ and B⃗ are perpendicular but oscillate 90° out of phase",
+          "The three are mutually perpendicular, and E⃗ and B⃗ oscillate in phase"
+        ],
+        "correctIndex": 3,
+        "explanation": "∇·E = 0 and ∇·B = 0 make both fields transverse, k̂ × E = cB makes k, E and B mutually perpendicular, and E and B oscillate in phase.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.2_004_fi",
+        "stem": "Mikä väittämistä vektoreista k⃗, E⃗ ja B⃗ pätee tyhjiössä etenevälle tasoaallolle?",
+        "options": [
+          "B⃗ on k⃗:n suuntainen ja E⃗ kohtisuorassa sitä vastaan",
+          "E⃗ on k⃗:n suuntainen ja B⃗ kohtisuorassa sitä vastaan",
+          "E⃗ ja B⃗ ovat kohtisuorassa mutta värähtelevät 90° vaihe-erolla",
+          "Kolme vektoria ovat keskenään kohtisuorassa, ja E⃗ ja B⃗ värähtelevät samassa vaiheessa"
+        ],
+        "correctIndex": 3,
+        "explanation": "∇·E = 0 ja ∇·B = 0 tekevät molemmista kentistä poikittaisia, k̂ × E = cB tekee k:sta, E:stä ja B:stä keskenään kohtisuorat, ja E ja B värähtelevät samassa vaiheessa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.2_004"
       }
     ],
     "4.3": [
@@ -1898,6 +2258,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.3_003"
+      },
+      {
+        "id": "q4.3_004",
+        "stem": "How are the electric and magnetic energy densities related in an electromagnetic wave in vacuum?",
+        "options": [
+          "They are equal, uE = uB",
+          "uB = c·uE",
+          "uE is twice as large as uB",
+          "All the energy is in the magnetic field"
+        ],
+        "correctIndex": 0,
+        "explanation": "With B = E/c and c² = 1/(μ₀ε₀), uB = B²/(2μ₀) = ε₀E²/2 = uE: the energy is shared equally between the fields.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.3_004_fi",
+        "stem": "Miten sähkö- ja magneettikentän energiatiheydet liittyvät toisiinsa tyhjiössä etenevässä sähkömagneettisessa aallossa?",
+        "options": [
+          "Ne ovat yhtä suuret, uE = uB",
+          "uB = c·uE",
+          "uE on kaksi kertaa suurempi kuin uB",
+          "Kaikki energia on magneettikentässä"
+        ],
+        "correctIndex": 0,
+        "explanation": "Kun B = E/c ja c² = 1/(μ₀ε₀), uB = B²/(2μ₀) = ε₀E²/2 = uE: energia jakautuu tasan kenttien kesken.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.3_004"
+      },
+      {
+        "id": "q4.3_005",
+        "stem": "Why do photodetectors measure the time-averaged irradiance rather than the instantaneous Poynting vector?",
+        "options": [
+          "Photodetectors respond only to the magnetic field",
+          "The Poynting vector oscillates at ~10¹⁵ Hz, far too fast for electronics (~10¹⁰ Hz)",
+          "The time average of cos²(ωt) is zero",
+          "The Poynting vector is constant in time"
+        ],
+        "correctIndex": 1,
+        "explanation": "S oscillates at optical frequencies (~10¹⁵ Hz), which electronic components (~10¹⁰ Hz) cannot follow, so only the time average is measured; ⟨cos²ωt⟩ = 1/2, not 0.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.3_005_fi",
+        "stem": "Miksi valodetektorit mittaavat aikakeskiarvoistettua irradianssia eivätkä hetkellistä Poyntingin vektoria?",
+        "options": [
+          "Valodetektorit reagoivat vain magneettikenttään",
+          "Poyntingin vektori värähtelee taajuudella ~10¹⁵ Hz, mikä on aivan liian nopeaa elektroniikalle (~10¹⁰ Hz)",
+          "Funktion cos²(ωt) aikakeskiarvo on nolla",
+          "Poyntingin vektori on vakio ajan suhteen"
+        ],
+        "correctIndex": 1,
+        "explanation": "S värähtelee optisilla taajuuksilla (~10¹⁵ Hz), joita elektroniset komponentit (~10¹⁰ Hz) eivät pysty seuraamaan, joten mitataan vain aikakeskiarvo; ⟨cos²ωt⟩ = 1/2, ei 0.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.3_005"
       }
     ],
     "4.4": [
@@ -1960,6 +2380,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.4_002"
+      },
+      {
+        "id": "q4.4_003",
+        "stem": "What is the time-averaged radiation pressure of a light beam with irradiance I?",
+        "options": [
+          "⟨P⟩ = I·c",
+          "⟨P⟩ = I²/c",
+          "⟨P⟩ = I/c",
+          "⟨P⟩ = I/c²"
+        ],
+        "correctIndex": 2,
+        "explanation": "Radiation pressure equals the energy density, P = u = S/c, so its time average is ⟨P⟩ = I/c.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.4_003_fi",
+        "stem": "Mikä on valonsäteen, jonka irradianssi on I, aikakeskiarvoistettu säteilypaine?",
+        "options": [
+          "⟨P⟩ = I·c",
+          "⟨P⟩ = I²/c",
+          "⟨P⟩ = I/c",
+          "⟨P⟩ = I/c²"
+        ],
+        "correctIndex": 2,
+        "explanation": "Säteilypaine on yhtä suuri kuin energiatiheys, P = u = S/c, joten sen aikakeskiarvo on ⟨P⟩ = I/c.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.4_003"
+      },
+      {
+        "id": "q4.4_004",
+        "stem": "Sunlight of irradiance ≈ 1000 W/m² is fully absorbed by a surface. What radiation pressure results (c ≈ 3×10⁸ m/s)?",
+        "options": [
+          "≈ 3.3×10⁻¹¹ Pa",
+          "≈ 3×10¹¹ Pa",
+          "≈ 0.33 Pa",
+          "≈ 3.3×10⁻⁶ Pa"
+        ],
+        "correctIndex": 3,
+        "explanation": "P = I/c = 1000/(3×10⁸) ≈ 3.3×10⁻⁶ Pa — tiny, which is why radiation pressure is hard to notice in everyday life.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.4_004_fi",
+        "stem": "Auringonvalo, jonka irradianssi on ≈ 1000 W/m², absorboituu kokonaan pintaan. Kuinka suuri säteilypaine syntyy (c ≈ 3×10⁸ m/s)?",
+        "options": [
+          "≈ 3,3×10⁻¹¹ Pa",
+          "≈ 3×10¹¹ Pa",
+          "≈ 0,33 Pa",
+          "≈ 3,3×10⁻⁶ Pa"
+        ],
+        "correctIndex": 3,
+        "explanation": "P = I/c = 1000/(3×10⁸) ≈ 3,3×10⁻⁶ Pa — pieni, minkä vuoksi säteilypaine on arjessa vaikea havaita.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.4_004"
       }
     ],
     "4.5": [
@@ -2052,6 +2532,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.5_003"
+      },
+      {
+        "id": "q4.5_004",
+        "stem": "In the far field of an oscillating electric dipole, in which directions is the radiation most intense?",
+        "options": [
+          "Perpendicular to the dipole moment (θ = 90°)",
+          "Only at θ = 45°",
+          "Along the dipole moment (θ = 0°)",
+          "Equally in all directions"
+        ],
+        "correctIndex": 0,
+        "explanation": "I ∝ sin²θ/r², with θ measured from the dipole moment, so the maximum is at θ = 90° and there is no radiation along the dipole axis.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.5_004_fi",
+        "stem": "Missä suunnissa säteily on voimakkainta värähtelevän sähköisen dipolin kaukokentässä?",
+        "options": [
+          "Kohtisuoraan dipolimomenttia vastaan (θ = 90°)",
+          "Vain kulmassa θ = 45°",
+          "Dipolimomentin suunnassa (θ = 0°)",
+          "Yhtä voimakkaasti kaikkiin suuntiin"
+        ],
+        "correctIndex": 0,
+        "explanation": "I ∝ sin²θ/r², missä θ mitataan dipolimomentista, joten maksimi on kulmassa θ = 90° eikä dipoliakselin suunnassa säteile lainkaan.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.5_004"
       }
     ],
     "4.6": [
@@ -2144,6 +2654,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.6_003"
+      },
+      {
+        "id": "q4.6_004",
+        "stem": "A light wave of vacuum wavelength λ₀ enters a medium with refractive index n > 1. What happens to its wavelength and frequency?",
+        "options": [
+          "Both the wavelength and the frequency are divided by n",
+          "The wavelength becomes λ₀/n while the frequency stays the same",
+          "The wavelength becomes nλ₀ while the frequency stays the same",
+          "The wavelength stays λ₀ while the frequency becomes ν/n"
+        ],
+        "correctIndex": 1,
+        "explanation": "The oscillation frequency ω (or ν) does not change in the medium; v = c/n, so λ = λ₀/n and k = nk₀.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.6_004_fi",
+        "stem": "Tyhjiöaallonpituudeltaan λ₀ oleva valoaalto siirtyy aineeseen, jonka taitekerroin on n > 1. Mitä sen aallonpituudelle ja taajuudelle tapahtuu?",
+        "options": [
+          "Sekä aallonpituus että taajuus jaetaan n:llä",
+          "Aallonpituudeksi tulee λ₀/n ja taajuus pysyy samana",
+          "Aallonpituudeksi tulee nλ₀ ja taajuus pysyy samana",
+          "Aallonpituus pysyy λ₀:na ja taajuudeksi tulee ν/n"
+        ],
+        "correctIndex": 1,
+        "explanation": "Värähtelytaajuus ω (tai ν) ei muutu aineessa; v = c/n, joten λ = λ₀/n ja k = nk₀.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.6_004"
       }
     ]
   },
@@ -2208,6 +2748,96 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q5.1_002"
+      },
+      {
+        "id": "q5.1_003",
+        "stem": "What does the label g denote in the electronic-state picture of light–matter interaction?",
+        "options": [
+          "The first excited state",
+          "A gain state that amplifies light",
+          "The ground state of the electron",
+          "A state above the ionization threshold"
+        ],
+        "correctIndex": 2,
+        "explanation": "g corresponds to the ground state, while 1 and 2 are electronic excitation states.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.1_003_fi",
+        "stem": "Mitä merkintä g tarkoittaa valon ja aineen vuorovaikutuksen elektronitilakuvassa?",
+        "options": [
+          "Ensimmäistä viritystilaa",
+          "Vahvistustilaa, joka vahvistaa valoa",
+          "Elektronin perustilaa",
+          "Ionisaatiorajan yläpuolella olevaa tilaa"
+        ],
+        "correctIndex": 2,
+        "explanation": "g tarkoittaa perustilaa, kun taas 1 ja 2 ovat elektronin viritystiloja.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.1_003"
+      },
+      {
+        "id": "q5.1_004",
+        "stem": "What is the approximate thermal energy k_BT at 300 K?",
+        "options": [
+          "≈ 2.6 eV",
+          "≈ 26 eV",
+          "≈ 0.26 meV",
+          "≈ 26 meV"
+        ],
+        "correctIndex": 3,
+        "explanation": "k_BT ≈ 26 meV at 300 K, which is much smaller than typical electronic excitation energies (1.6–3.2 eV).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.1_004_fi",
+        "stem": "Kuinka suuri on lämpöenergia k_BT likimain lämpötilassa 300 K?",
+        "options": [
+          "≈ 2,6 eV",
+          "≈ 26 eV",
+          "≈ 0,26 meV",
+          "≈ 26 meV"
+        ],
+        "correctIndex": 3,
+        "explanation": "k_BT ≈ 26 meV lämpötilassa 300 K, mikä on paljon pienempi kuin tyypilliset elektronien virityksen energiat (1,6–3,2 eV).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.1_004"
+      },
+      {
+        "id": "q5.1_005",
+        "stem": "What is the order of magnitude of the excited-state lifetime τ mentioned in the notes?",
+        "options": [
+          "~10 ns",
+          "~10 ms",
+          "~10 s",
+          "~10 fs"
+        ],
+        "correctIndex": 0,
+        "explanation": "Excited states relax towards lower-energy states with lifetimes of the order of ~10 ns.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.1_005_fi",
+        "stem": "Mikä on muistiinpanoissa mainitun viritystilan elinajan τ suuruusluokka?",
+        "options": [
+          "~10 ns",
+          "~10 ms",
+          "~10 s",
+          "~10 fs"
+        ],
+        "correctIndex": 0,
+        "explanation": "Viritystilat relaksoituvat kohti alempaa energiaa elinajoilla, jotka ovat suuruusluokkaa ~10 ns.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.1_005"
       }
     ],
     "5.2": [
@@ -2300,6 +2930,96 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q5.2_003"
+      },
+      {
+        "id": "q5.2_004",
+        "stem": "What is a radiative relaxation?",
+        "options": [
+          "The scattering of a photon far from resonance",
+          "A relaxation via a single process in which a photon is emitted",
+          "A relaxation via several processes that create phonons",
+          "The absorption of a photon that raises an electron"
+        ],
+        "correctIndex": 1,
+        "explanation": "If the relaxation takes place via a single process and a photon is emitted (VIS/IR/NIR), it is radiative; via several processes (e.g. phonons), non-radiative.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.2_004_fi",
+        "stem": "Mitä säteilevä relaksaatio tarkoittaa?",
+        "options": [
+          "Fotonin sirontaa kaukana resonanssista",
+          "Relaksaatiota yhden prosessin kautta, jossa emittoituu fotoni",
+          "Relaksaatiota usean prosessin kautta, jossa syntyy fononeja",
+          "Fotonin absorptiota, joka nostaa elektronin ylemmälle tilalle"
+        ],
+        "correctIndex": 1,
+        "explanation": "Jos relaksaatio tapahtuu yhden prosessin kautta ja fotoni emittoituu (VIS/IR/NIR), se on säteilevä; usean prosessin (esim. fononit) kautta säteilemätön.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.2_004"
+      },
+      {
+        "id": "q5.2_005",
+        "stem": "What typically accompanies a non-radiative relaxation in a material?",
+        "options": [
+          "A population inversion appears",
+          "The incident light is amplified",
+          "Phonons are created and the material heats up",
+          "A photon of the resonance frequency is emitted"
+        ],
+        "correctIndex": 2,
+        "explanation": "Non-radiative relaxation proceeds via several processes, typically creating phonons and thereby heating the matter.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.2_005_fi",
+        "stem": "Mitä tyypillisesti seuraa aineen säteilemättömästä relaksaatiosta?",
+        "options": [
+          "Syntyy populaatioinversio",
+          "Tuleva valo vahvistuu",
+          "Syntyy fononeja ja aine lämpenee",
+          "Emittoituu resonanssitaajuinen fotoni"
+        ],
+        "correctIndex": 2,
+        "explanation": "Säteilemätön relaksaatio tapahtuu usean prosessin kautta ja synnyttää tyypillisesti fononeja, jolloin aine lämpenee.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.2_005"
+      },
+      {
+        "id": "q5.2_006",
+        "stem": "Which of these processes keeps a phase correlation between the emitted and the incident photon?",
+        "options": [
+          "Non-radiative relaxation",
+          "Spontaneous emission",
+          "Absorption",
+          "Stimulated emission"
+        ],
+        "correctIndex": 3,
+        "explanation": "Phase correlation remains in stimulated emission (and in scattering) but vanishes in absorption and spontaneous emission.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.2_006_fi",
+        "stem": "Mikä seuraavista prosesseista säilyttää vaihekorrelaation emittoituneen ja tulevan fotonin välillä?",
+        "options": [
+          "Säteilemätön relaksaatio",
+          "Spontaani emissio",
+          "Absorptio",
+          "Stimuloitu emissio"
+        ],
+        "correctIndex": 3,
+        "explanation": "Vaihekorrelaatio säilyy stimuloidussa emissiossa (ja sironnassa) mutta katoaa absorptiossa ja spontaanissa emissiossa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.2_006"
       }
     ],
     "5.3": [
@@ -2422,6 +3142,126 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q5.3_004"
+      },
+      {
+        "id": "q5.3_005",
+        "stem": "What is the resonance frequency of a Lorentz oscillator with spring constant k and electron mass m?",
+        "options": [
+          "ω₀ = (k/m)^{1/2}",
+          "ω₀ = km",
+          "ω₀ = k/m",
+          "ω₀ = (m/k)^{1/2}"
+        ],
+        "correctIndex": 0,
+        "explanation": "The equation of motion ẍ + ω₀²x = qE₀e^{−iωt}/m defines ω₀ = (k/m)^{1/2}.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.3_005_fi",
+        "stem": "Mikä on Lorentzin oskillaattorin resonanssitaajuus, kun jousivakio on k ja elektronin massa m?",
+        "options": [
+          "ω₀ = (k/m)^{1/2}",
+          "ω₀ = km",
+          "ω₀ = k/m",
+          "ω₀ = (m/k)^{1/2}"
+        ],
+        "correctIndex": 0,
+        "explanation": "Liikeyhtälö ẍ + ω₀²x = qE₀e^{−iωt}/m määrittelee ω₀ = (k/m)^{1/2}.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.3_005"
+      },
+      {
+        "id": "q5.3_006",
+        "stem": "For which kind of materials does the Lorentz model work particularly well?",
+        "options": [
+          "Superconductors",
+          "Dielectric materials",
+          "Ionized plasmas",
+          "Metals"
+        ],
+        "correctIndex": 1,
+        "explanation": "The model applies particularly well to dielectrics, tolerably to semiconductors and poorly to metals (for which the Drude model works).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.3_006_fi",
+        "stem": "Minkä tyyppisille aineille Lorentzin malli toimii erityisen hyvin?",
+        "options": [
+          "Suprajohteille",
+          "Dielektrisille aineille",
+          "Ionisoituneille plasmoille",
+          "Metalleille"
+        ],
+        "correctIndex": 1,
+        "explanation": "Malli toimii erityisen hyvin dielektreille, kohtuullisesti puolijohteille ja huonosti metalleille (joille Druden malli toimii).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.3_006"
+      },
+      {
+        "id": "q5.3_007",
+        "stem": "Far below resonance (ω < ω₀), what does the undamped Lorentz model predict for the refractive index?",
+        "options": [
+          "n = 0",
+          "n → ∞",
+          "n > 1 and almost constant",
+          "n < 1"
+        ],
+        "correctIndex": 2,
+        "explanation": "n²(ω) = 1 + Nq²/(ε₀m(ω₀² − ω²)) is above 1 and nearly constant far below resonance; n < 1 occurs above ω₀, and n diverges only exactly at ω₀.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.3_007_fi",
+        "stem": "Mitä vaimentamaton Lorentzin malli ennustaa taitekertoimelle kaukana resonanssin alapuolella (ω < ω₀)?",
+        "options": [
+          "n = 0",
+          "n → ∞",
+          "n > 1 ja lähes vakio",
+          "n < 1"
+        ],
+        "correctIndex": 2,
+        "explanation": "n²(ω) = 1 + Nq²/(ε₀m(ω₀² − ω²)) on yli 1 ja lähes vakio kaukana resonanssin alapuolella; n < 1 esiintyy ω₀:n yläpuolella, ja n hajaantuu vain täsmälleen kohdassa ω₀.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.3_007"
+      },
+      {
+        "id": "q5.3_008",
+        "stem": "What is the Helmholtz–Ketteler equation?",
+        "options": [
+          "The law relating the incidence and refraction angles",
+          "The far-field irradiance of a dipole",
+          "The equilibrium distribution of level populations",
+          "The formula for n²(ω) of a dielectric with several damped resonances"
+        ],
+        "correctIndex": 3,
+        "explanation": "Generalizing the damped Lorentz model to several resonances gives n²(ω) = 1 + (Nq²/ε₀m) Σ_j f_j/(ω₀,j² − ω² − iγ_jω), the Helmholtz–Ketteler equation.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.3_008_fi",
+        "stem": "Mikä on Helmholtzin–Ketterlerin yhtälö?",
+        "options": [
+          "Laki, joka yhdistää tulo- ja taitekulman",
+          "Dipolin kaukokentän irradianssi",
+          "Tasojen miehitysten tasapainojakauma",
+          "Kaava n²(ω):lle dielektrille, jolla on useita vaimennettuja resonansseja"
+        ],
+        "correctIndex": 3,
+        "explanation": "Vaimennetun Lorentzin mallin yleistys useille resonansseille antaa n²(ω) = 1 + (Nq²/ε₀m) Σ_j f_j/(ω₀,j² − ω² − iγ_jω), eli Helmholtzin–Ketterlerin yhtälön.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.3_008"
       }
     ],
     "5.4": [
@@ -2514,6 +3354,96 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q5.4_003"
+      },
+      {
+        "id": "q5.4_004",
+        "stem": "Which two processes are the main phenomena for understanding the laser principle?",
+        "options": [
+          "Absorption and stimulated emission",
+          "Reflection and refraction",
+          "Scattering and diffraction",
+          "Spontaneous emission and dispersion"
+        ],
+        "correctIndex": 0,
+        "explanation": "Absorption causes losses and stores energy in the laser crystal, while stimulated emission enables the amplification of light.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.4_004_fi",
+        "stem": "Mitkä kaksi prosessia ovat päätekijät laserin toimintaperiaatteen ymmärtämisessä?",
+        "options": [
+          "Absorptio ja stimuloitu emissio",
+          "Heijastus ja taittuminen",
+          "Sironta ja diffraktio",
+          "Spontaani emissio ja dispersio"
+        ],
+        "correctIndex": 0,
+        "explanation": "Absorptio aiheuttaa häviöitä ja varastoi energiaa laserkiteeseen, kun taas stimuloitu emissio mahdollistaa valon vahvistamisen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.4_004"
+      },
+      {
+        "id": "q5.4_005",
+        "stem": "Which of the following is NOT a pumping method for breaking thermal equilibrium mentioned in the notes?",
+        "options": [
+          "Thermal pumping (thermodynamics of gases)",
+          "Gravitational pumping",
+          "Electronic pumping (semiconductors and electric current)",
+          "Optical pumping (a strong light source)"
+        ],
+        "correctIndex": 1,
+        "explanation": "The notes list optical, electronic and thermal pumping; there is no gravitational pumping.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.4_005_fi",
+        "stem": "Mikä seuraavista EI ole muistiinpanoissa mainittu pumppausmenetelmä termisen tasapainon rikkomiseksi?",
+        "options": [
+          "Terminen pumppaus (kaasujen termodynamiikka)",
+          "Gravitaatiopumppaus",
+          "Sähköinen pumppaus (puolijohteet ja sähkövirta)",
+          "Optinen pumppaus (voimakas valonlähde)"
+        ],
+        "correctIndex": 1,
+        "explanation": "Muistiinpanoissa mainitaan optinen, sähköinen ja terminen pumppaus; gravitaatiopumppausta ei ole.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.4_005"
+      },
+      {
+        "id": "q5.4_006",
+        "stem": "At 300 K, k_BT ≈ 26 meV while electronic excitation energies are 1.6–3.2 eV. What follows in thermal equilibrium?",
+        "options": [
+          "Stimulated emission dominates over absorption",
+          "About half of the electrons are in the excited state",
+          "Almost all electrons are in the ground state, so absorption is the most probable process",
+          "A population inversion arises spontaneously"
+        ],
+        "correctIndex": 2,
+        "explanation": "The Boltzmann factor e^{−hν₀/k_BT} is tiny, so N₂ ≪ N₁: nearly all electrons are in the ground state and absorption dominates; inversion needs pumping.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q5.4_006_fi",
+        "stem": "Lämpötilassa 300 K k_BT ≈ 26 meV, kun elektronien virityksen energiat ovat 1,6–3,2 eV. Mitä tästä seuraa termisessä tasapainossa?",
+        "options": [
+          "Stimuloitu emissio hallitsee absorptiota",
+          "Noin puolet elektroneista on viritystilassa",
+          "Lähes kaikki elektronit ovat perustilassa, joten absorptio on todennäköisin prosessi",
+          "Populaatioinversio syntyy itsestään"
+        ],
+        "correctIndex": 2,
+        "explanation": "Boltzmannin tekijä e^{−hν₀/k_BT} on mitätön, joten N₂ ≪ N₁: lähes kaikki elektronit ovat perustilassa ja absorptio hallitsee; inversio vaatii pumppausta.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q5.4_006"
       }
     ]
   },
@@ -2608,6 +3538,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q6.1_003"
+      },
+      {
+        "id": "q6.1_004",
+        "stem": "At what velocity does a wavefront propagate in a medium of refractive index n?",
+        "options": [
+          "c",
+          "nc",
+          "c/n²",
+          "c/n"
+        ],
+        "correctIndex": 3,
+        "explanation": "A wavefront propagates at velocity c/n, i.e. more slowly than in vacuum when n > 1.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q6.1_004_fi",
+        "stem": "Millä nopeudella aaltorintama etenee aineessa, jonka taitekerroin on n?",
+        "options": [
+          "c",
+          "nc",
+          "c/n²",
+          "c/n"
+        ],
+        "correctIndex": 3,
+        "explanation": "Aaltorintama etenee nopeudella c/n eli hitaammin kuin tyhjiössä, kun n > 1.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.1_004"
       }
     ],
     "6.2": [
@@ -2882,6 +3842,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q6.3_004"
+      },
+      {
+        "id": "q6.3_005",
+        "stem": "Why can the term ∫(∂B/∂t)·dA be dropped when the small loop is shrunk to the interface in the boundary-condition derivation?",
+        "options": [
+          "The loop area tends to zero while ∂B/∂t stays finite",
+          "E is zero at the interface",
+          "B is zero at every interface",
+          "∂B/∂t diverges at the interface"
+        ],
+        "correctIndex": 0,
+        "explanation": "Shrinking the two edges that cross the interface makes the area S → 0, while the integrand ∂B/∂t stays finite, so the flux term vanishes and ∮E·dℓ = 0.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q6.3_005_fi",
+        "stem": "Miksi termi ∫(∂B/∂t)·dA voidaan jättää pois, kun pieni silmukka kutistetaan rajapintaan reunaehdon johdossa?",
+        "options": [
+          "Silmukan ala lähestyy nollaa, kun ∂B/∂t pysyy äärellisenä",
+          "E on nolla rajapinnalla",
+          "B on nolla jokaisella rajapinnalla",
+          "∂B/∂t hajaantuu rajapinnalla"
+        ],
+        "correctIndex": 0,
+        "explanation": "Rajapinnan läpäisevien kahden sivun kutistaminen tekee alasta S → 0, kun integrandi ∂B/∂t pysyy äärellisenä, joten vuotermi häviää ja ∮E·dℓ = 0.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.3_005"
       }
     ],
     "6.4": [
@@ -3126,6 +4116,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q6.5_004"
+      },
+      {
+        "id": "q6.5_005",
+        "stem": "Light in air is normally incident on glass (n = 1.5). What fraction of the power is transmitted?",
+        "options": [
+          "≈ 64 %",
+          "≈ 96 %",
+          "≈ 4 %",
+          "≈ 100 %"
+        ],
+        "correctIndex": 1,
+        "explanation": "R = 0.04, so T = 1 − R = 0.96. The value 64 % would be |t|² = 0.8², but T is not simply |t|² (it includes the factor n_t cosθ_t/n_i cosθ_i).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q6.5_005_fi",
+        "stem": "Ilmassa etenevä valo osuu kohtisuorasti lasiin (n = 1,5). Kuinka suuri osa tehosta läpäisee?",
+        "options": [
+          "≈ 64 %",
+          "≈ 96 %",
+          "≈ 4 %",
+          "≈ 100 %"
+        ],
+        "correctIndex": 1,
+        "explanation": "R = 0,04, joten T = 1 − R = 0,96. Arvo 64 % olisi |t|² = 0,8², mutta T ei ole pelkkä |t|² (siinä on tekijä n_t cosθ_t/n_i cosθ_i).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.5_005"
       }
     ],
     "6.6": [
@@ -3248,6 +4268,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q6.6_004"
+      },
+      {
+        "id": "q6.6_005",
+        "stem": "What is the critical angle for total internal reflection at a glass (n = 1.5) to air interface?",
+        "options": [
+          "≈ 56°",
+          "≈ 49°",
+          "≈ 42°",
+          "≈ 90°"
+        ],
+        "correctIndex": 2,
+        "explanation": "sinθ_c = n_t/n_i = 1/1.5 ≈ 0.667, so θ_c ≈ 42°. 49° is the value for water→air, and 56° is Brewster's angle for air→glass.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q6.6_005_fi",
+        "stem": "Mikä on kokonaisheijastuksen kriittinen kulma lasin (n = 1,5) ja ilman rajapinnalla, kun valo etenee lasista ilmaan?",
+        "options": [
+          "≈ 56°",
+          "≈ 49°",
+          "≈ 42°",
+          "≈ 90°"
+        ],
+        "correctIndex": 2,
+        "explanation": "sinθ_c = n_t/n_i = 1/1,5 ≈ 0,667, joten θ_c ≈ 42°. 49° on arvo vedestä ilmaan, ja 56° on Brewsterin kulma ilmasta lasiin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.6_005"
       }
     ]
   },

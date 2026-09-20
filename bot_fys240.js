@@ -85,8 +85,9 @@
  *     are now real FYS.240 content.
  *
  * KNOWN GAPS (not yet implemented — see redeploy-package README):
- *   - Quiz bank coverage (as of v2.7.0): quizBank_fys240.json has questions for
- *     every chapter 2-10 in both EN and FI (221 each), so /quiz is normally
+ *   - Quiz bank coverage (as of v2.7.6): quizBank_fys240.json has questions for
+ *     every chapter 2-10 in both EN and FI (256 each; chapter pools: 2: 20,
+ *     3: 43, 4: 25, 5: 25, 6: 28, 7: 20, 8: 26, 9: 22, 10: 47), so /quiz is normally
  *     served free from the bank; live generation (1 credit) only happens when a
  *     request asks for more than the bank has left. multivalueQuizBank_fys240.json
  *     holds 247 questions in EN and 247 in FI (v2.7.5): every one of the 61
@@ -109,6 +110,27 @@
 
  *
  * CHANGELOG:
+ *   v2.7.6 — Content-only update (no code changes): quizBank_fys240.json (the
+ *            single-answer /quiz bank) grew from 221 to 256 questions per language
+ *            (EN + FI, 512 entries). 35 new questions were added where the pools
+ *            were thinnest: chapter 2 +10 (10 -> 20), chapter 4 +8 (17 -> 25,
+ *            incl. 4.4: 2 -> 4), chapter 5 +13 (12 -> 25,
+ *            incl. 5.1: 2 -> 5) and chapter 6 +4 (24 -> 28). Every section of
+ *            chapters 2, 4, 5 and 6 now has at least 4 questions, and a student
+ *            can take 4-5 consecutive five-question chapter quizzes in each of
+ *            these chapters without a repeat (previously 2-4). Same conventions as
+ *            the existing entries: EN ids continue each section's numbering (no
+ *            lang field), FI copies "_fi" with lang "fi", translationOf and
+ *            source "claude-translated"; correct-answer positions are balanced
+ *            (A-D: 65/64/64/63 over the EN bank); no existing question changed.
+ *            One small code fix ships with it: quizGenerator_fys240.js sent stems,
+ *            correct answers and explanations with parse_mode HTML unescaped
+ *            (the bank has always contained text such as "n > 1" and "n < 1"; the
+ *            multi-answer generator got the same fix in v2.7.2). They are now
+ *            HTML-escaped, which also covers live-generated questions. Note: a
+ *            default "/quiz N.M" section quiz still asks for 5 questions, and 43 of
+ *            the 61 sections hold only 3-4 single-answer questions, so those top up
+ *            via live generation (1 credit) — unchanged behaviour.
  *   v2.7.5 — Content-only update (no code changes): multivalueQuizBank_fys240.json
  *            grew from 190 to 247 questions per language (EN + FI, 494 entries).
  *            57 new "select all that apply" questions enlarge the chapter pools
@@ -470,7 +492,7 @@
  *   (earlier history predates version tracking)
  */
 
-const BOT_VERSION = "2.7.5";
+const BOT_VERSION = "2.7.6";
 
 const fs = require("fs");
 const path = require("path");
