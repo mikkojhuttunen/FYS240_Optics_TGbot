@@ -130,6 +130,11 @@ Optional (all have working defaults):
 - `CACHE_TTL` (default `1h`)
 - `MAX_TOKENS` (default `900`)
 - `BOT_USERNAME` — needed for @mention detection in group chats
+- `ADMIN_USER_IDS` — comma-separated Telegram user IDs: exempt from the usage limits and allowed to use `/pending`
+- `QUIZ_PENDING_DIR` — directory for the pending (live-generated, unreviewed) quiz questions. Set it to the mount path of a
+  Railway Volume (e.g. `/data`) so they survive redeploys; unset = repo directory, wiped on every redeploy. See
+  `PENDING_QUESTIONS_fys240.md`.
+- `QUIZ_PENDING_MAX` (default `500`) — max entries kept per pending file
 
 (No `LATEX_ENABLED`/`LATEX_VERIFY_BEFORE_SEND` any more — LaTeX image
 rendering has been removed; see above.)
