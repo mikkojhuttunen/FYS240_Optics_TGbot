@@ -486,8 +486,16 @@ function buildQuestionKeyboard(sessionIndex, question) {
   };
 }
 
+// Messages are sent with parse_mode: 'HTML', and quiz text legitimately
+// contains <, > and & (e.g. "n < 1", "λ < 10 nm"). Unescaped, Telegram can
+// reject the whole message and the quiz stalls, so every piece of bank or
+// generated question text is escaped before it is embedded in an HTML message.
+function escapeHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function formatQuestionMessage(question, qNumber, total, lang) {
-  return `<b>${ui(lang).question(qNumber, total)}</b>\n\n${question.stem}`;
+  return `<b>${ui(lang).question(qNumber, total)}</b>\n\n${escapeHtml(question.stem)}`;
 }
 
 // Fallback used when the caller doesn't supply its own askWhichChapter
@@ -594,8 +602,8 @@ async function handleQuizAnswer(bot, callbackQuery) {
   if (correct) session.score += 1;
 
   const feedback = correct
-    ? t.correct(question.explanation)
-    : t.incorrect(question.options[question.correctIndex], question.explanation);
+    ? t.correct(escapeHtml(question.explanation))
+    : t.incorrect(escapeHtml(question.options[question.correctIndex]), escapeHtml(question.explanation));
 
   await bot.editMessageText(
     `${formatQuestionMessage(question, qIndex + 1, session.questions.length, lang)}\n\n${feedback}`,

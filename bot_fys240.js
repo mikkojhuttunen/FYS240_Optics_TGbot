@@ -85,13 +85,20 @@
  *     are now real FYS.240 content.
  *
  * KNOWN GAPS (not yet implemented — see redeploy-package README):
- *   - Quiz bank coverage (as of v2.7.0): quizBank_fys240.json has questions for
- *     every chapter 2-10 in both EN and FI (221 each), so /quiz is normally
- *     served free from the bank; live generation (1 credit) only happens when a
- *     request asks for more than the bank has left. multivalueQuizBank_fys240.json
- *     holds 104 questions in EN and 104 in FI (since v2.7.2), so /mvquiz and
- *     /moquiz are normally served free from the bank too; sections with fewer
- *     than 3 banked questions top up via live generation (1 credit).
+ *   - Quiz bank coverage (as of v2.7.7): quizBank_fys240.json has questions for
+ *     every chapter 2-10 in both EN and FI (316 each; chapter pools: 2: 20,
+ *     3: 60, 4: 30, 5: 25, 6: 30, 7: 25, 8: 35, 9: 26, 10: 65) and EVERY one of
+ *     the 61 sections holds at least 5, so /quiz is normally served free from
+ *     the bank — including the default 5-question section quiz ("/quiz 4.4");
+ *     live generation (1 credit) only happens when a request asks for more than
+ *     the bank has left. multivalueQuizBank_fys240.json
+ *     holds 247 questions in EN and 247 in FI (v2.7.5): every one of the 61
+ *     sections has at least 3 and every chapter has a pool of at least 22
+ *     (chapter 2: 22; chapters 4-9: 25; chapter 3: 36; chapter 10: 39), so
+ *     /mvquiz and /moquiz are normally served free from the bank too — section
+ *     quizzes (3 questions) and 4-5 consecutive chapter quizzes (5 questions)
+ *     without repeats; live generation (1 credit) is only needed when a request
+ *     asks for more than the bank has left.
  *     /source_quizzes shows the live picture.
  *   - homework_solutions.json (new in v2.3.0) is instructor-reference only —
  *     nothing in this bot loads or serves it; see the file's own header
@@ -105,6 +112,79 @@
 
  *
  * CHANGELOG:
+ *   v2.7.7 — Content-only update (no code changes): quizBank_fys240.json (the
+ *            single-answer /quiz bank) grew from 256 to 316 questions per language
+ *            (EN + FI, 632 entries). Resolves the open point noted in v2.7.6: a
+ *            default "/quiz N.M" section quiz asks for 5 questions, but 43 of the
+ *            61 sections held only 3-4, so they topped up via live generation
+ *            (1 credit, members only). 60 new questions (+1/+2 per section) now give
+ *            every section at least 5 in both languages: 3.1-3.12 (+17), 4.1/4.2/4.4/
+ *            4.5/4.6 (+5), 6.1/6.4 (+2), 7.1/7.2/7.3/7.5 (+5), 8.1/8.2/8.3/8.5/8.6/8.7
+ *            (+9), 9.1/9.2/9.4 (+4), 10.1-10.5/10.7-10.11/10.13 (+18). Chapter pools
+ *            are now 2: 20, 3: 60, 4: 30, 5: 25, 6: 30, 7: 25, 8: 35, 9: 26, 10: 65.
+ *            Tested by starting the default section quiz for all 61 sections in EN
+ *            and FI: 122/122 gave 5 questions with zero live-generation requests.
+ *            Same conventions as before (EN ids continue each section's numbering,
+ *            FI copies "_fi" + translationOf, addedAt 2026-09-20, correct-answer
+ *            positions balanced A-D 80/79/79/78); no existing question changed.
+ *   v2.7.6 — Content-only update (no code changes): quizBank_fys240.json (the
+ *            single-answer /quiz bank) grew from 221 to 256 questions per language
+ *            (EN + FI, 512 entries). 35 new questions were added where the pools
+ *            were thinnest: chapter 2 +10 (10 -> 20), chapter 4 +8 (17 -> 25,
+ *            incl. 4.4: 2 -> 4), chapter 5 +13 (12 -> 25,
+ *            incl. 5.1: 2 -> 5) and chapter 6 +4 (24 -> 28). Every section of
+ *            chapters 2, 4, 5 and 6 now has at least 4 questions, and a student
+ *            can take 4-5 consecutive five-question chapter quizzes in each of
+ *            these chapters without a repeat (previously 2-4). Same conventions as
+ *            the existing entries: EN ids continue each section's numbering (no
+ *            lang field), FI copies "_fi" with lang "fi", translationOf and
+ *            source "claude-translated"; correct-answer positions are balanced
+ *            (A-D: 65/64/64/63 over the EN bank); no existing question changed.
+ *            One small code fix ships with it: quizGenerator_fys240.js sent stems,
+ *            correct answers and explanations with parse_mode HTML unescaped
+ *            (the bank has always contained text such as "n > 1" and "n < 1"; the
+ *            multi-answer generator got the same fix in v2.7.2). They are now
+ *            HTML-escaped, which also covers live-generated questions. Note: a
+ *            default "/quiz N.M" section quiz still asks for 5 questions, and 43 of
+ *            the 61 sections hold only 3-4 single-answer questions, so those top up
+ *            via live generation (1 credit) — unchanged behaviour.
+ *   v2.7.5 — Content-only update (no code changes): multivalueQuizBank_fys240.json
+ *            grew from 190 to 247 questions per language (EN + FI, 494 entries).
+ *            57 new "select all that apply" questions enlarge the chapter pools
+ *            for /mvquiz N, /moquiz N: chapter 2 +10 (12 -> 22), chapter 4 +7
+ *            (18 -> 25), chapter 5 +12 (13 -> 25), chapter 6 +7 (18 -> 25),
+ *            chapter 7 +8 (17 -> 25), chapter 8 +4 (21 -> 25), chapter 9 +9
+ *            (16 -> 25); chapters 3 and 10 (36 / 39) needed no additions. A
+ *            student can now take 4-7 consecutive five-question chapter quizzes
+ *            without a repeat (previously 2-4 for chapters 2, 4, 5, 6, 7, 9).
+ *            The new questions favour derivation details, sign/factor traps and
+ *            short numerical applications (e.g. photon energy, critical angles,
+ *            Fraunhofer distance, Fabry-Perot FSR) on top of the concept
+ *            questions. Same conventions as v2.7.3/4 (ids continue each section's
+ *            numbering, Finnish "_fi" copies with translationOf, addedAt
+ *            2026-09-20); no existing question changed.
+ *   v2.7.4 — Content-only update (no code changes): multivalueQuizBank_fys240.json
+ *            grew from 155 to 190 questions per language (EN + FI, 380 entries).
+ *            35 new "select all that apply" questions fill every remaining thin
+ *            section in chapters 4-9 (4.1-4.6, 5.3, 5.4, 6.1, 6.2, 6.4-6.6, 7.1,
+ *            7.3, 7.5, 8.1-8.7, 9.2, 9.5) up to at least 3, so all 61 sections
+ *            of the course now have 3 or more banked multi-answer questions and
+ *            no section quiz ("/mvquiz 8.4", "/moquiz 6.6", ...) needs live
+ *            generation any more. Same conventions as v2.7.3: ids continue each
+ *            section's numbering, Finnish copies carry "_fi" + translationOf,
+ *            source "claude-authored" / "claude-translated", addedAt 2026-09-20,
+ *            no existing question changed.
+ *   v2.7.3 — Content-only update (no code changes): multivalueQuizBank_fys240.json
+ *            grew from 104 to 155 questions per language (EN + FI, 310 entries).
+ *            51 new "select all that apply" questions were added, 2 per section
+ *            for sections 3.1-3.12 and 10.1-10.11, 10.13 (24 + 24) and 3 for 10.12
+ *            (which had none), so every section of chapters 3 and 10 now has 3
+ *            banked questions and "/mvquiz 3.3" / "/moquiz 10.9" etc. are served
+ *            entirely from the bank (no live generation, no credit). New ids
+ *            continue each section's numbering (q3.1_002, q3.1_003, ...), Finnish
+ *            copies carry the "_fi" suffix and translationOf like the earlier
+ *            ones; source "claude-authored" (EN) / "claude-translated" (FI),
+ *            addedAt 2026-09-20. No existing question was changed.
  *   v2.7.2 — Finnish multi-answer quiz + numeric scope for the multi-answer
  *            commands. Three things, all in the multivalue quiz add-on:
  *            (1) Finnish bank. All 104 English questions in
@@ -429,7 +509,7 @@
  *   (earlier history predates version tracking)
  */
 
-const BOT_VERSION = "2.7.2";
+const BOT_VERSION = "2.7.7";
 
 const fs = require("fs");
 const path = require("path");
