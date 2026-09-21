@@ -21,3 +21,10 @@ Thumbs.db
 # Build/temp
 tmp/
 *.tmp
+
+# Pending quiz questions exported from the bot (review with mergePending_fys240.js; see PENDING_QUESTIONS_fys240.md)
+quizBankPending_fys240.json
+multivalueQuizBankPending_fys240.json
+*.corrupt-*
+pending_review.md
+*.json.bak

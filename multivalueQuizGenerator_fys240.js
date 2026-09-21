@@ -69,12 +69,19 @@ const path = require('path');
 const Anthropic = require('@anthropic-ai/sdk');
 const corpusLoader = require('./corpusLoader');
 const limiter = require('./usageLimiter');
+const { createPendingStore } = require('./pendingStore_fys240');
 const { getCorpusSection } = corpusLoader;
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const QUIZ_BANK_PATH = path.join(__dirname, 'multivalueQuizBank_fys240.json');
-const QUIZ_BANK_PENDING_PATH = path.join(__dirname, 'multivalueQuizBankPending_fys240.json');
+// Live-generated (unreviewed) questions. Lives in QUIZ_PENDING_DIR when set (a Railway Volume) —
+// see pendingStore_fys240.js and PENDING_QUESTIONS_fys240.md.
+const pendingStore = createPendingStore({
+  fileName: 'multivalueQuizBankPending_fys240.json',
+  logTag: 'MVQUIZ_PENDING_QUESTION',
+  label: 'multivalueQuizGenerator_fys240',
+});
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
@@ -322,26 +329,10 @@ function sampleFromBankChapters(chapters, count, excludeIds = [], lang = "en") {
 }
 
 // ---------- self-expansion capture ----------
+// Persistence (volume dir, atomic writes, size cap, corrupt-file quarantine, stdout log lines)
+// lives in pendingStore_fys240.js.
 function appendPendingQuestions(chapter, section, questions, lang = "en") {
-  const generatedAt = new Date().toISOString();
-  const entries = questions.map((q) => ({ chapter: String(chapter), section: section || null, lang, question: q, generatedAt }));
-
-  try {
-    let existing = [];
-    try {
-      existing = JSON.parse(fs.readFileSync(QUIZ_BANK_PENDING_PATH, 'utf8'));
-      if (!Array.isArray(existing)) existing = [];
-    } catch (e) {
-      existing = [];
-    }
-    fs.writeFileSync(QUIZ_BANK_PENDING_PATH, JSON.stringify(existing.concat(entries), null, 2), 'utf8');
-  } catch (e) {
-    console.warn(`multivalueQuizGenerator_fys240: could not persist multivalueQuizBankPending_fys240.json (${e.message}) — relying on stdout log capture instead`);
-  }
-
-  for (const entry of entries) {
-    console.log(`MVQUIZ_PENDING_QUESTION ${JSON.stringify(entry)}`);
-  }
+  pendingStore.append(chapter, section, questions, lang);
 }
 
 // ---------- Stage 2: generation (one LLM call, structured JSON out) ----------
@@ -372,6 +363,31 @@ kurssille (FYS.240 Optiikka), tiukasti annettuun kurssimateriaaliotteeseen pohja
 - Palauta VAIN validi JSON, ei markdown-koodilohkoja, ei alkupuhetta. Muoto:
   { "questions": [ { "stem": "... (Valitse kaikki oikeat)", "options": ["...","...","...","...","..."],
     "correctIndices": [0,2,3], "explanation": "..." } ] }`;
+
+const MIN_OPTIONS = 4;
+const MAX_OPTIONS = LETTERS.length;
+
+/** Structural validity of one multi-select question; returns a cleaned copy or null. */
+function normaliseQuestion(q) {
+  if (!q || typeof q !== 'object') return null;
+  if (typeof q.stem !== 'string' || !q.stem.trim()) return null;
+  if (!Array.isArray(q.options)) return null;
+  if (q.options.length < MIN_OPTIONS || q.options.length > MAX_OPTIONS) return null;
+  if (!q.options.every((o) => typeof o === 'string' && o.trim())) return null;
+  if (new Set(q.options.map((o) => o.trim().toLowerCase())).size !== q.options.length) return null;
+  if (!Array.isArray(q.correctIndices)) return null;
+
+  const idx = [...new Set(q.correctIndices)];
+  if (!idx.every((i) => Number.isInteger(i) && i >= 0 && i < q.options.length)) return null;
+  // Genuinely multi-valued: at least 2 correct, and at least 1 wrong option.
+  if (idx.length < 2 || idx.length >= q.options.length) return null;
+
+  return {
+    ...q,
+    correctIndices: idx.sort((a, b) => a - b),
+    explanation: typeof q.explanation === 'string' ? q.explanation : '',
+  };
+}
 
 async function generateQuiz(chapter, section, count = 5, lang = "en") {
   const corpusLang = lang === "fi" ? "both" : "en";
@@ -410,12 +426,11 @@ async function generateQuiz(chapter, section, count = 5, lang = "en") {
     throw new Error('Multivalue quiz generation returned no questions');
   }
 
-  // Defensive sanity check: reject (drop) any generated question that isn't
-  // genuinely multi-valued (0, 1, or ALL options marked correct), since a
-  // live LLM call could still slip up despite the system prompt's rules.
-  const sane = parsed.questions.filter(
-    (q) => Array.isArray(q.correctIndices) && q.correctIndices.length >= 2 && q.correctIndices.length < (q.options || []).length
-  );
+  // Defensive sanity check: reject (drop) any generated question that is malformed or isn't
+  // genuinely multi-valued (0, 1, or ALL options marked correct), since a live LLM call could
+  // still slip up despite the system prompt's rules. Dropped questions are neither served nor
+  // written to the pending file.
+  const sane = parsed.questions.map(normaliseQuestion).filter(Boolean);
   if (!sane.length) {
     throw new Error('Multivalue quiz generation returned no valid multi-answer questions');
   }
@@ -782,6 +797,11 @@ module.exports = {
   extractSectionHint,
   extractRawCountHint,
   resolveQuizLang,
+  // pending (live-generated, unreviewed) questions — used by /pending, /healthz and tests
+  normaliseQuestion,
+  pendingSummary: () => pendingStore.summary(),
+  clearPending: () => pendingStore.clear(),
+  readPending: () => pendingStore.read(),
 };
 
 /* INTEGRATION NOTES — see MULTIVALUE_QUIZ_INTEGRATION.md for the full

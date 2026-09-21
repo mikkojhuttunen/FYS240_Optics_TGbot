@@ -75,7 +75,13 @@
  *     introspection commands (see CHANGELOG v2.6.1). NOT listed in /help or
  *     /start, but not access-restricted either — same as every other
  *     command here.
+ *   - /pending [clear] — ADMIN ONLY (ADMIN_USER_IDS, private chat only; not in /help): exports
+ *     the live-generated, not-yet-reviewed quiz questions (single + multi-select, EN + FI) as
+ *     JSON documents, or empties the pending files. With QUIZ_PENDING_DIR pointing at a Railway
+ *     Volume those questions also survive redeploys. See CHANGELOG v2.8.0 and
+ *     PENDING_QUESTIONS_fys240.md.
  *   - /healthz — reports corpus/video/homework/glossary/quiz health + BOT_VERSION
+ *     (+ pending-question counts and whether a persistent directory is configured)
  *   - Conversation history (6 turns) & per-user rate limiting
  *   - Course-mismatch guards, kept as permanent safety nets, on both
  *     homework_problems.json (v2.2.0) and terminology.json (v2.4.0):
@@ -112,6 +118,34 @@
 
  *
  * CHANGELOG:
+ *   v2.8.0 — Live-generated quiz questions are now kept for review on a Railway Volume, with
+ *            an admin export. Ported from the FYS.501 Laser bot's pending-question pipeline.
+ *            Until now the pending files (quizBankPending_fys240.json /
+ *            multivalueQuizBankPending_fys240.json) were written next to the code, which
+ *            Railway wipes on every redeploy, so only the QUIZ_PENDING_QUESTION log lines
+ *            survived. Now:
+ *              - QUIZ_PENDING_DIR (env) puts both pending files on a mounted Railway Volume
+ *                (e.g. /data); unset = old behavior (repo dir, ephemeral). QUIZ_PENDING_MAX
+ *                (default 500) caps entries per file. Writes are atomic, an unreadable file is
+ *                moved aside (.corrupt-<ts>) instead of overwritten, and the stdout log lines
+ *                are still emitted as a second capture path. Shared code:
+ *                pendingStore_fys240.js.
+ *              - /pending (ADMIN_USER_IDS only, private chat only): summary by section and
+ *                language + both pending files as Telegram documents; /pending clear empties
+ *                them after you saved the export (pendingAdmin_fys240.js).
+ *              - Live-generated output is now validated before it is served or captured
+ *                (single: exactly 4 distinct options + valid correctIndex; multi: 4-8 distinct
+ *                options, at least 2 correct and at least 1 wrong). Malformed questions are
+ *                dropped, so they never reach a student or the pending files.
+ *              - mergePending_fys240.js (run locally): extract (rebuild the pending files from a
+ *                Railway log export), review (validity, duplicate and near-duplicate check per
+ *                language, writes pending_review.md) and merge (adds the questions you accept to
+ *                the banks with the right EN/FI id, lang and stem-suffix conventions, keeps .bak
+ *                backups). e2e_pending_test_fys240.js covers all of it.
+ *              - /healthz gained pendingQuestions { single, multi, persistentDir };
+ *                /source_quizzes now reads the pending files from the configured location and
+ *                shows where they are stored.
+ *            Quiz behavior for students is unchanged apart from the validation above.
  *   v2.7.7 — Content-only update (no code changes): quizBank_fys240.json (the
  *            single-answer /quiz bank) grew from 256 to 316 questions per language
  *            (EN + FI, 632 entries). Resolves the open point noted in v2.7.6: a
@@ -509,7 +543,7 @@
  *   (earlier history predates version tracking)
  */
 
-const BOT_VERSION = "2.7.7";
+const BOT_VERSION = "2.8.0";
 
 const fs = require("fs");
 const path = require("path");
@@ -520,6 +554,7 @@ const mvQuizGenerator = require("./multivalueQuizGenerator_fys240");
 const corpusLoader = require("./corpusLoader");
 const limiter = require("./usageLimiter");
 const accessGuard = require("./accessGuard");
+const pendingAdmin = require("./pendingAdmin_fys240");
 
 const app = express();
 app.use(express.json());
@@ -564,11 +599,12 @@ const HW_SOLUTIONS_PATH = path.join(__dirname, "homework_solutions.json");
 const TERMINOLOGY_PATH = path.join(__dirname, "terminology.json");
 const VIDEOS_MODULE_PATH = path.join(__dirname, "fys240_videos.js");
 const QUIZ_BANK_PATH = path.join(__dirname, "quizBank_fys240.json");
-const QUIZ_BANK_PENDING_PATH = path.join(__dirname, "quizBankPending_fys240.json");
+// The pending (live-generated, unreviewed) files are NOT at a fixed path in __dirname: with
+// QUIZ_PENDING_DIR set they live on a Railway Volume. Use quizGenerator.pendingSummary().path /
+// mvQuizGenerator.pendingSummary().path (see /source_quizzes and /pending) rather than a constant.
 // Multivalue ("select all that apply") quiz add-on — separate data files,
 // only read here for the /source_quizzes diagnostic report below.
 const MV_QUIZ_BANK_PATH = path.join(__dirname, "multivalueQuizBank_fys240.json");
-const MV_QUIZ_BANK_PENDING_PATH = path.join(__dirname, "multivalueQuizBankPending_fys240.json");
 
 // Sanity-check against a recurring failure mode in this repo: this codebase
 // is forked between a FYS.240 Optics bot and a FYS.501 Laser Physics bot,
@@ -834,6 +870,17 @@ function remember(chatId, role, content) {
 // ------------------------------------------------------------- telegram -----
 async function tg(method, payload) {
   return axios.post(`${TELEGRAM_API}/${method}`, payload, { timeout: 15000 });
+}
+
+// Sends a local file as a Telegram document (multipart upload; Node >= 18 provides
+// fetch / FormData / Blob globally). Used by the admin-only /pending export.
+async function tgSendDocument(chatId, filePath, filename, caption) {
+  const form = new FormData();
+  form.append("chat_id", String(chatId));
+  if (caption) form.append("caption", caption);
+  form.append("document", new Blob([fs.readFileSync(filePath)], { type: "application/json" }), filename);
+  const res = await fetch(`${TELEGRAM_API}/sendDocument`, { method: "POST", body: form });
+  if (!res.ok) throw new Error(`Telegram sendDocument failed: HTTP ${res.status}`);
 }
 
 // ---------------------------------------------------- quiz bot adapter -----
@@ -1464,7 +1511,8 @@ function buildSourceHwReport() {
 function buildSourceQuizzesReport() {
   const bank = quizGenerator.loadQuizBank();
   const bankInfo = fileInfo(QUIZ_BANK_PATH);
-  const pendingInfo = fileInfo(QUIZ_BANK_PENDING_PATH);
+  const pendingSum = quizGenerator.pendingSummary();
+  const pendingInfo = fileInfo(pendingSum.path);
 
   const chapters = Object.keys(bank).sort((a, b) => Number(a) - Number(b));
   let totalQuestions = 0;
@@ -1483,15 +1531,7 @@ function buildSourceQuizzesReport() {
   const ALL_CHAPTERS = [2, 3, 4, 5, 6, 7, 8, 9, 10];
   const missingChapters = ALL_CHAPTERS.filter((c) => !chapters.includes(String(c)));
 
-  let pendingCount = 0;
-  if (pendingInfo.exists) {
-    try {
-      const pending = JSON.parse(fs.readFileSync(QUIZ_BANK_PENDING_PATH, "utf8"));
-      pendingCount = Array.isArray(pending) ? pending.length : 0;
-    } catch (e) {
-      pendingCount = 0;
-    }
-  }
+  const pendingCount = pendingSum.total;
 
   const lines = [];
   lines.push(`SOURCE: quiz data — bot v${BOT_VERSION}`);
@@ -1505,9 +1545,10 @@ function buildSourceQuizzesReport() {
   lines.push(`- On disk: ${bankInfo.exists ? `modified ${bankInfo.modified}` : "file not found"}`);
   lines.push("");
   lines.push("quizBankPending_fys240.json (live-generated questions saved for later curation)");
+  lines.push(`- Storage: ${pendingSum.persistentDir ? `persistent directory ${path.dirname(pendingSum.path)} (QUIZ_PENDING_DIR) — survives redeploys` : "repo directory — LOST on redeploy (set QUIZ_PENDING_DIR to a Railway Volume; admins can export with /pending)"}`);
   lines.push(`- Present: ${pendingInfo.exists ? "yes" : "no — none saved yet"}`);
   if (pendingInfo.exists) {
-    lines.push(`- Pending questions saved: ${pendingCount}`);
+    lines.push(`- Pending questions saved: ${pendingCount}${pendingSum.corrupt ? " (file unreadable!)" : ""}`);
     lines.push(`- On disk: modified ${pendingInfo.modified}`);
   }
   lines.push("");
@@ -1518,7 +1559,8 @@ function buildSourceQuizzesReport() {
   lines.push("multivalueQuizBank_fys240.json (\"select all that apply\" add-on, separate from the above)");
   const mvBank = mvQuizGenerator.loadQuizBank();
   const mvBankInfo = fileInfo(MV_QUIZ_BANK_PATH);
-  const mvPendingInfo = fileInfo(MV_QUIZ_BANK_PENDING_PATH);
+  const mvPendingSum = mvQuizGenerator.pendingSummary();
+  const mvPendingInfo = fileInfo(mvPendingSum.path);
   const mvChapters = Object.keys(mvBank).sort((a, b) => Number(a) - Number(b));
   let mvTotalQuestions = 0;
   let mvTotalFi = 0;
@@ -1537,15 +1579,7 @@ function buildSourceQuizzesReport() {
     return `   Chapter ${ch}: ${secCounts.join(", ") || "no sections"}`;
   });
   const mvMissingChapters = ALL_CHAPTERS.filter((c) => !mvChapters.includes(String(c)));
-  let mvPendingCount = 0;
-  if (mvPendingInfo.exists) {
-    try {
-      const pending = JSON.parse(fs.readFileSync(MV_QUIZ_BANK_PENDING_PATH, "utf8"));
-      mvPendingCount = Array.isArray(pending) ? pending.length : 0;
-    } catch (e) {
-      mvPendingCount = 0;
-    }
-  }
+  const mvPendingCount = mvPendingSum.total;
   lines.push(`- Status: ${mvBankInfo.exists ? "loaded" : "NOT FOUND — every multivalue quiz live-generates via the Claude API"}`);
   lines.push(`- Health check (multivalueQuizBankLooksHealthy): ${mvQuizGenerator.quizBankLooksHealthy() ? "ok" : "FAILED"}`);
   lines.push(`- Coverage: ${mvChapters.length ? `chapters ${mvChapters.join(", ")} — ${mvTotalQuestions} questions total (${mvTotalQuestions - mvTotalFi} en, ${mvTotalFi} fi)` : "none"}`);
@@ -1944,6 +1978,11 @@ app.get("/healthz", (_req, res) => res.json({
   glossaryCourseMismatch: corpusLoader.glossaryCourseMismatch(),
   quizBankLooksHealthy: quizGenerator.quizBankLooksHealthy(),
   multivalueQuizBankLooksHealthy: mvQuizGenerator.quizBankLooksHealthy(),
+  pendingQuestions: {
+    single: quizGenerator.pendingSummary().total,
+    multi: mvQuizGenerator.pendingSummary().total,
+    persistentDir: !!process.env.QUIZ_PENDING_DIR,
+  },
   limiter: limiter.status(),
   membershipGate: !!process.env.COURSE_CHANNEL_ID,
 }));
@@ -1992,6 +2031,22 @@ async function handleUpdate(update) {
   // ---- /usage — the student's AI credits today (free, no Claude call) ----
   if (/^\/usage(@\S+)?\b/i.test(text)) {
     return sendDiagnosticReport(chatId, accessGuard.usageText(userId, lang), message.message_id);
+  }
+  // ---- /pending (ADMIN_USER_IDS only, private chat only): export / clear the live-generated quiz
+  // questions awaiting review. Silently ignored for everyone else — admin-gated internally by
+  // pendingAdmin_fys240.js, so no membership/credit check is needed. See PENDING_QUESTIONS_fys240.md.
+  const pendingMatch = text.match(/^\/pending(@\S+)?\b\s*(.*)$/i);
+  if (pendingMatch) {
+    return pendingAdmin
+      .handlePendingCommand({
+        chatId,
+        userId,
+        isPrivate: message.chat.type === "private",
+        arg: pendingMatch[2],
+        sendText: (c, t) => sendDiagnosticReport(c, t, message.message_id),
+        sendDocument: tgSendDocument,
+      })
+      .catch((e) => console.error("/pending crashed:", e.message));
   }
   // ---- dev-only data-source introspection (v2.6.1) — not in /help/start ----
   if (/^\/source_materials/i.test(text)) {

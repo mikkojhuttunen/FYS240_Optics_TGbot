@@ -52,12 +52,19 @@ const path = require('path');
 const Anthropic = require('@anthropic-ai/sdk');
 const corpusLoader = require('./corpusLoader');
 const limiter = require('./usageLimiter');
+const { createPendingStore } = require('./pendingStore_fys240');
 const { getCorpusSection } = corpusLoader;
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const QUIZ_BANK_PATH = path.join(__dirname, 'quizBank_fys240.json');
-const QUIZ_BANK_PENDING_PATH = path.join(__dirname, 'quizBankPending_fys240.json');
+// Live-generated (unreviewed) questions. Lives in QUIZ_PENDING_DIR when set (a Railway Volume) —
+// see pendingStore_fys240.js and PENDING_QUESTIONS_fys240.md.
+const pendingStore = createPendingStore({
+  fileName: 'quizBankPending_fys240.json',
+  logTag: 'QUIZ_PENDING_QUESTION',
+  label: 'quizGenerator_fys240',
+});
 
 // ---------- Stage 1: local trigger gate (no API call) ----------
 
@@ -297,34 +304,11 @@ function sampleFromBank(chapter, section, count, excludeIds = [], lang = "en") {
 }
 
 // ---------- quizBankPending_fys240.json — self-expansion capture ----------
+// Persistence (volume dir, atomic writes, size cap, corrupt-file quarantine, stdout log lines)
+// lives in pendingStore_fys240.js.
 
 function appendPendingQuestions(chapter, section, questions, lang = "en") {
-  const generatedAt = new Date().toISOString();
-  const entries = questions.map((q) => ({ chapter: String(chapter), section: section || null, lang, question: q, generatedAt }));
-
-  // Best-effort file append. On deploy environments with an ephemeral
-  // filesystem (e.g. Railway without an attached volume), this file may not
-  // survive a restart — that's fine, the stdout log line below is the
-  // durable fallback capture path (see setup guide section 5a).
-  try {
-    let existing = [];
-    try {
-      existing = JSON.parse(fs.readFileSync(QUIZ_BANK_PENDING_PATH, 'utf8'));
-      if (!Array.isArray(existing)) existing = [];
-    } catch (e) {
-      existing = []; // file doesn't exist yet or is corrupt — start fresh
-    }
-    fs.writeFileSync(QUIZ_BANK_PENDING_PATH, JSON.stringify(existing.concat(entries), null, 2), 'utf8');
-  } catch (e) {
-    console.warn(`quizGenerator_fys240: could not persist quizBankPending_fys240.json (${e.message}) — relying on stdout log capture instead`);
-  }
-
-  // Structured log line, independent of the file write above, so a
-  // log-based capture pipeline (Railway log export → offline merge) works
-  // even if the filesystem doesn't persist.
-  for (const entry of entries) {
-    console.log(`QUIZ_PENDING_QUESTION ${JSON.stringify(entry)}`);
-  }
+  pendingStore.append(chapter, section, questions, lang);
 }
 
 // ---------- Stage 2: generation (one LLM call, structured JSON out) ----------
@@ -366,6 +350,17 @@ Optiikka), tiukasti annettuun kurssimateriaaliotteeseen pohjautuen. Säännöt:
  * corpusLoader's module doc comment) while still instructing the model to
  * write the question itself in Finnish.
  */
+/** Structural validity of one single-select question; returns a cleaned copy or null. */
+function normaliseQuestion(q) {
+  if (!q || typeof q !== 'object') return null;
+  if (typeof q.stem !== 'string' || !q.stem.trim()) return null;
+  if (!Array.isArray(q.options) || q.options.length !== 4) return null;
+  if (!q.options.every((o) => typeof o === 'string' && o.trim())) return null;
+  if (new Set(q.options.map((o) => o.trim().toLowerCase())).size !== 4) return null;
+  if (!Number.isInteger(q.correctIndex) || q.correctIndex < 0 || q.correctIndex > 3) return null;
+  return { ...q, explanation: typeof q.explanation === 'string' ? q.explanation : '' };
+}
+
 async function generateQuiz(chapter, section, count = 5, lang = "en") {
   const corpusLang = lang === "fi" ? "both" : "en";
   const corpusExcerpt = getCorpusSection(chapter, section || undefined, { lang: corpusLang });
@@ -408,7 +403,15 @@ async function generateQuiz(chapter, section, count = 5, lang = "en") {
     throw new Error('Quiz generation returned no questions');
   }
 
-  return parsed.questions;
+  // Defensive sanity check: a live LLM call can still produce a malformed question (wrong option
+  // count, out-of-range correctIndex, duplicate options). Drop those so they are neither served
+  // to the student nor written to the pending file.
+  const sane = parsed.questions.map(normaliseQuestion).filter(Boolean);
+  if (!sane.length) {
+    throw new Error('Quiz generation returned no valid questions');
+  }
+
+  return sane;
 }
 
 /**
@@ -641,6 +644,11 @@ module.exports = {
   extractCountHint,
   extractRawCountHint,
   resolveQuizLang,
+  // pending (live-generated, unreviewed) questions — used by /pending, /healthz and tests
+  normaliseQuestion,
+  pendingSummary: () => pendingStore.summary(),
+  clearPending: () => pendingStore.clear(),
+  readPending: () => pendingStore.read(),
 };
 
 /* INTEGRATION NOTES — wired up in bot_fys240.js. Summary of how (mirrors
