@@ -85,11 +85,13 @@
  *     are now real FYS.240 content.
  *
  * KNOWN GAPS (not yet implemented — see redeploy-package README):
- *   - Quiz bank coverage (as of v2.7.6): quizBank_fys240.json has questions for
- *     every chapter 2-10 in both EN and FI (256 each; chapter pools: 2: 20,
- *     3: 43, 4: 25, 5: 25, 6: 28, 7: 20, 8: 26, 9: 22, 10: 47), so /quiz is normally
- *     served free from the bank; live generation (1 credit) only happens when a
- *     request asks for more than the bank has left. multivalueQuizBank_fys240.json
+ *   - Quiz bank coverage (as of v2.7.7): quizBank_fys240.json has questions for
+ *     every chapter 2-10 in both EN and FI (316 each; chapter pools: 2: 20,
+ *     3: 60, 4: 30, 5: 25, 6: 30, 7: 25, 8: 35, 9: 26, 10: 65) and EVERY one of
+ *     the 61 sections holds at least 5, so /quiz is normally served free from
+ *     the bank — including the default 5-question section quiz ("/quiz 4.4");
+ *     live generation (1 credit) only happens when a request asks for more than
+ *     the bank has left. multivalueQuizBank_fys240.json
  *     holds 247 questions in EN and 247 in FI (v2.7.5): every one of the 61
  *     sections has at least 3 and every chapter has a pool of at least 22
  *     (chapter 2: 22; chapters 4-9: 25; chapter 3: 36; chapter 10: 39), so
@@ -110,6 +112,21 @@
 
  *
  * CHANGELOG:
+ *   v2.7.7 — Content-only update (no code changes): quizBank_fys240.json (the
+ *            single-answer /quiz bank) grew from 256 to 316 questions per language
+ *            (EN + FI, 632 entries). Resolves the open point noted in v2.7.6: a
+ *            default "/quiz N.M" section quiz asks for 5 questions, but 43 of the
+ *            61 sections held only 3-4, so they topped up via live generation
+ *            (1 credit, members only). 60 new questions (+1/+2 per section) now give
+ *            every section at least 5 in both languages: 3.1-3.12 (+17), 4.1/4.2/4.4/
+ *            4.5/4.6 (+5), 6.1/6.4 (+2), 7.1/7.2/7.3/7.5 (+5), 8.1/8.2/8.3/8.5/8.6/8.7
+ *            (+9), 9.1/9.2/9.4 (+4), 10.1-10.5/10.7-10.11/10.13 (+18). Chapter pools
+ *            are now 2: 20, 3: 60, 4: 30, 5: 25, 6: 30, 7: 25, 8: 35, 9: 26, 10: 65.
+ *            Tested by starting the default section quiz for all 61 sections in EN
+ *            and FI: 122/122 gave 5 questions with zero live-generation requests.
+ *            Same conventions as before (EN ids continue each section's numbering,
+ *            FI copies "_fi" + translationOf, addedAt 2026-09-20, correct-answer
+ *            positions balanced A-D 80/79/79/78); no existing question changed.
  *   v2.7.6 — Content-only update (no code changes): quizBank_fys240.json (the
  *            single-answer /quiz bank) grew from 221 to 256 questions per language
  *            (EN + FI, 512 entries). 35 new questions were added where the pools
@@ -492,7 +509,7 @@
  *   (earlier history predates version tracking)
  */
 
-const BOT_VERSION = "2.7.6";
+const BOT_VERSION = "2.7.7";
 
 const fs = require("fs");
 const path = require("path");

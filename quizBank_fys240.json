@@ -698,6 +698,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.1_003"
+      },
+      {
+        "id": "q3.1_004",
+        "stem": "Which change of the argument shifts a function f(z) by z₀ along the +z axis without changing its shape?",
+        "options": [
+          "f(z − z₀)",
+          "f(z + z₀)",
+          "f(z/z₀)",
+          "z₀·f(z)"
+        ],
+        "correctIndex": 0,
+        "explanation": "Replacing z by z′ = z − z₀ shifts the whole profile by z₀ towards +z; f(z + z₀) would shift it towards −z.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.1_004_fi",
+        "stem": "Mikä argumentin muutos siirtää funktiota f(z) matkan z₀ verran +z-suuntaan muotoa muuttamatta?",
+        "options": [
+          "f(z − z₀)",
+          "f(z + z₀)",
+          "f(z/z₀)",
+          "z₀·f(z)"
+        ],
+        "correctIndex": 0,
+        "explanation": "Korvaamalla z:n muuttujalla z′ = z − z₀ koko profiili siirtyy z₀ verran +z-suuntaan; f(z + z₀) siirtäisi sitä −z-suuntaan.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.1_004"
+      },
+      {
+        "id": "q3.1_005",
+        "stem": "In ψ(z,t) = f(z − vt), what does z₀ = vt represent?",
+        "options": [
+          "The initial position of the pulse",
+          "The distance the profile has travelled by time t",
+          "The wavelength of the disturbance",
+          "The width of the pulse"
+        ],
+        "correctIndex": 1,
+        "explanation": "Choosing z₀ = vt makes the shift grow linearly in time, so the profile moves at the constant speed v; z₀ is the distance travelled.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.1_005_fi",
+        "stem": "Mitä z₀ = vt tarkoittaa lausekkeessa ψ(z,t) = f(z − vt)?",
+        "options": [
+          "Pulssin alkuasemaa",
+          "Matkaa, jonka profiili on edennyt ajassa t",
+          "Häiriön aallonpituutta",
+          "Pulssin leveyttä"
+        ],
+        "correctIndex": 1,
+        "explanation": "Valinta z₀ = vt saa siirron kasvamaan lineaarisesti ajan funktiona, joten profiili liikkuu vakionopeudella v; z₀ on kuljettu matka.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.1_005"
       }
     ],
     "3.2": [
@@ -790,6 +850,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.2_003"
+      },
+      {
+        "id": "q3.2_004",
+        "stem": "Both f(z − vt) and f(z + vt) satisfy which equation?",
+        "options": [
+          "∂²ψ/∂z² = v² ∂²ψ/∂t²",
+          "∂ψ/∂t = v ∂ψ/∂z",
+          "∂²ψ/∂z² = (1/v²) ∂²ψ/∂t²",
+          "∂²ψ/∂z² = −(1/v²) ∂²ψ/∂t²"
+        ],
+        "correctIndex": 2,
+        "explanation": "Differentiating twice with the chain rule gives ∂²ψ/∂t² = v² ∂²f/∂z′² and ∂²ψ/∂z² = ∂²f/∂z′², i.e. ∂²ψ/∂z² = (1/v²)∂²ψ/∂t². The first-order equation depends on the direction (±v).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.2_004_fi",
+        "stem": "Minkä yhtälön toteuttavat sekä f(z − vt) että f(z + vt)?",
+        "options": [
+          "∂²ψ/∂z² = v² ∂²ψ/∂t²",
+          "∂ψ/∂t = v ∂ψ/∂z",
+          "∂²ψ/∂z² = (1/v²) ∂²ψ/∂t²",
+          "∂²ψ/∂z² = −(1/v²) ∂²ψ/∂t²"
+        ],
+        "correctIndex": 2,
+        "explanation": "Kahdesti derivoimalla ketjusäännöllä saadaan ∂²ψ/∂t² = v² ∂²f/∂z′² ja ∂²ψ/∂z² = ∂²f/∂z′², eli ∂²ψ/∂z² = (1/v²)∂²ψ/∂t². Ensimmäisen kertaluvun yhtälö riippuu suunnasta (±v).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.2_004"
+      },
+      {
+        "id": "q3.2_005",
+        "stem": "Why is a second-order wave equation preferred over the first-order relation ∂ψ/∂t = ±v ∂ψ/∂z?",
+        "options": [
+          "It contains only first derivatives",
+          "It fixes the choice of coordinate system",
+          "It is defined only for propagation towards +z",
+          "It contains only v², so it does not depend on the propagation direction"
+        ],
+        "correctIndex": 3,
+        "explanation": "The first-order relation has ±v and thus depends on the direction of propagation; the second-order equation has (±v)² = v² and covers both directions.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.2_005_fi",
+        "stem": "Miksi toisen kertaluvun aaltoyhtälö on parempi kuin ensimmäisen kertaluvun yhteys ∂ψ/∂t = ±v ∂ψ/∂z?",
+        "options": [
+          "Siinä on vain ensimmäisiä derivaattoja",
+          "Se lukitsee koordinaatiston valinnan",
+          "Se on määritelty vain +z-suuntaiselle etenemiselle",
+          "Siinä on vain v², joten se ei riipu etenemissuunnasta"
+        ],
+        "correctIndex": 3,
+        "explanation": "Ensimmäisen kertaluvun yhteydessä on ±v, joten se riippuu etenemissuunnasta; toisen kertaluvun yhtälössä on (±v)² = v², ja se kattaa molemmat suunnat.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.2_005"
       }
     ],
     "3.3": [
@@ -912,6 +1032,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.3_004"
+      },
+      {
+        "id": "q3.3_005",
+        "stem": "What is the period τ of a harmonic wave with wavelength λ and phase velocity v?",
+        "options": [
+          "τ = λ/v",
+          "τ = λv",
+          "τ = 1/(λv)",
+          "τ = v/λ"
+        ],
+        "correctIndex": 0,
+        "explanation": "The wave advances one wavelength in one period, v = λ/τ, so τ = λ/v (and ν = 1/τ = v/λ).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.3_005_fi",
+        "stem": "Mikä on harmonisen aallon jakso τ, kun aallonpituus on λ ja vaihenopeus v?",
+        "options": [
+          "τ = λ/v",
+          "τ = λv",
+          "τ = 1/(λv)",
+          "τ = v/λ"
+        ],
+        "correctIndex": 0,
+        "explanation": "Aalto etenee yhden aallonpituuden yhdessä jaksossa, v = λ/τ, joten τ = λ/v (ja ν = 1/τ = v/λ).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.3_005"
       }
     ],
     "3.4": [
@@ -1004,6 +1154,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.4_003"
+      },
+      {
+        "id": "q3.4_004",
+        "stem": "For the phase φ = kz − ωt + ε of a harmonic wave, what are ∂φ/∂z and ∂φ/∂t?",
+        "options": [
+          "∂φ/∂z = −k and ∂φ/∂t = ω",
+          "∂φ/∂z = k and ∂φ/∂t = −ω",
+          "∂φ/∂z = k and ∂φ/∂t = ω",
+          "∂φ/∂z = ω and ∂φ/∂t = −k"
+        ],
+        "correctIndex": 1,
+        "explanation": "Differentiating φ = kz − ωt + ε gives ∂φ/∂z = k and ∂φ/∂t = −ω; the total derivative dφ/dt = 0 then gives v_p = ω/k.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.4_004_fi",
+        "stem": "Mitkä ovat harmonisen aallon vaiheen φ = kz − ωt + ε derivaatat ∂φ/∂z ja ∂φ/∂t?",
+        "options": [
+          "∂φ/∂z = −k ja ∂φ/∂t = ω",
+          "∂φ/∂z = k ja ∂φ/∂t = −ω",
+          "∂φ/∂z = k ja ∂φ/∂t = ω",
+          "∂φ/∂z = ω ja ∂φ/∂t = −k"
+        ],
+        "correctIndex": 1,
+        "explanation": "Derivoimalla φ = kz − ωt + ε saadaan ∂φ/∂z = k ja ∂φ/∂t = −ω; kokonaisderivaatta dφ/dt = 0 antaa sitten v_p = ω/k.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.4_004"
+      },
+      {
+        "id": "q3.4_005",
+        "stem": "Which velocity describes the propagation of an arbitrary (non-harmonic) disturbance built from many harmonic waves?",
+        "options": [
+          "The average of v_p and c",
+          "The phase velocity v_p of every component",
+          "The group velocity v_g",
+          "The particle velocity of the medium"
+        ],
+        "correctIndex": 2,
+        "explanation": "A harmonic wave moves at the phase velocity, but an arbitrary disturbance (a sum of many harmonic waves) can propagate at a different velocity, the group velocity.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.4_005_fi",
+        "stem": "Mikä nopeus kuvaa monesta harmonisesta aallosta koostuvan mielivaltaisen (ei-harmonisen) häiriön etenemistä?",
+        "options": [
+          "Nopeuksien v_p ja c keskiarvo",
+          "Kunkin komponentin vaihenopeus v_p",
+          "Ryhmänopeus v_g",
+          "Aineen hiukkasnopeus"
+        ],
+        "correctIndex": 2,
+        "explanation": "Harmoninen aalto etenee vaihenopeudella, mutta mielivaltainen häiriö (monen harmonisen aallon summa) voi edetä eri nopeudella, ryhmänopeudella.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.4_005"
       }
     ],
     "3.5": [
@@ -1096,6 +1306,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.5_003"
+      },
+      {
+        "id": "q3.5_004",
+        "stem": "ψ₁ and ψ₂ are solutions of the wave equation. Which combination is also a solution for any constants α and β?",
+        "options": [
+          "ψ₁ · ψ₂",
+          "ψ₁² + ψ₂²",
+          "ψ₁ / ψ₂",
+          "αψ₁ + βψ₂"
+        ],
+        "correctIndex": 3,
+        "explanation": "The wave equation is linear (differentiation is a linear operation), so any linear combination of solutions is again a solution; products or quotients are not.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.5_004_fi",
+        "stem": "ψ₁ ja ψ₂ ovat aaltoyhtälön ratkaisuja. Mikä yhdistelmä on myös ratkaisu mille tahansa vakioille α ja β?",
+        "options": [
+          "ψ₁ · ψ₂",
+          "ψ₁² + ψ₂²",
+          "ψ₁ / ψ₂",
+          "αψ₁ + βψ₂"
+        ],
+        "correctIndex": 3,
+        "explanation": "Aaltoyhtälö on lineaarinen (derivointi on lineaarinen operaatio), joten mikä tahansa ratkaisujen lineaarikombinaatio on ratkaisu; tulot tai osamäärät eivät ole.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.5_004"
+      },
+      {
+        "id": "q3.5_005",
+        "stem": "Two harmonic waves of equal amplitude A and frequency overlap with a relative phase difference of 0°. What results?",
+        "options": [
+          "Constructive interference: a wave of amplitude 2A",
+          "A wave of amplitude A",
+          "A wave of amplitude A/2",
+          "Destructive interference: zero field"
+        ],
+        "correctIndex": 0,
+        "explanation": "In-phase waves add, giving amplitude 2A (constructive interference); a 180° phase difference would give zero (destructive interference).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.5_005_fi",
+        "stem": "Kaksi samanamplitudista (A) ja samataajuista harmonista aaltoa on päällekkäin, ja niiden suhteellinen vaihe-ero on 0°. Mitä syntyy?",
+        "options": [
+          "Konstruktiivinen interferenssi: aalto, jonka amplitudi on 2A",
+          "Aalto, jonka amplitudi on A",
+          "Aalto, jonka amplitudi on A/2",
+          "Destruktiivinen interferenssi: nollakenttä"
+        ],
+        "correctIndex": 0,
+        "explanation": "Samassa vaiheessa olevat aallot summautuvat, jolloin amplitudi on 2A (konstruktiivinen interferenssi); 180° vaihe-ero antaisi nollan (destruktiivinen interferenssi).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.5_005"
       }
     ],
     "3.6": [
@@ -1218,6 +1488,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.6_004"
+      },
+      {
+        "id": "q3.6_005",
+        "stem": "What is the complex conjugate of z = r e^{iθ}?",
+        "options": [
+          "z* = e^{−iθ}/r",
+          "z* = r e^{−iθ}",
+          "z* = −r e^{iθ}",
+          "z* = r e^{iθ}"
+        ],
+        "correctIndex": 1,
+        "explanation": "The complex conjugate flips the sign of the imaginary part, i.e. of the phase: z* = r e^{−iθ}, so that zz* = r².",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.6_005_fi",
+        "stem": "Mikä on luvun z = r e^{iθ} kompleksikonjugaatti?",
+        "options": [
+          "z* = e^{−iθ}/r",
+          "z* = r e^{−iθ}",
+          "z* = −r e^{iθ}",
+          "z* = r e^{iθ}"
+        ],
+        "correctIndex": 1,
+        "explanation": "Kompleksikonjugaatti vaihtaa imaginaariosan (vaiheen) etumerkin: z* = r e^{−iθ}, joten zz* = r².",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.6_005"
       }
     ],
     "3.7": [
@@ -1310,6 +1610,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.7_003"
+      },
+      {
+        "id": "q3.7_004",
+        "stem": "Which vector is normal to the surfaces of constant phase of a plane wave ψ = A e^{i(k·r − ωt)}?",
+        "options": [
+          "The vector ω",
+          "The position vector r of the observation point",
+          "The wavevector k",
+          "The polarization vector"
+        ],
+        "correctIndex": 2,
+        "explanation": "k·r is constant on planes perpendicular to k, so the phasefronts are planes with normal k.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.7_004_fi",
+        "stem": "Mikä vektori on kohtisuorassa tasoaallon ψ = A e^{i(k·r − ωt)} vakiovaihepintoja vastaan?",
+        "options": [
+          "Vektori ω",
+          "Havaintopisteen paikkavektori r",
+          "Aaltovektori k",
+          "Polarisaatiovektori"
+        ],
+        "correctIndex": 2,
+        "explanation": "k·r on vakio k:ta vastaan kohtisuorilla tasoilla, joten aaltorintamat ovat tasoja, joiden normaali on k.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.7_004"
+      },
+      {
+        "id": "q3.7_005",
+        "stem": "For a plane wave with phase φ = k r_k − ωt, what does dφ = 0 give for the phase velocity?",
+        "options": [
+          "v_p = 1/(ωk)",
+          "v_p = k/ω",
+          "v_p = ωk",
+          "v_p = dr_k/dt = ω/k"
+        ],
+        "correctIndex": 3,
+        "explanation": "Requiring constant phase, k dr_k − ω dt = 0, gives v_p = dr_k/dt = ω/k.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.7_005_fi",
+        "stem": "Mitä ehto dφ = 0 antaa vaihenopeudelle tasoaallolle, jonka vaihe on φ = k r_k − ωt?",
+        "options": [
+          "v_p = 1/(ωk)",
+          "v_p = k/ω",
+          "v_p = ωk",
+          "v_p = dr_k/dt = ω/k"
+        ],
+        "correctIndex": 3,
+        "explanation": "Vakiovaihe, k dr_k − ω dt = 0, antaa v_p = dr_k/dt = ω/k.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.7_005"
       }
     ],
     "3.8": [
@@ -1432,6 +1792,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.8_004"
+      },
+      {
+        "id": "q3.8_005",
+        "stem": "For the plane wave ψ = A e^{i(k·r − ωt)}, what is ∂²ψ/∂x²?",
+        "options": [
+          "−kₓ² ψ",
+          "−kₓ ψ",
+          "+kₓ² ψ",
+          "−ω² ψ"
+        ],
+        "correctIndex": 0,
+        "explanation": "Each x-derivative brings down a factor ikₓ, so ∂²ψ/∂x² = (ikₓ)²ψ = −kₓ²ψ; summing over x, y, z gives −k²ψ.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.8_005_fi",
+        "stem": "Mikä on tasoaallon ψ = A e^{i(k·r − ωt)} derivaatta ∂²ψ/∂x²?",
+        "options": [
+          "−kₓ² ψ",
+          "−kₓ ψ",
+          "+kₓ² ψ",
+          "−ω² ψ"
+        ],
+        "correctIndex": 0,
+        "explanation": "Jokainen x-derivointi tuo tekijän ikₓ, joten ∂²ψ/∂x² = (ikₓ)²ψ = −kₓ²ψ; summaus x:n, y:n ja z:n yli antaa −k²ψ.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.8_005"
       }
     ],
     "3.9": [
@@ -1554,6 +1944,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.9_004"
+      },
+      {
+        "id": "q3.9_005",
+        "stem": "In spherical coordinates, how is the Cartesian coordinate z expressed?",
+        "options": [
+          "z = r sinθ",
+          "z = r cosθ",
+          "z = r cosφ",
+          "z = r"
+        ],
+        "correctIndex": 1,
+        "explanation": "x = r sinθ cosφ, y = r sinθ sinφ and z = r cosθ, with θ the polar angle and φ the azimuthal angle.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.9_005_fi",
+        "stem": "Miten karteesinen koordinaatti z ilmaistaan pallokoordinaateissa?",
+        "options": [
+          "z = r sinθ",
+          "z = r cosθ",
+          "z = r cosφ",
+          "z = r"
+        ],
+        "correctIndex": 1,
+        "explanation": "x = r sinθ cosφ, y = r sinθ sinφ ja z = r cosθ, missä θ on napakulma ja φ atsimuuttikulma.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.9_005"
       }
     ],
     "3.10": [
@@ -1676,6 +2096,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.10_004"
+      },
+      {
+        "id": "q3.10_005",
+        "stem": "Which is the polarization vector of right-handed circularly polarized light in the notes?",
+        "options": [
+          "p_R = (x̂ − ŷ)/√2",
+          "p_R = (x̂ + ŷ)/√2",
+          "p_R = (x̂ − iŷ)/√2",
+          "p_R = (x̂ + iŷ)/√2"
+        ],
+        "correctIndex": 2,
+        "explanation": "p_R = (x̂ − iŷ)/√2 and p_L = (x̂ + iŷ)/√2; the last two are linear polarizations at ±45° (no ±π/2 phase between the components).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.10_005_fi",
+        "stem": "Mikä on muistiinpanoissa oikeakätisen ympyräpolarisoidun valon polarisaatiovektori?",
+        "options": [
+          "p_R = (x̂ − ŷ)/√2",
+          "p_R = (x̂ + ŷ)/√2",
+          "p_R = (x̂ − iŷ)/√2",
+          "p_R = (x̂ + iŷ)/√2"
+        ],
+        "correctIndex": 2,
+        "explanation": "p_R = (x̂ − iŷ)/√2 ja p_L = (x̂ + iŷ)/√2; kaksi viimeistä ovat lineaarisia polarisaatioita ±45° kulmassa (komponenttien välillä ei ole ±π/2:n vaihe-eroa).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.10_005"
       }
     ],
     "3.11": [
@@ -1798,6 +2248,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.11_004"
+      },
+      {
+        "id": "q3.11_005",
+        "stem": "What does the divergence of a curl, ∇·(∇ × E), equal for any smooth vector field E?",
+        "options": [
+          "∇(∇·E)",
+          "∇²E",
+          "E",
+          "Zero"
+        ],
+        "correctIndex": 3,
+        "explanation": "∇·(∇ × E) = 0 identically (like ∇ × (∇φ) = 0); it is used e.g. to derive charge conservation from Ampère's law.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.11_005_fi",
+        "stem": "Mitä roottorin divergenssi, ∇·(∇ × E), on mille tahansa sileälle vektorikentälle E?",
+        "options": [
+          "∇(∇·E)",
+          "∇²E",
+          "E",
+          "Nolla"
+        ],
+        "correctIndex": 3,
+        "explanation": "∇·(∇ × E) = 0 identtisesti (kuten ∇ × (∇φ) = 0); sitä käytetään mm. varauksen säilymisen johtamiseen Ampèren laista.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.11_005"
       }
     ],
     "3.12": [
@@ -1920,6 +2400,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q3.12_004"
+      },
+      {
+        "id": "q3.12_005",
+        "stem": "Which is the differential form of Gauss's law in the electrostatic approximation?",
+        "options": [
+          "∇·E = ρ/ε₀",
+          "∇·B = ρ/ε₀",
+          "∇²E = ρ/ε₀",
+          "∇ × E = ρ/ε₀"
+        ],
+        "correctIndex": 0,
+        "explanation": "Gauss's law states ∇·E = ρ/ε₀ (the integral form ∮E·dA = ∫ρ/ε₀ dV follows via the divergence theorem); ∇·B = 0 instead.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q3.12_005_fi",
+        "stem": "Mikä on Gaussin lain differentiaalimuoto sähköstaattisessa approksimaatiossa?",
+        "options": [
+          "∇·E = ρ/ε₀",
+          "∇·B = ρ/ε₀",
+          "∇²E = ρ/ε₀",
+          "∇ × E = ρ/ε₀"
+        ],
+        "correctIndex": 0,
+        "explanation": "Gaussin laki on ∇·E = ρ/ε₀ (integraalimuoto ∮E·dA = ∫ρ/ε₀ dV seuraa divergenssiteoreemasta); ∇·B = 0 sen sijaan.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q3.12_005"
       }
     ]
   },
@@ -2044,6 +2554,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.1_004"
+      },
+      {
+        "id": "q4.1_005",
+        "stem": "Which vector identity is used together with ∇·E = 0 to derive the wave equation ∇²E = μ₀ε₀ ∂²E/∂t² from the curl equations?",
+        "options": [
+          "∇·(∇ × E) = 0",
+          "∇ × (∇ × E) = ∇(∇·E) − ∇²E",
+          "∇²(φψ) = φ∇²ψ + ψ∇²φ",
+          "∇ × (∇φ) = 0"
+        ],
+        "correctIndex": 1,
+        "explanation": "Taking the curl of the Maxwell–Faraday equation and inserting Ampère's law, Lagrange's formula ∇ × ∇ × E = ∇(∇·E) − ∇²E with ∇·E = 0 leaves −∇²E, giving the wave equation.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.1_005_fi",
+        "stem": "Mitä vektori-identiteettiä käytetään ehdon ∇·E = 0 kanssa aaltoyhtälön ∇²E = μ₀ε₀ ∂²E/∂t² johtamiseen roottoriyhtälöistä?",
+        "options": [
+          "∇·(∇ × E) = 0",
+          "∇ × (∇ × E) = ∇(∇·E) − ∇²E",
+          "∇²(φψ) = φ∇²ψ + ψ∇²φ",
+          "∇ × (∇φ) = 0"
+        ],
+        "correctIndex": 1,
+        "explanation": "Ottamalla Maxwellin–Faradayn yhtälön roottori ja sijoittamalla Ampèren laki, Lagrangen kaava ∇ × ∇ × E = ∇(∇·E) − ∇²E ehdolla ∇·E = 0 jättää −∇²E:n, mikä antaa aaltoyhtälön.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.1_005"
       }
     ],
     "4.2": [
@@ -2166,6 +2706,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.2_004"
+      },
+      {
+        "id": "q4.2_005",
+        "stem": "A plane wave in vacuum propagates along +z with its E-field along +x. Along which direction does B point?",
+        "options": [
+          "+x",
+          "+z",
+          "+y",
+          "−y"
+        ],
+        "correctIndex": 2,
+        "explanation": "k̂ × E = cB gives B along ẑ × x̂ = +ŷ; E, B and k are mutually perpendicular.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.2_005_fi",
+        "stem": "Tyhjiössä etenevä tasoaalto etenee +z-suuntaan ja sen E-kenttä on +x-suunnassa. Mihin suuntaan B osoittaa?",
+        "options": [
+          "+x",
+          "+z",
+          "+y",
+          "−y"
+        ],
+        "correctIndex": 2,
+        "explanation": "k̂ × E = cB antaa B:n suunnaksi ẑ × x̂ = +ŷ; E, B ja k ovat keskenään kohtisuorassa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.2_005"
       }
     ],
     "4.3": [
@@ -2440,6 +3010,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.4_004"
+      },
+      {
+        "id": "q4.4_005",
+        "stem": "How does the radiation pressure of a light beam change when its irradiance doubles?",
+        "options": [
+          "It quadruples",
+          "It stays the same",
+          "It halves",
+          "It doubles"
+        ],
+        "correctIndex": 3,
+        "explanation": "The time-averaged radiation pressure is ⟨P⟩ = I/c, directly proportional to the irradiance.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.4_005_fi",
+        "stem": "Miten valonsäteen säteilypaine muuttuu, kun sen irradianssi kaksinkertaistuu?",
+        "options": [
+          "Se nelinkertaistuu",
+          "Se pysyy samana",
+          "Se puolittuu",
+          "Se kaksinkertaistuu"
+        ],
+        "correctIndex": 3,
+        "explanation": "Aikakeskiarvoistettu säteilypaine on ⟨P⟩ = I/c, suoraan verrannollinen irradianssiin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.4_005"
       }
     ],
     "4.5": [
@@ -2562,6 +3162,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.5_004"
+      },
+      {
+        "id": "q4.5_005",
+        "stem": "Since dipole radiation scales as ω⁴, about how much more strongly is blue light (450 nm) radiated than red light (700 nm) by the same dipole?",
+        "options": [
+          "≈ 6 times",
+          "≈ 2.4 times",
+          "≈ 1.6 times",
+          "≈ 36 times"
+        ],
+        "correctIndex": 0,
+        "explanation": "I ∝ ω⁴ ∝ λ⁻⁴, so (700/450)⁴ ≈ 5.9 — about 6 times; this is why the sky is blue.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.5_005_fi",
+        "stem": "Koska dipolisäteily skaalautuu kuten ω⁴, kuinka paljon voimakkaammin sama dipoli säteilee sinistä valoa (450 nm) kuin punaista (700 nm)?",
+        "options": [
+          "≈ 6-kertaisesti",
+          "≈ 2,4-kertaisesti",
+          "≈ 1,6-kertaisesti",
+          "≈ 36-kertaisesti"
+        ],
+        "correctIndex": 0,
+        "explanation": "I ∝ ω⁴ ∝ λ⁻⁴, joten (700/450)⁴ ≈ 5,9 — noin 6-kertainen; siksi taivas on sininen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.5_005"
       }
     ],
     "4.6": [
@@ -2684,6 +3314,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q4.6_004"
+      },
+      {
+        "id": "q4.6_005",
+        "stem": "Which relation defines the electric displacement D in a medium?",
+        "options": [
+          "D = μ₀H + M",
+          "D = ε₀E + P",
+          "D = ε₀E − P",
+          "D = E/ε₀ + P"
+        ],
+        "correctIndex": 1,
+        "explanation": "D = ε₀E + P (and analogously B = μ₀(H + M)); its divergence equals the free charge density ρ_f.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q4.6_005_fi",
+        "stem": "Mikä yhtälö määrittelee sähkövuon tiheyden D aineessa?",
+        "options": [
+          "D = μ₀H + M",
+          "D = ε₀E + P",
+          "D = ε₀E − P",
+          "D = E/ε₀ + P"
+        ],
+        "correctIndex": 1,
+        "explanation": "D = ε₀E + P (ja vastaavasti B = μ₀(H + M)); sen divergenssi on yhtä suuri kuin vapaan varauksen tiheys ρ_f.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q4.6_005"
       }
     ]
   },
@@ -3568,6 +4228,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q6.1_004"
+      },
+      {
+        "id": "q6.1_005",
+        "stem": "Light goes from air (n = 1) into glass (n = 1.5). How does the wavefront speed change?",
+        "options": [
+          "It stays c",
+          "It increases to 1.5c ≈ 4.5×10⁸ m/s",
+          "It is reduced to c/1.5 ≈ 2×10⁸ m/s",
+          "It is reduced to c/1.5² ≈ 1.3×10⁸ m/s"
+        ],
+        "correctIndex": 2,
+        "explanation": "Wavefronts propagate at c/n = 3×10⁸/1.5 = 2×10⁸ m/s in the glass; the speed is divided by n, not by n².",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q6.1_005_fi",
+        "stem": "Valo siirtyy ilmasta (n = 1) lasiin (n = 1,5). Miten aaltorintaman nopeus muuttuu?",
+        "options": [
+          "Se pysyy arvossa c",
+          "Se kasvaa arvoon 1,5c ≈ 4,5×10⁸ m/s",
+          "Se pienenee arvoon c/1,5 ≈ 2×10⁸ m/s",
+          "Se pienenee arvoon c/1,5² ≈ 1,3×10⁸ m/s"
+        ],
+        "correctIndex": 2,
+        "explanation": "Aaltorintamat etenevät lasissa nopeudella c/n = 3×10⁸/1,5 = 2×10⁸ m/s; nopeus jaetaan n:llä, ei n²:lla.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.1_005"
       }
     ],
     "6.2": [
@@ -3994,6 +4684,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q6.4_004"
+      },
+      {
+        "id": "q6.4_005",
+        "stem": "At Brewster's angle, what is the relation between the angle of incidence θᵢ and the refraction angle θₜ?",
+        "options": [
+          "θᵢ − θₜ = 90°",
+          "θᵢ = 2θₜ",
+          "θᵢ = θₜ",
+          "θᵢ + θₜ = 90°"
+        ],
+        "correctIndex": 3,
+        "explanation": "The parallel-polarization reflection coefficient r_∥ vanishes when θᵢ + θₜ = 90°, i.e. tan θ_B = nₜ/nᵢ.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q6.4_005_fi",
+        "stem": "Mikä on tulokulman θᵢ ja taitekulman θₜ välinen yhteys Brewsterin kulmassa?",
+        "options": [
+          "θᵢ − θₜ = 90°",
+          "θᵢ = 2θₜ",
+          "θᵢ = θₜ",
+          "θᵢ + θₜ = 90°"
+        ],
+        "correctIndex": 3,
+        "explanation": "Yhdensuuntaisen polarisaation heijastuskerroin r_∥ häviää, kun θᵢ + θₜ = 90°, eli tan θ_B = nₜ/nᵢ.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q6.4_005"
       }
     ],
     "6.5": [
@@ -4392,6 +5112,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q7.1_003"
+      },
+      {
+        "id": "q7.1_004",
+        "stem": "Which later chapters build on the superposition principle introduced in Chapter 7?",
+        "options": [
+          "Chapter 8 (interference) and Chapter 9 (diffraction)",
+          "Chapter 4 and Chapter 5",
+          "Chapter 2 and Chapter 3",
+          "Chapter 6 and Chapter 10"
+        ],
+        "correctIndex": 0,
+        "explanation": "Interference (finite numbers of waves) and diffraction (continuous distributions) both rest on superposition.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q7.1_004_fi",
+        "stem": "Mitkä myöhemmät luvut rakentuvat luvussa 7 esitellylle superpositioperiaatteelle?",
+        "options": [
+          "Luku 8 (interferenssi) ja luku 9 (diffraktio)",
+          "Luku 4 ja luku 5",
+          "Luku 2 ja luku 3",
+          "Luku 6 ja luku 10"
+        ],
+        "correctIndex": 0,
+        "explanation": "Interferenssi (äärellinen määrä aaltoja) ja diffraktio (jatkuvat jakaumat) perustuvat molemmat superpositioon.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.1_004"
+      },
+      {
+        "id": "q7.1_005",
+        "stem": "What is the general form of a superposition of n waves ψᵢ with constant coefficients cᵢ?",
+        "options": [
+          "ψ = Σ ψᵢ²",
+          "ψ = Σ cᵢψᵢ",
+          "ψ = Σ cᵢ/ψᵢ",
+          "ψ = Π ψᵢ"
+        ],
+        "correctIndex": 1,
+        "explanation": "Because the wave equation is linear, a weighted sum Σ cᵢψᵢ of its solutions is also a solution.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q7.1_005_fi",
+        "stem": "Mikä on n aallon ψᵢ superposition yleinen muoto vakiokertoimilla cᵢ?",
+        "options": [
+          "ψ = Σ ψᵢ²",
+          "ψ = Σ cᵢψᵢ",
+          "ψ = Σ cᵢ/ψᵢ",
+          "ψ = Π ψᵢ"
+        ],
+        "correctIndex": 1,
+        "explanation": "Koska aaltoyhtälö on lineaarinen, sen ratkaisujen painotettu summa Σ cᵢψᵢ on myös ratkaisu.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.1_005"
       }
     ],
     "7.2": [
@@ -4514,6 +5294,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q7.2_004"
+      },
+      {
+        "id": "q7.2_005",
+        "stem": "Two waves of the same frequency have amplitudes A₁ = 1 and A₂ = 2. What is the minimum of I ∝ |E|² as the phase difference varies?",
+        "options": [
+          "5",
+          "9",
+          "1",
+          "0"
+        ],
+        "correctIndex": 2,
+        "explanation": "I ∝ A₁² + A₂² + 2A₁A₂cosδ has its minimum (A₂ − A₁)² = 1 at δ = π; 9 is the maximum (A₁ + A₂)², and 5 is the incoherent sum.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q7.2_005_fi",
+        "stem": "Kahden samataajuisen aallon amplitudit ovat A₁ = 1 ja A₂ = 2. Mikä on suureen I ∝ |E|² minimi vaihe-eron vaihdellessa?",
+        "options": [
+          "5",
+          "9",
+          "1",
+          "0"
+        ],
+        "correctIndex": 2,
+        "explanation": "I ∝ A₁² + A₂² + 2A₁A₂cosδ saa minimin (A₂ − A₁)² = 1 kohdassa δ = π; 9 on maksimi (A₁ + A₂)², ja 5 on epäkoherentti summa.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.2_005"
       }
     ],
     "7.3": [
@@ -4636,6 +5446,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q7.3_004"
+      },
+      {
+        "id": "q7.3_005",
+        "stem": "A wave with amplitude A_I reflects from a perfect metal mirror at z = 0. What is the amplitude A_R of the reflected wave?",
+        "options": [
+          "A_R = 2A_I",
+          "A_R = 0",
+          "A_R = +A_I",
+          "A_R = −A_I"
+        ],
+        "correctIndex": 3,
+        "explanation": "The boundary condition E(z = 0, t) = 0 requires A_I + A_R = 0, i.e. A_R = −A_I, giving a node at the mirror.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q7.3_005_fi",
+        "stem": "Aalto, jonka amplitudi on A_I, heijastuu täydellisestä metallipeilistä kohdassa z = 0. Mikä on heijastuneen aallon amplitudi A_R?",
+        "options": [
+          "A_R = 2A_I",
+          "A_R = 0",
+          "A_R = +A_I",
+          "A_R = −A_I"
+        ],
+        "correctIndex": 3,
+        "explanation": "Reunaehto E(z = 0, t) = 0 edellyttää A_I + A_R = 0 eli A_R = −A_I, mikä antaa solmun peilin kohdalle.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.3_005"
       }
     ],
     "7.4": [
@@ -4910,6 +5750,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q7.5_004"
+      },
+      {
+        "id": "q7.5_005",
+        "stem": "How is the coherence length ℓ_c related to the coherence time τ_c?",
+        "options": [
+          "ℓ_c = cτ_c",
+          "ℓ_c = c/τ_c",
+          "ℓ_c = c²τ_c",
+          "ℓ_c = τ_c/c"
+        ],
+        "correctIndex": 0,
+        "explanation": "Light travels the distance ℓ_c = cτ_c during the coherence time.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q7.5_005_fi",
+        "stem": "Miten koherenssipituus ℓ_c liittyy koherenssiaikaan τ_c?",
+        "options": [
+          "ℓ_c = cτ_c",
+          "ℓ_c = c/τ_c",
+          "ℓ_c = c²τ_c",
+          "ℓ_c = τ_c/c"
+        ],
+        "correctIndex": 0,
+        "explanation": "Valo kulkee koherenssiajan aikana matkan ℓ_c = cτ_c.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q7.5_005"
       }
     ]
   },
@@ -5034,6 +5904,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.1_004"
+      },
+      {
+        "id": "q8.1_005",
+        "stem": "Two waves have irradiances I₀ and 4I₀ and parallel polarizations. What is the maximum irradiance of their superposition?",
+        "options": [
+          "5I₀",
+          "9I₀",
+          "16I₀",
+          "4I₀"
+        ],
+        "correctIndex": 1,
+        "explanation": "I = I₁ + I₂ + 2√(I₁I₂)cosδ has its maximum I₀ + 4I₀ + 2·2I₀ = 9I₀; 5I₀ is the incoherent sum without the interference term.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q8.1_005_fi",
+        "stem": "Kahden aallon irradianssit ovat I₀ ja 4I₀, ja polarisaatiot ovat yhdensuuntaiset. Mikä on niiden superposition suurin irradianssi?",
+        "options": [
+          "5I₀",
+          "9I₀",
+          "16I₀",
+          "4I₀"
+        ],
+        "correctIndex": 1,
+        "explanation": "I = I₁ + I₂ + 2√(I₁I₂)cosδ saa maksimin I₀ + 4I₀ + 2·2I₀ = 9I₀; 5I₀ on epäkoherentti summa ilman interferenssitermiä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.1_005"
       }
     ],
     "8.2": [
@@ -5156,6 +6056,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.2_004"
+      },
+      {
+        "id": "q8.2_005",
+        "stem": "In Young's double-slit experiment (slit separation a, screen distance s ≫ a), what is the phase difference at screen position y?",
+        "options": [
+          "δ = (2π/λ) a s y",
+          "δ = (2π/λ)(s/a) y",
+          "δ = (2π/λ)(a/s) y",
+          "δ = (λ/2π)(a/s) y"
+        ],
+        "correctIndex": 2,
+        "explanation": "The path difference is ≈ a sinθ ≈ a y/s, so δ = kΛ = (2π/λ)(a/s)y; maxima occur at δ = 2πm, i.e. y_m = m sλ/a.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q8.2_005_fi",
+        "stem": "Mikä on vaihe-ero varjostimen kohdassa y Youngin kaksoisrakokokeessa (rakojen etäisyys a, varjostimen etäisyys s ≫ a)?",
+        "options": [
+          "δ = (2π/λ) a s y",
+          "δ = (2π/λ)(s/a) y",
+          "δ = (2π/λ)(a/s) y",
+          "δ = (λ/2π)(a/s) y"
+        ],
+        "correctIndex": 2,
+        "explanation": "Matkaero on ≈ a sinθ ≈ a y/s, joten δ = kΛ = (2π/λ)(a/s)y; maksimit esiintyvät kohdissa δ = 2πm eli y_m = m sλ/a.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.2_005"
       }
     ],
     "8.3": [
@@ -5248,6 +6178,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.3_003"
+      },
+      {
+        "id": "q8.3_004",
+        "stem": "A thin film (thickness d, index n_t, refraction angle θ_t) is illuminated. What is the optical path difference of the two reflected rays?",
+        "options": [
+          "Λ = 2n_t d sinθ_t",
+          "Λ = 2d cosθ_t",
+          "Λ = n_t d/cosθ_t",
+          "Λ = 2n_t d cosθ_t"
+        ],
+        "correctIndex": 3,
+        "explanation": "OPL₂ − OPL₁ = 2n_t d/cosθ_t − 2n_t d sin²θ_t/cosθ_t = 2n_t d cosθ_t (the film index n_t must be included).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q8.3_004_fi",
+        "stem": "Ohutkalvoa (paksuus d, taitekerroin n_t, taitekulma θ_t) valaistaan. Mikä on kahden heijastuneen säteen optinen matkaero?",
+        "options": [
+          "Λ = 2n_t d sinθ_t",
+          "Λ = 2d cosθ_t",
+          "Λ = n_t d/cosθ_t",
+          "Λ = 2n_t d cosθ_t"
+        ],
+        "correctIndex": 3,
+        "explanation": "OPL₂ − OPL₁ = 2n_t d/cosθ_t − 2n_t d sin²θ_t/cosθ_t = 2n_t d cosθ_t (kalvon taitekerroin n_t on otettava mukaan).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.3_004"
+      },
+      {
+        "id": "q8.3_005",
+        "stem": "A film has the same medium on both sides (different from the film). How many of the two reflections add a π phase shift?",
+        "options": [
+          "Exactly one",
+          "It depends only on the film thickness",
+          "Both",
+          "Neither"
+        ],
+        "correctIndex": 0,
+        "explanation": "The two Fresnel reflection coefficients have opposite signs (one reflection at n_i → n_t, the other at n_t → n_i), so the phase difference is δ = kΛ ± π.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q8.3_005_fi",
+        "stem": "Kalvon molemmilla puolilla on sama aine, joka eroaa kalvosta. Kuinka moni kahdesta heijastuksesta lisää π:n vaihesiirron?",
+        "options": [
+          "Täsmälleen yksi",
+          "Se riippuu vain kalvon paksuudesta",
+          "Molemmat",
+          "Ei kumpikaan"
+        ],
+        "correctIndex": 0,
+        "explanation": "Kahdella Fresnelin heijastuskertoimella on vastakkaiset etumerkit (toinen heijastus tapahtuu n_i → n_t, toinen n_t → n_i), joten vaihe-ero on δ = kΛ ± π.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.3_005"
       }
     ],
     "8.4": [
@@ -5492,6 +6482,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.5_003"
+      },
+      {
+        "id": "q8.5_004",
+        "stem": "The multiply reflected waves in a strongly reflecting thin film add up as which kind of series?",
+        "options": [
+          "A Fourier series",
+          "A geometric series",
+          "A harmonic series",
+          "An arithmetic series"
+        ],
+        "correctIndex": 1,
+        "explanation": "Each round trip multiplies the amplitude by the same factor (r′)²e^{iδ}, so the sum is geometric: 1 + s + s² + … = 1/(1 − s).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q8.5_004_fi",
+        "stem": "Minkä tyyppisenä sarjana voimakkaasti heijastavan ohutkalvon moneen kertaan heijastuneet aallot summautuvat?",
+        "options": [
+          "Fourier-sarjana",
+          "Geometrisena sarjana",
+          "Harmonisena sarjana",
+          "Aritmeettisena sarjana"
+        ],
+        "correctIndex": 1,
+        "explanation": "Jokainen edestakainen kierros kertoo amplitudin samalla tekijällä (r′)²e^{iδ}, joten summa on geometrinen: 1 + s + s² + … = 1/(1 − s).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.5_004"
+      },
+      {
+        "id": "q8.5_005",
+        "stem": "Each surface of a film has amplitude reflection coefficient r = 0.9. What is the finesse coefficient F = (2r/(1 − r²))²?",
+        "options": [
+          "≈ 0.9",
+          "≈ 9",
+          "≈ 90",
+          "≈ 900"
+        ],
+        "correctIndex": 2,
+        "explanation": "F = (1.8/0.19)² ≈ 90; a larger r gives a larger F and narrower transmittance peaks.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q8.5_005_fi",
+        "stem": "Kalvon kummankin pinnan amplitudiheijastuskerroin on r = 0,9. Mikä on finessitekijä F = (2r/(1 − r²))²?",
+        "options": [
+          "≈ 0,9",
+          "≈ 9",
+          "≈ 90",
+          "≈ 900"
+        ],
+        "correctIndex": 2,
+        "explanation": "F = (1,8/0,19)² ≈ 90; suurempi r antaa suuremman F:n ja kapeammat läpäisyhuiput.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.5_005"
       }
     ],
     "8.6": [
@@ -5614,6 +6664,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.6_004"
+      },
+      {
+        "id": "q8.6_005",
+        "stem": "What is the FWHM γ (in phase) of a Fabry–Pérot transmittance peak in terms of the finesse coefficient F?",
+        "options": [
+          "γ = 2/F",
+          "γ = √F/4",
+          "γ = 4F",
+          "γ = 4/√F"
+        ],
+        "correctIndex": 3,
+        "explanation": "The half-maximum condition A = 1/2 gives sin²(δ/2) = 1/F, so γ ≈ 4/√F; the finesse is ℱ = 2π/γ = π√F/2.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q8.6_005_fi",
+        "stem": "Mikä on Fabryn–Perot-läpäisyhuipun FWHM γ (vaiheessa) finessitekijän F avulla?",
+        "options": [
+          "γ = 2/F",
+          "γ = √F/4",
+          "γ = 4F",
+          "γ = 4/√F"
+        ],
+        "correctIndex": 3,
+        "explanation": "Puolimaksimiehto A = 1/2 antaa sin²(δ/2) = 1/F, joten γ ≈ 4/√F; finessi on ℱ = 2π/γ = π√F/2.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.6_005"
       }
     ],
     "8.7": [
@@ -5706,6 +6786,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q8.7_003"
+      },
+      {
+        "id": "q8.7_004",
+        "stem": "Which condition gives the transmittance peak frequencies νₘ of a Fabry–Pérot cavity of effective length L?",
+        "options": [
+          "νₘ = mc/(2L)",
+          "νₘ = 2mc/L",
+          "νₘ = mc/(4L)",
+          "νₘ = mc/L"
+        ],
+        "correctIndex": 0,
+        "explanation": "Peaks occur when δ = 4πνL/c = 2πm, so νₘ = mc/(2L); neighbouring peaks are c/(2L) apart (the free spectral range).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q8.7_004_fi",
+        "stem": "Mikä ehto antaa tehollisen pituuden L Fabryn–Perot-resonaattorin läpäisyhuippujen taajuudet νₘ?",
+        "options": [
+          "νₘ = mc/(2L)",
+          "νₘ = 2mc/L",
+          "νₘ = mc/(4L)",
+          "νₘ = mc/L"
+        ],
+        "correctIndex": 0,
+        "explanation": "Huiput esiintyvät, kun δ = 4πνL/c = 2πm, joten νₘ = mc/(2L); vierekkäiset huiput ovat c/(2L):n päässä toisistaan (vapaa spektrialue).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.7_004"
+      },
+      {
+        "id": "q8.7_005",
+        "stem": "What is the spectral resolving power νₘ/Δν_min of a Fabry–Pérot instrument?",
+        "options": [
+          "m + ℱ",
+          "mℱ (order times finesse)",
+          "m/ℱ",
+          "ℱ/m"
+        ],
+        "correctIndex": 1,
+        "explanation": "The resolving power is a dimensionless quantity νₘ/Δν_min = mℱ: it grows with both the interference order m and the finesse ℱ.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q8.7_005_fi",
+        "stem": "Mikä on Fabryn–Perot-laitteen spektrinen erotuskyky νₘ/Δν_min?",
+        "options": [
+          "m + ℱ",
+          "mℱ (kertaluku kertaa finessi)",
+          "m/ℱ",
+          "ℱ/m"
+        ],
+        "correctIndex": 1,
+        "explanation": "Erotuskyky on dimensioton suure νₘ/Δν_min = mℱ: se kasvaa sekä interferenssin kertaluvun m että finessin ℱ mukana.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q8.7_005"
       }
     ]
   },
@@ -5830,6 +6970,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q9.1_004"
+      },
+      {
+        "id": "q9.1_005",
+        "stem": "Which statement about Fresnel and Fraunhofer diffraction is correct in this course?",
+        "options": [
+          "Both are treated in detail",
+          "Fraunhofer diffraction is beyond the scope; Fresnel is treated in detail",
+          "Fresnel diffraction (moderate distance) is beyond the scope; Fraunhofer (far field) is treated",
+          "Neither can be solved analytically"
+        ],
+        "correctIndex": 2,
+        "explanation": "The diffraction integral is analytically solvable in the Fresnel regime (r > λ, beyond our scope) and in the Fraunhofer far field (r ≫ λ).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q9.1_005_fi",
+        "stem": "Mikä väittämä Fresnelin ja Fraunhoferin diffraktiosta pitää paikkansa tällä kurssilla?",
+        "options": [
+          "Molempia käsitellään yksityiskohtaisesti",
+          "Fraunhoferin diffraktio on kurssin ulkopuolella; Fresnelin käsitellään yksityiskohtaisesti",
+          "Fresnelin diffraktio (kohtalainen etäisyys) on kurssin ulkopuolella; Fraunhoferin (kaukokenttä) käsitellään",
+          "Kumpaakaan ei voida ratkaista analyyttisesti"
+        ],
+        "correctIndex": 2,
+        "explanation": "Diffraktiointegraali on analyyttisesti ratkaistavissa Fresnelin alueella (r > λ, kurssin ulkopuolella) ja Fraunhoferin kaukokentässä (r ≫ λ).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.1_005"
       }
     ],
     "9.2": [
@@ -5922,6 +7092,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q9.2_003"
+      },
+      {
+        "id": "q9.2_004",
+        "stem": "In the Fraunhofer (far-field) limit, how is the distance r from an aperture point (x,y) to the observation point R approximated in the phase?",
+        "options": [
+          "r ≈ R",
+          "r ≈ R − (x² + y²)/(2R)",
+          "r ≈ R + (Xx + Yy)/R",
+          "r ≈ R − (Xx + Yy)/R"
+        ],
+        "correctIndex": 3,
+        "explanation": "Expanding r = √((X − x)² + (Y − y)² + Z²) gives r ≈ R − (Xx + Yy)/R + (x² + y²)/2R; the quadratic term is negligible for R > a²/λ, while the linear term produces the Fourier-transform kernel.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q9.2_004_fi",
+        "stem": "Miten etäisyys r aukon pisteestä (x,y) havaintopisteeseen R approksimoidaan vaiheessa Fraunhoferin (kaukokenttä) rajalla?",
+        "options": [
+          "r ≈ R",
+          "r ≈ R − (x² + y²)/(2R)",
+          "r ≈ R + (Xx + Yy)/R",
+          "r ≈ R − (Xx + Yy)/R"
+        ],
+        "correctIndex": 3,
+        "explanation": "Kehittämällä r = √((X − x)² + (Y − y)² + Z²) saadaan r ≈ R − (Xx + Yy)/R + (x² + y²)/2R; neliöllinen termi on mitätön, kun R > a²/λ, ja lineaarinen termi tuottaa Fourier-muunnoksen ytimen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.2_004"
+      },
+      {
+        "id": "q9.2_005",
+        "stem": "The aperture size a is doubled. How does the far-field distance a²/λ change?",
+        "options": [
+          "It increases by a factor of 4",
+          "It stays the same",
+          "It doubles",
+          "It halves"
+        ],
+        "correctIndex": 0,
+        "explanation": "a²/λ scales with the square of the aperture size, so doubling a quadruples the distance beyond which the far-field condition holds.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q9.2_005_fi",
+        "stem": "Aukon kokoa a kaksinkertaistetaan. Miten kaukokenttäetäisyys a²/λ muuttuu?",
+        "options": [
+          "Se kasvaa nelinkertaiseksi",
+          "Se pysyy samana",
+          "Se kaksinkertaistuu",
+          "Se puolittuu"
+        ],
+        "correctIndex": 0,
+        "explanation": "a²/λ skaalautuu aukon koon neliönä, joten a:n kaksinkertaistaminen nelinkertaistaa etäisyyden, jonka jälkeen kaukokenttäehto pätee.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.2_005"
       }
     ],
     "9.3": [
@@ -6226,6 +7456,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q9.4_004"
+      },
+      {
+        "id": "q9.4_005",
+        "stem": "Where are the principal maxima of the periodicity factor (sin Nβ/sin β)² located?",
+        "options": [
+          "At β = mπ/N",
+          "At β = mπ (m an integer)",
+          "Only at β = 0",
+          "At β = (m + ½)π"
+        ],
+        "correctIndex": 1,
+        "explanation": "Where sin β = 0 (β = mπ) the ratio sin Nβ/sin β tends to ±N, giving principal maxima of height N²; β = mπ/N (not a multiple of π) are zeros.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q9.4_005_fi",
+        "stem": "Missä jaksollisuustekijän (sin Nβ/sin β)² päämaksimit sijaitsevat?",
+        "options": [
+          "Kohdissa β = mπ/N",
+          "Kohdissa β = mπ (m kokonaisluku)",
+          "Vain kohdassa β = 0",
+          "Kohdissa β = (m + ½)π"
+        ],
+        "correctIndex": 1,
+        "explanation": "Kun sin β = 0 (β = mπ), osamäärä sin Nβ/sin β lähestyy arvoa ±N, mikä antaa päämaksimit, joiden korkeus on N²; kohdat β = mπ/N (jotka eivät ole π:n monikertoja) ovat nollakohtia.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q9.4_005"
       }
     ],
     "9.5": [
@@ -6502,6 +7762,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.1_004"
+      },
+      {
+        "id": "q10.1_005",
+        "stem": "In a stigmatic imaging system, what are conjugate points?",
+        "options": [
+          "The centres of the two lens surfaces",
+          "The two focal points of the system",
+          "An object point and its image point",
+          "A real and a virtual image of different objects"
+        ],
+        "correctIndex": 2,
+        "explanation": "In a stigmatic system the imaging direction could be reversed: an object point S is imaged to P, and P imaged back to S, so S and P are conjugate points.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.1_005_fi",
+        "stem": "Mitä konjugaattipisteet ovat stigmaattisessa kuvantamisjärjestelmässä?",
+        "options": [
+          "Kahden linssipinnan keskipisteet",
+          "Systeemin kaksi polttopistettä",
+          "Kohdepiste ja sen kuvapiste",
+          "Eri kohteiden todellinen ja virtuaalinen kuva"
+        ],
+        "correctIndex": 2,
+        "explanation": "Stigmaattisessa systeemissä kuvaussuunta voitaisiin kääntää: kohdepiste S kuvautuu pisteeksi P ja P takaisin pisteeksi S, joten S ja P ovat konjugaattipisteitä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.1_005"
       }
     ],
     "10.2": [
@@ -6594,6 +7884,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.2_003"
+      },
+      {
+        "id": "q10.2_004",
+        "stem": "Which relation holds in the paraxial approximation for refraction at a single spherical surface of radius R (medium n₁ → n₂)?",
+        "options": [
+          "n₁/sₒ − n₂/sᵢ = (n₂ + n₁)/R",
+          "sₒ/n₁ + sᵢ/n₂ = R/(n₂ − n₁)",
+          "n₁sₒ + n₂sᵢ = R",
+          "n₁/sₒ + n₂/sᵢ = (n₂ − n₁)/R"
+        ],
+        "correctIndex": 3,
+        "explanation": "With sinφ ≈ φ and cosφ ≈ 1, Snell's law reduces to n₁/sₒ + n₂/sᵢ = (n₂ − n₁)/R, independent of the ray height h.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.2_004_fi",
+        "stem": "Mikä yhtälö pätee paraksiaaliapproksimaatiossa taittumiselle yhdellä pallopinnalla, jonka säde on R (aine n₁ → n₂)?",
+        "options": [
+          "n₁/sₒ − n₂/sᵢ = (n₂ + n₁)/R",
+          "sₒ/n₁ + sᵢ/n₂ = R/(n₂ − n₁)",
+          "n₁sₒ + n₂sᵢ = R",
+          "n₁/sₒ + n₂/sᵢ = (n₂ − n₁)/R"
+        ],
+        "correctIndex": 3,
+        "explanation": "Kun sinφ ≈ φ ja cosφ ≈ 1, Snellin laki sievenee muotoon n₁/sₒ + n₂/sᵢ = (n₂ − n₁)/R, riippumatta säteen korkeudesta h.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.2_004"
+      },
+      {
+        "id": "q10.2_005",
+        "stem": "How do the front and back focal lengths of a single spherical refracting surface compare?",
+        "options": [
+          "They differ: fₒ = n₁R/(n₂ − n₁) and fᵢ = n₂R/(n₂ − n₁)",
+          "The front focal length is always infinite",
+          "They are equal in magnitude and opposite in sign",
+          "They are always equal"
+        ],
+        "correctIndex": 0,
+        "explanation": "Setting sₒ = ∞ or sᵢ = ∞ in the paraxial relation gives fᵢ = n₂R/(n₂ − n₁) and fₒ = n₁R/(n₂ − n₁); only for a thin lens in a uniform medium do they become equal.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.2_005_fi",
+        "stem": "Miten yhden pallomaisen taittavan pinnan etu- ja takapolttovälit vertautuvat toisiinsa?",
+        "options": [
+          "Ne eroavat: fₒ = n₁R/(n₂ − n₁) ja fᵢ = n₂R/(n₂ − n₁)",
+          "Etupolttoväli on aina ääretön",
+          "Ne ovat itseisarvoltaan yhtä suuret ja vastakkaismerkkiset",
+          "Ne ovat aina yhtä suuret"
+        ],
+        "correctIndex": 0,
+        "explanation": "Kun paraksiaaliyhtälöön asetetaan sₒ = ∞ tai sᵢ = ∞, saadaan fᵢ = n₂R/(n₂ − n₁) ja fₒ = n₁R/(n₂ − n₁); vain ohuelle linssille yhtenäisessä aineessa ne ovat yhtä suuret.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.2_005"
       }
     ],
     "10.3": [
@@ -6716,6 +8066,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.3_004"
+      },
+      {
+        "id": "q10.3_005",
+        "stem": "What is the Gaussian thin-lens equation?",
+        "options": [
+          "sₒ + sᵢ = f",
+          "1/sₒ + 1/sᵢ = 1/f",
+          "sₒ·sᵢ = f",
+          "1/sₒ − 1/sᵢ = 1/f"
+        ],
+        "correctIndex": 1,
+        "explanation": "For a thin lens, 1/sₒ + 1/sᵢ = 1/f; Newton's form xₒxᵢ = f² uses distances measured from the focal points instead.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.3_005_fi",
+        "stem": "Mikä on Gaussin ohuen linssin yhtälö?",
+        "options": [
+          "sₒ + sᵢ = f",
+          "1/sₒ + 1/sᵢ = 1/f",
+          "sₒ·sᵢ = f",
+          "1/sₒ − 1/sᵢ = 1/f"
+        ],
+        "correctIndex": 1,
+        "explanation": "Ohuelle linssille 1/sₒ + 1/sᵢ = 1/f; Newtonin muoto xₒxᵢ = f² käyttää polttopisteistä mitattuja etäisyyksiä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.3_005"
       }
     ],
     "10.4": [
@@ -6838,6 +8218,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.4_004"
+      },
+      {
+        "id": "q10.4_005",
+        "stem": "What is the transverse magnification of a thin-lens image in terms of the object and image distances?",
+        "options": [
+          "M_T = −sₒ/sᵢ",
+          "M_T = sₒ − sᵢ",
+          "M_T = −sᵢ/sₒ",
+          "M_T = sᵢ/sₒ"
+        ],
+        "correctIndex": 2,
+        "explanation": "M_T = yᵢ/yₒ = −sᵢ/sₒ; the minus sign means that a real image (sᵢ > 0) of a real object is inverted.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.4_005_fi",
+        "stem": "Mikä on ohuen linssin kuvan poikittaissuurennus kohde- ja kuvaetäisyyksien avulla?",
+        "options": [
+          "M_T = −sₒ/sᵢ",
+          "M_T = sₒ − sᵢ",
+          "M_T = −sᵢ/sₒ",
+          "M_T = sᵢ/sₒ"
+        ],
+        "correctIndex": 2,
+        "explanation": "M_T = yᵢ/yₒ = −sᵢ/sₒ; miinusmerkki tarkoittaa, että todellisen kohteen todellinen kuva (sᵢ > 0) on ylösalaisin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.4_005"
       }
     ],
     "10.5": [
@@ -6930,6 +8340,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.5_003"
+      },
+      {
+        "id": "q10.5_004",
+        "stem": "How is the image formed by a two-lens system found step by step?",
+        "options": [
+          "Only the lens closer to the eye contributes to the image",
+          "Both lenses image the original object independently and the images are averaged",
+          "The two focal lengths are always added directly, f = f₁ + f₂",
+          "The image formed by the first lens serves as the object of the second lens"
+        ],
+        "correctIndex": 3,
+        "explanation": "The system is treated one lens at a time: the first image (at sᵢ₁ = d − sₒ₂ from the second lens) is the object of the second lens, and the total magnification is the product M_T1·M_T2.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.5_004_fi",
+        "stem": "Miten kahden linssin systeemin muodostama kuva selvitetään vaihe vaiheelta?",
+        "options": [
+          "Vain silmää lähempi linssi vaikuttaa kuvaan",
+          "Molemmat linssit kuvaavat alkuperäisen kohteen erikseen ja kuvat keskiarvoistetaan",
+          "Polttovälit lasketaan aina suoraan yhteen, f = f₁ + f₂",
+          "Ensimmäisen linssin muodostama kuva toimii toisen linssin kohteena"
+        ],
+        "correctIndex": 3,
+        "explanation": "Systeemiä käsitellään yksi linssi kerrallaan: ensimmäinen kuva (etäisyydellä sᵢ₁ = d − sₒ₂ toisesta linssistä) on toisen linssin kohde, ja kokonaissuurennus on tulo M_T1·M_T2.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.5_004"
+      },
+      {
+        "id": "q10.5_005",
+        "stem": "Two thin lenses in contact have optical powers +2 D and +3 D. What is the combined focal length?",
+        "options": [
+          "20 cm",
+          "10 cm",
+          "50 cm",
+          "83 cm"
+        ],
+        "correctIndex": 0,
+        "explanation": "For lenses in contact the powers add: D = D₁ + D₂ = 5 D, so f = 1/D = 0.2 m = 20 cm. Adding the focal lengths (50 cm + 33 cm = 83 cm) is wrong.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.5_005_fi",
+        "stem": "Kahden toisiinsa kosketuksissa olevan ohuen linssin optiset voimakkuudet ovat +2 D ja +3 D. Mikä on yhdistetty polttoväli?",
+        "options": [
+          "20 cm",
+          "10 cm",
+          "50 cm",
+          "83 cm"
+        ],
+        "correctIndex": 0,
+        "explanation": "Toisiinsa kosketuksissa olevien linssien voimakkuudet summautuvat: D = D₁ + D₂ = 5 D, joten f = 1/D = 0,2 m = 20 cm. Polttovälien yhteenlasku (50 cm + 33 cm = 83 cm) on väärin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.5_005"
       }
     ],
     "10.6": [
@@ -7174,6 +8644,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.7_003"
+      },
+      {
+        "id": "q10.7_004",
+        "stem": "What happens to the handedness of an object in a plane-mirror image?",
+        "options": [
+          "Only up and down are interchanged",
+          "It is reversed: a left hand looks like a right hand",
+          "It is preserved",
+          "It is unchanged but the image is magnified"
+        ],
+        "correctIndex": 1,
+        "explanation": "A plane mirror forms a virtual image with reversed handedness (looking at your left hand in a mirror, the image looks like a right hand).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.7_004_fi",
+        "stem": "Mitä objektin kätisyydelle tapahtuu tasopeilin kuvassa?",
+        "options": [
+          "Vain ylä- ja alapuoli vaihtuvat keskenään",
+          "Se kääntyy: vasen käsi näyttää oikealta kädeltä",
+          "Se säilyy",
+          "Se ei muutu, mutta kuva on suurennettu"
+        ],
+        "correctIndex": 1,
+        "explanation": "Tasopeili muodostaa virtuaalikuvan, jonka kätisyys on kääntynyt (kun katsot vasenta kättäsi peilistä, kuva näyttää oikealta kädeltä).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.7_004"
+      },
+      {
+        "id": "q10.7_005",
+        "stem": "Why are very large mirrors preferred over very large lenses in space telescopes?",
+        "options": [
+          "Mirrors have a much higher refractive index",
+          "Lenses cannot focus visible light",
+          "Very large mirrors are easier to manufacture than very large lenses",
+          "Mirrors never have any aberrations"
+        ],
+        "correctIndex": 2,
+        "explanation": "Besides being nearly free of chromatic aberration, really large mirrors are easier to manufacture (a single surface, supported from behind) than large lenses; mirrors do still have other aberrations.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.7_005_fi",
+        "stem": "Miksi erittäin suuria peilejä suositaan erittäin suurten linssien sijaan avaruusteleskoopeissa?",
+        "options": [
+          "Peileillä on paljon korkeampi taitekerroin",
+          "Linssit eivät voi tarkentaa näkyvää valoa",
+          "Erittäin suuria peilejä on helpompi valmistaa kuin erittäin suuria linssejä",
+          "Peileillä ei ole koskaan aberraatioita"
+        ],
+        "correctIndex": 2,
+        "explanation": "Sen lisäksi, että peileillä ei juuri ole kromaattista aberraatiota, todella suuria peilejä on helpompi valmistaa (yksi pinta, tuettu takaa) kuin suuria linssejä; peileilläkin on silti muita aberraatioita.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.7_005"
       }
     ],
     "10.8": [
@@ -7266,6 +8796,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.8_003"
+      },
+      {
+        "id": "q10.8_004",
+        "stem": "What are prisms used for in binoculars?",
+        "options": [
+          "Splitting the light into colours for the eye",
+          "Polarizing the light",
+          "Magnifying the image",
+          "Flipping the image upright using total internal reflection"
+        ],
+        "correctIndex": 3,
+        "explanation": "Binoculars are based on a Keplerian configuration whose image is inverted; prisms using total internal reflection turn the images upright with negligible losses.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.8_004_fi",
+        "stem": "Mihin prismoja käytetään kiikareissa?",
+        "options": [
+          "Valon jakamiseen väreiksi silmälle",
+          "Valon polarisoimiseen",
+          "Kuvan suurentamiseen",
+          "Kuvan kääntämiseen pystyyn kokonaisheijastuksen avulla"
+        ],
+        "correctIndex": 3,
+        "explanation": "Kiikarit perustuvat Keplerin rakenteeseen, jonka kuva on ylösalainen; kokonaisheijastukseen perustuvat prismat kääntävät kuvat pystyiksi mitättömin häviöin.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.8_004"
+      },
+      {
+        "id": "q10.8_005",
+        "stem": "How does the operating principle of a dispersive prism differ from that of a diffraction grating?",
+        "options": [
+          "The prism relies on the wavelength dependence of the refractive index; the grating on diffraction from a periodic structure",
+          "Both rely on total internal reflection",
+          "There is no difference",
+          "The prism relies on diffraction; the grating on refraction"
+        ],
+        "correctIndex": 0,
+        "explanation": "A dispersive prism separates colours because n depends on wavelength (refraction at the interfaces); a grating separates them through interference of waves from many periodic slits.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.8_005_fi",
+        "stem": "Miten dispersiivisen prisman toimintaperiaate eroaa diffraktiohilan toimintaperiaatteesta?",
+        "options": [
+          "Prisma perustuu taitekertoimen aallonpituusriippuvuuteen; hila jaksollisen rakenteen diffraktioon",
+          "Molemmat perustuvat kokonaisheijastukseen",
+          "Eroa ei ole",
+          "Prisma perustuu diffraktioon; hila taittumiseen"
+        ],
+        "correctIndex": 0,
+        "explanation": "Dispersiivinen prisma erottaa värit, koska n riippuu aallonpituudesta (taittuminen rajapinnoilla); hila erottaa ne monen jaksollisen raon aaltojen interferenssin avulla.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.8_005"
       }
     ],
     "10.9": [
@@ -7388,6 +8978,36 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.9_004"
+      },
+      {
+        "id": "q10.9_005",
+        "stem": "Which cells of the retina sense the colour of light?",
+        "options": [
+          "Cells of the iris",
+          "Cone cells",
+          "Cells of the cornea",
+          "Rod cells"
+        ],
+        "correctIndex": 1,
+        "explanation": "Three types of cone cells sense both intensity and colour; rod cells sense only intensity and enable night vision.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.9_005_fi",
+        "stem": "Mitkä verkkokalvon solut aistivat valon värin?",
+        "options": [
+          "Värikalvon solut",
+          "Tappisolut",
+          "Sarveiskalvon solut",
+          "Sauvasolut"
+        ],
+        "correctIndex": 1,
+        "explanation": "Kolme tappisolutyyppiä aistii sekä voimakkuutta että väriä; sauvasolut aistivat vain voimakkuutta ja mahdollistavat yönäön.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.9_005"
       }
     ],
     "10.10": [
@@ -7480,6 +9100,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.10_003"
+      },
+      {
+        "id": "q10.10_004",
+        "stem": "What angular magnification does a magnifying glass with f = 10 cm give for a near point of 25 cm with the image at infinity?",
+        "options": [
+          "0.4×",
+          "25×",
+          "2.5×",
+          "10×"
+        ],
+        "correctIndex": 2,
+        "explanation": "M_P = d_o/f = 25 cm/10 cm = 2.5 (equivalently d_o·D with D = +10 dioptres).",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.10_004_fi",
+        "stem": "Kuinka suuren kulmasuurennuksen suurennuslasi, jonka f = 10 cm, antaa lähipisteen ollessa 25 cm ja kuvan ollessa äärettömyydessä?",
+        "options": [
+          "0,4×",
+          "25×",
+          "2,5×",
+          "10×"
+        ],
+        "correctIndex": 2,
+        "explanation": "M_P = d_o/f = 25 cm/10 cm = 2,5 (vastaavasti d_o·D, kun D = +10 dioptria).",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.10_004"
+      },
+      {
+        "id": "q10.10_005",
+        "stem": "What mainly limits the useful magnification of a simple magnifying glass?",
+        "options": [
+          "The refractive index of air",
+          "The colour of the object",
+          "The polarization of the light",
+          "Aberrations of the lens"
+        ],
+        "correctIndex": 3,
+        "explanation": "Simple magnifiers with much larger magnification are rare because the lens aberrations start to limit the performance.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.10_005_fi",
+        "stem": "Mikä rajoittaa pääasiassa yksinkertaisen suurennuslasin hyödyllistä suurennusta?",
+        "options": [
+          "Ilman taitekerroin",
+          "Kohteen väri",
+          "Valon polarisaatio",
+          "Linssin aberraatiot"
+        ],
+        "correctIndex": 3,
+        "explanation": "Yksinkertaisia suurennuslaseja, joilla on selvästi suurempi suurennus, on harvassa, koska linssin aberraatiot alkavat rajoittaa suorituskykyä.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.10_005"
       }
     ],
     "10.11": [
@@ -7572,6 +9252,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.11_003"
+      },
+      {
+        "id": "q10.11_004",
+        "stem": "How many lenses does the simplest optical instrument for direct viewing by the human eye contain?",
+        "options": [
+          "Two: an objective and an eyepiece",
+          "Three",
+          "Four",
+          "One"
+        ],
+        "correctIndex": 0,
+        "explanation": "In the simplest case such instruments consist of two lenses: the objective forms an intermediate image, which the eyepiece then magnifies further.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.11_004_fi",
+        "stem": "Kuinka monta linssiä on yksinkertaisimmassa suoraan ihmissilmällä käytettävässä optisessa laitteessa?",
+        "options": [
+          "Kaksi: objektiivi ja okulaari",
+          "Kolme",
+          "Neljä",
+          "Yksi"
+        ],
+        "correctIndex": 0,
+        "explanation": "Yksinkertaisimmillaan tällaiset laitteet koostuvat kahdesta linssistä: objektiivi muodostaa välikuvan, jota okulaari suurentaa edelleen.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.11_004"
+      },
+      {
+        "id": "q10.11_005",
+        "stem": "Which lens of such a two-lens instrument is located closest to the object?",
+        "options": [
+          "The lens with the longest focal length",
+          "The objective",
+          "The eyepiece (ocular)",
+          "The intermediate image"
+        ],
+        "correctIndex": 1,
+        "explanation": "The objective is located close to the object and forms the intermediate image; the eyepiece is the second lens, close to the eye.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.11_005_fi",
+        "stem": "Kumpi tällaisen kahden linssin laitteen linsseistä sijaitsee lähinnä kohdetta?",
+        "options": [
+          "Linssi, jolla on pisin polttoväli",
+          "Objektiivi",
+          "Okulaari",
+          "Välikuva"
+        ],
+        "correctIndex": 1,
+        "explanation": "Objektiivi sijaitsee lähellä kohdetta ja muodostaa välikuvan; okulaari on toinen linssi, lähellä silmää.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.11_005"
       }
     ],
     "10.12": [
@@ -7816,6 +9556,66 @@
         "source": "claude-translated",
         "lang": "fi",
         "translationOf": "q10.13_003"
+      },
+      {
+        "id": "q10.13_004",
+        "stem": "Which telescope type has a negative eyepiece (fₑ < 0) and produces an upright image?",
+        "options": [
+          "The Keplerian telescope",
+          "The Cassegrain telescope",
+          "The Galilean telescope",
+          "The Newtonian telescope"
+        ],
+        "correctIndex": 2,
+        "explanation": "The Galilean telescope uses a negative eyepiece and gives an upright image (compact, but with the exit pupil inside); the Keplerian design gives an inverted image.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.13_004_fi",
+        "stem": "Millä kaukoputkityypillä on negatiivinen okulaari (fₑ < 0) ja pysty kuva?",
+        "options": [
+          "Keplerin kaukoputki",
+          "Cassegrainin kaukoputki",
+          "Galilein kaukoputki",
+          "Newtonin kaukoputki"
+        ],
+        "correctIndex": 2,
+        "explanation": "Galilein kaukoputki käyttää negatiivista okulaaria ja antaa pystyn kuvan (kompakti, mutta ulostulopupilli on sisällä); Keplerin rakenne antaa ylösalaisen kuvan.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.13_004"
+      },
+      {
+        "id": "q10.13_005",
+        "stem": "Where does the objective of a simple Keplerian telescope form its intermediate image?",
+        "options": [
+          "At infinity",
+          "Inside the objective lens",
+          "In the back focal plane of the eyepiece",
+          "In the front focal plane of the eyepiece, so the final image is at infinity"
+        ],
+        "correctIndex": 3,
+        "explanation": "The objective forms a demagnified intermediate image in the front focal plane of the eyepiece (d = fₒ + fₑ), so the eyepiece produces the final image at infinity — an afocal system.",
+        "addedAt": "2026-09-20",
+        "source": "claude-authored"
+      },
+      {
+        "id": "q10.13_005_fi",
+        "stem": "Mihin yksinkertaisen Keplerin kaukoputken objektiivi muodostaa välikuvansa?",
+        "options": [
+          "Äärettömyyteen",
+          "Objektiivilinssin sisään",
+          "Okulaarin takapolttotasoon",
+          "Okulaarin etupolttotasoon, joten lopullinen kuva on äärettömyydessä"
+        ],
+        "correctIndex": 3,
+        "explanation": "Objektiivi muodostaa pienennetyn välikuvan okulaarin etupolttotasoon (d = fₒ + fₑ), joten okulaari tuottaa lopullisen kuvan äärettömyyteen — afokaalinen systeemi.",
+        "addedAt": "2026-09-20",
+        "source": "claude-translated",
+        "lang": "fi",
+        "translationOf": "q10.13_005"
       }
     ]
   }
